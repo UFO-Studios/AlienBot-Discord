@@ -1,4 +1,5 @@
-# counter66
-A Discord bot that adds in a counting channel.
+# AlienBot 2.0
+A Discord bot that doesnt yet work! 
+help neede please! :D
 
-Project ran by @Parv66
+By @NiceygyLive
