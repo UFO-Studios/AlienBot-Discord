@@ -12,10 +12,11 @@ client.on("ready", async () => {
   console.log("Running!")
 });
 
-//client.on("message", async message => {
-//    message.channel.send('Pong!')
-//  })
+client.on("message", async message => {
+    message.channel.send('Pong!')
+})
 
+console.log("Commands loaded")
 
 //command(client, ['ping'], (message) => {
 //   message.channel.send('Pong!')
