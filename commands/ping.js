@@ -8,4 +8,4 @@ module.exports = {
 		await interaction.reply('Pong!');
 	},
 };
-console.log("cmd1 active")
+console.log("ping online")
