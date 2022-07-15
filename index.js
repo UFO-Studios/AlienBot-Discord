@@ -15,14 +15,21 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
+console.log("1")
+
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
+//console.log(level, message)
+
+
 client.on('interactionCreate', async interaction => {
+	console.log("1")
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
+	console.log("1")
 
 	if (!command) return;
 
