@@ -1,8 +1,8 @@
 # AlienBot 2.0
 A Discord bot that doesnt yet work! 
-help neede please! :D
+help needed please! :D
 
-By @NiceygyLive
+By @NiceygyLive & @TheAlienDoctor
 
 
     Todo list:
