@@ -18,3 +18,4 @@ module.exports = (client, aliases, callback) => {
     })
   })
 }
+// alien we dont need the prefix it uses /commands :D
