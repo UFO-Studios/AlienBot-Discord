@@ -1,0 +1,15 @@
+//const { SlashCommandBuilder, channelMention } = require('@discordjs/builders');
+//const { Permissions } = require('discord.js');
+//const { PermissionFlagsBits } = require('discord-api-types/v10');
+
+
+//module.exports = {
+//	data: new SlashCommandBuilder()
+//		.setName('temp mute')
+//		.setDescription('Temp mutes a user!'),
+//	async execute(interaction) {
+//		if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
+//			console.log("test")
+//		}
+//	},
+//};
