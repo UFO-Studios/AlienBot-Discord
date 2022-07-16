@@ -6,6 +6,7 @@
     "@discordjs/rest": "^0.5.0",
     "discord-api-types": "^0.36.2",
     "discord.js": "^13.8.1",
-    "mongoose": "^6.4.3"
+    "mongoose": "^6.4.3",
+    "namemc": "^1.8.16"
   }
 }
