@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Intents } = require('discord.js');
-const { botToken } = require('./config.json');
+const { botToken, channel } = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -19,9 +19,8 @@ console.log("1")
 
 client.once('ready', () => {
 	console.log('Ready!');
+	client.channels.cache.get(channel).send("Bot is online! All working as expected :D");
 });
-
-//console.log(level, message)
 
 
 client.on('interactionCreate', async interaction => {
@@ -29,7 +28,6 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
-	console.log("1")
 
 	if (!command) return;
 
