@@ -1,4 +1,0 @@
- command(client, ['ping', 'test'], (message) => {
-    message.channel.send('Pong!')
-  })
-})
