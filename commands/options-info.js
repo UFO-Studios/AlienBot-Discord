@@ -11,3 +11,4 @@ module.exports = {
 		return interaction.reply('No option was provided!');
 	},
 };
+console.log("options-info.js run")

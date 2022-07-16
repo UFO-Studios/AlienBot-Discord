@@ -8,4 +8,4 @@ module.exports = {
 		return interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 	},
 };
-console.log("cmd2 active")
+console.log("server.js run")

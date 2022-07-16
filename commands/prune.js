@@ -19,3 +19,4 @@ module.exports = {
 		return interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true });
 	},
 };
+console.log("prune.js run")

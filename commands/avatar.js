@@ -11,3 +11,4 @@ module.exports = {
 		return interaction.reply(`Your avatar: ${interaction.user.displayAvatarURL({ dynamic: true })}`);
 	},
 };
+console.log("avatar.js run")

@@ -8,4 +8,4 @@ module.exports = {
 		await interaction.reply('Pong!');
 	},
 };
-console.log("ping online")
+console.log("ping.js run")

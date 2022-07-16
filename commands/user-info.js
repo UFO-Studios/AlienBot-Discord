@@ -8,3 +8,4 @@ module.exports = {
 		return interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 	},
 };
+console.log("user-info.js run")
