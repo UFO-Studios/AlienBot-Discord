@@ -6,12 +6,12 @@ By @NiceygyLive
 
 
     Todo list:
-    . FIx kick command
-    ping
-    ban
-    kick
-    counting
-    mute
-    ~~ woof ~~
-    tempmute
-    tempban
+    .Fix kick command
+    .ping (Done)
+    .ban
+    .kick
+    .counting
+    .mute
+    .woof (Done)
+    .tempmute
+    .tempban
