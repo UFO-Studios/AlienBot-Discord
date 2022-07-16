@@ -12,6 +12,6 @@ By @NiceygyLive
     kick
     counting
     mute
-    ~~woof~~
+    ~~ woof ~~
     tempmute
     tempban
