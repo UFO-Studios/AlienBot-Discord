@@ -5,6 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder().setName("kick").setDescription("This command kicks a member!"),
     execute(message, args){
         const target = message.mentions.users.first();
+        //how do you specify a user?
         if(target){
             const memberTarget = message.guild.members.cache.get(target.id);
             memberTarget.kick();
