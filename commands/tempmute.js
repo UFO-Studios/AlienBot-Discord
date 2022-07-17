@@ -23,3 +23,5 @@ module.exports = {
     return interaction.followUp({ content: `${member} has been timed out for ${ms(time, { long: true })}`})
  }
 }
+
+console.log("tempmute.js run")
