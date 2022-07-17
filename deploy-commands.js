@@ -19,3 +19,6 @@ const rest = new REST({ version: '9' }).setToken(botToken);
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
+
+//its on;y getting as far as kick.js, so i suspect its either kick or options-info. 
+// pls help... :D
