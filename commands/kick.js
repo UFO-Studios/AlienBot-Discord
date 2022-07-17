@@ -1,9 +1,8 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js")
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-    name: 'kick',
-    description: "This command kicks a member!",
+    data: new SlashCommandBuilder().setName("kick").setDescription("This command kicks a member!"),
     execute(message, args){
         const target = message.mentions.users.first();
         if(target){
@@ -15,4 +14,5 @@ module.exports = {
         }
     }
 }
-console.log("kick.js run")
+
+console.log("kick.js run");
