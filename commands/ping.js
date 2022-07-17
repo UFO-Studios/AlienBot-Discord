@@ -5,7 +5,7 @@ module.exports = {
 		.setName('ping')
 		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
-		await interaction.reply('Pong!');
+		await interaction.reply(`🏓 | Ping is \`${client.ws.ping}\` ms.`);
 	},
 };
 console.log("ping.js run")
