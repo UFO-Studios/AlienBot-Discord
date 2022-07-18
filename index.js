@@ -27,7 +27,7 @@ client.once("ready", () => {
 });
 
 client.on("interactionCreate", async (interaction) => {
-  console.log("1");
+  console.log("stage 2 run");
   if (!interaction.isCommand()) return;
 
   const command = client.commands.get(interaction.commandName);
@@ -43,6 +43,11 @@ client.on("interactionCreate", async (interaction) => {
       ephemeral: true,
     });
   }
+});
+
+client.user.setActivity("Sub 2 Alien", {
+  type: "STREAMING",
+  url: "https://www.youtube.com/c/TheAlienDoctor"
 });
 
 client.login(botToken);
