@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { Client, Collection, Intents } = require("discord.js");
+const { Client, Collection, Intents, Interaction } = require("discord.js");
 const Config = require("./config.json");
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -34,6 +34,11 @@ for (const file of eventFiles) {
     });
   }
 }
+
+// test emmet
+// client.on("interactionCreate", interaction => {
+  
+// })
 
 console.log("stage 1 run");
 
