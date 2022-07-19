@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Intents } = require("discord.js");
-const { botToken, channel } = require("./config.json");
+const Config = require("./config.json");
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -17,37 +17,24 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
-console.log("stage 1 run");
+const eventPath = path.join(__dirname, "events");
+const eventFiles = fs.readdirSync(eventPath).filter((f) => f.endsWith(".js"));
 
-client.once("ready", () => {
-  console.log("Ready!");
-  client.channels.cache
-    .get(channel)
-    .send("Bot is online! All working as expected :D");
-});
+for (const file of eventFiles) {
+  const filePath = path.join(eventPath, file);
+  const event = require(filePath);
 
-client.on("interactionCreate", async (interaction) => {
-  console.log("stage 2 run");
-  if (!interaction.isCommand()) return;
-
-  const command = client.commands.get(interaction.commandName);
-
-  if (!command) return;
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.error(error);
-    await interaction.reply({
-      content: "There was an error while executing this command!",
-      ephemeral: true,
+  if (event.once) {
+    client.once(event.name, () => {
+      event.execute(client);
+    });
+  } else {
+    client.on(event.name, (...args) => {
+      event.execute(...args, client);
     });
   }
-});
+}
 
-client.user.setActivity("Sub 2 Alien", {
-  type: "STREAMING",
-  url: "https://www.youtube.com/c/TheAlienDoctor"
-});
+console.log("stage 1 run");
 
-client.login(botToken);
+client.login(Config.TOKEN);

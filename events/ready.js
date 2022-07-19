@@ -1,7 +1,18 @@
+const Config = require("../config.json")
+
 module.exports = {
-	name: 'ready',
-	once: true,
-	execute(client) {
-		console.log(`Ready! Logged in as ${client.user.tag}`);
-	},
+  name: "ready",
+  once: true,
+  execute(client) {
+    console.log("Ready!");
+
+    client.user.setActivity("Sub 2 Alien", {
+      type: "STREAMING",
+      url: "https://www.youtube.com/c/TheAlienDoctor",
+    });
+
+    client.channels.cache
+      .get(Config.CHANNEL_ID)
+      .send("Bot is online! All working as expected :D");
+  },
 };
