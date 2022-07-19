@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
      .setName("ufosmp")
     .setDescription("Info about the UFO SMP"),
    async execute(interaction) {
-     await interaction.reply("UFO SMP is a server run by alien for his discord! Want to join us? But your on bedrock? FEAR NOT! It runs GeyserMC for crossplay. Still want to join? Get to level 3 (`!rank`) and apply through #create-a-ticket :D"
+     await interaction.reply("UFO SMP is a server ran by Alien for members of The Alien Empire community! Want to join us? But your on bedrock? FEAR NOT! It runs GeyserMC for crossplay. Still want to join? Get to level 5 (`/rank`) and apply on the form in the info channel! :D"
      );
    },
 };
