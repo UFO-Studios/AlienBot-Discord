@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,6 +21,7 @@ module.exports = {
     }),
   async execute(interaction, client) {
     const target = interaction.options.getMember("target");
+    const user = interaction.options.getUser("target");
     const reason =
       interaction.options.getString("reason") || "No reason given.";
 
@@ -31,9 +33,21 @@ module.exports = {
           await interaction.guild.bans.create(target, {
             reason,
           });
-          interaction.reply(
-            `${target.user.tag} was banned by ${interaction.user.tag}. Reason: ${reason}`
-          );
+
+          const successEmbed = new MessageEmbed()
+            .setColor("0099ff")
+            .setTitle(`${target.user.tag} got banned.`)
+            .setDescription(
+              `${target.user.tag} was banned by ${interaction.user.tag}. Reason: ${reason}`
+            )
+            .setThumbnail(user.displayAvatarURL({ dynamic: true }))
+            .setTimestamp()
+            .setFooter({
+              text: "/help for a list of all the commands. - Alienbot",
+              iconURL:
+                "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+            });
+          interaction.reply({ embeds: [successEmbed] });
           console.log(
             `${target.user.tag} was banned by ${interaction.user.tag}. Reason: ${reason}`
           );
