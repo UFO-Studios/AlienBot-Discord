@@ -35,11 +35,12 @@ for (const file of eventFiles) {
   }
 }
 
+<<<<<<< HEAD
 // test emmet
 // client.on("interactionCreate", interaction => {
     
 // })
-
-console.log("stage 1 run");
+=======
+>>>>>>> 783648d85f50625de4029abc40b403e1966ac400
 
 client.login(Config.TOKEN);
