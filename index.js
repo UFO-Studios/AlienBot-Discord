@@ -37,7 +37,7 @@ for (const file of eventFiles) {
 
 // test emmet
 // client.on("interactionCreate", interaction => {
-  
+    
 // })
 
 console.log("stage 1 run");
