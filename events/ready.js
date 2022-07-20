@@ -13,6 +13,6 @@ module.exports = {
 
     client.channels.cache
       .get(Config.CHANNEL_ID)
-      .send("Bot is online! Bot is running in dev mode :D");
+      .send("Bot is online! Running in dev mode :D");
   },
 };
