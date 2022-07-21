@@ -1,6 +1,6 @@
 {
   "name": "AB2",
-  "license": "BSD-3-Claus",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "@discordjs/builders": "^0.15.0",
     "@discordjs/rest": "^0.5.0",
