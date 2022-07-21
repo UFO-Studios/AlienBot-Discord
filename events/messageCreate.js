@@ -1,8 +1,4 @@
-const Config = require("../config.json");
-const db = require("easy-db-json");
-db.setFile("./b-w.json");
-//ive gtg but the plan is to make a seperate local bannedwords db so users can remove/add it easier (w/ a command) ill work on this later but if anyone wants to try then feel free :D
-
+const BW = require("./b-w.json");
 
 module.exports = {
   name: "messageCreate",
@@ -12,7 +8,7 @@ module.exports = {
       const array = await message.content.split(" ");
 
       array.map((word) => {
-        if (Config["BANNED-WORDS"].includes(word)) {
+        if (BW["BANNED-WORDS"].includes()) {
           message.reply({ content: "You cannot use that word!", reply: true });
           setTimeout(() => {
             message.delete();
