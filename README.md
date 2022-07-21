@@ -8,3 +8,13 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
     • counting system
     • /tempban
 
+
+##Setup
+
+    Clone repo
+    fill in config.json (template coming soon!)
+    run node deploy-commands.js
+    run node index.js
+    Enjoy!
+    
+    :D
