@@ -10,6 +10,7 @@
     "minecraft-lookup": "^1.1.36",
     "mongoose": "^6.4.3",
     "ms": "^2.1.3",
+    "pretty-ms": "^7.0.1",
     "txtgen": "^3.0.2"
   }
 }
