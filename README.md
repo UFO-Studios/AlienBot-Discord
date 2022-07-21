@@ -3,12 +3,8 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
 
 
     Todo list:
-    .Fix kick command
-    .ping (Done)
-    .ban
-    .kick
-    .counting
-    .mute
-    .woof (Done)
-    .tempmute
-    .tempban
+    • connect mongodb
+    • embeds
+    • counting system
+    • /tempban
+
