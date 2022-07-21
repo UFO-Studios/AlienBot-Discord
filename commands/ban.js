@@ -43,7 +43,7 @@ module.exports = {
             .setThumbnail(user.displayAvatarURL({ dynamic: true }))
             .setTimestamp()
             .setFooter({
-              text: "/help for a list of all the commands. - Alienbot",
+              text: "/ban • Alienbot",
               iconURL:
                 "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
             });

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const mcapi = require("minecraft-lookup");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,7 +24,7 @@ module.exports = {
       const history = await mcapi.nameHistory("username", username);
       const cape = await mcapi.ofCape(username);
 
-      const starting = "Heres " + username + "'s info:  ";
+      const starting = "Heres " + userInfo.name + "'s info:  ";
       const usernameString = "username: " + userInfo.name + ", ";
       let skinString;
       if (skin) {
@@ -43,6 +44,21 @@ module.exports = {
         usernameHistory = "username history: " + history[0].name;
       }
 
+      const embed = new MessageEmbed()
+        .setTitle(starting)
+        .setDescription(
+          `${usernameString} \n ${skinString} \n ${headString} \n ${capeString} \n ${usernameHistory}`
+        )
+        .setColor("RANDOM")
+        .setThumbnail(userHead.helmavatar)
+        .setAuthor(interaction.user.tag)
+        .setTimestamp()
+        .setFooter({
+          text: "/namemc • AlienBot",
+          iconURL:
+            "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+        });
+
       console.log(
         starting,
         "\n",
@@ -56,9 +72,7 @@ module.exports = {
         "\n",
         usernameHistory
       );
-      return interaction.reply(
-        `${starting} \n ${usernameString} \n ${skinString} \n ${headString} \n ${capeString} \n ${usernameHistory}`
-      );
+      return interaction.reply({ embeds: [embed] });
     } catch (e) {
       if (e) {
         console.log(e);

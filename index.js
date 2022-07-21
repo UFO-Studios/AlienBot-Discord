@@ -2,9 +2,14 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Intents } = require("discord.js");
 const Config = require("./config.json");
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://<bot>:<TheDBWith1Diamond>@tadbot.09guv.mongodb.net/?retryWrites=true&w=majority"; //this is ip locked so dw abt securty
-const clientmongo = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri =
+  "mongodb+srv://<bot>:<TheDBWith1Diamond>@tadbot.09guv.mongodb.net/?retryWrites=true&w=majority"; //this is ip locked so dw abt securty
+const clientmongo = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
 
 const client = new Client({
   intents: [
@@ -14,11 +19,11 @@ const client = new Client({
   ],
 });
 
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object (smart mongo thing)
-  client.close();
-});
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object (smart mongo thing)
+//   client.close();
+// });
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
@@ -49,5 +54,9 @@ for (const file of eventFiles) {
     });
   }
 }
+
+// client.on("messageCreate", (message) => {
+//   message.delete()
+// });
 
 client.login(Config.TOKEN);
