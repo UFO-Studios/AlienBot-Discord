@@ -1,4 +1,8 @@
 const Config = require("../config.json");
+const db = require("easy-db-json");
+db.setFile("./b-w.json");
+//ive gtg but the plan is to make a seperate local bannedwords db so users can remove/add it easier (w/ a command) ill work on this later but if anyone wants to try then feel free :D
+
 
 module.exports = {
   name: "messageCreate",
