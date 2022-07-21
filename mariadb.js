@@ -1,13 +1,13 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri =
-  "mongodb+srv://<username>:<password>@tadbot.09guv.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
-client.connect((err) => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+const mongoose = require('mongoose') 
+const { mongoPath } = require('./config.json') 
+  
+ module.exports = async () => { 
+   mongoose.connect(mongoPath, { 
+     keepAlive: true, 
+     useNewUrlParser: true, 
+     useUnifiedTopology: true, 
+   }) 
+ } 
+const { MongoClient } = require('mongodb') 
+ const mongoose = require ('mongoose')
+const mongo = require('./mongo')
