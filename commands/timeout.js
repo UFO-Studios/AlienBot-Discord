@@ -79,7 +79,7 @@ module.exports = {
           duration
         )}. Reason: ${reason}`
       )
-      .setColor("RANDOM")
+      .setColor("f5700a")
       .setAuthor(interaction.user.tag)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
