@@ -55,8 +55,4 @@ for (const file of eventFiles) {
   }
 }
 
-// client.on("messageCreate", (message) => {
-//   message.delete()
-// });
-
 client.login(Config.TOKEN);
