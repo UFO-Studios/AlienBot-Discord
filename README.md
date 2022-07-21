@@ -1,8 +1,5 @@
 # AlienBot 2.0
-A Discord bot that doesnt yet work! 
-help needed please! :D
-
-By @NiceygyLive & @TheAlienDoctor
+An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord but open sourced for anyone that wants it!
 
 
     Todo list:
