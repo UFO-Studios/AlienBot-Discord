@@ -7,11 +7,7 @@
     "discord-api-types": "^0.36.2",
     "discord.js": "^13.8.1",
     "easy-db-json": "^1.1.2",
-<<<<<<< HEAD
     "firebase-admin": "^11.0.0",
-=======
-    "firebase": "^9.9.0",
->>>>>>> 03283481dcfc0cf7cef0873f035f6d83b10e6f9d
     "minecraft-lookup": "^1.1.36",
     "ms": "^2.1.3",
     "pretty-ms": "^7.0.1",
