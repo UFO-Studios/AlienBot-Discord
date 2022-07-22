@@ -28,6 +28,9 @@ module.exports = {
 
     const channelOption = await interaction.options.getChannel("channel");
 
+    if (channel.type == "voice")
+      return await interaction.reply({ content: "Invalid Channel" });
+
     db.set(channelOption.id, 1);
     db.set(`${channelOption.id}-id`, channelOption.id);
 
