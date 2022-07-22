@@ -12,7 +12,7 @@ Install Git from https://git-scm.com/
 
 Create a new Bot application:
 
-    1. Go to [Discord dev portal](https://discord.com/developers/applications)
+    1. Go to Discord dev portal(https://discord.com/developers/applications)
 
     2. Click on "New Application"
 
