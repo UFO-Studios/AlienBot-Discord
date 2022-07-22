@@ -1,5 +1,3 @@
-const Config = require("../config.json");
-
 module.exports = {
   name: "ready",
   once: true,
@@ -7,7 +5,7 @@ module.exports = {
     console.log("Ready!");
 
     client.channels.cache
-      .get(Config.CHANNEL_ID)
+      .get(client.C.CHANNEL_ID)
       .send("Bot is online! Running in dev mode :D");
     const array = [
       () => {

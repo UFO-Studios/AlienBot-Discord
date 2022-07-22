@@ -1,3 +1,7 @@
-const firebase = require("./firebase")
+const firebase = require("./firebase");
 
-firebase.addTestData()
+(async () => {
+  const lmao = await firebase.getData("lmao", "lmao");
+  console.log(lmao);
+  firebase.addData("lmao", "lmao2", { lmao: lmao.lmao + 1 });
+})();

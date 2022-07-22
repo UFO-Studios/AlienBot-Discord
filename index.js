@@ -2,8 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Intents } = require("discord.js");
 const Config = require("./config.json");
-//const { MongoClient, ServerApiVersion } = require("mongodb");
-
+const Firebase = require("./firebase.js")
 
 const client = new Client({
   intents: [
@@ -13,6 +12,8 @@ const client = new Client({
   ],
 });
 
+client.C = Config
+client.F = Firebase
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
@@ -44,4 +45,4 @@ for (const file of eventFiles) {
   }
 }
 
-client.login(Config.TOKEN);
+client.login(client.C.TOKEN);

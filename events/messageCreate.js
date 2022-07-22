@@ -1,6 +1,4 @@
-const Config = require("./config.json")
 const db = require("easy-db-json");
-const { Emoji } = require("discord.js");
 
 db.setFile("./db.json");
 
@@ -13,7 +11,7 @@ module.exports = {
       const array = await message.content.split(" ");
 
       array.map((word) => {
-        if (Config["BANNED-WORDS"].includes(word)) {
+        if (client.C.BANNED_WORDS.includes(word)) {
           message.reply({ content: "You cannot use that word!", reply: true });
           setTimeout(() => {
             message.delete();
@@ -31,8 +29,6 @@ module.exports = {
       if (!counts) return;
 
       if (!channelId == message.channel.id) return;
-
-      const array = await message.content.split(" ");
 
       if (/\d/.test(message.content)) {
         if (message.content == counts) {

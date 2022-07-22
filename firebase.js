@@ -46,10 +46,10 @@ const addData = async (collectionName, docName, dataObj) => {
 /**
  *  @param collectionName String, name of the collection to get a doc from.
  *  @param docName String, name of the doc ot get data from.
- *  @example getSingleDocument("users", "Kingerious")
+ *  @example getData("users", "Kingerious")
  *  @returns if no data is found, returns null, if data is found, returns the document data as a JS Object
  **/
-const getSingleDocument = async (collectionName, docName) => {
+const getData = async (collectionName, docName) => {
   const dataRef = db.collection(collectionName).doc(docName);
   const doc = await dataRef.get();
   if (!doc.exists) {
@@ -61,5 +61,5 @@ const getSingleDocument = async (collectionName, docName) => {
 
 module.exports = {
   addData,
-  getSingleDocument,
+  getData,
 };

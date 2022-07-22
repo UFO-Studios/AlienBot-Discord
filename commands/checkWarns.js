@@ -1,7 +1,4 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const db = require("easy-db-json");
-
-db.setFile("./db.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,13 +11,18 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
-    const target = interaction.options.getMember("target");
-    const warns = db.get(`${target.id}-warns`);
+    await interaction.deferReply();
+    const target = await interaction.options.getMember("target");
+    const warns = await client.F.getData("warns", `${target.id}`);
 
     if (!warns) {
-      return interaction.reply({ content: `${target.user.tag} has 0 warns` });
+      return await interaction.editReply({
+        content: `${target.user.tag} has 0 warns`,
+      });
     }
 
-    return interaction.reply(`${target.user.tag} has ${warns} warns.`);
+    return await interaction.editReply(
+      `${target.user.tag} has ${warns.warns} warns.`
+    );
   },
 };
