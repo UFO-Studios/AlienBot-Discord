@@ -17,6 +17,10 @@ module.exports = {
     const target = interaction.options.getMember("target");
     const warns = db.get(`${target.id}-warns`);
 
-    interaction.reply(`${target.user.tag} has ${warns} warns.`);
+    if (!warns) {
+      return interaction.reply({ content: `${target.user.tag} has 0 warns` });
+    }
+
+    return interaction.reply(`${target.user.tag} has ${warns} warns.`);
   },
 };

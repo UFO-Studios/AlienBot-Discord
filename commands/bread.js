@@ -5,8 +5,10 @@ module.exports = {
     .setName("bread")
     .setDescription("bread :thumbsup:"),
   async execute(interaction, client) {
-    return interaction.reply("Bread :thumbsup:");
+    const array = [":thumbsup:", "thumbsdown:"];
+    const randomNum = Math.floor(Math.random() * 1);
+    return interaction.reply(`Bread${array[randomNum]}`);
   },
 };
 
-console.log("Bread.js run")
+console.log("Bread.js run");

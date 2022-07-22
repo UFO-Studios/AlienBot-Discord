@@ -5,12 +5,10 @@
     "@discordjs/builders": "^0.15.0",
     "@discordjs/rest": "^0.5.0",
     "discord-api-types": "^0.36.2",
-    "discord-bot-youtube-notifications": "^1.1.4",
     "discord.js": "^13.8.1",
     "easy-db-json": "^1.1.2",
+    "firebase-admin": "^11.0.0",
     "minecraft-lookup": "^1.1.36",
-    "mongodb": "^4.8.0",
-    "mongoose": "^6.4.6",
     "ms": "^2.1.3",
     "pretty-ms": "^7.0.1",
     "txtgen": "^3.0.2"
