@@ -12,7 +12,7 @@ Install Git from https://git-scm.com/
 
 Create a new Bot application:
 
-    1. Go to [Discord dev portal](https://discord.com/developers/applications)
+    1. Go to Discord dev portal(https://discord.com/developers/applications)
 
     2. Click on "New Application"
 
@@ -36,7 +36,7 @@ Create a new Bot application:
 
 Create a new Firebase Project:
 
-    1. Go to [Firebase Developer Console](https://console.firebase.google.com/) and login if you need to
+    1. Go to Firebase Developer Console(https://console.firebase.google.com/) and login if you need to
 
     2. Click on "Add Project"
 
