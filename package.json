@@ -8,6 +8,7 @@
     "discord-bot-youtube-notifications": "^1.1.4",
     "discord.js": "^13.8.1",
     "easy-db-json": "^1.1.2",
+    "firebase": "^9.9.0",
     "minecraft-lookup": "^1.1.36",
     "mongodb": "^4.8.0",
     "mongoose": "^6.4.6",

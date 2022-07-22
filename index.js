@@ -3,13 +3,12 @@ const path = require("node:path");
 const { Client, Collection, Intents } = require("discord.js");
 const Config = require("./config.json");
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri =
-  "mongodb+srv://<bot>:<TheDBWith1Diamond>@tadbot.09guv.mongodb.net/?retryWrites=true&w=majority"; //this is ip locked so dw abt securty
-const clientmongo = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
+//const uri ="mongodb+srv://<bot>:<TheDBWith1Diamond>@tadbot.09guv.mongodb.net/?retryWrites=true&w=majority"; //this is ip locked so dw abt securty
+//const clientmongo = new MongoClient(uri, {
+//  useNewUrlParser: true,
+//  useUnifiedTopology: true,
+// serverApi: ServerApiVersion.v1,
+//});
 
 const client = new Client({
   intents: [
