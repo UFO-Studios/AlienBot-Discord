@@ -120,4 +120,4 @@ node ./index.js
 ```
 ## Contributing
 
-Contributions are always welcome! adding new:D
+Contributions are always welcome! :D
