@@ -11,7 +11,7 @@ module.exports = {
       const array = await message.content.split(" ");
 
       array.map((word) => {
-        if (client.C.BANNED_WORDS.includes(word)) {
+        if (client.C["BANNED_WORDS"].includes(word)) {
           message.reply({ content: "You cannot use that word!", reply: true });
           setTimeout(() => {
             message.delete();
