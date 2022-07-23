@@ -3,7 +3,8 @@
 An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord but open sourced for anyone that wants it!
 ## Invite Link
 
-Coming soon™️
+https://fl.niceygylive.xyz/UFOS-BOT20
+
 ## Setup Everything
 
 Install Nodejs from https://nodejs.dev/download/
@@ -87,6 +88,7 @@ Then create a config.json file which will look like this:
     "CLIENT_ID": "your-client-id",
     "GUILD_ID": "dev-guild-id",
     "APP_ID": "bot-app-id",
+    "DEFAULT_VCID": "default-voice-channel-id",
     "BANNED_WORDS": ["words", "to", "ban", "go", "here"]
     "FIREBASE-CONFIG": {
         "your": "firebase",
