@@ -88,7 +88,7 @@ Then create a config.json file which will look like this:
     "CLIENT_ID": "your-client-id",
     "GUILD_ID": "dev-guild-id",
     "APP_ID": "bot-app-id",
-    "ENV": "prod || dev"
+    "ENV": "prod || dev",
     "DEFAULT_VCID": "default-voice-channel-id",
     "BANNED_WORDS": ["words", "to", "ban", "go", "here"],
     "FIREBASE-CONFIG": {
@@ -113,4 +113,4 @@ node ./index.js
 ```
 ## Contributing
 
-Contributions are always welcome! :D
+Contributions are always welcome! adding new:D
