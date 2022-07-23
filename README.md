@@ -63,7 +63,15 @@ Create a new Firebase Project:
 
     13. select location and click on "Enable"
 
-## Dowload and run AlienBot 
+    14. click on "start collection" and name it `db`
+
+    15. click on "add document" and name it `BANNED_WORDS`
+
+    16. click on "add field" and name it `WORDS`, note: the type should be `array`
+
+    17. add all the words that you want to ban people from saying in there
+
+## Dowload and run AlienBot
 
 After you've setup everything, its time to install and run AlienBot
 
@@ -90,7 +98,6 @@ Then create a config.json file which will look like this:
     "APP_ID": "bot-app-id",
     "ENV": "prod || dev",
     "DEFAULT_VCID": "default-voice-channel-id",
-    "BANNED_WORDS": ["words", "to", "ban", "go", "here"],
     "FIREBASE-CONFIG": {
         "your": "firebase",
         "service": "account",

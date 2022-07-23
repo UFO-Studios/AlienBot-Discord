@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Intents } = require("discord.js");
 const Config = require("./config.json");
-const Firebase = require("./firebase.js")
+const Firebase = require("./firebase.js");
 
 const client = new Client({
   intents: [
@@ -12,8 +12,13 @@ const client = new Client({
   ],
 });
 
-client.C = Config
-client.F = Firebase
+(async () => {
+  const data = await Firebase.getData("db", "BANNED_WORDS")
+  client.BANNED_WORDS = await data.WORDS
+})()
+
+client.C = Config;
+client.F = Firebase;
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");

@@ -3,10 +3,10 @@ module.exports = {
   once: true,
   async execute(client) {
     console.log("Ready!");
-
-    client.channels.cache
+    await client.channels.cache
       .get(client.C.CHANNEL_ID)
       .send("Bot is online! Running in dev mode :D");
+
     const array = [
       () => {
         client.user.setActivity("Sub 2 Alien", {
@@ -38,12 +38,9 @@ module.exports = {
   },
 };
 
-
 // template
 //  () => {
 //    client.user.setActivity(`Activity Here`, {
 //      type: "WATCHING or PLAYING or STREAMING",
 //    });
 //  },
-
-//
