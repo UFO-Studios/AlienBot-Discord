@@ -7,6 +7,7 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("input").setDescription("The input to echo back")
     ),
+  global: true,
   async execute(interaction) {
     const value = interaction.options.getString("input");
     if (value) return interaction.reply(`The options value is: \`${value}\``);
@@ -15,3 +16,5 @@ module.exports = {
 };
 
 console.log("options-info.js run");
+
+// do we need this?

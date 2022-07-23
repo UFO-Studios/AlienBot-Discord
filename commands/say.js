@@ -10,6 +10,7 @@ module.exports = {
         .setDescription("the words to repeat")
         .setRequired(true)
     ),
+  global: true,
   async execute(interaction, client) {
     const string = await interaction.options.getString("string");
 

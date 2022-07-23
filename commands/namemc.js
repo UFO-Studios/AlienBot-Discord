@@ -15,6 +15,7 @@ module.exports = {
         .setRequired(true);
       return option;
     }),
+  global: true,
   async execute(interaction, client) {
     const username = await interaction.options.getString("username");
     try {

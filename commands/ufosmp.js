@@ -5,6 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("ufosmp")
     .setDescription("Info about the UFO SMP"),
+  global: true,
   async execute(interaction) {
     const embed = new MessageEmbed()
       .setAuthor(interaction.user.tag)

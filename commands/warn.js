@@ -14,6 +14,7 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("reason").setDescription("reason to warn the target")
     ),
+  global: true,
   async execute(interaction, client) {
     await interaction.deferReply();
     const target = await interaction.options.getMember("target");

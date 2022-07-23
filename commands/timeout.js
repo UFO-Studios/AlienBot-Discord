@@ -47,6 +47,7 @@ module.exports = {
         .setRequired(false);
       return option;
     }),
+  global: true,
   async execute(interaction, client) {
     const target = await interaction.options.getMember("target");
     const reason =

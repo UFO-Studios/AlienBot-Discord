@@ -10,11 +10,12 @@ module.exports = {
         .setDescription("Number of messages to prune")
         .setRequired(true)
     ),
+  global: true,
   async execute(interaction) {
     const amount = interaction.options.getInteger("amount");
 
     if (amount < 1 || amount > 99) {
-      return interaction.reply({
+      return await interaction.reply({
         content: "You need to input a number between 1 and 99.",
         ephemeral: true,
       });
@@ -27,7 +28,7 @@ module.exports = {
       });
     });
 
-    return interaction.reply({
+    return await interaction.reply({
       content: `Successfully pruned \`${amount}\` messages.`,
       ephemeral: true,
     });

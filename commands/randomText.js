@@ -34,6 +34,7 @@ module.exports = {
         .setRequired(true);
       return option;
     }),
+  global: true,
   async execute(interaction, client) {
     try {
       const value = await interaction.options.getString("text");

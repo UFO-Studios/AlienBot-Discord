@@ -38,6 +38,7 @@ module.exports = {
     .addUserOption((option) =>
       option.setName("target").setDescription("the target to get the info of")
     ),
+  global: true,
   async execute(interaction) {
     const targetMember =
       interaction.options.getMember("target") || interaction.member;

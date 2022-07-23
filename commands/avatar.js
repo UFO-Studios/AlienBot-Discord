@@ -11,6 +11,7 @@ module.exports = {
         .setDescription("The target to show the pfp of")
         .setRequired(true)
     ),
+  global: true,
   async execute(interaction) {
     const user = await interaction.options.getUser("target");
 

@@ -11,6 +11,7 @@ module.exports = {
         .setRequired(true);
       return option;
     }),
+  global: true,
   async execute(interaction, client) {
     const ID = interaction.options.getString("id");
 

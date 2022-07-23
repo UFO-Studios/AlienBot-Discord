@@ -4,7 +4,8 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const Config = require("./config.json");
 
-const commands = [];
+const globalCommands = [];
+const localCommands = [];
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
   .readdirSync(commandsPath)
@@ -13,25 +14,23 @@ const commandFiles = fs
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
-  commands.push(command.data.toJSON());
+  if (command.global) {
+    globalCommands.push(command.data.toJSON());
+  } else {
+    localCommands.push(command.data.toJSON());
+  }
 }
 
 const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
 
-if (Config.ENV == "dev") {
-  // local (with a guild id)
-  rest
-    .put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
-      body: commands,
-    })
-    .then(() => console.log("Successfully registered application commands locally."))
-    .catch(console.error);
-} else {
-  // global (only requires the app id)
-  rest
-    .put(Routes.applicationCommands(Config.APP_ID), {
-      body: commands,
-    })
-    .then(() => console.log("Successfully registered application commands globally."))
-    .catch(console.error);
-}
+// global commands
+rest.put(Routes.applicationCommands(Config.APP_ID), {
+  body: globalCommands,
+});
+
+// local commands
+rest.put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
+  body: localCommands,
+});
+
+console.log("Successfully registered global and local commands");

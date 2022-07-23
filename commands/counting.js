@@ -14,6 +14,7 @@ module.exports = {
         .setDescription("channel where the counting will start")
         .setRequired(true)
     ),
+    global: false, // its false until we make counting.js work
   async execute(interaction, client) {
     if (
       !interaction.member.permissions.has([

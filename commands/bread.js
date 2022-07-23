@@ -4,6 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("bread")
     .setDescription("bread...?!?"),
+  global: true,
   async execute(interaction, client) {
     const random = Math.random();
     if (random > 0.5) {
