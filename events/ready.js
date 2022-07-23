@@ -37,3 +37,13 @@ module.exports = {
     }, 10000);
   },
 };
+
+
+// template
+//  () => {
+//    client.user.setActivity(`Activity Here`, {
+//      type: "WATCHING or PLAYING or STREAMING",
+//    });
+//  },
+
+//
