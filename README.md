@@ -88,10 +88,12 @@ Then create a config.json file which will look like this:
     "CLIENT_ID": "your-client-id",
     "GUILD_ID": "dev-guild-id",
     "APP_ID": "bot-app-id",
+    "ENV": "prod || dev"
     "DEFAULT_VCID": "default-voice-channel-id",
-    "BANNED_WORDS": ["words", "to", "ban", "go", "here"]
+    "BANNED_WORDS": ["words", "to", "ban", "go", "here"],
     "FIREBASE-CONFIG": {
         "your": "firebase",
+        "service": "account",
         "config": "goes here"
     }
 }
