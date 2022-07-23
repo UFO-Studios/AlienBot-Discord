@@ -24,7 +24,7 @@ if (Config.ENV == "dev") {
     .put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
       body: commands,
     })
-    .then(() => console.log("Successfully registered application commands."))
+    .then(() => console.log("Successfully registered application commands locally."))
     .catch(console.error);
 } else {
   // global (only requires the app id)
@@ -32,6 +32,6 @@ if (Config.ENV == "dev") {
     .put(Routes.applicationCommands(Config.APP_ID), {
       body: commands,
     })
-    .then(() => console.log("Successfully registered application commands."))
+    .then(() => console.log("Successfully registered application commands globally."))
     .catch(console.error);
 }
