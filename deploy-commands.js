@@ -18,9 +18,20 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
 
-rest
-  .put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
-    body: commands,
-  })
-  .then(() => console.log("Successfully registered application commands."))
-  .catch(console.error);
+if (Config.ENV == "dev") {
+  // local (with a guild id)
+  rest
+    .put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
+      body: commands,
+    })
+    .then(() => console.log("Successfully registered application commands."))
+    .catch(console.error);
+} else {
+  // global (only requires the app id)
+  rest
+    .put(Routes.applicationCommands(Config.APP_ID), {
+      body: commands,
+    })
+    .then(() => console.log("Successfully registered application commands."))
+    .catch(console.error);
+}
