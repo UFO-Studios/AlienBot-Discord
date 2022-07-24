@@ -89,6 +89,10 @@ module.exports = {
           inline: true,
         },
         {
+          name: "Server language",
+          value: `\`\`\`${interaction.guild.preferredLocale}\`\`\``,
+        },
+        {
           name: `roles (${interaction.guild.roles.cache.size})`,
           value: `\`\`\`${roleNames}\`\`\``,
         },
