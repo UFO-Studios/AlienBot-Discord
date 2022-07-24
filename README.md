@@ -71,7 +71,7 @@ Create a new Firebase Project:
 
     17. add all the words that you want to ban people from saying in there
 
-## Dowload and run AlienBot
+## Download and run AlienBot
 
 After you've setup everything, its time to install and run AlienBot
 
