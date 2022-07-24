@@ -30,7 +30,7 @@ module.exports = {
 
     if (!webhookURL) {
       channel
-        .createWebhook("AlienBot test")
+        .createWebhook("AlienBot")
         .then(async (webhook) => {
           console.log(`New webhook created ${webhook.name}`);
 

@@ -31,7 +31,7 @@ module.exports = {
         `${oldMessage.author.tag} edited a message in #${oldMessage.channel.name}`
       )
       .setDescription(
-        `Before: \`\`\` ${original} \`\`\` \n After: \`\`\` ${edited} \`\`\``
+        `Before: \`\`\`${original}\`\`\` \nAfter: \`\`\`${edited}\`\`\``
       )
       .setAuthor({ name: oldMessage.author.tag })
       .setColor("RANDOM")
