@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Channel, Interaction } = require("discord.js");
+const { Channel, Interaction, Permissions } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,6 +17,13 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
+
+    if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD))
+      return await interaction.editReply({
+        content: "You dont have the permissions to set logs!",
+        ephemeral: true,
+      });
+
     const channel = await interaction.options.getChannel("channel");
 
     const webhookURL = await client.F.getData("logging", interaction.guildId);
