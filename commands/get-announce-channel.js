@@ -1,11 +1,11 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const db = require("easy-db-json");
 
-db.setFile("./dbs/dac.json");
+db.setFile("./dac.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("set update channel")
+    .setName("update-channel")
     .setDescription("Sets the channel to publish the bot update/fixes messages.")
     .addChannelOption((option) => {
       option
