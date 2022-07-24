@@ -18,8 +18,13 @@ module.exports = {
     }),
   global: true,
   async execute(interaction) { 
-    const serverId = await interaction.guildId
-    const channelId = await interaction.options.getChannel("channel-id").id
+    const serverId = await interaction.guildId 
+    const channel = await interaction.options.getChannel("channel")
+
+    console.log(channel) 
+    
+
+    const channelId = channel.id 
 
     db.set(serverId, channelId) 
 
