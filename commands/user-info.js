@@ -60,45 +60,45 @@ module.exports = {
       .addFields(
         {
           name: "username",
-          value: `\`${targetUser.tag}\``,
+          value: `\`\`\`${targetUser.tag}\`\`\``,
           inline: true,
         },
         {
           name: "user id",
-          value: `\`${targetUser.id}\``,
+          value: `\`\`\`${targetUser.id}\`\`\``,
           inline: true,
         },
         {
           name: "nickname",
-          value: `\`${targetMember.nickname || "no nickname"}\``,
+          value: `\`\`\`${targetMember.nickname || "no nickname"}\`\`\``,
           inline: true,
         },
         {
           name: "bot?",
-          value: `\`${targetUser.bot.toString()}\``,
+          value: `\`\`\`${targetUser.bot.toString()}\`\`\``,
           inline: true,
         },
         {
           name: "joined at",
-          value: `\`${targetMember.joinedAt}\``,
+          value: `\`\`\`${targetMember.joinedAt}\`\`\``,
           inline: true,
         },
         {
           name: "created at",
-          value: `\`${targetUser.createdAt}\``,
+          value: `\`\`\`${targetUser.createdAt}\`\`\``,
           inline: true,
         },
         {
           name: "boosting since",
-          value: `\`${targetMember.premiumSince || "not boosting"}\``,
+          value: `\`\`\`${targetMember.premiumSince || "not boosting"}\`\`\``,
           inline: true,
         },
         {
           name: "permissions",
-          value: `\`${permsText}\``,
+          value: `\`\`\`${permsText}\`\`\``,
           inline: true,
         },
-        { name: "roles", value: `\`${roles || "No roles"}\`` }
+        { name: "roles", value: `\`\`\`${roles || "No roles"}\`\`\`` }
       );
     return await interaction.reply({ embeds: [embed] });
   },

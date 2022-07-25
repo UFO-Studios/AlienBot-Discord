@@ -10,13 +10,14 @@ module.exports = {
       option
         .setName("username")
         .setDescription(
-          "The username of the minecraft player you want to lookup."
+          "The username of the minecraft player you want to lookup. note: THhis DOES NOT support bedrock."
         )
         .setRequired(true);
       return option;
     }),
   global: true,
   async execute(interaction, client) {
+    await interaction.deferReply();
     const username = await interaction.options.getString("username");
     try {
       const skin = await mcapi.skin(username);
@@ -73,12 +74,12 @@ module.exports = {
         "\n",
         usernameHistory
       );
-      return interaction.reply({ embeds: [embed] });
+      return interaction.editReply({ embeds: [embed] });
     } catch (e) {
       if (e) {
         console.log(e);
-        return interaction.reply({
-          content: `There was an error with the command: ${e}`,
+        return interaction.editReply({
+          content: `You cannot search info of bedrock players!`,
           ephemeral: true,
         });
       }
