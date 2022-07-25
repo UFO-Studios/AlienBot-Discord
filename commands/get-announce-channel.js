@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const db = require("easy-db-json");
+const Firebase = require("../firebase.js");
 
-db.setFile("./dac.json");
+//hi hallo?
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,18 +17,15 @@ module.exports = {
       return option;
     }),
   global: true,
-  async execute(interaction) { 
+  async execute(interaction, client) { 
     const serverId = await interaction.guildId 
     const channel = await interaction.options.getChannel("channel")
-
     console.log(channel) 
-    
-
     const channelId = channel.id 
-
-    db.set(serverId, channelId) 
-
-    await interaction.reply(`server id set to ${serverId}, & channelId set to ${channelId}`);
+    client.F.addData("Upadate-channels", serverId, { channelId })
+    await interaction.reply(`server id set to ${serverId}, & channelId set to ${channelId}. When there are any new updates/announcements about AlienBot you will get notified!`);
   },
 };
 console.log("get-announce-channel.js run"); 
+
+//client.F.addData("collectionName", "docName", { js: "object" })
