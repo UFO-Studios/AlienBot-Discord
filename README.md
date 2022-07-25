@@ -1,19 +1,51 @@
 ## AlienBot 2.0
 
 An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord but open sourced for anyone that wants it!
+
+
 ## Invite Link
 
-https://fl.niceygylive.xyz/UFOS-BOT20
+Coming soon™️
+## Commands
 
-## Setup Everything
+Here is a list of all the commands AlienBit has and what they do.
+
+• Moderation.    
+
+`/kick` - Kick a member from the server.    
+`/ban` - Ban a member from the server.  
+`/unban` - Unban a banned member.  
+`/warn` - Warn a member in the server.
+`/check-warns` - Check the warns of a member.   
+`/timeout` - Timeout a member. Note - The server has to have community turned on for this to work.    
+`/prune` - Prune/Clear upto 99 messages from a channel.    
+
+• General.   
+
+`/about` - About AlienBot.    
+`/user-info` - Get info about a user.    
+`/server-info` - Get info about a server.    
+`/pfp` - Get a member's profile picture.    
+`/bread` - Bread 👍👎.    
+`/namemc` - Get info about a Java minecraft player.    
+`/ping` - Get AlienBot's ping (and pong).    
+`/random-text-generator` - Get some random text generated for you.    
+`/say` - The bot will anonymously repeat what you tell it to say. Warning - Don't use this for bad stuff.    
+`/server-info` - Get info about the server.    
+`/woof` - AlienBot woods at you.     
+
+• Logs.   
+
+`/update-channel` - Channel where alienBot updates are sent.    
+`/set-logging-channel` - Set a logging channel where message logs will be sent.    
+
+## Setup
 
 Install Nodejs from https://nodejs.dev/download/
 
-Install Git from https://git-scm.com/
-
 Create a new Bot application:
 
-    1. Go to Discord dev portal(https://discord.com/developers/applications)
+    1. Go to [Discord dev portal](https://discord.com/developers/applications)
 
     2. Click on "New Application"
 
@@ -37,53 +69,33 @@ Create a new Bot application:
 
 Create a new Firebase Project:
 
-    1. Go to Firebase Developer Console(https://console.firebase.google.com/) and login if you need to
+1. Go to [Firebase Developer Console](https://console.firebase.google.com/) and login if you need to
 
-    2. Click on "Add Project"
+2. Click on "Add Project"
 
-    3. Enter a name for the project
+3. Enter a name for the project
 
-    4. Click on continue until you reach "Configure Google Analytics"
+4. Click on continue until you reach "Configure Google Analytics"
 
-    5. Choose "default account for firebase" then click on create project
+5. Choose "default account for firebase" then click on create project
 
-    6. Click on project settings (the gear icon on the top-left corner)
+6. Click on project settings (the gear icon on the top-left corner)
 
-    7. Click on "Service Accounts"
+7. Click on "Service Accounts"
 
-    8. Click on "generate key pair" and download your whole keypair from the downloaded .json file and save it for a later step
-
-    9. go to the home page of your project
-
-    10. then to to firestore section
-
-    11. click on "Create Database"
-
-    12. Start is test mode and click "Next" (you can update security rules later)
-
-    13. select location and click on "Enable"
-
-    14. click on "start collection" and name it `db`
-
-    15. click on "add document" and name it `BANNED_WORDS`
-
-    16. click on "add field" and name it `WORDS`, note: the type should be `array`
-
-    17. add all the words that you want to ban people from saying in there
+8. Click on "generate key pair" and download your whole keypair from the downloaded .json file and save it for a later step
 
 ## Download and run AlienBot
 
-After you've setup everything, its time to install and run AlienBot
-
-for that, you need to clone this repo: 
+First of all you need to clone this repo: 
 
 ```bash
 git clone https://github.com/UFO-Studios/AlienBot-2.0
 ```
-
 Now cd into the bot's directory:
 
 ```bash
+
 cd alienbot-2.0
 ```
 
@@ -121,3 +133,4 @@ node ./index.js
 ## Contributing
 
 Contributions are always welcome! :D
+
