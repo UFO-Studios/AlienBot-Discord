@@ -5,6 +5,36 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
 
 https://fl.niceygylive.xyz/UFOS-BOT20
 
+## Commands
+
+Here is a list of all the commands AlienBit has and what they do.
+
+• Moderation
+`/kick` - Kick a member from the server.
+`/ban` - Ban a member from the server.
+`/unban` - Unban a banned member.
+`/warn` - Warn a member in the server.
+`/check-warns` - Check the warns of a member.
+`/timeout` - Timeout a member. Note - The server has to have community turned on for this to work.
+`/prune` - Prune/Clear upto 99 messages from a channel.
+
+• General
+`/about` - About AlienBot.
+`/user-info` - Get info about a user.
+`/server-info` - Get info about a server.
+`/pfp` - Get a member's profile picture.
+`/bread` - Bread 👍👎.
+`/namemc` - Get info about a Java minecraft player.
+`/ping` - Get AlienBot's ping (and pong).
+`/random-text-generator` - Get some random text generated for you.
+`/say` - The bot will anonymously repeat what you tell it to say. Warning - Don't use this for bad stuff.
+`/server-info` - Get info about the server.
+`/woof` - AlienBot woods at you.
+
+• Logs
+`/update-channel` - Channel where alienBot updates are sent.
+`/set-logging-channel` - Set a logging channel where message logs will be sent.
+
 ## Setup Everything
 
 Install Nodejs from https://nodejs.dev/download/
