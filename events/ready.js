@@ -29,10 +29,20 @@ module.exports = {
           type: "WATCHING",
         });
       },
+        () => {
+          client.user.setActivity(`The only bot from outer space!`, {
+            type: "PLAYING",
+          });
+      },
+        () => {
+          client.user.setActivity(`github.com/UFO-Studios`, {
+            type: "WATCHING",
+          });
+        },
     ];
     setInterval(() => {
-      const randomNum = Math.floor(Math.random() * 3);
-      console.log(randomNum);
+      const randomNum = Math.floor(Math.random() * 6);
+      //console.log(randomNum);
       array[randomNum]();
     }, 10000);
   },
