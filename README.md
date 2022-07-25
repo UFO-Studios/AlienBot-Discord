@@ -10,8 +10,8 @@ https://fl.niceygylive.xyz/UFOS-BOT20
 Here is a list of all the commands AlienBit has and what they do.
 
 • Moderation
-`/kick` - Kick a member from the server.
-`/ban` - Ban a member from the server.
+`/kick` - Kick a member from the server. \n
+`/ban` - Ban a member from the server. \n
 `/unban` - Unban a banned member.
 `/warn` - Warn a member in the server.
 `/check-warns` - Check the warns of a member.
