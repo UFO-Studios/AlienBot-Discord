@@ -41,7 +41,7 @@ module.exports = {
         },
     ];
     setInterval(() => {
-      const randomNum = Math.floor(Math.random() * 6);
+      const randomNum = Math.floor(Math.random() * 5);
       //console.log(randomNum);
       array[randomNum]();
     }, 10000);
