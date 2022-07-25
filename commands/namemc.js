@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const mcapi = require("minecraft-lookup");
 const { MessageEmbed } = require("discord.js");
 
-module.exports = {
+  module.exports = {
   data: new SlashCommandBuilder()
     .setName("namemc")
     .setDescription("Lookup a minecraft player with their names.")
@@ -10,7 +10,7 @@ module.exports = {
       option
         .setName("username")
         .setDescription(
-          "The username of the minecraft player you want to lookup. note: THhis DOES NOT support bedrock."
+          "The username of the minecraft player you want to lookup. note: This DOES NOT support bedrock."
         )
         .setRequired(true);
       return option;
