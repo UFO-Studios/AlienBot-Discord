@@ -1,8 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const Firebase = require("../firebase.js");
-//const db = require("easy-db-json");
 
-//db.setFile("../dac.json");
+//hi hallo?
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,12 +17,12 @@ module.exports = {
       return option;
     }),
   global: true,
-  async execute(interaction) { 
+  async execute(interaction, client) { 
     const serverId = await interaction.guildId 
     const channel = await interaction.options.getChannel("channel")
     console.log(channel) 
     const channelId = channel.id 
-    client.F.addData(guildId, channelId, { js: "object" })
+    client.F.addData(serverId, channelId, { js: "object" })
     await interaction.reply(`server id set to ${serverId}, & channelId set to ${channelId}. When there are any new updates/announcements about AlienBot you will get notified!`);
   },
 };
