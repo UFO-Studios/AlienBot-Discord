@@ -57,7 +57,7 @@ const { MessageEmbed } = require("discord.js");
         .setTimestamp()
         .setFooter({
           text: "/namemc • AlienBot",
-          iconURL:
+          iconURL: 
             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
         });
 
