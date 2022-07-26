@@ -11,6 +11,7 @@ module.exports = {
         .setDescription("Emoji to add from another server")
         .setRequired(true)
     ),
+  global: true,
   /**
    *
    * @param {Interaction} interaction

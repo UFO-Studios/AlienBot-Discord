@@ -3,20 +3,34 @@ const path = require("node:path");
 const { Client, Collection, Intents } = require("discord.js");
 const Config = require("./config.json");
 const Firebase = require("./firebase.js");
+const { Player } = require("discord-player");
 
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MEMBERS,
     Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+    Intents.FLAGS.GUILD_PRESENCES,
+    Intents.FLAGS.GUILD_INTEGRATIONS,
+    Intents.FLAGS.GUILD_BANS,
+    Intents.FLAGS.GUILD_WEBHOOKS,
+    Intents.FLAGS.GUILD_VOICE_STATES,
   ],
 });
 
 (async () => {
-  const data = await Firebase.getData("db", "BANNED_WORDS")
-  client.BANNED_WORDS = await data.WORDS
-})()
+  const data = await Firebase.getData("db", "BANNED_WORDS");
+  client.BANNED_WORDS = await data.WORDS;
+})();
 
+const player = new Player(client);
+
+player.on("trackStart", (queue, track) =>
+  queue.metadata.channel.send(`Now playing **${track.title}**!`)
+);
+
+client.P = player;
 client.C = Config;
 client.F = Firebase;
 
