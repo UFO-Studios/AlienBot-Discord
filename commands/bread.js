@@ -7,7 +7,7 @@ module.exports = {
   global: true,
   async execute(interaction, client) {
     const random = Math.random();
-    if (random > 0.5) {
+    if (random >= 0.5) {
       return interaction.reply("Bread :thumbsup:");
     } else {
       return interaction.reply("Bread :thumbsdown:");

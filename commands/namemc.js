@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const mcapi = require("minecraft-lookup");
 const { MessageEmbed } = require("discord.js");
 
-module.exports = {
+  module.exports = {
   data: new SlashCommandBuilder()
     .setName("namemc")
     .setDescription("Lookup a minecraft player with their names.")
@@ -10,13 +10,14 @@ module.exports = {
       option
         .setName("username")
         .setDescription(
-          "The username of the minecraft player you want to lookup."
+          "The username of the minecraft player you want to lookup. note: This DOES NOT support bedrock."
         )
         .setRequired(true);
       return option;
     }),
   global: true,
   async execute(interaction, client) {
+    await interaction.deferReply();
     const username = await interaction.options.getString("username");
     try {
       const skin = await mcapi.skin(username);
@@ -56,7 +57,7 @@ module.exports = {
         .setTimestamp()
         .setFooter({
           text: "/namemc • AlienBot",
-          iconURL:
+          iconURL: 
             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
         });
 
@@ -73,12 +74,12 @@ module.exports = {
         "\n",
         usernameHistory
       );
-      return interaction.reply({ embeds: [embed] });
+      return interaction.editReply({ embeds: [embed] });
     } catch (e) {
       if (e) {
         console.log(e);
-        return interaction.reply({
-          content: `There was an error with the command: ${e}`,
+        return interaction.editReply({
+          content: `You cannot search info of bedrock players!`,
           ephemeral: true,
         });
       }

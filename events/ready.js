@@ -1,11 +1,14 @@
+const { Client } = require("discord.js");
+
 module.exports = {
   name: "ready",
   once: true,
+  /**
+   *
+   * @param {Client} client
+   */
   async execute(client) {
-    console.log("Ready!");
-    await client.channels.cache
-      .get(client.C.CHANNEL_ID)
-      .send("Bot is online! Running in dev mode :D");
+    await client.guilds.fetch();
 
     const array = [
       () => {
@@ -29,22 +32,26 @@ module.exports = {
           type: "WATCHING",
         });
       },
-        () => {
-          client.user.setActivity(`The only bot from outer space!`, {
-            type: "PLAYING",
-          });
+      () => {
+        client.user.setActivity(`The only bot from outer space!`, {
+          type: "PLAYING",
+        });
       },
-        () => {
-          client.user.setActivity(`github.com/UFO-Studios`, {
-            type: "WATCHING",
-          });
-        },
+      () => {
+        client.user.setActivity(`github.com/UFO-Studios`, {
+          type: "WATCHING",
+        });
+      },
     ];
     setInterval(() => {
       const randomNum = Math.floor(Math.random() * 5);
       //console.log(randomNum);
       array[randomNum]();
     }, 10000);
+    console.log("Ready!");
+    await client.channels.cache
+      .get(client.C.CHANNEL_ID)
+      .send("Bot is online! Running in dev mode :D");
   },
 };
 
