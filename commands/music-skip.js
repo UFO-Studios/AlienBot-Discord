@@ -5,6 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("skip")
     .setDescription("Skip the song and move towards the next one!"),
+    global: true,
   /**
    *
    * @param {Interaction} interaction

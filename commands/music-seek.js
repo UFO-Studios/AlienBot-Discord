@@ -13,6 +13,7 @@ module.exports = {
         .setDescription("time to seek to in seconds, eg: 85")
         .setRequired(true)
     ),
+    global: true,
   /**
    *
    * @param {Interaction} interaction

@@ -11,6 +11,12 @@ module.exports = {
         .setDescription("The volume to set")
         .setRequired(false)
     ),
+  global: true,
+  /**
+   *
+   * @param {Interaction} interaction
+   * @param {Client} client
+   */
   async execute(interaction, client) {
     await interaction.deferReply();
 
@@ -20,23 +26,23 @@ module.exports = {
         content: "Music is not being played!",
       });
 
-    const volume = await interaction.options.getInteger("volume")
+    const volume = await interaction.options.getInteger("volume");
     if (!volume) {
       const embed = new MessageEmbed()
-      .setAuthor({ name: interaction.user.tag })
-      .setColor("GREEN")
-      .setTitle("Music volume")
-      .setDescription(`The current volume is **${queue.volume}**%!`)
-      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-      .setTimestamp()
-      .setFooter({
-        text: "Music System • Alienbot",
-        iconURL:
-          "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
-      }); 
+        .setAuthor({ name: interaction.user.tag })
+        .setColor("GREEN")
+        .setTitle("Music volume")
+        .setDescription(`The current volume is **${queue.volume}**%!`)
+        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+        .setTimestamp()
+        .setFooter({
+          text: "Music System • Alienbot",
+          iconURL:
+            "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+        });
 
-      return await interaction.editReply({embeds: [embed]})
-    };
+      return await interaction.editReply({ embeds: [embed] });
+    }
     if (volume < 0 || volume > 100)
       return await interaction.editReply({ content: "Invalid volume!" });
 

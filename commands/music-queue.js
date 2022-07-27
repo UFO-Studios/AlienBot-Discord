@@ -5,6 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("queue")
     .setDescription("Gets the music queue"),
+    global: true,
   /**
    *
    * @param {Interaction} interaction

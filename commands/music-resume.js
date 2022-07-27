@@ -5,6 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("resume")
     .setDescription("Resume the current playing stream."),
+    global: true,
   /**
    *
    * @param {Interaction} interaction
