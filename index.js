@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { Client, Collection, Intents } = require("discord.js");
+const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
 const Config = require("./config.json");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
@@ -26,9 +26,22 @@ const client = new Client({
 
 const player = new Player(client);
 
-player.on("trackStart", (queue, track) =>
-  queue.metadata.channel.send(`Now playing **${track.title}**!`)
-);
+player.on("trackStart", (queue, track) => {
+  const embed = new MessageEmbed()
+    .setTitle("Play song")
+    .setDescription(`Now playing **${track.title}**!`)
+    .setColor("GREEN")
+    .setAuthor({ name: client.user.tag })
+    .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
+    .setTimestamp()
+    .setFooter({
+      text: "Music System • Alienbot",
+      iconURL:
+        "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+    });
+    
+  queue.metadata.channel.send({ embeds: [embed] });
+});
 
 client.P = player;
 client.C = Config;

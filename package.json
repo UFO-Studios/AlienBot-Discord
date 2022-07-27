@@ -1,6 +1,9 @@
 {
   "name": "AB2",
   "license": "BSD-3-Clause",
+  "scripts": {
+    "start": "./start.sh"
+  },
   "dependencies": {
     "@discordjs/builders": "^0.15.0",
     "@discordjs/opus": "^0.8.0",
