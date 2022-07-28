@@ -22,7 +22,8 @@ module.exports = {
     const channel = await interaction.options.getChannel("channel")
     console.log(channel) 
     const channelId = channel.id 
-    client.F.getData("Upadate-channels", "varval", "varval")
+    client.F.getData("Upadate-channels", "varvaal", "varval") //determines how many entries we have
+    const varval = "varval"
     const varvalnew = varval + 1
     client.F.addData("Upadate-channels", varvalnew , { channelId, serverId })
     await interaction.reply(`server id set to ${serverId}, & channelId set to ${channelId}. When there are any new updates/announcements about AlienBot you will get notified!`);
