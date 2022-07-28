@@ -1,14 +1,31 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageEmbed, Interaction } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("about")
-    .setDescription("Alien`s links!"),
+    .setDescription("About AlienBot!"),
   global: true,
+  /**
+   *
+   * @param {Interaction} interaction
+   */
   async execute(interaction) {
-    await interaction.reply(
-      "I am made by the UFO-Studios team! We definitely know what we are doing :D. Find this bot's code at https://github.com/UFO-Studios/AlienBot-2.0"
-    );
+    const embed = new MessageEmbed()
+      .setAuthor({ name: interaction.user.tag })
+      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+      .setTitle("About AlienBot")
+      .setDescription(
+        "Hello humans I am AlienBot, the first alien discord bot. I am made by @UFO-STUDIOS and you can find my code at https://github.com/UFO-Studios/AlienBot-2.0"
+      )
+      .setColor("BLUE")
+      .setTimestamp()
+      .setFooter({
+        text: "/about • Alienbot",
+        iconURL:
+          "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+      });
+    await interaction.reply({ embeds: [embed] });
   },
 };
 console.log("about.js run");
