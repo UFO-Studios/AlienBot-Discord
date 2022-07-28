@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,11 +27,12 @@ module.exports = {
 
     try {
       if (
-        interaction.member.permissions.has("MODERATE_MEMBERS", "KICK_MEMBERS")
+        interaction.member.permissions.has(PermissionFlagsBits.KickMembers) ||
+        interaction.member.permissions.has(PermissionFlagsBits.Administrator)
       ) {
         if (target) {
           await interaction.guild.members.kick(target, reason);
-          const successEmbed = new MessageEmbed()
+          const successEmbed = new EmbedBuilder()
             .setColor("0099ff")
             .setTitle(`${target.user.tag} got kicked.`)
             .setDescription(

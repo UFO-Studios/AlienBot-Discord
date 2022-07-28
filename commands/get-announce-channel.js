@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,7 +20,7 @@ module.exports = {
     const channelId = channel.id;
 
     console.log(channel);
-    
+
     await client.F.addData("Upadate-channels", serverId, { channelId });
 
     await interaction.reply(

@@ -1,5 +1,8 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Interaction, Permissions } = require("discord.js");
+const {
+  Interaction,
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +21,14 @@ module.exports = {
   async execute(interaction, client) {
     await interaction.deferReply();
 
-    if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD))
+    if (
+      !interaction.member.permissions.has([
+        PermissionFlagsBits.ManageGuild,
+        PermissionFlagsBits.ManageMessages,
+        PermissionFlagsBits.ManageChannels,
+      ]) ||
+      !interaction.member.permissions.has(PermissionFlagsBits.Administrator)
+    )
       return await interaction.editReply({
         content: "You dont have the permissions to set logs!",
         ephemeral: true,

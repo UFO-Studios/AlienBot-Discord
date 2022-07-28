@@ -1,21 +1,26 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
+const {
+  Client,
+  Collection,
+  GatewayIntentBits,
+  EmbedBuilder,
+} = require("discord.js");
 const Config = require("./config.json");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
 
 const client = new Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
-    Intents.FLAGS.GUILD_PRESENCES,
-    Intents.FLAGS.GUILD_INTEGRATIONS,
-    Intents.FLAGS.GUILD_BANS,
-    Intents.FLAGS.GUILD_WEBHOOKS,
-    Intents.FLAGS.GUILD_VOICE_STATES,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildEmojisAndStickers,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildBans,
+    GatewayIntentBits.GuildWebhooks,
+    GatewayIntentBits.MessageContent,
   ],
 });
 
@@ -27,10 +32,10 @@ const client = new Client({
 const player = new Player(client);
 
 player.on("trackStart", (queue, track) => {
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setTitle("Play song")
     .setDescription(`Now playing **${track.title}**!`)
-    .setColor("GREEN")
+    .setColor("Green")
     .setAuthor({ name: client.user.tag })
     .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
     .setTimestamp()
@@ -39,7 +44,7 @@ player.on("trackStart", (queue, track) => {
       iconURL:
         "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
     });
-    
+
   queue.metadata.channel.send({ embeds: [embed] });
 });
 
@@ -76,5 +81,19 @@ for (const file of eventFiles) {
     });
   }
 }
+
+client.modals = new Collection();
+const modalsPath = path.join(__dirname, "modals");
+const modalFiles = fs
+  .readdirSync(modalsPath)
+  .filter((file) => file.endsWith(".js"));
+
+for (const file of modalFiles) {
+  const filePath = path.join(modalsPath, file);
+  const modal = require(filePath);
+  client.modals.set(modal.name, modal);
+}
+
+console.log(client.modals);
 
 client.login(client.C.TOKEN);

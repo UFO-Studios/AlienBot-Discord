@@ -1,5 +1,5 @@
 require("discord-player/smoothVolume");
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const { Client, Interaction } = require("discord.js");
 
 module.exports = {
@@ -68,7 +68,7 @@ module.exports = {
     queue.addTrack(song);
     if (!queue.playing) await queue.play();
 
-    return await interaction.editReply({content: "Added to the queue!"});
+    return await interaction.editReply({ content: "Added to the queue!" });
   },
 };
 

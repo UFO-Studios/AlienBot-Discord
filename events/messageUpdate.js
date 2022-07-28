@@ -1,4 +1,4 @@
-const { Message, MessageEmbed, WebhookClient } = require("discord.js");
+const { Message, EmbedBuilder, WebhookClient } = require("discord.js");
 
 module.exports = {
   name: "messageUpdate",
@@ -26,7 +26,7 @@ module.exports = {
       newMessage.content.slice(0, count) +
       (newMessage.content.length > count ? " ..." : "");
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(
         `${oldMessage.author.tag} edited a message in #${oldMessage.channel.name}`
       )
@@ -34,7 +34,7 @@ module.exports = {
         `Before: \`\`\`${original}\`\`\` \nAfter: \`\`\`${edited}\`\`\``
       )
       .setAuthor({ name: oldMessage.author.tag })
-      .setColor("RANDOM")
+      .setColor("Purple")
       .setThumbnail(oldMessage.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({

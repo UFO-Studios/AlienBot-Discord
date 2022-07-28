@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Interaction, Client, MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { Interaction, Client, EmbedBuilder } = require("discord.js");
 const ms = require("ms");
 const prettyMilliseconds = require("pretty-ms");
 
@@ -13,7 +13,7 @@ module.exports = {
         .setDescription("time to seek to in seconds, eg: 85")
         .setRequired(true)
     ),
-    global: true,
+  global: true,
   /**
    *
    * @param {Interaction} interaction
@@ -32,9 +32,9 @@ module.exports = {
     const timems = ms(time);
 
     await queue.seek(timems);
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setColor("GREEN")
+      .setColor("Green")
       .setTitle("Music seek")
       .setDescription(`Seeked to ${prettyMilliseconds(timems)}!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))

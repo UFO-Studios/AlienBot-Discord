@@ -1,11 +1,11 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Interaction, Client, MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { Interaction, Client, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("queue")
     .setDescription("Gets the music queue"),
-    global: true,
+  global: true,
   /**
    *
    * @param {Interaction} interaction
@@ -25,10 +25,10 @@ module.exports = {
       return `${index + 1}. **${song.title}**: ${song.url}`;
     });
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-      .setColor("GREEN")
+      .setColor("Green")
       .setTitle("Current Queue")
       .setDescription(`${songs.join(",\n")}`)
       .addField("Now playing:", `${currentSong.title}: ${currentSong.url}`)

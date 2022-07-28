@@ -1,15 +1,15 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ufosmp")
     .setDescription("Info about the UFO SMP"),
-  global: true,
+  global: false,
   async execute(interaction) {
-    const embed = new MessageEmbed()
-      .setAuthor(interaction.user.tag)
-      .setColor("RANDOM")
+    const embed = new EmbedBuilder()
+      .setAuthor({ name: interaction.user.tag })
+      .setColor("Blue")
       .setTitle("UFO SMP")
       .setDescription(
         "UFO SMP is a server run by Alien for members of The Alien Empire community! Want to join us? But you're  on bedrock? FEAR NOT! It runs GeyserMC for crossplay. Still want to join? Get to level 5 (`/rank`) and apply on the form in the info channel! :D"

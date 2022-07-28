@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed, Permissions } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder, Permissions } = require("discord.js");
 
 const getPerms = async (perms) => {
   if (perms.has(Permissions.FLAGS.ADMINISTRATOR)) {
@@ -52,9 +52,9 @@ module.exports = {
 
     const permsText = await getPerms(targetMember.permissions);
 
-    const embed = new MessageEmbed()
-      .setAuthor(targetUser.tag)
-      .setColor("RANDOM")
+    const embed = new EmbedBuilder()
+      .setAuthor({name: targetUser.tag})
+      .setColor("Blue")
       .setTitle("User Info")
       .setThumbnail(targetUser.displayAvatarURL({ dynamic: true }))
       .addFields(

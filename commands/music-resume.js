@@ -1,11 +1,11 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Client, Interaction, MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { Client, Interaction, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("resume")
     .setDescription("Resume the current playing stream."),
-    global: true,
+  global: true,
   /**
    *
    * @param {Interaction} interaction
@@ -21,9 +21,9 @@ module.exports = {
         ephemeral: true,
       });
 
-    const successEmbed = new MessageEmbed()
+    const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setColor("GREEN")
+      .setColor("Green")
       .setTitle("Music resume")
       .setDescription(`Resumed **${queue.current.title}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -34,9 +34,9 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    const errorEmbed = new MessageEmbed()
+    const errorEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setColor("GREEN")
+      .setColor("Green")
       .setTitle("Music resume")
       .setDescription(`Couldn't resume **${queue.current}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -13,6 +13,11 @@ module.exports = {
     }),
   global: true,
   async execute(interaction, client) {
+    if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers))
+      return await interaction.reply({
+        content: "You dont have the perms to unban a member!",
+      });
+
     const ID = interaction.options.getString("id");
 
     try {

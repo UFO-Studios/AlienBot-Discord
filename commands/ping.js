@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed, Interaction, Client } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder, Interaction, Client } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,9 +12,9 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setColor("BLUE")
+      .setColor("Blue")
       .setTitle("Ping.")
       .setDescription(`🏓 | Ping is \`${client.ws.ping}\` ms.`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))

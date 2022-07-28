@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,9 +15,9 @@ module.exports = {
   async execute(interaction) {
     const user = await interaction.options.getUser("target");
 
-    const embed = new MessageEmbed()
-      .setAuthor(interaction.user.tag)
-      .setColor("RANDOM")
+    const embed = new EmbedBuilder()
+      .setAuthor({name: interaction.user.tag})
+      .setColor("Blue")
       .setTitle("Profile Picture")
       .setDescription(`Heres the profile picture of the \`${user.tag}\`:`)
       .setImage(user.displayAvatarURL({ dynamic: true }))

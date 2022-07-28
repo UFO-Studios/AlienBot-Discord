@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Interaction, Client, MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { Interaction, Client, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,9 +28,9 @@ module.exports = {
 
     const volume = await interaction.options.getInteger("volume");
     if (!volume) {
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setAuthor({ name: interaction.user.tag })
-        .setColor("GREEN")
+        .setColor("Green")
         .setTitle("Music volume")
         .setDescription(`The current volume is **${queue.volume}**%!`)
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -48,9 +48,9 @@ module.exports = {
 
     const changed = queue.setVolume(volume);
 
-    const successEmbed = new MessageEmbed()
+    const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setColor("GREEN")
+      .setColor("Green")
       .setTitle("Music volume")
       .setDescription(`Changed the volume to **${volume}**%!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
@@ -61,9 +61,9 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    const errorEmbed = new MessageEmbed()
+    const errorEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setColor("GREEN")
+      .setColor("Green")
       .setTitle("Music pause")
       .setDescription(`Couldn't change the volume to **${volume}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
