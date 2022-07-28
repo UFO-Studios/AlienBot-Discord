@@ -1,8 +1,8 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const mcapi = require("minecraft-lookup");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
-  module.exports = {
+module.exports = {
   data: new SlashCommandBuilder()
     .setName("namemc")
     .setDescription("Lookup a minecraft player with their names.")
@@ -46,18 +46,18 @@ const { MessageEmbed } = require("discord.js");
         usernameHistory = "username history: " + history[0].name;
       }
 
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(starting)
         .setDescription(
           `${usernameString} \n ${skinString} \n ${headString} \n ${capeString} \n ${usernameHistory}`
         )
-        .setColor("RANDOM")
+        .setColor("Blue")
         .setThumbnail(userHead.helmavatar)
         .setAuthor(interaction.user.tag)
         .setTimestamp()
         .setFooter({
           text: "/namemc • AlienBot",
-          iconURL: 
+          iconURL:
             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
         });
 

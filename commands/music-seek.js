@@ -1,10 +1,18 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { Interaction, Client, EmbedBuilder } = require("discord.js");
+const ms = require("ms");
+const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("queue")
-    .setDescription("Gets the music queue"),
+    .setName("seek")
+    .setDescription("Seek to the given time")
+    .addStringOption((option) =>
+      option
+        .setName("time")
+        .setDescription("time to seek to in seconds, eg: 85")
+        .setRequired(true)
+    ),
   global: true,
   /**
    *
@@ -13,25 +21,23 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
+
     const queue = client.P.getQueue(interaction.guildId);
     if (!queue || !queue.playing)
       return await interaction.editReply({
         content: "Music is not being played!",
       });
 
-    const currentSong = queue.current;
+    const time = await interaction.options.getString("time");
+    const timems = ms(time);
 
-    const songs = queue.tracks.map((song, index) => {
-      return `${index + 1}. **${song.title}**: ${song.url}`;
-    });
-
+    await queue.seek(timems);
     const embed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setColor("Green")
-      .setTitle("Current Queue")
-      .setDescription(`${songs.join(",\n")}`)
-      .addField("Now playing:", `${currentSong.title}: ${currentSong.url}`)
+      .setTitle("Music seek")
+      .setDescription(`Seeked to ${prettyMilliseconds(timems)}!`)
+      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({
         text: "Music System • Alienbot",
@@ -43,4 +49,4 @@ module.exports = {
   },
 };
 
-console.log("music-queue.js run");
+console.log("music-seek.js run");

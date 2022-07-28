@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed, Interaction } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder, Interaction } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,14 +11,14 @@ module.exports = {
    * @param {Interaction} interaction
    */
   async execute(interaction) {
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTitle("About AlienBot")
       .setDescription(
-        "Hello humans I am AlienBot, the first alien discord bot. I am made by @UFO-STUDIOS and you can find my code at https://github.com/UFO-Studios/AlienBot-2.0"
+        "Hello humans I am AlienBot, the first alien discord bot. I am made by @UFO-STUDIOS and you can find my code at https://github.com/UFO-Studios/AlienBot-2.0. invite me using this link: https://fl.niceygylive.xyz/UFOS-BOT20"
       )
-      .setColor("BLUE")
+      .setColor("Blue")
       .setTimestamp()
       .setFooter({
         text: "/about • Alienbot",

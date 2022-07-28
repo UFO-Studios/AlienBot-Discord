@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Permissions } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,13 +21,15 @@ module.exports = {
     const reason =
       (await interaction.options.getString("reason")) || "No reason given";
 
-    if (!interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS))
+    if (
+      !interaction.member.permissions.has(PermissionFlagsBits.ModerateMembers)
+    )
       return await interaction.reply({
         content: `You dont have the permissions to warn ${target.user.tag}!`,
         ephemeral: true,
       });
 
-    if (target.permissions.has(Permissions.FLAGS.ADMINISTRATOR))
+    if (target.permissions.has(PermissionFlagsBits.Administrator))
       return await interaction.reply({
         content: "You cannot warn an admin!",
         ephemeral: true,

@@ -1,4 +1,4 @@
-const { Message, MessageEmbed, WebhookClient } = require("discord.js");
+const { Message, EmbedBuilder, WebhookClient } = require("discord.js");
 
 module.exports = {
   name: "messageDelete",
@@ -15,13 +15,11 @@ module.exports = {
     //checks
     if (message.author.bot) return;
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(
         `${message.author.tag} deleted a message in #${message.channel.name}`
       )
-      .setDescription(
-        `Message Content: \`\`\`${message.content}\`\`\``
-      )
+      .setDescription(`Message Content: \`\`\`${message.content}\`\`\``)
       .setAuthor({ name: message.author.tag })
       .setColor("fcdf03")
       .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))

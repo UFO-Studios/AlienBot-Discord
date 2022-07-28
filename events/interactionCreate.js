@@ -1,22 +1,40 @@
+const { InteractionType } = require("discord.js");
+
 module.exports = {
   name: "interactionCreate",
   once: false,
   async execute(interaction, client) {
-    console.log("stage 2 run");
-    if (!interaction.isCommand()) return;
+    if (interaction.type === InteractionType.ModalSubmit) {
+      console.log("stage 2 modal run");
+      const modal = client.modals.get(interaction.customId);
 
-    const command = client.commands.get(interaction.commandName);
+      if (!modal) return console.log("error debug");
+      try {
+        await modal.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+        await interaction.reply({
+          content: "There was an error!",
+          ephemeral: true,
+        });
+      }
+    } else {
+      console.log("stage 2 command run");
+      if (!interaction.isChatInputCommand()) return;
 
-    if (!command) return;
+      const command = client.commands.get(interaction.commandName);
 
-    try {
-      await command.execute(interaction, client);
-    } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content: "There was an error while executing this command!",
-        ephemeral: true,
-      });
+      if (!command) return;
+
+      try {
+        await command.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+        await interaction.reply({
+          content: "There was an error while executing this command!",
+          ephemeral: true,
+        });
+      }
     }
   },
 };

@@ -1,6 +1,6 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const { sentence, paragraph, article } = require("txtgen/dist/cjs/txtgen.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 const Lucky = async (randomNum) => {
   if (randomNum == 69) {
@@ -49,10 +49,10 @@ module.exports = {
       const randomNum = Math.floor(Math.random() * 100);
       const random = await Lucky(randomNum);
 
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle("Random generated text.")
         .setDescription(`${random} \n` + Text)
-        .setColor("RANDOM")
+        .setColor("Blue")
         .setAuthor(interaction.user.tag)
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
         .setTimestamp()

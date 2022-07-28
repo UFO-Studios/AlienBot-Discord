@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed, Interaction } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder, Interaction } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,9 +10,9 @@ module.exports = {
    * @param {Interaction} interaction
    */
   async execute(interaction) {
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
-      .setColor("BLUE")
+      .setColor("Blue")
       .setTitle("The Alien Doctor")
       .setDescription(
         "Find Alien on all the good sites @TheAlienDoctor, Here's the main ones:"

@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder, ChannelType } = require("discord.js");
 
 const getMemberAndBots = async (interaction) => {
   return `Members - ${await interaction.guild.members.cache.filter(
@@ -29,33 +29,41 @@ module.exports = {
       .map((role) => role.name)
       .join(", ");
 
-    const categories = interaction.guild.channels.cache.filter(
-      (channel) => channel.type == "GUILD_CATEGORY"
+    const categories = await interaction.guild.channels.cache.filter(
+      (channel) => channel.type == ChannelType.GuildCategory
     ).size;
 
-    const announcementChannels = interaction.guild.channels.cache.filter(
-      (channel) => channel.type == "GUILD_NEWS"
+    const announcementChannels = await interaction.guild.channels.cache.filter(
+      (channel) => channel.type == ChannelType.GuildNews
     ).size;
 
-    const threads = interaction.guild.channels.cache.filter(
-      (channel) => channel.type == "GUILD_PUBLIC_THREAD"
+    const threads = await interaction.guild.channels.cache.filter(
+      (channel) => channel.type == ChannelType.GuildPublicThread
     ).size;
 
-    const textChannels = interaction.guild.channels.cache.filter(
-      (channel) => channel.type == "GUILD_TEXT"
+    const textChannels = await interaction.guild.channels.cache.filter(
+      (channel) => channel.type == ChannelType.GuildText
     ).size;
 
-    const voiceChannels = interaction.guild.channels.cache.filter(
-      (channel) => channel.type == "GUILD_VOICE"
+    const voiceChannels = await interaction.guild.channels.cache.filter(
+      (channel) => channel.type == ChannelType.GuildVoice
     ).size;
 
-    const stageChannels = interaction.guild.channels.cache.filter(
-      (channel) => channel.type == "GUILD_STAGE_VOICE"
+    const stageChannels = await interaction.guild.channels.cache.filter(
+      (channel) => channel.type == ChannelType.GuildStageVoice
     ).size;
 
-    const embed = new MessageEmbed()
-      .setAuthor(interaction.user.tag)
-      .setColor("RANDOM")
+    let forums = Array.from(
+      await interaction.guild.channels.cache.filter(
+        (channel) => channel.type == ChannelType.GuildForum
+      )
+    );
+
+    if (forums.length <= 0) forums = 0;
+
+    const embed = new EmbedBuilder()
+      .setAuthor({ name: interaction.user.tag })
+      .setColor("Blue")
       .setTitle("Server Info")
       .addFields(
         {
@@ -91,6 +99,12 @@ module.exports = {
         {
           name: "Server language",
           value: `\`\`\`${interaction.guild.preferredLocale}\`\`\``,
+          inline: true,
+        },
+        {
+          name: "verified?",
+          value: `\`\`\`${interaction.guild.verified}\`\`\``,
+          inline: true,
         },
         {
           name: `roles (${interaction.guild.roles.cache.size})`,
@@ -98,7 +112,7 @@ module.exports = {
         },
         {
           name: `channels (${interaction.guild.channels.cache.size})`,
-          value: `\`\`\`Text channels - ${textChannels}, Voice channels - ${voiceChannels}, categories - ${categories}, Announcement channels - ${announcementChannels}, stage channels - ${stageChannels}, threads - ${threads}\`\`\``,
+          value: `\`\`\`Text channels - ${textChannels}, Voice channels - ${voiceChannels}, categories - ${categories}, Announcement channels - ${announcementChannels}, stage channels - ${stageChannels}, threads - ${threads}, forums - ${forums}\`\`\``,
         },
         {
           name: "total boosts",
@@ -107,7 +121,7 @@ module.exports = {
         },
         {
           name: "boost level",
-          value: `\`\`\`${interaction.guild.premiumTier.toLowerCase()}\`\`\``,
+          value: `\`\`\`${interaction.guild.premiumTier}\`\`\``,
           inline: true,
         }
       );

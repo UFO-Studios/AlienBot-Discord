@@ -1,7 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const Firebase = require("../firebase.js");
-
-//hi hallo?
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,6 +14,7 @@ module.exports = {
       return option;
     }),
   global: true,
+
   async execute(interaction, client) { 
     const serverId = await interaction.guildId 
     const channel = await interaction.options.getChannel("channel")

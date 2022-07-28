@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const { Permissions } = require("discord.js");
 const db = require("easy-db-json");
 
@@ -14,7 +14,7 @@ module.exports = {
         .setDescription("channel where the counting will start")
         .setRequired(true)
     ),
-    global: false, // its false until we make counting.js work
+  global: false, // its false until we make counting.js work
   async execute(interaction, client) {
     if (
       !interaction.member.permissions.has([

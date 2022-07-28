@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Interaction, Client, Util, Permissions } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { Interaction, Client, Util, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,7 +20,7 @@ module.exports = {
   async execute(interaction, client) {
     if (
       !interaction.member.permissions.has(
-        Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS
+        PermissionFlagsBits.ManageEmojisAndStickers
       )
     )
       return await interaction.reply({

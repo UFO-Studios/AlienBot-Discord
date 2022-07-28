@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
-const { Permissions } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const prettyMilliseconds = require("pretty-ms");
 
 const durations = [
@@ -59,8 +58,10 @@ module.exports = {
       return interaction.reply({ content: "Invalid member.", ephemeral: true });
 
     if (
-      !interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS) ||
-      !interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)
+      !interaction.member.permissions.has(
+        PermissionFlagsBits.ModerateMembers
+      ) ||
+      !interaction.member.permissions.has(PermissionFlagsBits.Administrator)
     )
       return interaction.reply({
         content: `You dont have the permissions to timeout ${target.user.tag}!`,
@@ -73,7 +74,7 @@ module.exports = {
         ephemeral: true,
       });
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle("Timeout")
       .setDescription(
         `${target.user.tag} has been timed out for ${prettyMilliseconds(
@@ -81,7 +82,7 @@ module.exports = {
         )}. Reason: ${reason}`
       )
       .setColor("f5700a")
-      .setAuthor(interaction.user.tag)
+      .setAuthor({ name: interaction.user.tag })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({
@@ -110,7 +111,7 @@ module.exports = {
     //   ) {
     //     if (target) {
     //       await target.timeout(duration, reason);
-    //       const successEmbed = new MessageEmbed()
+    //       const successEmbed = new EmbedBuilder()
     //         .setColor("0099ff")
     //         .setTitle(`Timed out ${target.user.tag}.`)
     //         .setDescription(
