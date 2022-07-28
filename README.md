@@ -27,17 +27,16 @@ Here is a list of all the commands AlienBit has and what they do.
 `/server-info` - Get info about a server.    
 `/pfp` - Get a member's profile picture.    
 `/bread` - Bread 👍👎.    
-`/namemc` - Get info about a Java minecraft player.    
+`/namemc` - Get info about a Java Minecraft player.    
 `/ping` - Get AlienBot's ping (and pong).    
 `/random-text-generator` - Get some random text generated for you.    
-`/say` - The bot will anonymously repeat what you tell it to say. Warning - Don't use this for bad stuff.    
 `/server-info` - Get info about the server.    
-`/woof` - AlienBot woods at you.     
+`/woof` - AlienBot woofs at you.     
 
 • Logs.   
 
-`/update-channel` - Channel where alienBot updates are sent.    
-`/set-logging-channel` - Set a logging channel where message logs will be sent.    
+`/update-channel` - Channel where AlienBot updates are sent.    
+`/set-logging-channel` - Set a logging channel where message logs (and other logs too in the future) will be sent.    
 
 ## Setup
 
