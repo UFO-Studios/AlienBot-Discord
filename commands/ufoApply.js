@@ -21,6 +21,17 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    if (
+      !interaction.member.roles.cache.some(
+        (role) => role.id === "998936193091768412"
+      )
+    ) {
+      return await interaction.reply({
+        content:
+          "In the Discord server, you are not at level 5! Chat some more to level up!",
+      });
+    }
+
     const modal = new ModalBuilder()
       .setCustomId("ufoApply")
       .setTitle("Apply to join UFO SMP!");
@@ -48,15 +59,15 @@ module.exports = {
     const BedrockUsername = new TextInputBuilder()
       .setCustomId("bedrockUsername")
       .setLabel("Minecraft Bedrock Username")
-      .setRequired(true)
       .setPlaceholder("Kingerious")
+      .setRequired(false)
       .setStyle(TextInputStyle.Short);
 
     const JavaUsername = new TextInputBuilder()
       .setCustomId("javaUsername")
       .setLabel("Minecraft Java Username")
       .setPlaceholder("TheAlienDoctor")
-      .setRequired(true)
+      .setRequired(false)
       .setStyle(TextInputStyle.Short);
 
     const firstActionRow = new ActionRowBuilder().addComponents(subToAlien);

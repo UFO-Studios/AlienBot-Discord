@@ -14,12 +14,25 @@ module.exports = {
    */
   async execute(interaction, client) {
     try {
-      const subToAlien = interaction.fields.getTextInputValue("subToAlien");
-      const breakRules = interaction.fields.getTextInputValue("breakRules");
-      const age = interaction.fields.getTextInputValue("age");
-      const bedrockUsername =
-        interaction.fields.getTextInputValue("bedrockUsername");
-      const javaUsername = interaction.fields.getTextInputValue("javaUsername");
+      const subToAlien = await interaction.fields.getTextInputValue(
+        "subToAlien"
+      );
+      const breakRules = await interaction.fields.getTextInputValue(
+        "breakRules"
+      );
+      const age = await interaction.fields.getTextInputValue("age");
+      const bedrockUsername = await interaction.fields.getTextInputValue(
+        "bedrockUsername"
+      );
+      let javaUsername = await interaction.fields.getTextInputValue(
+        "javaUsername"
+      );
+
+      if (!bedrockUsername && !javaUsername)
+        return await interaction.reply({
+          content: "Please enter a username!",
+          ephemeral: true,
+        });
 
       const webhook = new WebhookClient({
         url: "https://discord.com/api/webhooks/1002265819721498807/XqF_Et2m3KlCB9tCQKYgJZg0XoiauwP_LMUHqfXAmGPzqhZ8MptFlsY0SfUEpK1EBNWY",
@@ -44,11 +57,11 @@ module.exports = {
           },
           {
             name: "Minecraft Bedrock Username",
-            value: `\`\`\`${bedrockUsername}\`\`\``,
+            value: `\`\`\`${bedrockUsername || "No bedrock username given"}\`\`\``,
           },
           {
             name: "Minecraft Java Username",
-            value: `\`\`\`${javaUsername}\`\`\``,
+            value: `\`\`\`${javaUsername || "No java username given"}\`\`\``,
           }
         )
         .setTimestamp()
@@ -58,9 +71,9 @@ module.exports = {
             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
         });
 
-      webhook.send({ embeds: [embed] });
+      await webhook.send({ embeds: [embed] });
 
-      interaction.reply(
+      return await interaction.reply(
         "Your form has been submitted! It takes around 1 day for Alien to check your form and reply. you can do /ufosmp to get info about the UFOSMP!"
       );
     } catch (error) {
