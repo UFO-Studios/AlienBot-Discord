@@ -1,0 +1,2 @@
+- name: ssh deploy
+  uses: easingthemes/ssh-deploy@v2.2.11
