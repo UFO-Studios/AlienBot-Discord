@@ -35,7 +35,7 @@ module.exports = {
         });
 
       const webhook = new WebhookClient({
-        url: "https://discord.com/api/webhooks/1002265819721498807/XqF_Et2m3KlCB9tCQKYgJZg0XoiauwP_LMUHqfXAmGPzqhZ8MptFlsY0SfUEpK1EBNWY",
+        url: "https://discord.com/api/webhooks/1002269232928673812/bkv_A0gCvnfjk5ENMZAWyPBkoYJQuN6E8uEMB_1vY-6mJ0lfvvYR7v1souti_gLU4m8J",
       });
 
       const embed = new EmbedBuilder()
@@ -57,7 +57,9 @@ module.exports = {
           },
           {
             name: "Minecraft Bedrock Username",
-            value: `\`\`\`${bedrockUsername || "No bedrock username given"}\`\`\``,
+            value: `\`\`\`${
+              bedrockUsername || "No bedrock username given"
+            }\`\`\``,
           },
           {
             name: "Minecraft Java Username",
