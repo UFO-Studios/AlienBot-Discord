@@ -92,7 +92,7 @@ Create a new Firebase Project:
 First of all you need to clone this repo: 
 
 ```bash
-git clone https://github.com/UFO-Studios/AlienBot-2.0
+git clone https://github.com/UFO-Studios/AlienBot-2.0.git
 ```
 Now cd into the bot's directory:
 
