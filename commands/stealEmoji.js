@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { Interaction, Client, Util, PermissionFlagsBits } = require("discord.js");
+const { PermissionFlagsBits, parseEmoji } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,35 +12,33 @@ module.exports = {
         .setRequired(true)
     ),
   global: true,
-  /**
-   *
-   * @param {Interaction} interaction
-   * @param {Client} client
-   */
-  async execute(interaction, client) {
+  async execute(interaction) {
     if (
       !interaction.member.permissions.has(
         PermissionFlagsBits.ManageEmojisAndStickers
       )
-    )
+    ) {
       return await interaction.reply({
         content:
           "You dont have the permissions to add an emoji to this server!",
         ephemeral: true,
       });
+    }
 
     const rawEmoji = await interaction.options.getString("emoji");
     try {
-      const parsedEmoji = Util.parseEmoji(rawEmoji);
+      const parsedEmoji = parseEmoji(rawEmoji);
 
       const extension = parsedEmoji.animated ? ".gif" : ".png";
-      const url = `https://cdn.discordapp.com/emojis/${
-        parsedEmoji.id + extension
-      }`;
+      const url = `https://cdn.discordapp.com/emojis/${parsedEmoji.id}${extension}`;
 
-      interaction.guild.emojis.create(url, parsedEmoji.name).then((emoji) => {
-        return interaction.reply({ content: `New Emoji added: ${emoji.url}` });
-      });
+      await interaction.guild.emojis
+        .create({ attachment: url, name: parsedEmoji.name })
+        .then((emoji) => {
+          return interaction.reply({
+            content: `New Emoji added: \`${emoji.url}\``,
+          });
+        });
     } catch (e) {
       if (e) {
         return await interaction.reply({

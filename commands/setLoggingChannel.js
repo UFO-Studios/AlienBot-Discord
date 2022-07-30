@@ -19,8 +19,6 @@ module.exports = {
    * @param {Interaction} interaction
    */
   async execute(interaction, client) {
-    await interaction.deferReply();
-
     if (
       !interaction.member.permissions.has([
         PermissionFlagsBits.ManageGuild,
@@ -28,19 +26,22 @@ module.exports = {
         PermissionFlagsBits.ManageChannels,
       ]) ||
       !interaction.member.permissions.has(PermissionFlagsBits.Administrator)
-    )
-      return await interaction.editReply({
+    ) {
+      return await interaction.reply({
         content: "You dont have the permissions to set logs!",
         ephemeral: true,
       });
+    }
 
     const channel = await interaction.options.getChannel("channel");
 
     const webhookURL = await client.F.getData("logging", interaction.guildId);
 
+    await interaction.deferReply();
     if (!webhookURL) {
       channel
-        .createWebhook("AlienBot", {
+        .createWebhook({
+          name: "AlienBot",
           avatar:
             "https://cdn.discordapp.com/avatars/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.webp",
         })
@@ -48,11 +49,12 @@ module.exports = {
           console.log(`New webhook created ${webhook.name}`);
 
           await client.F.addData("logging", interaction.guildId, {
-            id: webhook.id,
-            token: webhook.token,
+            url: webhook.url,
           });
 
-          return await interaction.editReply("Logging channel set!");
+          return await interaction.editReply({
+            content: "Logging channel set!",
+          });
         })
         .catch((e) => {
           if (e) {
@@ -64,7 +66,9 @@ module.exports = {
           }
         });
     } else {
-      return await interaction.editReply("Logging channel already set!");
+      return await interaction.editReply({
+        content: "Logging channel already set!",
+      });
     }
   },
 };

@@ -53,7 +53,7 @@ module.exports = {
         .setTitle("Random generated text.")
         .setDescription(`${random} \n` + Text)
         .setColor("Blue")
-        .setAuthor(interaction.user.tag)
+        .setAuthor({name: interaction.user.tag})
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
         .setTimestamp()
         .setFooter({

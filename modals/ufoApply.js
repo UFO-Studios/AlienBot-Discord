@@ -35,7 +35,7 @@ module.exports = {
         });
 
       const webhook = new WebhookClient({
-        url: "https://discord.com/api/webhooks/1002269232928673812/bkv_A0gCvnfjk5ENMZAWyPBkoYJQuN6E8uEMB_1vY-6mJ0lfvvYR7v1souti_gLU4m8J",
+        url: client.C.WEBHOOK_URL,
       });
 
       const embed = new EmbedBuilder()
