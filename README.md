@@ -1,14 +1,15 @@
 ## AlienBot 2.0
 
 An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord but open sourced for anyone that wants it!
+[![pmd](https://github.com/UFO-Studios/AlienBot-2.0/actions/workflows/pmd.yml/badge.svg)](https://github.com/UFO-Studios/AlienBot-2.0/actions/workflows/pmd.yml)
 
 
 ## Invite Link
 
-Coming soon™️
+https://fl.niceygylive.xyz/UFOS-BOT20
 ## Commands
 
-Here is a list of all the commands AlienBit has and what they do.
+Here is a list of all the commands AlienBot has and what they do.
 
 • Moderation.    
 
