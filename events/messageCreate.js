@@ -25,7 +25,6 @@ module.exports = {
   name: "messageCreate",
   once: false,
   /**
-   *
    * @param {Message} message
    * @param {Client} client
    */
@@ -81,6 +80,9 @@ module.exports = {
     //   }
     // } else {
     // banned words
+    const data = client.F.getData("banned-words", message.guildId);
+    if (!data) return;
+    if (data.toggleValue == "off") return;
     try {
       const data = client.F.getData("banned-woreds", message.guildId);
       if (!data) return;

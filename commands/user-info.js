@@ -1,29 +1,29 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagBits } = require("discord.js");
 
 const getPerms = async (perms) => {
-  if (perms.has(Permissions.FLAGS.ADMINISTRATOR)) {
+  if (perms.has(PermissionFlagBits.Administrator)) {
     return "Administrator";
   } else if (
-    perms.has([
-      Permissions.FLAGS.BAN_MEMBERS,
-      Permissions.FLAGS.MODERATE_MEMBERS,
-      Permissions.FLAGS.KICK_MEMBERS,
-    ])
+    perms.has(
+      PermissionFlagBits.BanMember ||
+      PermissionFlagBits.ModerateMembers ||
+      PermissionFlagBits.KickMembers
+    )
   ) {
     return "Moderator";
   } else if (
-    perms.has([
-      Permissions.FLAGS.MANAGE_CHANNELS,
-      Permissions.FLAGS.MANAGE_GUILD,
-      Permissions.FLAGS.MANAGE_MESSAGES,
-      Permissions.FLAGS.MANAGE_ROLES,
-      Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS,
-      Permissions.FLAGS.MANAGE_EVENTS,
-      Permissions.FLAGS.MANAGE_NICKNAMES,
-      Permissions.FLAGS.MANAGE_THREADS,
-      Permissions.FLAGS.MANAGE_WEBHOOKS,
-    ])
+    perms.has(
+      PermissionFlagBits.ManageChannels ||
+      PermissionFlagBits.ManageGuild ||
+      PermissionFlagBits.ManageMessages ||
+      PermissionFlagBits.ManageRoles ||
+      PermissionFlagBits.ManageEmojiAndStickers ||
+      PermissionFlagBits.MangeEvents ||
+      PermissionFlagBits.ManageNicknames ||
+      PermissionFlagBits.ManageThreads ||
+      PermissionFlagBits.ManageWebhooks 
+    )
   ) {
     return "Server Manager";
   } else {
