@@ -1,4 +1,3 @@
-
 const fs = require("node:fs");
 const path = require("node:path");
 const {
@@ -6,6 +5,7 @@ const {
   Collection,
   GatewayIntentBits,
   EmbedBuilder,
+  Partials,
 } = require("discord.js");
 const Config = require("./config.json");
 const Firebase = require("./firebase.js");
@@ -22,7 +22,10 @@ const client = new Client({
     GatewayIntentBits.GuildBans,
     GatewayIntentBits.GuildWebhooks,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.DirectMessageReactions
   ],
+  partials: [Partials.Channel],
 });
 
 (async () => {
