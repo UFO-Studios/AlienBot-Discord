@@ -1,3 +1,4 @@
+const { Message, Client } = require("discord.js");
 const db = require("easy-db-json");
 
 db.setFile("./db.json");
@@ -5,10 +6,17 @@ db.setFile("./db.json");
 module.exports = {
   name: "messageCreate",
   once: false,
+  /**
+   * @param {Message} message
+   * @param {Client} client
+   */
   async execute(message, client) {
     if (message.author.bot) return;
 
     // banned words
+    const data = client.F.getData("banned-words", message.guildId);
+    if (!data) return;
+    if (data.toggleValue == "off") return;
     try {
       const array = await message.content.split(" ");
 
