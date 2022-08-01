@@ -1,4 +1,4 @@
-const { Client } = require("discord.js");
+const { Client, ActivityType } = require("discord.js");
 
 module.exports = {
   name: "ready",
@@ -10,36 +10,76 @@ module.exports = {
   async execute(client) {
     await client.guilds.fetch();
 
+    // `github.com/UFO-Studios`, {
+    //   type: "WATCHING",
+    // }
     const array = [
       () => {
-        client.user.setActivity("Sub 2 Alien", {
-          type: "STREAMING",
-          url: "https://www.youtube.com/c/TheAlienDoctor",
+        client.user.setPresence({
+          activities: [
+            {
+              name: "Sub 2 Alien",
+              type: ActivityType.Streaming,
+              url: "https://www.youtube.com/c/TheAlienDoctor",
+            },
+          ],
+          status: "online",
         });
       },
       () => {
-        client.user.setActivity("thealiendoctor.com is cool", {
-          type: "PLAYING",
+        client.user.setPresence({
+          activities: [
+            {
+              name: "https://thealiendoctor.com is cool",
+              type: ActivityType.Playing,
+              url: "https://thealiendoctor.com",
+            },
+          ],
+          status: "dnd",
         });
       },
       () => {
-        client.user.setActivity(`${client.guilds.cache.size} servers`, {
-          type: "WATCHING",
+        client.user.setPresence({
+          activities: [
+            {
+              name: `${client.guilds.cache.size} servers`,
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "idle",
         });
       },
       () => {
-        client.user.setActivity(`${client.users.cache.size} users`, {
-          type: "WATCHING",
+        client.user.setPresence({
+          activities: [
+            {
+              name: `${client.users.cache.size} members`,
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "dnd",
         });
       },
       () => {
-        client.user.setActivity(`The only bot from outer space!`, {
-          type: "PLAYING",
+        client.user.setPresence({
+          activities: [
+            {
+              name: "The only bot from outer space!",
+              type: ActivityType.Playing,
+            },
+          ],
+          status: "idle",
         });
       },
       () => {
-        client.user.setActivity(`github.com/UFO-Studios`, {
-          type: "WATCHING",
+        client.user.setPresence({
+          activities: [
+            {
+              name: "https://github.com/UFO-Studios",
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "online",
         });
       },
     ];
@@ -48,6 +88,7 @@ module.exports = {
       //console.log(randomNum);
       array[randomNum]();
     }, 10000);
+
     console.log("Ready!");
     await client.channels.cache
       .get(client.C.CHANNEL_ID)
@@ -56,8 +97,15 @@ module.exports = {
 };
 
 // template
-//  () => {
-//    client.user.setActivity(`Activity Here`, {
-//      type: "WATCHING or PLAYING or STREAMING",
-//    });
+// () => {
+//   client.user.setPresence({
+//     activities: [
+//       {
+//         name: "activity name",
+//         type: ActivityType.Streaming,
+//       },
+//     ],
+//     status: "online",
+//   });
+// };
 //  },
