@@ -53,7 +53,10 @@ module.exports = {
         )
         .setColor("Blue")
         .setThumbnail(userHead.helmavatar)
-        .setAuthor(interaction.user.tag)
+        .setAuthor({
+          name: interaction.user.tag,
+          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+        })
         .setTimestamp()
         .setFooter({
           text: "/namemc • AlienBot",
