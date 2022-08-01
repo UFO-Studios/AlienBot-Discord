@@ -24,19 +24,19 @@ module.exports = {
     if (
       !interaction.member.permissions.has(PermissionFlagsBits.ModerateMembers)
     )
-      return await interaction.reply({
+      return await interaction.editReply({
         content: `You dont have the permissions to warn ${target.user.tag}!`,
         ephemeral: true,
       });
 
     if (target.permissions.has(PermissionFlagsBits.Administrator))
-      return await interaction.reply({
+      return await interaction.editReply({
         content: "You cannot warn an admin!",
         ephemeral: true,
       });
 
     if (target.id == interaction.member.id)
-      return interaction.reply({
+      return interaction.editReply({
         content: "You cannot warn yourself!",
         ephemeral: true,
       });

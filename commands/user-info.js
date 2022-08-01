@@ -1,28 +1,28 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { EmbedBuilder, PermissionFlagBits } = require("discord.js");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
 const getPerms = async (perms) => {
-  if (perms.has(PermissionFlagBits.Administrator)) {
+  if (perms.has(PermissionsBitField.Flags.Administrator)) {
     return "Administrator";
   } else if (
     perms.has(
-      PermissionFlagBits.BanMember ||
-      PermissionFlagBits.ModerateMembers ||
-      PermissionFlagBits.KickMembers
+      PermissionsBitField.Flags.BanMembers ||
+        PermissionsBitField.Flags.ModerateMembers ||
+        PermissionsBitField.Flags.KickMembers
     )
   ) {
     return "Moderator";
   } else if (
     perms.has(
-      PermissionFlagBits.ManageChannels ||
-      PermissionFlagBits.ManageGuild ||
-      PermissionFlagBits.ManageMessages ||
-      PermissionFlagBits.ManageRoles ||
-      PermissionFlagBits.ManageEmojiAndStickers ||
-      PermissionFlagBits.MangeEvents ||
-      PermissionFlagBits.ManageNicknames ||
-      PermissionFlagBits.ManageThreads ||
-      PermissionFlagBits.ManageWebhooks 
+      PermissionsBitField.Flags.ManageChannels ||
+        PermissionsBitField.Flags.ManageGuild ||
+        PermissionsBitField.Flags.ManageMessages ||
+        PermissionsBitField.Flags.ManageRoles ||
+        PermissionsBitField.Flags.ManageEmojisAndStickers ||
+        PermissionsBitField.Flags.ManageEvents ||
+        PermissionsBitField.Flags.ManageNicknames ||
+        PermissionsBitField.Flags.ManageThreads ||
+        PermissionsBitField.Flags.ManageWebhooks
     )
   ) {
     return "Server Manager";
@@ -53,7 +53,7 @@ module.exports = {
     const permsText = await getPerms(targetMember.permissions);
 
     const embed = new EmbedBuilder()
-      .setAuthor({name: targetUser.tag})
+      .setAuthor({ name: targetUser.tag })
       .setColor("Blue")
       .setTitle("User Info")
       .setThumbnail(targetUser.displayAvatarURL({ dynamic: true }))
