@@ -19,19 +19,25 @@ module.exports = {
         content: "Music is not being played!",
       });
 
-    const currentSong = queue.current;
+    currentSong = queue.current;
 
-    const songs = queue.tracks.map((song, index) => {
-      return `${index + 1}. **${song.title}**: ${song.url}`;
-    });
+    console.log(queue.tracks);
 
-    const embed = new EmbedBuilder()
+    const songs = queue.tracks.map(
+      (song, index) => `${index + 1}. **${song.title}**: ${song.url}`
+    );
+    console.log(songs);
+    console.log(songs.join(",\n"));
+
+    const embed = new EmbedBuilder().setTitle("Current Queue")``
+      .setDescription(`${songs.join(",\n")}`)
       .setAuthor({ name: interaction.user.tag })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setColor("Green")
-      .setTitle("Current Queue")
-      .setDescription(`${songs.join(",\n")}`)
-      .addField("Now playing:", `${currentSong.title}: ${currentSong.url}`)
+      .addFields({
+        name: "Now playing:",
+        value: `${currentSong.title}: ${currentSong.url}`,
+      })
       .setTimestamp()
       .setFooter({
         text: "Music System • Alienbot",

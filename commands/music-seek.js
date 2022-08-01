@@ -36,7 +36,7 @@ module.exports = {
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
       .setTitle("Music seek")
-      .setDescription(`Seeked to ${prettyMilliseconds(timems)}!`)
+      .setDescription(`Seeked to ${timems}!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({

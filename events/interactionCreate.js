@@ -1,8 +1,13 @@
-const { InteractionType } = require("discord.js");
+const { InteractionType, Interaction, Client } = require("discord.js");
 
 module.exports = {
   name: "interactionCreate",
   once: false,
+  /**
+   *
+   * @param {Interaction} interaction
+   * @param {Client} client
+   */
   async execute(interaction, client) {
     if (interaction.type === InteractionType.ModalSubmit) {
       console.log("stage 2 modal run");
@@ -30,10 +35,17 @@ module.exports = {
         await command.execute(interaction, client);
       } catch (error) {
         console.error(error);
-        await interaction.reply({
-          content: "There was an error while executing this command!",
-          ephemeral: true,
-        });
+        if (!interaction.replied) {
+          await interaction.reply({
+            content: "There was an error while executing this command!",
+            ephemeral: true,
+          });
+        } else {
+          await interaction.editReply({
+            content: "There was an error while executing this command!",
+            ephemeral: true,
+          });
+        }
       }
     }
   },
