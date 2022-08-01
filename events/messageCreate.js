@@ -80,27 +80,29 @@ module.exports = {
     //   }
     // } else {
     // banned words
-    const data = client.F.getData("banned-words", message.guildId);
+    const data = client.F.getData("banned-words", message.guild.id);
     if (!data) return;
     if (data.toggleValue == "off") return;
     try {
       const data = client.F.getData("banned-woreds", message.guildId);
       if (!data) return;
-      if (data.toggleValue == "off") return;
+      if (data.toggleValue == "on") {
+        const array = message.content.split(" ");
 
-      const array = message.content.split(" ");
-
-      array.map((word) => {
-        if (client.BANNED_WORDS.includes(word.toLowerCase())) {
-          message.reply({
-            content: "You cannot use that word!",
-            reply: true,
-          });
-          setTimeout(() => {
-            message.delete();
-          }, 1000);
-        }
-      });
+        array.map((word) => {
+          if (client.BANNED_WORDS.includes(word.toLowerCase())) {
+            message.reply({
+              content: "You cannot use that word!",
+              reply: true,
+            });
+            setTimeout(() => {
+              message.delete();
+            }, 1000);
+          }
+        });
+      } else {
+        return;
+      }
     } catch (e) {
       if (e) {
         console.log(e);
