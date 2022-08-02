@@ -23,6 +23,15 @@ Here is a list of all the commands AlienBot has and what they do.
 `/timeout` - Timeout a member. Note - The server has to have community turned on for this to work.    
 `/prune` - Prune/Clear upto 99 messages from a channel.    
 
+• Music.   
+`/play` - play a song by its name or url.    
+`/pause` - pause a song.    
+`/resume` - resume a paused song.   
+`/skip` - skip the current playing song, will play the next song on the queue.   
+`/seek` - seek to the given point in the song.    
+`/stop` - stop playing the song (coming soon™️).   
+`/queue` - info about the queue (coming soon™️).   
+ 
 • General.   
 
 `/about` - About AlienBot.    
@@ -35,6 +44,7 @@ Here is a list of all the commands AlienBot has and what they do.
 `/random-text-generator` - Get some random text generated for you.    
 `/server-info` - Get info about the server.    
 `/woof` - AlienBot woofs at you.     
+`/embed` - send an embed with full customisation.   
 
 • Logs.   
 
