@@ -1,6 +1,6 @@
 const {
   SlashCommandBuilder,
-  Interaction,
+  ChatInputCommandInteraction,
   Client,
   EmbedBuilder,
   ChannelType,
@@ -12,7 +12,7 @@ module.exports = {
     .setDescription("enables modmail system for your server"),
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {

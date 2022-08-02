@@ -1,7 +1,7 @@
 const {
   SlashCommandBuilder,
   Client,
-  Interaction,
+  ChatInputCommandInteraction,
   EmbedBuilder,
 } = require("discord.js");
 
@@ -65,19 +65,19 @@ module.exports = {
     ),
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const title = await interaction.options.getString("title");
-    const description = await interaction.options.getString("description");
-    const color = await interaction.options.getString("color");
-    const channel = await interaction.options.getChannel("channel");
-    const author = await interaction.options.getString("author");
-    const thumbnailUrl = await interaction.options.getString("thumbnail-url");
-    const imageUrl = await interaction.options.getString("image-url");
-    const footerText = await interaction.options.getString("footer-text");
-    const footerIcon = await interaction.options.getString("footer-icon");
+    const title = interaction.options.getString("title");
+    const description = interaction.options.getString("description");
+    const color = interaction.options.getString("color");
+    const channel = interaction.options.getChannel("channel");
+    const author = interaction.options.getString("author");
+    const thumbnailUrl = interaction.options.getString("thumbnail-url");
+    const imageUrl = interaction.options.getString("image-url");
+    const footerText = interaction.options.getString("footer-text");
+    const footerIcon = interaction.options.getString("footer-icon");
 
     try {
       const embed = new EmbedBuilder()

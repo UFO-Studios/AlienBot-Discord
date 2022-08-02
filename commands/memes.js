@@ -1,6 +1,6 @@
 const {
   SlashCommandBuilder,
-  Interaction,
+  ChatInputCommandInteraction,
   Client,
   EmbedBuilder,
 } = require("discord.js");
@@ -10,7 +10,7 @@ module.exports = {
   data: new SlashCommandBuilder().setName("meme").setDescription("get memes!"),
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {

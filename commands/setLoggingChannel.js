@@ -1,5 +1,5 @@
 const {
-  Interaction,
+  ChatInputCommandInteraction,
   PermissionFlagsBits,
   SlashCommandBuilder,
 } = require("discord.js");
@@ -16,7 +16,7 @@ module.exports = {
     ),
   global: true,
   /**
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    */
   async execute(interaction, client) {
     if (

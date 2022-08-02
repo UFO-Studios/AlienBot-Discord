@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const {
-  Interaction,
+  ChatInputCommandInteraction,
   Client,
   TextInputStyle,
   ModalBuilder,
@@ -17,7 +17,7 @@ module.exports = {
   global: false,
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {

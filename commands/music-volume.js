@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { Interaction, Client, EmbedBuilder } = require("discord.js");
+const { ChatInputCommandInteraction, Client, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,7 +14,7 @@ module.exports = {
   global: true,
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {

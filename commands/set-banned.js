@@ -1,6 +1,6 @@
 const {
   SlashCommandBuilder,
-  Interaction,
+  ChatInputCommandInteraction,
   Client,
   PermissionsBitField,
 } = require("discord.js");
@@ -21,11 +21,13 @@ module.exports = {
   global: true,
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-    if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild))
+    if (
+      !interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)
+    )
       return await interaction.reply({
         content: "You dont have the permissions to toggle banned words!",
         ephemeral: true,

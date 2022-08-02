@@ -1,5 +1,9 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { Interaction, Client, EmbedBuilder } = require("discord.js");
+const {
+  ChatInputCommandInteraction,
+  Client,
+  EmbedBuilder,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,7 +12,7 @@ module.exports = {
   global: true,
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
@@ -21,15 +25,12 @@ module.exports = {
 
     currentSong = queue.current;
 
-    console.log(queue.tracks);
-
     const songs = queue.tracks.map(
       (song, index) => `${index + 1}. **${song.title}**: ${song.url}`
     );
-    console.log(songs);
-    console.log(songs.join(",\n"));
 
-    const embed = new EmbedBuilder().setTitle("Current Queue")``
+    const embed = new EmbedBuilder()
+    .setTitle("Current Queue")
       .setDescription(`${songs.join(",\n")}`)
       .setAuthor({ name: interaction.user.tag })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))

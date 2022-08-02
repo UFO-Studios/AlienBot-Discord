@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { Interaction, Client, EmbedBuilder } = require("discord.js");
+const { ChatInputCommandInteraction, Client, EmbedBuilder } = require("discord.js");
 const ms = require("ms");
 const prettyMilliseconds = require("pretty-ms");
 
@@ -16,7 +16,7 @@ module.exports = {
   global: true,
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
@@ -29,14 +29,13 @@ module.exports = {
       });
 
     const time = await interaction.options.getString("time");
-    const timems = ms(time);
 
-    await queue.seek(timems);
+    await queue.seek(time);
     const embed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
       .setTitle("Music seek")
-      .setDescription(`Seeked to ${timems}!`)
+      .setDescription(`Seeked to ${time}s!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({

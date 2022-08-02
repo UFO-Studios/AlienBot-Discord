@@ -1,6 +1,6 @@
 require("discord-player/smoothVolume");
 const { SlashCommandBuilder } = require("discord.js");
-const { Client, Interaction } = require("discord.js");
+const { Client, ChatInputCommandInteraction } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,7 +15,7 @@ module.exports = {
   global: true,
   /**
    *
-   * @param {Interaction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
