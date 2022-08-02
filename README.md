@@ -31,6 +31,7 @@ Here is a list of all the commands AlienBot has and what they do.
 `/seek` - seek to the given point in the song.    
 `/stop` - stop playing the song (coming soon™️).   
 `/queue` - info about the queue (coming soon™️).   
+`/stop` - stop the current playing song.    
  
 • General.   
 
