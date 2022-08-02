@@ -63,6 +63,7 @@ module.exports = {
           "the footer icon url to be displayed besides the footer text, defaults to none"
         )
     ),
+  global: true,
   /**
    *
    * @param {Interaction} interaction
