@@ -143,5 +143,5 @@ $ ./start.sh
 ```
 ## Contributing
 
-Contributions are always welcome! :D
+We'll be needing help, so contributions are always welcome! :D
 
