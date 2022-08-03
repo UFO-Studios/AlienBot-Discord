@@ -103,13 +103,12 @@ Create a new Firebase Project:
 First of all you need to clone this repo: 
 
 ```bash
-git clone https://github.com/UFO-Studios/AlienBot-2.0.git
+$ git clone https://github.com/UFO-Studios/AlienBot-2.0.git
 ```
 Now cd into the bot's directory:
 
 ```bash
-
-cd alienbot-2.0
+$ cd alienbot-2.0
 ```
 
 Then create a config.json file which will look like this:
@@ -134,14 +133,13 @@ Then create a config.json file which will look like this:
 Now install all the required dependencies:
 
 ```bash
-npm install
+$ npm install
 ```
 
-Now run these node commands:
+Now run this:
 
 ```bash
-node ./deploy-commands.js
-node ./index.js
+$ ./start.sh
 ```
 ## Contributing
 
