@@ -31,7 +31,7 @@ Here is a list of all the commands AlienBot has and what they do.
 `/seek` - seek to the given point in the song.    
 `/stop` - stop playing the song (coming soon™️).   
 `/queue` - info about the queue (coming soon™️).   
-`/stop` - stop the current playing song.    
+`/stop` - stop the current playing song.
  
 • General.   
 
@@ -46,6 +46,7 @@ Here is a list of all the commands AlienBot has and what they do.
 `/server-info` - Get info about the server.    
 `/woof` - AlienBot woofs at you.     
 `/embed` - send an embed with full customisation.   
+`/emoji-info` - Get info about an emoji.    
 
 • Logs.   
 
