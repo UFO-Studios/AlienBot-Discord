@@ -114,4 +114,4 @@ client.login(client.C.TOKEN);
 
 app.get("/", (req, res) => res.send("<h1>hello there - AlienBot server</h1>"))
 
-app.listen(30, () => console.log("AlienBot server running on port 30"))
+app.listen(55, () => console.log("AlienBot server running on port 30"))
