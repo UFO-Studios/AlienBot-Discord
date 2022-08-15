@@ -29,6 +29,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(message, client) {
+    const pointGain = Math.random();
     if (message.author.bot) return;
     // if (message.channel.type === ChannelType.DM) {
     //   await client.guilds.fetch();
@@ -84,6 +85,12 @@ module.exports = {
     const data = client.F.getData("banned-words", message.guild.id);
     if (!data) return;
     if (data.toggleValue == "off") return;
+    // levling code
+   // const messageSender = message.author.username
+   // const currentLevel = client.F.getData("level", messageSender)
+    //const NewLevel = currentLevel + pointGain
+    //client.F.addData("level", messageSender, NewLevel)
+    // collec name, doc name, data
     try {
       const data = client.F.getData("banned-woreds", message.guildId);
       if (!data) return;
@@ -109,52 +116,5 @@ module.exports = {
         console.log(e);
       }
     }
-
-    // counting
-    // try {
-    //   const counts = db.get(message.channel.id);
-    //   const channelId = db.get(`${message.channel.id}-id`);
-    //   if (!counts) return;
-
-    //   if (!channelId == message.channel.id) return;
-    //   const currentCounter = db.get(`currentCounter-${message.channel.id}`);
-
-    //   if (!currentCounter) {
-    //     db.set(`currentCounter-${message.channel.id}`, message.author.id);
-    //   } else if (
-    //     currentCounter == message.author.id &&
-    //     message.channel.id == channelId
-    //   ) {
-    //     return interaction.reply("You cannot send 2 messages in a row!")
-    //   }
-
-    //   if (/\d/.test(message.content)) {
-    //     if (message.content == counts) {
-    //       db.set(message.channel.id, counts + 1);
-    //       return message.react("☑️");
-    //     } else {
-    //       db.set(`currentCounter-${message.channel.id}`, "1");
-    //       db.set(message.channel.id, 1);
-    //       message.react("❎");
-    //       return message.reply({
-    //         content: "Wrong number! Start from 1.",
-    //         reply: true,
-    //       });
-    //     }
-    //   } else {
-    //     db.set(`currentCounter-${message.channel.id}`, "1");
-    //     db.set(message.channel.id, 1);
-    //     return message.reply({
-    //       content: "You cannot talk here! Start from 1",
-    //       reply: true,
-    //     });
-    //   }
-    // } catch (e) {
-    //   if (e) {
-    //     console.log(e);
-    //     return interaction.reply({ content: `Error: ${e}`, ephemeral: true });
-    //   }
-    // }
-    // }
   },
 };

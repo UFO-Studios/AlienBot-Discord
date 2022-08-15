@@ -28,7 +28,7 @@ module.exports = {
     ) {
       return await interaction.reply({
         content:
-          "In the Discord server, you are not at level 5! Chat some more to level up!",
+          "You are not level 5 in the discord! Chat more to level up",
       });
     }
 
