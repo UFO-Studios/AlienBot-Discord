@@ -1,4 +1,4 @@
-const { Channel, WebhookClient, Client, ChannelType } = require("discord.js");
+const { EmbedBuilder, Channel, WebhookClient, Client, ChannelType } = require("discord.js");
 
 module.exports = {
   name: "channelUpdate",
