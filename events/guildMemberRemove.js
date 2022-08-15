@@ -71,7 +71,7 @@ module.exports = {
     });
 
     const webhook = new WebhookClient({
-      url: "https://discord.com/api/webhooks/1006496263094681682/8fV25KtxnyfO2-U3tM38Mcx3-Fb04NbKnEBIfytxYzpSWm1Qrd0dkcZda3ABig6KoXHc",
+      url: data.url,
     });
 
     webhook.send({ content: data.message, files: [attachment] });
