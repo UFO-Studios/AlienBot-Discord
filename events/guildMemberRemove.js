@@ -42,12 +42,12 @@ module.exports = {
 
     context.drawImage(background, 0, 0);
 
-    context.font = applyText(canvas, "Bye!", 160, "sans-serif");
+    context.font = applyText(canvas, "Goodbye!", 160, "Verdana Bold");
     context.fillStyle = "yellow";
     context.textAlign = "center";
     context.fillText("Welcome!", 1275, canvas.height / 1.5);
 
-    context.font = applyText(canvas, member.user.tag, 170, "sans-serif");
+    context.font = applyText(canvas, member.user.tag, 170, "Verdana Bold");
     context.fillStyle = "white";
     context.fillText(member.user.tag, 1275, canvas.height / 1.25);
 
@@ -55,7 +55,7 @@ module.exports = {
       canvas,
       `Member #${member.guild.memberCount}`,
       140,
-      "sans-serif"
+      "Verdana Bold"
     );
     context.fillStyle = "yellow";
     context.fillText(
