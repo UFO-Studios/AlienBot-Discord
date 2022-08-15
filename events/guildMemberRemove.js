@@ -18,6 +18,10 @@ module.exports = {
     if (!data) {
       return;
     }
+
+    await data.leaveMessage.replace(/{username}/g, member.user.tag);
+    await data.leaveMessage.replace(/{memberCount}/g, member.guild.memberCount);
+
     const applyText = (canvas, text, fontSize, font) => {
       const context = canvas.getContext("2d");
 
@@ -38,7 +42,7 @@ module.exports = {
 
     context.drawImage(background, 0, 0);
 
-    context.font = applyText(canvas, "Welcome!", 160, "sans-serif");
+    context.font = applyText(canvas, "Bye!", 160, "sans-serif");
     context.fillStyle = "yellow";
     context.textAlign = "center";
     context.fillText("Welcome!", 1275, canvas.height / 1.5);
@@ -63,13 +67,13 @@ module.exports = {
     context.drawImage(avatar, 935, 100, 690, 690);
 
     const attachment = new AttachmentBuilder(await canvas.encode("png"), {
-      name: "welcomePicture.png",
+      name: "leavePicture.png",
     });
 
     const webhook = new WebhookClient({
       url: "https://discord.com/api/webhooks/1006496263094681682/8fV25KtxnyfO2-U3tM38Mcx3-Fb04NbKnEBIfytxYzpSWm1Qrd0dkcZda3ABig6KoXHc",
     });
-    
+
     webhook.send({ content: data.message, files: [attachment] });
   },
 };

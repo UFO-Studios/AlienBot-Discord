@@ -18,6 +18,20 @@ module.exports = {
     if (!data) {
       return;
     }
+
+    await data.welcomeMessage.replace(/{username}/g, member.user.tag);
+    await data.welcomeMessage.replace(/{memberCount}/g, member.guild.memberCount);
+
+    const applyText = (canvas, text, fontSize, font) => {
+      const context = canvas.getContext("2d");
+
+      do {
+        context.font = `${(fontSize -= 10)}px ${font}`;
+      } while (context.measureText(text).width > canvas.width - 300);
+
+      return context.font;
+    };
+
     const canvas = Canvas.createCanvas(2560, 1440);
     const context = canvas.getContext("2d");
     const randomNum = Math.floor(Math.random() * client.images.length);
@@ -27,31 +41,39 @@ module.exports = {
     );
 
     context.drawImage(background, 0, 0);
-    context.drawImage(avatar, 935, 100, 690, 690);
 
-    context.font = "160px Verdana Bold";
+    context.font = applyText(canvas, "Welcome!", 160, "sans-serif");
     context.fillStyle = "yellow";
     context.textAlign = "center";
-    context.fillText("Welcome", 1200, canvas.height / 1.5);
+    context.fillText("Welcome!", 1275, canvas.height / 1.5);
 
+    context.font = applyText(canvas, member.user.tag, 170, "sans-serif");
     context.fillStyle = "white";
-    context.fillText(member.user.tag, 1024, canvas.height / 1.3);
+    context.fillText(member.user.tag, 1275, canvas.height / 1.25);
 
-    context.font = "140px Verdana Bold";
+    context.font = applyText(
+      canvas,
+      `Member #${member.guild.memberCount}`,
+      140,
+      "sans-serif"
+    );
     context.fillStyle = "yellow";
-
     context.fillText(
       `Member #${member.guild.memberCount}`,
-      1675,
+      1275,
       canvas.height / 1.1
     );
+
+    context.drawImage(avatar, 935, 100, 690, 690);
 
     const attachment = new AttachmentBuilder(await canvas.encode("png"), {
       name: "welcomePicture.png",
     });
+
     const webhook = new WebhookClient({
       url: "https://discord.com/api/webhooks/1006496263094681682/8fV25KtxnyfO2-U3tM38Mcx3-Fb04NbKnEBIfytxYzpSWm1Qrd0dkcZda3ABig6KoXHc",
     });
+
     webhook.send({ content: data.message, files: [attachment] });
   },
 };

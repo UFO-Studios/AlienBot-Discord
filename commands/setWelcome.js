@@ -17,9 +17,16 @@ module.exports = {
     )
     .addStringOption((option) =>
       option
-        .setName("message")
+        .setName("welcome-message")
         .setDescription(
           "The message to send with the welcome image. special words: {username} {memberCount}"
+        )
+    )
+    .addStringOption((option) =>
+      option
+        .setName("leave-message")
+        .setDescription(
+          "The message to send with the leave image. special words: {username} {memberCount}"
         )
     ),
   global: true,
@@ -38,9 +45,13 @@ module.exports = {
       });
 
     const channel = interaction.options.getChannel("channel");
-    const message =
-      interaction.options.getString("message") ||
+    const welcomeMessage =
+      interaction.options.getString("welcome-message") ||
       "Welcome {username} to the server! you are member #{memberCount}. Dont forget to read and follow the rules!";
+
+    const leaveMessage =
+      interaction.options.getString("leave-message") ||
+      "Goodbye {username}! you will be missed!";
 
     const webhook = await channel
       .createWebhook({
@@ -52,7 +63,8 @@ module.exports = {
 
     console.log(`New webhook created: ${webhook.name}`);
     await client.F.addData("welcome", interaction.guildId, {
-      message,
+      welcomeMessage,
+      leaveMessage,
       webhookUrl: webhook.url,
     });
     return await interaction.reply({
