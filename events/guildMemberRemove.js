@@ -71,7 +71,7 @@ module.exports = {
     });
 
     const webhook = new WebhookClient({
-      url: data.url,
+      url: data.webhookUrl,
     });
 
     webhook.send({ content: data.message, files: [attachment] });
