@@ -18,6 +18,7 @@ module.exports = {
         )
         .setRequired(true)
     ),
+  global: true,
   /**
    *
    * @param {ChatInputCommandInteraction} interaction

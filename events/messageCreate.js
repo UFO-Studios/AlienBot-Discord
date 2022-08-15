@@ -1,6 +1,6 @@
-// const db = require("easy-db-json");
+﻿// const db = require("easy-db-json");
 // db.setFile("./db.json");
-const { ChannelType, Message, Client, EmbedBuilder } = require("discord.js");
+const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
 
@@ -79,6 +79,7 @@ module.exports = {
     //     react(msg, guildsIn.length - 1);
     //   }
     // } else {
+
     // banned words
     const data = client.F.getData("banned-words", message.guild.id);
     if (!data) return;
