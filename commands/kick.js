@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { EmbedBuilder, PermissionBitField } = require("discord.js");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,8 +27,8 @@ module.exports = {
 
     try {
       if (
-        interaction.member.permissions.has(PermissionBitField.Flags.KickMembers) ||
-        interaction.member.permissions.has(PermissionBitField.Flags.Administrator)
+        interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers) ||
+        interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)
       ) {
         if (target) {
           await interaction.guild.members.kick(target, reason);
@@ -38,7 +38,7 @@ module.exports = {
             .setDescription(
               `${target.user.tag} was kicked by ${interaction.user.tag}. Reason: ${reason}`
             )
-            .setThumbnail(user.displayAvatarURL({ dynamic: true }))
+            .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
             .setTimestamp()
             .setFooter({
               text: "/kick • Alienbot",

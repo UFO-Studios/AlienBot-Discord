@@ -29,8 +29,6 @@ module.exports = {
       .map((role) => role.name)
       .join(", ");
 
-    const newRoleNames = await roleNames.slice(0, 1024) + roleNames.length > 1024 ? "..." : ""
-
     const categories = await interaction.guild.channels.cache.filter(
       (channel) => channel.type == ChannelType.GuildCategory
     ).size;
@@ -110,7 +108,7 @@ module.exports = {
         },
         {
           name: `roles (${interaction.guild.roles.cache.size})`,
-          value: `\`\`\`${newRoleNames}\`\`\``,
+          value: `\`\`\`${roleNames}\`\`\``,
         },
         {
           name: `channels (${interaction.guild.channels.cache.size})`,

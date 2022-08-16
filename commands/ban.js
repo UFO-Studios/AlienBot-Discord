@@ -38,6 +38,7 @@ module.exports = {
 
           const successEmbed = new EmbedBuilder()
             .setColor("0099ff")
+            .setAuthor({ name: interaction.user.tag })
             .setTitle(`${target.user.tag} got banned.`)
             .setDescription(
               `${target.user.tag} was banned by ${interaction.user.tag}. Reason: ${reason}`

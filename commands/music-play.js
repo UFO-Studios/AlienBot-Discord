@@ -20,7 +20,7 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
-    const songName = await interaction.options.get("song-name").value;
+    const songName = interaction.options.get("song-name").value;
 
     if (!interaction.member.voice.channelId)
       return await interaction.editReply({

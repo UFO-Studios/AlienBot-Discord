@@ -30,7 +30,7 @@ module.exports = {
     );
 
     const embed = new EmbedBuilder()
-    .setTitle("Current Queue")
+      .setTitle("Current Queue")
       .setDescription(`${songs.join(",\n")}`)
       .setAuthor({ name: interaction.user.tag })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
