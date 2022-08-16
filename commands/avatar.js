@@ -19,7 +19,7 @@ module.exports = {
       .setAuthor({name: interaction.user.tag})
       .setColor("Blue")
       .setTitle("Profile Picture")
-      .setDescription(`Heres the profile picture of the \`${user.tag}\`:`)
+      .setDescription(`Heres the profile picture of \`${user.tag}\`:`)
       .setImage(user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({ text: "/pfp • AlienBot" });

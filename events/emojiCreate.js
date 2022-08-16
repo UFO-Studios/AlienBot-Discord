@@ -1,4 +1,4 @@
-const { GuildEmoji, Client, WebhookClient } = require("discord.js");
+const { GuildEmoji, Client, WebhookClient, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "emojiCreate",

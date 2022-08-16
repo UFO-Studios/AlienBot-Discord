@@ -1,4 +1,10 @@
-const { Channel, WebhookClient, Client, ChannelType } = require("discord.js");
+const {
+  EmbedBuilder,
+  Channel,
+  WebhookClient,
+  Client,
+  ChannelType,
+} = require("discord.js");
 
 module.exports = {
   name: "channelUpdate",
@@ -14,6 +20,21 @@ module.exports = {
       oldChannel.type === ChannelType.DM
     )
       return;
+
+    const { channels } = await client.F.getData(
+      "ignore-channels",
+      oldChannel.guildId
+    );
+
+    if (!channels.length > 1) {
+      if (channels[0] == oldChannel.id) return;
+    } else {
+      // TODO: work pn a better system to do this
+      const array = channels.map((id) => id == oldChannel.id);
+      if (array.includes(true)) {
+        return;
+      }
+    }
 
     const data = await client.F.getData("logging", oldChannel.guildId);
     if (!data) return;
@@ -35,6 +56,12 @@ module.exports = {
         });
       webhook.send({ embeds: [embed] });
     } else if (oldChannel.topic !== NewChannel.topic) {
+      if (
+        oldChannel.id == 853344187378434068 ||
+        oldChannel.id == 853344307015581726
+      )
+        return;
+
       const embed = new EmbedBuilder()
         .setTitle("Channel Topic Update")
         .setDescription(

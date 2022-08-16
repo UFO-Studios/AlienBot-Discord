@@ -1,4 +1,4 @@
-const fs = require("node:fs");
+﻿const fs = require("node:fs");
 const path = require("node:path");
 const {
   Client,
@@ -10,6 +10,7 @@ const {
 const Config = require("./config.json");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
+const app = require("express")();
 
 const client = new Client({
   intents: [
@@ -17,13 +18,14 @@ const client = new Client({
     GatewayIntentBits.GuildVoiceStates,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.GuildEmojisAndStickers,
     GatewayIntentBits.GuildPresences,
     GatewayIntentBits.GuildBans,
     GatewayIntentBits.GuildWebhooks,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.DirectMessageReactions
+    GatewayIntentBits.DirectMessageReactions,
   ],
   partials: [Partials.Channel],
 });
@@ -68,6 +70,16 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
+const imagesPath = path.join(__dirname, "./images/welcomeImages");
+const imagesFiles = fs
+  .readdirSync(imagesPath)
+  .filter((f) => f.endsWith(".png"));
+client.images = [];
+
+for (const file of imagesFiles) {
+  client.images.push(path.join(imagesPath, file));
+}
+
 const eventPath = path.join(__dirname, "events");
 const eventFiles = fs.readdirSync(eventPath).filter((f) => f.endsWith(".js"));
 
@@ -98,6 +110,9 @@ for (const file of modalFiles) {
   client.modals.set(modal.name, modal);
 }
 
-console.log(client.modals);
-
 client.login(client.C.TOKEN);
+
+app.get("/", (req, res) => res.send("<h1>hello there - AlienBot server</h1>"));
+
+const port = 69;
+app.listen(port, () => console.log(`AlienBot server running on port ${port}`));

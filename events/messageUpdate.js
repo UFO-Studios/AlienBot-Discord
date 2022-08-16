@@ -15,6 +15,7 @@ module.exports = {
     //checks
     if (oldMessage.author.bot) return;
     if (oldMessage.content == newMessage.content) return;
+    if (oldMessage.channelId == 853344307015581726) return
 
     const count = 1950; // because of embed description size
 
