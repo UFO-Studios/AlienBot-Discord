@@ -1,8 +1,8 @@
 const {
   SlashCommandBuilder,
-  PermissionFlagsBits,
   ChatInputCommandInteraction,
   Client,
+  PermissionsBitField,
 } = require("discord.js");
 
 module.exports = {
@@ -21,6 +21,15 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    if (
+      !interaction.member.permissions.has([
+        PermissionsBitField.Flags.ManageGuild,
+        PermissionsBitField.Flags.ManageChannels,
+      ])
+    )
+      return await interaction.reply({
+        content: "You dont have the permissions to set ignore a channel!",
+      });
     const channel = interaction.options.getChannel("channel");
 
     await interaction.deferReply();
