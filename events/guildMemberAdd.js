@@ -42,12 +42,12 @@ module.exports = {
 
     context.drawImage(background, 0, 0);
 
-    context.font = applyText(canvas, "Welcome!", 160, "sans-serif");
+    context.font = applyText(canvas, "Welcome!", 160, "Verdana Bold");
     context.fillStyle = "yellow";
     context.textAlign = "center";
     context.fillText("Welcome!", 1275, canvas.height / 1.5);
 
-    context.font = applyText(canvas, member.user.tag, 170, "sans-serif");
+    context.font = applyText(canvas, member.user.tag, 170, "Verdana Bold");
     context.fillStyle = "white";
     context.fillText(member.user.tag, 1275, canvas.height / 1.25);
 
@@ -55,7 +55,7 @@ module.exports = {
       canvas,
       `Member #${member.guild.memberCount}`,
       140,
-      "sans-serif"
+      "Verdana Bold"
     );
     context.fillStyle = "yellow";
     context.fillText(
@@ -71,7 +71,7 @@ module.exports = {
     });
 
     const webhook = new WebhookClient({
-      url: "https://discord.com/api/webhooks/1006496263094681682/8fV25KtxnyfO2-U3tM38Mcx3-Fb04NbKnEBIfytxYzpSWm1Qrd0dkcZda3ABig6KoXHc",
+      url: data.webhookUrl,
     });
 
     webhook.send({ content: data.message, files: [attachment] });
