@@ -24,6 +24,17 @@ for (const file of commandFiles) {
   }
 }
 
+const contextPath = path.join(__dirname, "contextMenu");
+const contextFiles = fs
+  .readdirSync(contextPath)
+  .filter((f) => f.endsWith(".js"));
+
+for (const file of contextFiles) {
+  const filePath = path.join(contextPath, file);
+  const command = require(filePath);
+  commands.push(command.data.toJSON());
+}
+
 const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
 
 if (Config.ENV == "prod") {
@@ -43,5 +54,5 @@ if (Config.ENV == "prod") {
   rest.put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
     body: commands,
   });
-  console.log("Successfully registered commands locally")
+  console.log("Successfully registered commands locally");
 }

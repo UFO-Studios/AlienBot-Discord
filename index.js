@@ -70,6 +70,17 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
+const contextPath = path.join(__dirname, "contextMenu");
+const contextFiles = fs
+  .readdirSync(contextPath)
+  .filter((f) => f.endsWith(".js"));
+
+for (const file of contextFiles) {
+  const filePath = path.join(contextPath, file);
+  const command = require(filePath);
+  client.commands.set(command.data.name, command);
+}
+
 const imagesPath = path.join(__dirname, "./images/welcomeImages");
 const imagesFiles = fs
   .readdirSync(imagesPath)

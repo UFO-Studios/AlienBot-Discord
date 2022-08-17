@@ -25,7 +25,7 @@ module.exports = {
     .setDescription("Generate random text.")
     .addStringOption((option) => {
       option
-        .setName("text")
+        .setName("size")
         .setDescription("Text to generate")
         .addChoices(
           { name: "sentence", value: "sentence" },

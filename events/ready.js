@@ -119,7 +119,7 @@ module.exports = {
         client.user.setPresence({
           activities: [
             {
-              name: "What? you expected a funnu joke? lol no",
+              name: "What? you expected a funny joke? lol no",
               type: ActivityType.Watching,
             },
           ],
