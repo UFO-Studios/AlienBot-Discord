@@ -19,6 +19,12 @@ module.exports = {
   async execute(interaction, client) {
     const msg = interaction.targetMessage.content;
 
+    if (!msg)
+      return await interaction.reply({
+        content: "Cant translate embeds!",
+        ephemeral: true,
+      });
+
     const inFrench = await translate(msg, { to: "french" })
       .then((res) => res.text)
       .catch((e) => console.log(e));
@@ -43,7 +49,7 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    interaction.reply({ embeds: [embed] });
+    interaction.reply({ embeds: [embed], ephemeral: true });
   },
 };
 
