@@ -147,7 +147,7 @@ module.exports = {
 //  client.user.setPresence({
 //    activities: [
 //      {
-//        name: "https://github.com/UFO-Studios",
+//        name: "status",
 //        type: ActivityType.Watching,
 //      },
 //    ],
