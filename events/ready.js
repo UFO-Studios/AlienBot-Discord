@@ -82,9 +82,54 @@ module.exports = {
           status: "online",
         });
       },
+      () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "Now running on DJS v14!",
+              type: ActivityType.Playing,
+            },
+          ],
+          status: "online",
+        });
+      },
+      () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "tbh ngl pls bruh dont brake my bard uwu",
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "online",
+        });
+      },
+      () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "*ooo! Quartz*",
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "online",
+        });
+      },
+      () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "What? you expected a funny joke? lol no",
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "online",
+        });
+      },
     ];
+    
     setInterval(() => {
-      const randomNum = Math.floor(Math.random() * 5);
+      const randomNum = Math.floor(Math.random() * 8);
       //console.log(randomNum);
       array[randomNum]();
     }, 10000);
@@ -96,16 +141,16 @@ module.exports = {
   },
 };
 
-// template
-// () => {
-//   client.user.setPresence({
-//     activities: [
-//       {
-//         name: "activity name",
-//         type: ActivityType.Streaming,
-//       },
-//     ],
-//     status: "online",
-//   });
-// };
-//  },
+
+//template
+//() => {
+//  client.user.setPresence({
+//    activities: [
+//      {
+//        name: "https://github.com/UFO-Studios",
+//        type: ActivityType.Watching,
+//      },
+//    ],
+//    status: "online",
+//  });
+//},
