@@ -3,6 +3,7 @@ const {
   Client,
   ChatInputCommandInteraction,
   EmbedBuilder,
+  PermissionsBitField,
 } = require("discord.js");
 
 module.exports = {
@@ -58,7 +59,7 @@ module.exports = {
     )
     .addStringOption((option) =>
       option
-        .setName("footer-icon")
+        .setName("footer-image-url")
         .setDescription(
           "the footer icon url to be displayed besides the footer text, defaults to none"
         )
@@ -70,6 +71,18 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    if (
+      !interaction.member.permissions.has(
+        PermissionsBitField.Flags.ManageGuild
+      ) ||
+      !interaction.member.permissions.has(
+        PermissionsBitField.Flags.ManageChannels
+      )
+    )
+      return await interaction.reply({
+        content:
+          "You dont have the permissions to send an embed in the server!",
+      });
     const title = interaction.options.getString("title");
     const description = interaction.options.getString("description");
     const color = interaction.options.getString("color");

@@ -6,7 +6,7 @@ module.exports = {
     .setDescription("Unban a user by giving their id.")
     .addStringOption((option) => {
       option
-        .setName("id")
+        .setName("user-id")
         .setDescription("The ID of a banned member to be unbanned.")
         .setRequired(true);
       return option;

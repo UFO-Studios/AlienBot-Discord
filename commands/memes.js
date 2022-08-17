@@ -18,6 +18,16 @@ module.exports = {
     const data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
       (res) => res.json()
     );
+    
+    if (!interaction.channel.nsfw && data.nsfw) {
+      console.log(data.nsfw);
+      while (data.nsfw) {
+        console.log("while loop run");
+        data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
+          (res) => res.json()
+        );
+      }
+    }
 
     const embed = new EmbedBuilder()
       .setTitle(data.title)
