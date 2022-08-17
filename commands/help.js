@@ -24,7 +24,7 @@ module.exports = {
       )
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setColor("Blue")
-      .setAuthor({ name: interaction.user.tag })
+      .setAuthor({ name: interaction.user.tag }).setTimestamp()
       .setFooter({
         text: `/help • Alienbot`,
         iconURL:
