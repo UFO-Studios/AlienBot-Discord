@@ -33,7 +33,7 @@ if (Config.ENV == "prod") {
   });
 
   // local commands
-  rest.put(Routes.applicationGuildCommands(Config.APP_ID, 714904062398824639), {
+  rest.put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
     body: localCommands,
   });
 

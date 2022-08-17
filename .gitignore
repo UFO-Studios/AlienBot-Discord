@@ -3,3 +3,6 @@ config.json
 .vscode/
 placeholder_to_run_action
 images/AlienWallpaper
+commands/ufoApply.js
+commands/ufosmp.js
+commands/sub2alien.js
