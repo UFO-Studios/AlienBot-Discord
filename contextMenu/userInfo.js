@@ -1,24 +1,32 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const {
+  ContextMenuCommandInteraction,
+  ContextMenuCommandBuilder,
+  Client,
+  PermissionsBitField,
+  ApplicationCommandType,
+  EmbedBuilder
+} = require("discord.js");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("user-info")
-    .setDescription("Display info about a member.")
-    .addUserOption((option) =>
-      option.setName("target").setDescription("the target to get the info of")
-    ),
+  data: new ContextMenuCommandBuilder()
+    .setName("UserInfo")
+    .setType(ApplicationCommandType.User),
   global: true,
-  async execute(interaction) {
-    const targetMember =
-      interaction.options.getMember("target") || interaction.member;
-    const targetUser =
-      interaction.options.getUser("target") || interaction.user;
+  /**
+   *
+   * @param {ContextMenuCommandInteraction} interaction
+   * @param {Client} client
+   */
+  async execute(interaction, client) {
+    const targetMember = interaction.targetMember;
+    const targetUser = interaction.targetUser;
 
     const roles = targetMember.roles.cache
       .filter((role) => role.id !== interaction.guild.id)
       .map((role) => role.name)
       .join(", ");
+
+    // const permsText = await getPerms(targetMember.permissions);
 
     const embed = new EmbedBuilder()
       .setAuthor({ name: targetUser.tag })
@@ -71,4 +79,5 @@ module.exports = {
     return await interaction.reply({ embeds: [embed] });
   },
 };
-console.log("user-info.js run");
+
+console.log("nickname.js run");
