@@ -19,8 +19,11 @@ module.exports = {
       return;
     }
 
-    await data.leaveMessage.replace(/{username}/g, member.user.tag);
-    await data.leaveMessage.replace(/{memberCount}/g, member.guild.memberCount);
+    const leaveRE = new RegExp("{username}", "g");
+    const leaveRE2 = new RegExp("{memberCount}", "g");
+
+    const str = data.leaveMessage.replace(leaveRE, member.displayName);
+    const strULTIMATE = str.replace(leaveRE2, member.guild.memberCount);
 
     const applyText = (canvas, text, fontSize, font) => {
       const context = canvas.getContext("2d");
@@ -59,7 +62,7 @@ module.exports = {
     );
     context.fillStyle = "yellow";
     context.fillText(
-      `Members left ${member.guild.memberCount}`,
+      `Members left: ${member.guild.memberCount}`,
       1275,
       canvas.height / 1.1
     );
@@ -74,6 +77,6 @@ module.exports = {
       url: data.webhookUrl,
     });
 
-    webhook.send({ content: data.message, files: [attachment] });
+    webhook.send({ content: strULTIMATE, files: [attachment] });
   },
 };

@@ -19,11 +19,16 @@ module.exports = {
       return;
     }
 
-    await data.welcomeMessage.replace(/{username}/g, member.user.tag);
-    await data.welcomeMessage.replace(/{memberCount}/g, member.guild.memberCount);
+    const welcomeRE = new RegExp("{username}", "g");
+    const welcomeRE2 = new RegExp("{memberCount}", "g");
+
+    const str = data.welcomeMessage.replace(welcomeRE, member.displayName);
+    const strULTIMATE = str.replace(welcomeRE2, member.guild.memberCount);
 
     const applyText = (canvas, text, fontSize, font) => {
       const context = canvas.getContext("2d");
+
+      fontSize += 10;
 
       do {
         context.font = `${(fontSize -= 10)}px ${font}`;
@@ -74,6 +79,6 @@ module.exports = {
       url: data.webhookUrl,
     });
 
-    webhook.send({ content: data.message, files: [attachment] });
+    webhook.send({ content: strULTIMATE, files: [attachment] });
   },
 };
