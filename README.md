@@ -8,7 +8,8 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
 
 ## Invite Link
 
-https://discord.com/api/oauth2/authorize?client_id=800089810525356072&permissions=1103742758006&scope=bot%20applications.commands
+https://thealiendoctor.com/addalienbot
+
 ## Commands
 
 Here is a list of all the commands AlienBot has and what they do.
