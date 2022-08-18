@@ -8,7 +8,7 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
 
 ## Invite Link
 
-https://thealiendoctor.com/addalienbot
+https://thealiendoctor.com/AddAlienBot
 
 ## Commands
 
