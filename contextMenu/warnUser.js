@@ -28,7 +28,7 @@ module.exports = {
       )
     )
       return await interaction.editReply({
-        content: `You dont have the permissions to warn ${target.tag}!`,
+        content: `You dont have the permissions to warn ${target.tag}. You need the "ModerateMembers" permission!`,
         ephemeral: true,
       });
 
@@ -53,7 +53,7 @@ module.exports = {
         warns: warns.warns + 1,
       });
     }
-    
+
     return await interaction.editReply({
       content: `${target.tag} got warned by ${
         interaction.user.tag

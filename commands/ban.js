@@ -62,14 +62,15 @@ module.exports = {
         }
       } else {
         return interaction.reply({
-          content: "You dont have the permissions to ban a member!",
+          content:
+            'You dont have the permissions to ban a member. You need the "BanMembers" permission!',
           ephemeral: true,
         });
       }
     } catch (e) {
       if (e.code == 50013) {
         return interaction.reply({
-          content: `I dont have the permissions to ban ${target.user.tag}`,
+          content: `I dont have the permissions to ban ${target.user.tag}. I need the "BanMembers" permission!`,
           ephemeral: true,
         });
       }

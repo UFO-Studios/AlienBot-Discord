@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -13,9 +13,12 @@ module.exports = {
     }),
   global: true,
   async execute(interaction, client) {
-    if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers))
+    if (
+      !interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)
+    )
       return await interaction.reply({
-        content: "You dont have the perms to unban a member!",
+        content:
+          'You dont have the perms to unban a member. You need the "BanMembers" permission!',
       });
 
     const ID = interaction.options.getString("id");
@@ -33,6 +36,11 @@ module.exports = {
         });
     } catch (e) {
       if (e) {
+        if (e.code == 50013)
+          return await interaction.reply({
+            content:
+              'I dont have th permissions to unban a member. I need the "BanMembers" permission!',
+          });
         console.log(e);
         return interaction.reply({ content: "Invalid ID", ephemeral: true });
       }

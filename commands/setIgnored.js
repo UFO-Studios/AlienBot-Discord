@@ -22,13 +22,10 @@ module.exports = {
    */
   async execute(interaction, client) {
     if (
-      !interaction.member.permissions.has([
-        PermissionsBitField.Flags.ManageGuild,
-        PermissionsBitField.Flags.ManageChannels,
-      ])
+      !interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)
     )
       return await interaction.reply({
-        content: "You dont have the permissions to set ignore a channel!",
+        content: "You dont have the permissions to set ignore a channel. You need the \"ManageGuild\" permission!",
       });
     const channel = interaction.options.getChannel("channel");
 

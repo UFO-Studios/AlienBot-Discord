@@ -29,7 +29,8 @@ module.exports = {
       !interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)
     )
       return await interaction.reply({
-        content: "You dont have the permissions to toggle banned words!",
+        content:
+          'You dont have the permissions to toggle banned words. You need the "ManageGuild" permission!',
         ephemeral: true,
       });
 

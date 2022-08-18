@@ -20,15 +20,10 @@ module.exports = {
    */
   async execute(interaction, client) {
     if (
-      !interaction.member.permissions.has([
-        PermissionFlagsBits.ManageGuild,
-        PermissionFlagsBits.ManageMessages,
-        PermissionFlagsBits.ManageChannels,
-      ]) ||
-      !interaction.member.permissions.has(PermissionFlagsBits.Administrator)
+      !interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)
     ) {
       return await interaction.reply({
-        content: "You dont have the permissions to set logs!",
+        content: "You dont have the permissions to set a logging channel. You need the \"ManageGuild\" permission!",
         ephemeral: true,
       });
     }

@@ -20,7 +20,7 @@ module.exports = {
     ) {
       return await interaction.reply({
         content:
-          "You dont have the permissions to add an emoji to this server!",
+          'You dont have the permissions to add an emoji to this server. You need the "ManageEmojisAndStickers" permission!',
         ephemeral: true,
       });
     }
@@ -41,6 +41,11 @@ module.exports = {
         });
     } catch (e) {
       if (e) {
+        if (e.code == 50013)
+          return await interaction.reply({
+            content: `I dont have the permissions to add an emoji to this guild. I need the "ManageEmojisAndSticker" permission!`,
+          });
+          
         return await interaction.reply({
           content: "Invalid Emoji",
           ephemeral: true,

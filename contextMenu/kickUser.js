@@ -55,14 +55,14 @@ module.exports = {
         }
       } else {
         return interaction.reply({
-          content: "You dont have the permissions to kick a member!",
+          content: "You dont have the permissions to kick a member. You need the \"KickMembers\" permission!",
           ephemeral: true,
         });
       }
     } catch (e) {
       if (e.code == 50013) {
         return interaction.reply({
-          content: `I dont have the permissions to kick ${target.tag}`,
+          content: `I dont have the permissions to kick ${target.tag}. I need the "KickMembers" permission!`,
           ephemeral: true,
         });
       }

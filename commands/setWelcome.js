@@ -40,7 +40,7 @@ module.exports = {
       !interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)
     )
       return await interaction.reply({
-        content: "You dont have the permissions to set the welcome channel!",
+        content: `You dont have the permissions to set the welcome channel. You need the "ManageGuild" permission!`,
         ephemeral: true,
       });
 

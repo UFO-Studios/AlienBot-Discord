@@ -1,5 +1,10 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+const {
+  EmbedBuilder,
+  PermissionFlagsBits,
+  ChatInputCommandInteraction,
+  Client,
+  SlashCommandBuilder,
+} = require("discord.js");
 const prettyMilliseconds = require("pretty-ms");
 
 const durations = [
@@ -47,12 +52,24 @@ module.exports = {
       return option;
     }),
   global: true,
+  /**
+   *
+   * @param {ChatInputCommandInteraction} interaction
+   * @param {Client} client
+   * @returns
+   */
   async execute(interaction, client) {
     const target = await interaction.options.getMember("target");
     const reason =
       (await interaction.options.getString("reason")) || "No reason given.";
     const duration = await interaction.options.getNumber("duration");
     // const member = await interaction.guild.members.fetch(target.id);
+
+    if (!interaction.guild.features.includes("COMMUNITY"))
+      return await interaction.reply({
+        content:
+          "You need community enabled in this server to timeout a member!",
+      });
 
     if (!target)
       return interaction.reply({ content: "Invalid member.", ephemeral: true });
@@ -103,58 +120,6 @@ module.exports = {
         });
       }
     }
-
-    // try {
-    //   if (
-    //     await interaction.member.permissions.has(Permissions.FLAGS.MUTE_MEMBERS) ||
-    //     await interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)
-    //   ) {
-    //     if (target) {
-    //       await target.timeout(duration, reason);
-    //       const successEmbed = new EmbedBuilder()
-    //         .setColor("0099ff")
-    //         .setTitle(`Timed out ${target.user.tag}.`)
-    //         .setDescription(
-    //           `${target.user.tag} was timed out by ${interaction.user.tag}. Reason: ${reason}`
-    //         )
-    //         .setThumbnail(user.displayAvatarURL({ dynamic: true }))
-    //         .setTimestamp()
-    //         .setFooter({
-    //           text: "/help for a list of all the commands. - Alienbot",
-    //           iconURL:
-    //             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
-    //         });
-    //       interaction.reply({ embeds: [successEmbed] });
-    //       console.log(
-    //         `${target.user.tag} was timed out by ${interaction.user.tag}. Reason: ${reason}`
-    //       );
-    //     } else {
-    //       return interaction.reply({
-    //         content: "Invalid member.",
-    //         ephemeral: true,
-    //       });
-    //     }
-    //   } else {
-    //     return interaction.reply({
-    //       content: "You dont have the permissions to time out a member!",
-    //       ephemeral: true,
-    //     });
-    //   }
-    // } catch (e) {
-    //   if (e.code == 50013) {
-    //     return interaction.reply({
-    //       content: `I dont have the permissions to timeout ${target.user.tag}`,
-    //       ephemeral: true,
-    //     });
-    //   }
-    //   if (e) {
-    //     console.log(e);
-    //     return interaction.reply({
-    //       content: "An unknown error has occurred. Please try again later.",
-    //       ephemeral: true,
-    //     });
-    //   }
-    // }
   },
 };
 
