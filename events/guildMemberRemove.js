@@ -3,6 +3,7 @@ const {
   Client,
   WebhookClient,
   AttachmentBuilder,
+  EmbedBuilder
 } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 
@@ -14,6 +15,27 @@ module.exports = {
    * @param {Client} client
    */
   async execute(member, client) {
+    // Logs
+    const logChannel = await client.F.getData("logging", member.guild.id.toString());
+    if (!logChannel) return;
+
+    const logWebhook = new WebhookClient({ url: logChannel.url });
+    const embed = new EmbedBuilder()
+      .setTitle("Member Leave")
+      .setDescription(`Member left: ${member.displayName}`)
+      .setAuthor({ name: member.user.tag })
+      .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+      .setColor("Purple")
+      .setTimestamp()
+      .setFooter({
+        text: "Member leave • AlienBot",
+        iconURL:
+          "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+      });
+
+    await logWebhook.send({ embeds: [embed] });
+
+    // Welcome image
     const data = await client.F.getData("welcome", member.guild.id);
     if (!data) {
       return;
@@ -45,20 +67,20 @@ module.exports = {
 
     context.drawImage(background, 0, 0);
 
-    context.font = applyText(canvas, "Goodbye!", 160, "Verdana Bold");
+    context.font = applyText(canvas, "Goodbye!", 160, "open sans");
     context.fillStyle = "yellow";
     context.textAlign = "center";
     context.fillText("Goodbye!", 1275, canvas.height / 1.5);
 
-    context.font = applyText(canvas, member.user.tag, 170, "Verdana Bold");
+    context.font = applyText(canvas, member.user.tag, 170, "open sans");
     context.fillStyle = "white";
-    context.fillText(member.user.tag, 1275, canvas.height / 1.25);
+    context.fillText(member.user.tag, 1275, canvas.height / 1.265);
 
     context.font = applyText(
       canvas,
       `Members left: ${member.guild.memberCount}`,
       140,
-      "Verdana Bold"
+      "open sans"
     );
     context.fillStyle = "yellow";
     context.fillText(
@@ -77,6 +99,6 @@ module.exports = {
       url: data.webhookUrl,
     });
 
-    webhook.send({ content: strULTIMATE, files: [attachment] });
+    await webhook.send({ content: strULTIMATE, files: [attachment] });
   },
 };
