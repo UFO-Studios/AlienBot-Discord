@@ -8,7 +8,8 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
 
 ## Invite Link
 
-https://fl.niceygylive.xyz/UFOS-BOT20
+https://thealiendoctor.com/AddAlienBot
+
 ## Commands
 
 Here is a list of all the commands AlienBot has and what they do.
