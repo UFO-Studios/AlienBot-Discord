@@ -126,6 +126,16 @@ module.exports = {
           ],
           status: "online",
         });
+      },() => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "\"Great Minds Think Alike.\"",
+              type: ActivityType.Playing,
+            },
+          ],
+          status: "idle",
+        });
       },
     ];
     
