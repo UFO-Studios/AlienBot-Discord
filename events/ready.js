@@ -1,4 +1,5 @@
 const { Client, ActivityType } = require("discord.js");
+const ms = require("ms")
 
 module.exports = {
   name: "ready",
@@ -132,7 +133,7 @@ module.exports = {
       const randomNum = Math.floor(Math.random() * 8);
       //console.log(randomNum);
       array[randomNum]();
-    }, 10000);
+    }, ms(120);
 
     console.log("Ready!");
     await client.channels.cache
