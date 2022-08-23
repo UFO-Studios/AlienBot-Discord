@@ -1,4 +1,5 @@
-﻿const fs = require("node:fs");
+require("dotenv").config()
+const fs = require("node:fs");
 const path = require("node:path");
 const {
   Client,
@@ -7,7 +8,7 @@ const {
   EmbedBuilder,
   Partials,
 } = require("discord.js");
-const Config = require("./config.json");
+// const Config = require("./config.json");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
 const app = require("express")();
@@ -55,7 +56,7 @@ player.on("trackStart", (queue, track) => {
 });
 
 client.P = player;
-client.C = Config;
+client.C = process.env;
 client.F = Firebase;
 
 client.commands = new Collection();
