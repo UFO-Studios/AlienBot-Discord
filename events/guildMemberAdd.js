@@ -42,8 +42,8 @@ module.exports = {
       return;
     }
 
-    const welcomeRE = new RegExp("{username}", "g");
-    const welcomeRE2 = new RegExp("{memberCount}", "g");
+    const welcomeRE = new RegExp("{username}", "gi");
+    const welcomeRE2 = new RegExp("{memberCount}", "gi");
 
     const str = data.welcomeMessage.replace(welcomeRE, member.displayName);
     const strULTIMATE = str.replace(welcomeRE2, member.guild.memberCount);

@@ -9,7 +9,7 @@ const {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("embed")
-    .setDescription("send an embed to the given channel!")
+    .setDescription("send an embed to the given channel")
     .addChannelOption((option) =>
       option
         .setName("channel")
@@ -25,7 +25,7 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("description")
-        .setDescription("the description to be displayed. use \\n for newlines")
+        .setDescription("the description to be displayed. use `newline` for newlines")
         .setRequired(true)
     )
     .addStringOption((option) =>
@@ -83,6 +83,7 @@ module.exports = {
         content:
           "You dont have the permissions to send an embed in the server!",
       });
+
     const title = interaction.options.getString("title");
     const description = interaction.options.getString("description");
     const color = interaction.options.getString("color");
@@ -92,7 +93,8 @@ module.exports = {
     const imageUrl = interaction.options.getString("image-url");
     const footerText = interaction.options.getString("footer-text");
     const footerIcon = interaction.options.getString("footer-icon");
-    const newDescription = description.replace("newline", "\n");
+    const re = new RegExp("newline", "gi")
+    const newDescription = re.test(description) ? description.replace(re, "\n") : description
 
     if (title.length > 256)
       return interaction.reply({
@@ -100,7 +102,7 @@ module.exports = {
         ephemeral: true,
       });
 
-    if (author.length > 256)
+    if (author?.length > 256)
       return interaction.reply({
         content: "The Author Name is too big! The limit is 256 characters",
         ephemeral: true,
@@ -112,7 +114,7 @@ module.exports = {
         ephemeral: true,
       });
 
-    if (footerText.length > 2000)
+    if (footerText?.length > 2000)
       return interaction.reply({
         content: "The Footer Text is too big! The limit is 2000 characters",
         ephemeral: true,
