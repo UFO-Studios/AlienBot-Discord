@@ -16,27 +16,27 @@ Install Nodejs from https://nodejs.dev/download/
 
 Create a new Bot application:
 
-    1. Go to Discord dev portal (https://discord.com/developers/applications)
+1. Go to Discord dev portal (https://discord.com/developers/applications)
 
-    2. Click on "New Application"
+2. Click on "New Application"
 
-    3. Enter the name of the bot
+3. Enter the name of the bot
 
-    4. Go to the "Bot" section (will be on the left)
+4. Go to the "Bot" section (will be on the left)
 
-    5. Click on "Add bot"
+5. Click on "Add bot"
 
-    6. Click on "Reset Token"
+6. Click on "Reset Token"
 
-    7. Copy the token and save it for a later step
+7. Copy the token and save it for a later step
 
-    8. Go to "OAuth2" section (will be on the left)
+8. Go to "OAuth2" section (will be on the left)
 
-    9. Copy "client id" and save if for a later step
+9. Copy "client id" and save if for a later step
 
-    10. Go to "General Information" section (will be on the left)
+10. Go to "General Information" section (will be on the left)
 
-    11. scroll down and copy "Application ID" and save it for a later step
+11. scroll down and copy "Application ID" and save it for a later step
 
 Create a new Firebase Project:
 
