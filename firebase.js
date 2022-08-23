@@ -1,9 +1,10 @@
+require("dotenv").config();
 const firebase = require("firebase-admin/app");
 const firestore = require("firebase-admin/firestore");
-const Config = require("./config.json");
+const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
 
 const app = firebase.initializeApp({
-  credential: firebase.cert(Config.FIREBASE_CONFIG),
+  credential: firebase.cert(firebaseConfig),
 });
 
 const db = firestore.getFirestore();
@@ -32,7 +33,7 @@ const addTestData = async () => {
  *  @param collectionName String, name of the collection to add data to.
  *  @param docName String, name of the document to add data to.
  *  @param dataObj JS object, the data to add to the document.
- *  @example addData("users", "test", {hello: "world"})
+ *  @example await addData("users", "test", {hello: "world"})
  *  @returns data Reference
  **/
 const addData = async (collectionName, docName, dataObj) => {

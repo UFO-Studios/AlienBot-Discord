@@ -1,32 +1,32 @@
+require("dotenv").config();
 const fs = require("node:fs");
 const path = require("node:path");
 const {
   Client,
   Collection,
-  GatewayIntentBits,
   EmbedBuilder,
   Partials,
+  IntentsBitField,
 } = require("discord.js");
-const Config = require("./config.json");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
-const app = require("express")();
+
+const Intents = new IntentsBitField([
+  IntentsBitField.Flags.Guilds,
+  IntentsBitField.Flags.GuildVoiceStates,
+  IntentsBitField.Flags.GuildMembers,
+  IntentsBitField.Flags.GuildMessages,
+  IntentsBitField.Flags.GuildMessageReactions,
+  IntentsBitField.Flags.GuildEmojisAndStickers,
+  IntentsBitField.Flags.GuildBans,
+  IntentsBitField.Flags.GuildWebhooks,
+  IntentsBitField.Flags.MessageContent,
+  IntentsBitField.Flags.DirectMessages,
+  IntentsBitField.Flags.DirectMessageReactions,
+]);
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildVoiceStates,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.GuildEmojisAndStickers,
-    GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildBans,
-    GatewayIntentBits.GuildWebhooks,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.DirectMessageReactions,
-  ],
+  intents: Intents,
   partials: [Partials.Channel],
 });
 
@@ -55,7 +55,7 @@ player.on("trackStart", (queue, track) => {
 });
 
 client.P = player;
-client.C = Config;
+client.C = process.env;
 client.F = Firebase;
 
 client.commands = new Collection();
@@ -122,8 +122,3 @@ for (const file of modalFiles) {
 }
 
 client.login(client.C.TOKEN);
-
-app.get("/", (req, res) => res.send("<h1>hello there - AlienBot server</h1>"));
-
-const port = 69;
-app.listen(port, () => console.log(`AlienBot server running on port ${port}`));

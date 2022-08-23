@@ -1,8 +1,8 @@
+const Config = require("dotenv").config().parsed;
 const fs = require("node:fs");
 const path = require("node:path");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-const Config = require("./config.json");
 
 const commands = [];
 const globalCommands = [];
