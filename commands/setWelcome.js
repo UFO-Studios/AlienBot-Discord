@@ -57,7 +57,7 @@ module.exports = {
       .createWebhook({
         name: "AlienBot",
         avatar:
-          "https://cdn.discordapp.com/avatars/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.webp",
+          "https://media.discordapp.net/attachments/864949202583683072/1010470792393408553/logo.png",
       })
       .then((w) => w);
 

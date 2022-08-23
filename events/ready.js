@@ -1,4 +1,5 @@
 const { Client, ActivityType } = require("discord.js");
+const ms = require("ms")
 
 module.exports = {
   name: "ready",
@@ -125,6 +126,16 @@ module.exports = {
           ],
           status: "online",
         });
+      },() => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "\"Great Minds Think Alike.\"",
+              type: ActivityType.Playing,
+            },
+          ],
+          status: "idle",
+        });
       },
     ];
     
@@ -132,7 +143,7 @@ module.exports = {
       const randomNum = Math.floor(Math.random() * 8);
       //console.log(randomNum);
       array[randomNum]();
-    }, 10000);
+    }, ms(120);
 
     console.log("Ready!");
     await client.channels.cache

@@ -10,50 +10,6 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
 
 https://thealiendoctor.com/AddAlienBot
 
-## Commands
-
-Here is a list of all the commands AlienBot has and what they do.
-
-• Moderation.    
-
-`/kick` - Kick a member from the server.    
-`/ban` - Ban a member from the server.  
-`/unban` - Unban a banned member.  
-`/warn` - Warn a member in the server.
-`/check-warns` - Check the warns of a member.   
-`/timeout` - Timeout a member. Note - The server has to have community turned on for this to work.    
-`/prune` - Prune/Clear upto 99 messages from a channel.    
-
-• Music.   
-`/play` - play a song by its name or url.    
-`/pause` - pause a song.    
-`/resume` - resume a paused song.   
-`/skip` - skip the current playing song, will play the next song on the queue.   
-`/seek` - seek to the given point in the song.    
-`/stop` - stop playing the song (coming soon™️).   
-`/queue` - info about the queue (coming soon™️).   
-`/stop` - stop the current playing song.
- 
-• General.   
-
-`/about` - About AlienBot.    
-`/user-info` - Get info about a user.    
-`/server-info` - Get info about a server.    
-`/pfp` - Get a member's profile picture.    
-`/bread` - Bread 👍👎.    
-`/namemc` - Get info about a Java Minecraft player.    
-`/ping` - Get AlienBot's ping (and pong).    
-`/random-text-generator` - Get some random text generated for you.    
-`/server-info` - Get info about the server.    
-`/woof` - AlienBot woofs at you.     
-`/embed` - send an embed with full customisation.   
-`/emoji-info` - Get info about an emoji.    
-
-• Logs.   
-
-`/update-channel` - Channel where AlienBot updates are sent.    
-`/set-logging-channel` - Set a logging channel where message logs (and other logs too in the future) will be sent.    
-
 ## Setup
 
 Install Nodejs from https://nodejs.dev/download/
