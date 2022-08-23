@@ -8,7 +8,7 @@ const {
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
-    .setName("warn")
+    .setName("warnUser")
     .setType(ApplicationCommandType.User),
   global: true,
   /**

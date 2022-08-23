@@ -8,7 +8,7 @@ const {
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
-    .setName("pfp")
+    .setName("avatar")
     .setType(ApplicationCommandType.User),
   /**
    *
@@ -16,9 +16,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const pfpUrl = await interaction.targetUser.displayAvatarURL({
-      dynamic: true,
-    });
+    const user = interaction.targetUser;
 
     const embed = new EmbedBuilder()
       .setAuthor({
@@ -27,8 +25,12 @@ module.exports = {
       })
       .setColor("Blue")
       .setTitle("Profile Picture")
-      .setDescription(`Heres the profile picture of \`${interaction.targetUser.tag}\`:`)
-      .setImage(pfpUrl)
+      .setDescription(`Heres the profile picture of \`${user.tag}\`:`)
+      .setImage(
+        user.displayAvatarURL({
+          dynamic: true,
+        })
+      )
       .setTimestamp()
       .setFooter({
         text: "pfp • AlienBot",

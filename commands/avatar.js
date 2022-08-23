@@ -1,5 +1,9 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { EmbedBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  ChatInputCommandInteraction,
+  Client,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,8 +16,12 @@ module.exports = {
         .setRequired(true)
     ),
   global: true,
-  async execute(interaction) {
-    const user = await interaction.options.getUser("target");
+  /**
+   * @param {ChatInputCommandInteraction} interaction
+   * @param {Client} client
+   */
+  async execute(interaction, client) {
+    const user = interaction.options.getUser("target");
 
     const embed = new EmbedBuilder()
       .setAuthor({
@@ -23,7 +31,7 @@ module.exports = {
       .setColor("Blue")
       .setTitle("Profile Picture")
       .setDescription(`Heres the profile picture of \`${user.tag}\`:`)
-      .setImage(user.displayAvatarURL({ dynamic: true }))
+      .setImage(user.displayAvatarURL({ dynamic: true }).toString())
       .setTimestamp()
       .setFooter({
         text: "/pfp • AlienBot",

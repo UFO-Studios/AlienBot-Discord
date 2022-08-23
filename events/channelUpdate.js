@@ -29,9 +29,16 @@ module.exports = {
     if (!channels.length > 1) {
       if (channels[0] == oldChannel.id) return;
     } else {
-      // TODO: work pn a better system to do this
-      const array = channels.map((id) => id == oldChannel.id);
-      if (array.includes(true)) {
+      // TODO: work on a better system to do this
+      const array = channels.map((id) => {
+        if (id == oldChannel.id) {
+          return "true";
+        } else {
+          return "false";
+        }
+      });
+
+      if (array.includes("true")) {
         return;
       }
     }
@@ -45,7 +52,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setTitle("Channel Name Update")
         .setDescription(
-          `Channel name update:\nBefore: \`${oldChannel.name}\`\nAfter: \`${NewChannel.name}\``
+          `Channel name update:\nBefore: \`\`\`${oldChannel.name}\`\`\`\nAfter: \`\`\`${NewChannel.name}\`\`\``
         )
         .setColor("Purple")
         .setTimestamp()
@@ -65,7 +72,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setTitle("Channel Topic Update")
         .setDescription(
-          `Channel topic update:\nBefore: \`${oldChannel.topic}\`\nAfter: \`${NewChannel.topic}\``
+          `Channel topic update:\nBefore: \`\`\`${oldChannel.topic}\`\`\`\nAfter: \`\`\`${NewChannel.topic}\`\`\``
         )
         .setColor("Purple")
         .setTimestamp()
