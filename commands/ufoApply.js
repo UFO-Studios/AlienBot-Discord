@@ -40,7 +40,7 @@ module.exports = {
       .setCustomId("subToAlien")
       .setLabel("How long have you been subscribed to alien?")
       .setRequired(true)
-      .setStyle(TextInputStyle.Short);
+      .setStyle(TextInputStyle.Short)
 
     const breakRules = new TextInputBuilder()
       .setCustomId("breakRules")

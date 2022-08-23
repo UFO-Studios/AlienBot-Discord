@@ -1,5 +1,5 @@
 const {
-  ChatInputCommandInteraction,
+  ModalSubmitInteraction,
   Client,
   WebhookClient,
   EmbedBuilder,
@@ -9,7 +9,7 @@ module.exports = {
   name: "ufoApply",
   /**
    *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {ModalSubmitInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {

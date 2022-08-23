@@ -1,29 +1,29 @@
 const {
-  ContextMenuCommandBuilder,
   ContextMenuCommandInteraction,
+  ContextMenuCommandBuilder,
   Client,
   ApplicationCommandType,
 } = require("discord.js");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
-    .setName("read")
-    .setType(ApplicationCommandType.Message),
-  global: true,
+    .setName("view-warns")
+    .setType(ApplicationCommandType.User),
   /**
    *
    * @param {ContextMenuCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const msg = interaction.targetMessage.content;
+    const user = interaction.targetUser
+    const data = await client.F.getData("warns", user.id);
+    const warns = data ? data.warns : 0
 
     return await interaction.reply({
-      content: msg,
-      tts: true,
+      content: `${user.tag} has ${warns} warns.`,
       ephemeral: true,
     });
   },
 };
 
-console.log("read.js run");
+console.log("checkWarnsOfUser.js run");
