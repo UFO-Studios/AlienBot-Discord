@@ -1,5 +1,5 @@
 {
-  "name": "AB2",
+  "name": "AlienBot-2.0",
   "license": "BSD-3-Clause",
   "scripts": {
     "start": "node deploy-commands.js && node index.js"
