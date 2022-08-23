@@ -143,7 +143,7 @@ module.exports = {
       const randomNum = Math.floor(Math.random() * 8);
       //console.log(randomNum);
       array[randomNum]();
-    }, ms(120);
+    }, ms(120));
 
     console.log("Ready!");
     await client.channels.cache

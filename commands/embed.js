@@ -92,11 +92,36 @@ module.exports = {
     const imageUrl = interaction.options.getString("image-url");
     const footerText = interaction.options.getString("footer-text");
     const footerIcon = interaction.options.getString("footer-icon");
+    const newDescription = description.replace("newline", "\n");
+
+    if (title.length > 256)
+      return interaction.reply({
+        content: "The Title is too big! The limit is 256 characters",
+        ephemeral: true,
+      });
+
+    if (author.length > 256)
+      return interaction.reply({
+        content: "The Author Name is too big! The limit is 256 characters",
+        ephemeral: true,
+      });
+
+    if (newDescription.length > 4000)
+      return interaction.reply({
+        content: "The Description is too big! The limit is 4000 characters",
+        ephemeral: true,
+      });
+
+    if (footerText.length > 2000)
+      return interaction.reply({
+        content: "The Footer Text is too big! The limit is 2000 characters",
+        ephemeral: true,
+      });
 
     try {
       const embed = new EmbedBuilder()
         .setTitle(title)
-        .setDescription(description)
+        .setDescription(newDescription)
         .setColor(color)
         .setAuthor({ name: author })
         .setThumbnail(thumbnailUrl)
