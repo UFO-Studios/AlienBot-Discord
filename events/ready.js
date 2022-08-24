@@ -1,5 +1,6 @@
 const { Client, ActivityType } = require("discord.js");
 const ms = require("ms")
+const http = require("http");
 
 module.exports = {
   name: "ready",
@@ -145,10 +146,25 @@ module.exports = {
       array[randomNum]();
     }, ms(120));
 
+
+
     console.log("Ready!");
     await client.channels.cache
       .get(client.C.CHANNEL_ID)
       .send("Bot is online! Running in dev mode :D");
+      //status http server
+    const host = 'localhost';
+    const port = '25583'
+
+const requestListener = function (req, res) {
+    res.writeHead(200);
+    res.end("Bot online");
+};
+const server = http.createServer(requestListener);
+server.listen(port, host, () => {
+    console.log(`Status ping is running @ http://${host}:${port}`);
+});
+
   },
 };
 
