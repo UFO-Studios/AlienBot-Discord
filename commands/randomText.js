@@ -28,8 +28,8 @@ module.exports = {
         .setName("size")
         .setDescription("Text to generate")
         .addChoices(
-          { name: "sentence", value: "sentence" },
-          { name: "paragraph", value: "paragraph" }
+          { name: "sentence", value: "0" },
+          { name: "paragraph", value: "1" }
         )
         .setRequired(true);
       return option;
@@ -37,14 +37,14 @@ module.exports = {
   global: true,
   async execute(interaction, client) {
     try {
-      const value = await interaction.options.getString("text");
+      const value = parseInt(interaction.options.getString("text"))
 
-      const fn = {
+      const fns = [
         sentence,
         paragraph,
         article,
-      };
-      const Text = await fn[value]();
+      ];
+      const Text = await fns[value]();
 
       const randomNum = Math.floor(Math.random() * 100);
       const random = await Lucky(randomNum);
