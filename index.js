@@ -1,6 +1,7 @@
 require("dotenv").config();
 const fs = require("node:fs");
 const path = require("node:path");
+const app = require("express")();
 const {
   Client,
   Collection,
@@ -122,3 +123,9 @@ for (const file of modalFiles) {
 }
 
 client.login(client.C.TOKEN);
+
+const port = 25583;
+
+app.listen(port, () => {
+  console.log(`AlienBot running on port ${port}`);
+});
