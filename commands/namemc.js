@@ -26,25 +26,28 @@ module.exports = {
       const history = await mcapi.nameHistory("username", username);
       const cape = await mcapi.ofCape(username);
 
-      const starting = "Heres " + userInfo.name + "'s info:  ";
-      const usernameString = "username: " + userInfo.name + ", ";
-      let skinString;
-      if (skin) {
-        skinString = "skin: " + skin.view + ",";
-      } else {
-        skinString = "";
-      }
-      const headString = "head: " + userHead.helmavatar + ",";
-      const capeString = "cape: " + cape + ",";
+      const starting = userInfo ? "Heres " + userInfo.name + "'s info:  " : "";
+      const usernameString = userInfo
+        ? "username: " + userInfo.name + ", "
+        : "";
+      const skinString = skin ? "skin: " + skin.view + "," : "";
+      // pro refactoring
+      // if (skin) {
+      //   skinString = "skin: " + skin.view + ",";
+      // } else {
+      //   skinString = "";
+      // }
+      const headString = userHead ? "head: " + userHead.helmavatar + "," : "";
+      const capeString = cape ? "cape: " + cape + "," : "";
+
       const getNames = () => {
         return history.map((object) => object.name);
       };
-      let usernameHistory;
-      if (history.length > 1) {
-        usernameHistory = "username history: " + getNames();
-      } else {
-        usernameHistory = "username history: " + history[0].name;
-      }
+
+      const usernameHistory =
+        history.length > 1
+          ? "username history: " + getNames()
+          : "username history: " + history[0].name;
 
       const embed = new EmbedBuilder()
         .setTitle(starting)
