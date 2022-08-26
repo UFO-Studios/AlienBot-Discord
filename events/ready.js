@@ -156,14 +156,14 @@ module.exports = {
     const host = 'localhost';
     const port = '25583'
 
-const requestListener = function (req, res) {
-    res.writeHead(200);
-    res.end("Bot online");
-};
-const server = http.createServer(requestListener);
-server.listen(port, host, () => {
-    console.log(`Status ping is running @ http://${host}:${port}`);
-});
+//const requestListener = function (req, res) {
+ //   res.writeHead(200);
+  //  res.end("Bot online");
+//};
+//const server = http.createServer(requestListener);
+//server.listen(port, host, () => {
+ //   console.log(`Status ping is running @ http://${host}:${port}`);
+//});
 
   },
 };
