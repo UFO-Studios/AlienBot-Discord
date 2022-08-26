@@ -165,8 +165,8 @@ module.exports = {
  //   console.log(`Status ping is running @ http://${host}:${port}`);
 //});
 
-  },
-};
+//  },
+//};
 
 
 //template
