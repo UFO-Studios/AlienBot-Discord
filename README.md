@@ -66,7 +66,7 @@ $ git clone https://github.com/UFO-Studios/AlienBot-2.0.git
 Now cd into the bot's directory:
 
 ```bash
-$ cd alienbot-2.0
+$ cd AlienBot-2.0
 ```
 
 Then create a .env file which will look like this:
