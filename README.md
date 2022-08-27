@@ -69,23 +69,16 @@ Now cd into the bot's directory:
 $ cd alienbot-2.0
 ```
 
-Then create a config.json file which will look like this:
+Then create a .env file which will look like this:
 
-```json
-{
-    "TOKEN": "your-bot-token",
-    "CHANNEL_ID": "dev-channel-id",
-    "CLIENT_ID": "your-client-id",
-    "GUILD_ID": "dev-guild-id",
-    "APP_ID": "bot-app-id",
-    "ENV": "prod || dev",
-    "DEFAULT_VCID": "default-voice-channel-id",
-    "FIREBASE-CONFIG": {
-        "your": "firebase",
-        "service": "account",
-        "config": "goes here"
-    }
-}
+```env
+TOKEN=yourbottoken
+CHANNEL_ID=serverchannelid
+CLIENT_ID=botclientid
+GUILD_ID=serverid
+APP_ID=botapplicationid
+ENV=prod||dev
+FIREBASE_CONFIG={"your":"firebase","config":"here","in":"oneline"}
 ```
 
 Now install all the required dependencies:
