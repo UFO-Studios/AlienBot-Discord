@@ -7,3 +7,5 @@ commands/ufoApply.js
 commands/ufosmp.js
 commands/sub2alien.js
 *.env
+env
+.env
