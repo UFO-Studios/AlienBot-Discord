@@ -11,7 +11,7 @@ const {
 } = require("discord.js");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
-const prompt = inquirer.createPromptModule();
+//const prompt = inquirer.createPromptModule();
 
 
 const Intents = new IntentsBitField([
