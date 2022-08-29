@@ -21,12 +21,12 @@ module.exports = {
     )
       return;
 
-    const { channels } = await client.F.getData(
+    const ignoreChannelsData = await client.F.getData(
       "ignore-channels",
       oldChannel.guildId
     );
 
-    if (!channels.length > 1) {
+    if (!ignoreChannelsData.channels.length > 1) {
       if (channels[0] == oldChannel.id) return;
     } else {
       // TODO: work on a better system to do this
