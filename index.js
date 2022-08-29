@@ -11,6 +11,8 @@ const {
 } = require("discord.js");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
+const prompt = inquirer.createPromptModule();
+
 
 const Intents = new IntentsBitField([
   IntentsBitField.Flags.Guilds,
@@ -123,6 +125,14 @@ for (const file of modalFiles) {
 }
 
 client.login(client.C.TOKEN);
+
+//debug
+var interval = setInterval(function(){ 
+  console.log('Still running!'); 
+}, 10000);
+setTimeout(function() { 
+  clearInterval(interval); 
+}, 1000000);
 
 const port = 25583;
 
