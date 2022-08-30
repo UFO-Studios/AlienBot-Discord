@@ -2,6 +2,7 @@
   "name": "AlienBot-2.0",
   "license": "BSD-3-Clause",
   "scripts": {
+    "setup": "npm 1 && node deploy-commands.js && node index.js",
     "start": "node deploy-commands.js && node index.js"
   },
   "dependencies": {
