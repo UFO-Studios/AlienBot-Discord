@@ -81,16 +81,16 @@ ENV=prod||dev
 FIREBASE_CONFIG={"your":"firebase","config":"here","in":"oneline"}
 ```
 
-Now install all the required dependencies:
+Now run the setup script (run this only once!)
 
 ```bash
-$ npm install
+$ npm run setup
 ```
 
-Now run this:
+Run this whenever the bot crashes/host stops the script
 
 ```bash
-$ ./start.sh
+$ npm run start
 ```
 ## Contributing
 
