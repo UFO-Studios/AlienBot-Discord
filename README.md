@@ -78,19 +78,19 @@ CLIENT_ID=botclientid
 GUILD_ID=serverid
 APP_ID=botapplicationid
 ENV=prod||dev
-FIREBASE_CONFIG={"your":"firebase","config":"here","in":"oneline"}
+FIREBASE_CONFIG={"your":"firebase","service":"account","config":"here","in":"oneline"}
 ```
 
-Now install all the required dependencies:
+Now run the setup script (run this only once!)
 
 ```bash
-$ npm install
+$ npm run setup
 ```
 
-Now run this:
+Run this whenever the bot crashes/host stops the script
 
 ```bash
-$ ./start.sh
+$ npm run start
 ```
 ## Contributing
 

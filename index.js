@@ -11,6 +11,15 @@ const {
 } = require("discord.js");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
+//const prompt = inquirer.createPromptModule();
+
+//debug
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+//end of debug
+
 
 const Intents = new IntentsBitField([
   IntentsBitField.Flags.Guilds,
@@ -123,6 +132,9 @@ for (const file of modalFiles) {
 }
 
 client.login(client.C.TOKEN);
+
+
+
 
 const port = 25583;
 
