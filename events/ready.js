@@ -1,6 +1,4 @@
 const { Client, ActivityType } = require("discord.js");
-const ms = require("ms")
-const http = require("http");
 
 module.exports = {
   name: "ready",
@@ -12,9 +10,6 @@ module.exports = {
   async execute(client) {
     await client.guilds.fetch();
 
-    // `github.com/UFO-Studios`, {
-    //   type: "WATCHING",
-    // }
     const array = [
       () => {
         client.user.setPresence({
@@ -127,11 +122,12 @@ module.exports = {
           ],
           status: "online",
         });
-      },() => {
+      },
+      () => {
         client.user.setPresence({
           activities: [
             {
-              name: "\"Great Minds Think Alike.\"",
+              name: '"Great Minds Think Alike."',
               type: ActivityType.Playing,
             },
           ],
@@ -139,17 +135,16 @@ module.exports = {
         });
       },
     ];
-    
+
     setInterval(() => {
       const randomNum = Math.floor(Math.random() * 8);
       //console.log(randomNum);
       array[randomNum]();
-    }, ms(120));
-
-
+    }, 10000);
 
     console.log("Ready!");
     await client.channels.cache
       .get(client.C.CHANNEL_ID)
       .send("Bot is online! Running in dev mode :D");
-  }}
+  },
+};
