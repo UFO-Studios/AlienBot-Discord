@@ -78,7 +78,7 @@ CLIENT_ID=botclientid
 GUILD_ID=serverid
 APP_ID=botapplicationid
 ENV=prod||dev
-FIREBASE_CONFIG={"your":"firebase","config":"here","in":"oneline"}
+FIREBASE_CONFIG={"your":"firebase","service":"account","config":"here","in":"oneline"}
 ```
 
 Now run the setup script (run this only once!)
