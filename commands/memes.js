@@ -15,7 +15,7 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
-    const data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
+    let data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
       (res) => res.json()
     );
     

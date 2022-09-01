@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 const fs = require("node:fs");
 const path = require("node:path");
 const app = require("express")();
@@ -11,6 +11,7 @@ const {
 } = require("discord.js");
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
+const Config = require("./config.json") 
 //const prompt = inquirer.createPromptModule();
 
 //debug
@@ -65,7 +66,7 @@ player.on("trackStart", (queue, track) => {
 });
 
 client.P = player;
-client.C = process.env;
+client.C = Config;
 client.F = Firebase;
 
 client.commands = new Collection();

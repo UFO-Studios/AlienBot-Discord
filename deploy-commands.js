@@ -1,5 +1,5 @@
-require("dotenv").config();
-const Config = process.env
+// require("dotenv").config();
+const Config = require("./config.json")
 const fs = require("node:fs");
 const path = require("node:path");
 const { REST } = require("@discordjs/rest");

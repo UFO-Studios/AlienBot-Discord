@@ -1,10 +1,10 @@
 require("dotenv").config();
 const firebase = require("firebase-admin/app");
 const firestore = require("firebase-admin/firestore");
-const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
+const Config = require("./config.json");
 
 const app = firebase.initializeApp({
-  credential: firebase.cert(firebaseConfig),
+  credential: firebase.cert(Config.FIREBASE_CONFIG),
 });
 
 const db = firestore.getFirestore();
