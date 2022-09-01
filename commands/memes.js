@@ -8,6 +8,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
   data: new SlashCommandBuilder().setName("meme").setDescription("get memes!"),
+  global: true,
   /**
    *
    * @param {ChatInputCommandInteraction} interaction
