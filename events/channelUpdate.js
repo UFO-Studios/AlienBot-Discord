@@ -26,20 +26,22 @@ module.exports = {
       oldChannel.guildId
     );
 
-    if (!ignoreChannelsData.channels.length > 1) {
-      if (channels[0] == oldChannel.id) return;
-    } else {
-      // TODO: work on a better system to do this
-      const array = channels.map((id) => {
-        if (id == oldChannel.id) {
-          return "true";
-        } else {
-          return "false";
-        }
-      });
+    if (ignoreChannelsData) {
+      if (!ignoreChannelsData.channels.length > 1) {
+        if (channels[0] == oldChannel.id) return;
+      } else {
+        // TODO: work on a better system to do this
+        const array = ignoreChannelsData.channels.map((id) => {
+          if (id == oldChannel.id) {
+            return "true";
+          } else {
+            return "false";
+          }
+        });
 
-      if (array.includes("true")) {
-        return;
+        if (array.includes("true")) {
+          return;
+        }
       }
     }
 
