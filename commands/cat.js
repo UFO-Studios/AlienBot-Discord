@@ -21,7 +21,7 @@ module.exports = {
     const data = await fetch("https://api.thecatapi.com/v1/images/search").then(
       (d) => d.json()
     );
-    
+
     const embed = new EmbedBuilder()
       .setTitle("Random Cat Pic")
       .setDescription(`Heres a random cat picture:`)
