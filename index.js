@@ -12,7 +12,7 @@ const {
 const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
-//const prompt = inquirer.createPromptModule();
+const { DiscordTogether } = require("discord-together");
 
 //debug
 const readline = require("readline").createInterface({
@@ -64,6 +64,7 @@ player.on("trackStart", (queue, track) => {
   queue.metadata.channel.send({ embeds: [embed] });
 });
 
+client.discordTogether = new DiscordTogether(client);
 client.P = player;
 client.C = Config;
 client.F = Firebase;
