@@ -95,10 +95,12 @@ module.exports = {
       name: "leavePicture.png",
     });
 
-    const webhook = new WebhookClient({
-      url: data.webhookUrl,
-    });
+    const channel = client.channels.cache.find(
+      (channel) => channel.name === "alien-logs"
+    );
 
-    await webhook.send({ content: strULTIMATE, files: [attachment] });
+    if (!channel) return;
+    
+    channel.send({ embeds: [embed] });
   },
 };

@@ -1,4 +1,4 @@
-const { Message, EmbedBuilder, WebhookClient } = require("discord.js");
+const { Message, EmbedBuilder, Client } = require("discord.js");
 
 module.exports = {
   name: "messageUpdate",
@@ -6,7 +6,8 @@ module.exports = {
   // intelliSense
   /**
    * @param {Message} oldMessage
-   *  @param {Message} newMessage
+   * @param {Message} newMessage
+   * @param {Client} client
    */
   async execute(oldMessage, newMessage, client) {
     const data = await client.F.getData("logging", oldMessage.guildId);
@@ -15,7 +16,7 @@ module.exports = {
     //checks
     if (oldMessage.author.bot) return;
     if (oldMessage.content == newMessage.content) return;
-    if (oldMessage.channelId == 853344307015581726) return
+    if (oldMessage.channelId == 853344307015581726) return;
 
     const count = 1950; // because of embed description size
 
@@ -44,8 +45,12 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    const webHook = new WebhookClient({ url: data.url });
+    const channel = client.channels.cache.find(
+      (channel) => channel.name === "alien-logs"
+    );
 
-    webHook.send({ embeds: [embed] });
+    if (!channel) return;
+    
+    channel.send({ embeds: [embed] });
   },
 };

@@ -48,8 +48,6 @@ module.exports = {
     const data = await client.F.getData("logging", oldChannel.guildId);
     if (!data) return;
 
-    const webhook = new WebhookClient({ url: data.url });
-
     if (oldChannel.name !== NewChannel.name) {
       const embed = new EmbedBuilder()
         .setTitle("Channel Name Update")
@@ -63,7 +61,13 @@ module.exports = {
           iconURL:
             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
         });
-      webhook.send({ embeds: [embed] });
+        const channel = client.channels.cache.find(
+          (channel) => channel.name === "alien-logs"
+        );
+    
+        if (!channel) return;
+        
+        channel.send({ embeds: [embed] });
     } else if (oldChannel.topic !== NewChannel.topic) {
       if (
         oldChannel.id == 853344187378434068 ||
@@ -83,7 +87,13 @@ module.exports = {
           iconURL:
             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
         });
-      webhook.send({ embeds: [embed] });
+        const channel = client.channels.cache.find(
+          (channel) => channel.name === "alien-logs"
+        );
+    
+        if (!channel) return;
+        
+        channel.send({ embeds: [embed] });
     }
   },
 };

@@ -28,7 +28,12 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    const webhook = new WebhookClient({ url: data.url });
-    webhook.send({ embeds: [embed] });
+    const logChannel = client.channels.cache.find(
+      (channel) => channel.name === "alien-logs"
+    );
+
+    if (!channel) return;
+
+    logChannel.send({ embeds: [embed] });
   },
 };
