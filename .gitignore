@@ -1,5 +1,6 @@
 node_modules
 config.json
+config-main.json
 .vscode/
 placeholder_to_run_action
 images/AlienWallpaper

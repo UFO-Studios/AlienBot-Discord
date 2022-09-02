@@ -4,14 +4,17 @@ const {
   Client,
   EmbedBuilder,
 } = require("discord.js");
-const axios = require("axios");
+const fetch = require("node-fetch");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("web-screenshot")
     .setDescription("Gets a screenshot of a website")
     .addStringOption((option) =>
-      option.setName("website").setDescription("The website to screen shot")
+      option
+        .setName("website")
+        .setDescription("The website to screen shot")
+        .setRequired(true)
     ),
   global: true,
   /**
@@ -26,9 +29,13 @@ module.exports = {
       website = "https://" + website;
     }
 
-    // `const response = await axios.get(
-    //   "https://poopoo-api.vercel.app/api/image?url=https://thealiendoctor.com"
-    // );`
+    try {
+      await fetch(website);
+    } catch (error) {
+      if (error.code == "ENOTFOUND") {
+        return await interaction.reply({ content: "Invalid URL." });
+      }
+    }
 
     const embed = new EmbedBuilder()
       .setTitle("Website Screenshot")
