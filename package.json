@@ -2,8 +2,8 @@
   "name": "AlienBot-2.0",
   "license": "BSD-3-Clause",
   "scripts": {
-    "setup": "npm 1 && node deploy-commands.js && node index.js",
-    "start": "node deploy-commands.js && node index.js"
+    "setup": "npm 1 && node index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "@discordjs/opus": "^0.8.0",

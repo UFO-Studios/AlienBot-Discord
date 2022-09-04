@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("./deploy-commands").registerCommands();
 const fs = require("node:fs");
 const path = require("node:path");
 const app = require("express")();
