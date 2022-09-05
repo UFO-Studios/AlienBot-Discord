@@ -7,10 +7,12 @@ const {
 
 module.exports = {
   name: "emojiDelete",
+  /**
+   * 
+   * @param {GuildEmoji} emoji 
+   * @param {Client} client 
+   */
   async execute(emoji, client) {
-    const data = await client.F.getData("logging", emoji.guild.id)
-    if(!data) return
-
     const embed = new EmbedBuilder()
       .setTitle("Emoji Deletion")
       .setDescription(`A emoji was deleted:\nemoji: :${emoji.name}:`)
@@ -20,14 +22,15 @@ module.exports = {
         text: "Emoji Deletion • AlienBot",
         iconURL:
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
-      });
+      }); 
 
-      const channel = client.channels.cache.find(
-        (channel) => channel.name === "alien-logs"
-      );
-  
-      if (!channel) return;
-      
-      channel.send({ embeds: [embed] });
+      await emoji.guild.channels.fetch();
+    const channel = emoji.guild.channels.cache.find(
+      (channel) => channel.name == "alien-logs"
+    );
+
+    if (!channel) return;
+
+    channel.send({ embeds: [embed] });
   },
 };

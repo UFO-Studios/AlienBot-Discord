@@ -3,7 +3,7 @@ const {
   Client,
   WebhookClient,
   AttachmentBuilder,
-  EmbedBuilder
+  EmbedBuilder,
 } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 
@@ -16,10 +16,6 @@ module.exports = {
    */
   async execute(member, client) {
     // Logs
-    const logChannel = await client.F.getData("logging", member.guild.id.toString());
-    if (!logChannel) return;
-
-    const logWebhook = new WebhookClient({ url: logChannel.url });
     const embed = new EmbedBuilder()
       .setTitle("Member Leave")
       .setDescription(`Member left: ${member.displayName}`)
@@ -33,7 +29,15 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    await logWebhook.send({ embeds: [embed] });
+    await member.guild.channels.fetch();
+
+    const channel = member.guild.channels.cache.find(
+      (channel) => channel.name == "alien-logs"
+    );
+
+    if (channel) {
+      await channel.send({ embeds: [embed] });
+    }
 
     // Welcome image
     const data = await client.F.getData("welcome", member.guild.id);
@@ -95,12 +99,8 @@ module.exports = {
       name: "leavePicture.png",
     });
 
-    const channel = client.channels.cache.find(
-      (channel) => channel.name === "alien-logs"
-    );
+    await webhook.send({ content: strULTIMATE, files: [attachment] });
 
-    if (!channel) return;
-    
-    channel.send({ embeds: [embed] });
+    await webhook.send({ embeds: [embed] });
   },
 };

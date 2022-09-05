@@ -28,12 +28,13 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    const logChannel = client.channels.cache.find(
-      (channel) => channel.name === "alien-logs"
+    await channel.guild.channels.fetch();
+    const logChannel = channel.guild.channels.cache.find(
+      (FChannel) => FChannel.name === "alien-logs"
     );
 
-    if (!channel) return;
+    if (!logChannel) return;
 
-    logChannel.send({ embeds: [embed] });
+    await logChannel.send({ embeds: [embed] });
   },
 };
