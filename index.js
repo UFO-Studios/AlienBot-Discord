@@ -134,8 +134,3 @@ for (const file of modalFiles) {
 
 client.login(client.C.TOKEN);
 
-const port = 25583;
-
-app.listen(port, () => {
-  console.log(`AlienBot running on port ${port}`);
-});
