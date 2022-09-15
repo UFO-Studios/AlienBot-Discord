@@ -99,8 +99,7 @@ module.exports = {
       name: "leavePicture.png",
     });
 
+    const webhook = new WebhookClient({ url: data.webhookUrl });
     await webhook.send({ content: strULTIMATE, files: [attachment] });
-
-    await webhook.send({ embeds: [embed] });
   },
 };
