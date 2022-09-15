@@ -1,7 +1,6 @@
 require("./deploy-commands").registerCommands();
 const fs = require("node:fs");
 const path = require("node:path");
-const app = require("express")();
 const {
   Client,
   Collection,
@@ -13,6 +12,7 @@ const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
+const topGG = require("@top-gg/sdk");
 
 //debug
 const readline = require("readline").createInterface({
@@ -68,6 +68,7 @@ client.discordTogether = new DiscordTogether(client);
 client.P = player;
 client.C = Config;
 client.F = Firebase;
+client.Timeout = new Collection()
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
@@ -91,6 +92,19 @@ for (const file of contextFiles) {
   const command = require(filePath);
   client.commands.set(command.data.name, command);
 }
+
+// const functionsPath = path.join(__dirname, "functions");
+// const functionsFiles = fs
+//   .readdirSync(functionsPath)
+//   .filter((f) => f.endsWith(".js"));
+
+// client.functions = new Collection();
+
+// for (const file of functionsFiles) {
+//   const filePath = path.join(functionsPath, file);
+//   const Function = require(filePath);
+//   client.functions.set(Function.name, Function.execute);
+// }
 
 const imagesPath = path.join(__dirname, "./images/welcomeImages");
 const imagesFiles = fs

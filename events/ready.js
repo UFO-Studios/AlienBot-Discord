@@ -50,17 +50,6 @@ module.exports = {
         client.user.setPresence({
           activities: [
             {
-              name: `${client.users.cache.size} members`,
-              type: ActivityType.Watching,
-            },
-          ],
-          status: "dnd",
-        });
-      },
-      () => {
-        client.user.setPresence({
-          activities: [
-            {
               name: "The only bot from outer space!",
               type: ActivityType.Playing,
             },
@@ -134,13 +123,24 @@ module.exports = {
           status: "idle",
         });
       },
+      () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: '"The more pages a website has, the cooler it is" - TheAlienDoctor',
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "dnd",
+        });
+      },
     ];
 
     setInterval(() => {
       const randomNum = Math.floor(Math.random() * 8);
       //console.log(randomNum);
       array[randomNum]();
-    }, 10000);
+    }, 20 * 1000); // 20 seconds
 
     console.log("Ready!");
     await client.channels.cache

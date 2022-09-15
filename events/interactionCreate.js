@@ -3,6 +3,7 @@ const {
   ChatInputCommandInteraction,
   Client,
 } = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
   name: "interactionCreate",
@@ -14,7 +15,6 @@ module.exports = {
    */
   async execute(interaction, client) {
     if (interaction.type === InteractionType.ModalSubmit) {
-      console.log("stage 2 modal run");
       const modal = client.modals.get(interaction.customId);
 
       if (!modal) return console.log("error debug");
@@ -28,14 +28,36 @@ module.exports = {
         });
       }
     } else if (interaction.isChatInputCommand()) {
-      console.log("stage 2 command run");
-
       const command = client.commands.get(interaction.commandName);
 
       if (!command) return;
 
       try {
+        if (
+          client.Timeout.get(
+            `${interaction.commandName}-${interaction.user.id}`
+          )
+        )
+          return interaction.reply({
+            content: `You are on a cooldown! You need to wait ${ms(
+              client.Timeout.get(`${interaction.commandName}-${interaction.user.id}`) - Date.now(),
+              { long: true }
+            )}!`,
+            ephemeral: true,
+          });
+
         await command.execute(interaction, client);
+
+        client.Timeout.set(
+          `${interaction.commandName}-${interaction.user.id}`,
+          Date.now() + 4000
+        );
+
+        setInterval(() => {
+          client.Timeout.delete(
+            `${interaction.commandName}-${interaction.user.id}`
+          );
+        }, 4000);
       } catch (error) {
         console.error(error);
         if (!interaction.replied) {
