@@ -12,7 +12,6 @@ const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
-const topGG = require("@top-gg/sdk");
 
 //debug
 const readline = require("readline").createInterface({
