@@ -7,7 +7,7 @@ const app = firebase.initializeApp({
   credential: firebase.cert(Config.FIREBASE_CONFIG),
 });
 
-const db = firestore.getFirestore();
+const db = firestore.getFirestore(app);
 
 const addTestData = async () => {
   // data from docs
@@ -30,8 +30,8 @@ const addTestData = async () => {
 };
 
 /**
- *  @param collectionName String, name of the collection to add data to.
- *  @param docName String, name of the document to add data to.
+ *  @param {String} collectionName name of the collection to add data to.
+ *  @param {String} docName name of the document to add data to.
  *  @param dataObj JS object, the data to add to the document.
  *  @example await addData("users", "test", {hello: "world"})
  *  @returns data Reference
@@ -45,9 +45,9 @@ const addData = async (collectionName, docName, dataObj) => {
 };
 
 /**
- *  @param collectionName String, name of the collection to get a doc from.
- *  @param docName String, name of the doc ot get data from.
- *  @example getData("users", "Kingerious")
+ *  @param {String} collectionName name of the collection to get a doc from.
+ *  @param {String} docName name of the doc ot get data from.
+ *  @example const data = await getData("users", "Kingerious")
  *  @returns if no data is found, returns null, if data is found, returns the document data as a JS Object
  **/
 const getData = async (collectionName, docName) => {
@@ -62,8 +62,9 @@ const getData = async (collectionName, docName) => {
 
 /**
  *
- * @param {String} collectionName
- * @param {String} docName
+ * @param {String} collectionName The name of the collection
+ * @param {String} docName The name of teh document
+ * @example await deleteData("cities", "LA")
  */
 const deleteData = async (collectionName, docName) => {
   try {
