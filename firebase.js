@@ -60,7 +60,23 @@ const getData = async (collectionName, docName) => {
   }
 };
 
+/**
+ *
+ * @param {String} collectionName
+ * @param {String} docName
+ */
+const deleteData = async (collectionName, docName) => {
+  try {
+    const res = await db.collection(collectionName).doc(docName).delete();
+    return res;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
+
 module.exports = {
   addData,
   getData,
+  deleteData
 };
