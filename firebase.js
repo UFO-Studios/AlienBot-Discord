@@ -78,5 +78,5 @@ const deleteData = async (collectionName, docName) => {
 module.exports = {
   addData,
   getData,
-  deleteData
+  deleteData,
 };
