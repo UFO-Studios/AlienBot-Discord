@@ -10,6 +10,10 @@ An open source Discord bot thats currently in alpha, originally made for The Ali
 
 https://thealiendoctor.com/AddAlienBot
 
+## Download 
+
+https://github.com/UFO-Studios/AlienBot-Discord/archive/refs/heads/main.zip
+
 ## Setup
 
 Install Nodejs from https://nodejs.dev/download/
