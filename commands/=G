@@ -47,9 +47,10 @@ module.exports = {
         };
 
         const Text = await fns[value]();
-        let texT = Text;
+        let texT;
         if(Text.length > 4096){
-            texT = Text.slice(0, 4090) + "...";
+            texT = Text.slice(0, 4093) + "...";
+            console.log(texT);
         }
 
         const randomNum = Math.floor(Math.random() * 100);

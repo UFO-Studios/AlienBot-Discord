@@ -28,6 +28,7 @@
     "is-youtube-channel": "^1.0.0",
     "libsodium-wrappers": "^0.7.10",
     "minecraft-lookup": "^1.1.36",
+    "mongodb": "^4.10.0",
     "ms": "^2.1.3",
     "node-fetch": "^2.6.7",
     "number-to-words": "^1.2.4",
