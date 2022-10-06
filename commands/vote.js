@@ -40,7 +40,7 @@ module.exports = {
         },
         {
           name: "discordbotlist.com",
-          value: "```https://discordbotlist.com/bots/alienbot```",
+          value: "```https://discordbotlist.com/bots/AlienBot```",
         }
       );
 
@@ -52,7 +52,7 @@ module.exports = {
       new ButtonBuilder()
         .setLabel("discordbotlist.com")
         .setStyle(ButtonStyle.Link)
-        .setURL("https://discordbotlist.com/bots/alienbot")
+        .setURL("https://discordbotlist.com/bots/AlienBot")
     );
 
     interaction.reply({ embeds: [embed], components: [row] });

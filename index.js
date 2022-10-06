@@ -46,7 +46,7 @@ const client = new Client({
 
 const player = new Player(client, { ytdlOptions: { quality: 'highestaudio' } });
 
-player.on("trackStart", (queue, track) => {
+player.on("trackStart", (queue, track) =>{
     const embed = new EmbedBuilder()
         .setTitle("Play song")
         .setDescription(`Now playing **${track.title}**!`)
@@ -59,7 +59,6 @@ player.on("trackStart", (queue, track) => {
             iconURL:
             "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
         });
-
     queue.metadata.channel.send({ embeds: [embed] });
 });
 
