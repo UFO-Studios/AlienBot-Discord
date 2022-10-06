@@ -16,11 +16,11 @@
 
 ## Invite Link
 
-https://thealiendoctor.com/AddAlienBot
+<a href="https://thealiendoctor.com/AddAlienBot">Click me</a>
 
 ## Download 
 
-https://github.com/UFO-Studios/AlienBot-Discord/archive/refs/heads/main.zip
+<a href="https://github.com/UFO-Studios/AlienBot-Discord/archive/refs/heads/main.zip">Click me</a>
 
 ## Contributing
 
