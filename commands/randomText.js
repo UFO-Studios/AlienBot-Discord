@@ -28,8 +28,9 @@ module.exports = {
         .setName("size")
         .setDescription("Text to generate")
         .addChoices(
-          { name: "sentence", value: "0" },
-          { name: "paragraph", value: "1" }
+            { name: "sentence", value: "sentence" },
+            { name: "paragraph", value: "paragraph" },
+            {name: "article", value: "article"}
         )
         .setRequired(true);
       return option;
@@ -37,40 +38,45 @@ module.exports = {
   global: true,
   async execute(interaction, client) {
     try {
-      const value = parseInt(interaction.options.getString("text"))
+        const value = interaction.options.getString("size")
 
-      const fns = [
-        sentence,
-        paragraph,
-        article,
-      ];
-      const Text = await fns[value]();
+        const fns = {
+            sentence,
+            paragraph,
+            article,
+        };
 
-      const randomNum = Math.floor(Math.random() * 100);
-      const random = await Lucky(randomNum);
+        const Text = await fns[value]();
+        let texT = Text;
+        if(Text.length > 4096){
+            texT = Text.slice(0, 4090) + "...";
+        }
 
-      const embed = new EmbedBuilder()
-        .setTitle("Random generated text.")
-        .setDescription(`${random} \n` + Text)
-        .setColor("Blue")
-        .setAuthor({name: interaction.user.tag})
-        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-        .setTimestamp()
-        .setFooter({
-          text: "/random-text-generator • AlienBot",
-          iconURL:
-            "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
-        });
+        const randomNum = Math.floor(Math.random() * 100);
+        const random = await Lucky(randomNum);
 
-      return interaction.reply({ embeds: [embed] });
+        const embed = new EmbedBuilder()
+            .setTitle("Random generated text.")
+            .setDescription(`${random} \n` + texT)
+            .setColor("Blue")
+            .setAuthor({name: interaction.user.tag})
+            .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+            .setTimestamp()
+            .setFooter({
+                text: "/random-text-generator • AlienBot",
+                iconURL:
+                "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+            });
+
+        return interaction.reply({ embeds: [embed] });
     } catch (e) {
-      if (e) {
-        console.log(e);
-        return interaction.reply({
-          content: `Error while executing this command: ${e.code}`,
-          ephemeral: true,
-        });
-      }
+        if (e) {
+            console.log(e);
+            return interaction.reply({
+                content: `Error while executing this command: ${e.code}`,
+                ephemeral: true,
+            });
+        }
     }
   },
 };
