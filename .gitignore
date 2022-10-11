@@ -9,3 +9,4 @@ commands/ufosmp.js
 commands/sub2alien.js
 .env
 .addCompLib
+test.js

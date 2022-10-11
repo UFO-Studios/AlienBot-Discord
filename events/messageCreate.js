@@ -3,6 +3,8 @@
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
+const edb = require("easy-db-json");
+edb.setFile("./db/level.json")
 
 /**
  *
@@ -80,17 +82,22 @@ module.exports = {
     //     react(msg, guildsIn.length - 1);
     //   }
     // } else {
-
+      
     // banned words
     const data = client.F.getData("banned-words", message.guild.id);
     if (!data) return;
     if (data.toggleValue == "off") return;
     // levling code
-   // const messageSender = message.author.username
-   // const currentLevel = client.F.getData("level", messageSender)
-    //const NewLevel = currentLevel + pointGain
-    //client.F.addData("level", messageSender, NewLevel)
-    // collec name, doc name, data
+
+    const levelServer = message.guild.id
+    const msgAuthor = message.author.id
+       const lvlOld =  client.F.getData("level", msgAuthor);  //edb.get(msgAuthor)
+       console.log(lvlOld, "old");
+       const lvlGain = Math.trunc(Math.random() * 10);
+       const lvlNew = lvlOld + lvlGain;
+       console.log(lvlNew)
+       client.F.addData("level", msgAuthor, {"lvl": lvlNew}) //edb.set(msgAuthor, lvlNew)
+        //client.F.addData("level", levelServer, {messageSender: lvlNew})
     try {
       const data = client.F.getData("banned-woreds", message.guildId);
       if (!data) return;

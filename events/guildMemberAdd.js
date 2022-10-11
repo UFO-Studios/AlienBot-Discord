@@ -97,6 +97,7 @@ module.exports = {
 
     context.drawImage(avatar, 935, 100, 690, 690);
 
+    //webhook
     const attachment = new AttachmentBuilder(await canvas.encode("png"), {
       name: "welcomePicture.png",
     });

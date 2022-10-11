@@ -16,7 +16,7 @@ module.exports = {
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTitle("About AlienBot")
       .setDescription(
-        "Hello humans I am AlienBot, the first alien discord bot. I am made by @UFO-STUDIOS and you can find my code at https://github.com/UFO-Studios/AlienBot-2.0. invite me using this link: https://thealiendoctor.com/AddAlienBot"
+        "Hello humans I am AlienBot, the first alien discord bot. I am made by @UFO-STUDIOS and you can find my code at https://github.com/UFO-Studios/AlienBot-Discord. invite me using this link: https://thealiendoctor.com/AddAlienBot"
       )
       .setColor("Blue")
       .setTimestamp()

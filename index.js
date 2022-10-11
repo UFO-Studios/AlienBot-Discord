@@ -1,4 +1,4 @@
-require("./deploy-commands").registerCommands();
+require("./deploy-commands.js").registerCommands();
 const fs = require("node:fs");
 const path = require("node:path");
 const {
