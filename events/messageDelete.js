@@ -30,7 +30,7 @@ module.exports = {
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    await oldMessage.guild.channels.fetch();
+    await message.guild.channels.fetch();
     const channel = message.guild.channels.cache.find(
       (channel) => channel.name == "alien-logs"
     );
