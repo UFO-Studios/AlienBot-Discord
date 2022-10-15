@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag tad-discord-bot:$(date +%s)
+      run: docker push niceygy/tad_bot:$(date +%s)
