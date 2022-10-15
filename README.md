@@ -1,9 +1,9 @@
-### <h1 align="center">AlienBot 2.0</h1>
+### <h1 align="center">AlienBot Discord</h1>
 
 <p align="center">An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord!<p>
 
 <p align="center">
-  <img src="https://github.com/UFO-Studios/AlienBot-2.0/actions/workflows/pmd.yml/badge.svg" />
+  <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/pmd.yml/badge.svg" />
 </p>
 
 ## Todo
@@ -21,6 +21,10 @@
 ## Download 
 
 <a href="https://github.com/UFO-Studios/AlienBot-Discord/archive/refs/heads/main.zip">Click me</a>
+Or download the repo & run with docker! You can find install instructions for Docker <a href="https://docs.docker.com/get-docker/">Here</a>. 
+Run it on Docker using `docker build -tag tadbot .` & <a href="https://docs.docker.com/language/nodejs/run-containers/"> these instructions</a>
+
+
 
 ## Contributing
 
