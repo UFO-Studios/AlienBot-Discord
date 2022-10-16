@@ -14,7 +14,7 @@ module.exports = {
 
     await client.F.addData("banned-words", guild.id, { toggleValue: "on" });
     await client.F.addData("level", guild.id, {
-      exist: "yes",
+      level: {},
     });
 
     await guild.publicUpdatesChannel.send({
