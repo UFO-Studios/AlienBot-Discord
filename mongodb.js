@@ -1,29 +1,27 @@
 const { add } = require('libsodium-wrappers');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://AB:xKBuXE6sQxDT2zp3@abdb.dijoszh.mongodb.net/level');
+console.log("loaded!")
 
-const db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
-//TEMPLATE CODE DO NOT USE
+const db = mongoose.connection; 
+db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
 
 
-const Schema = mongoose.Schema; //What is a schema?
 
+const Schema = mongoose.Schema; //What is a schema? This!
 const LvlSchema = new Schema({ //Define the schema "LvlSchema". Basically a template for data
     user_id: Number,
     lvl: Number,
   });
 
-const Lvl = mongoose.model("Lvl", LvlSchema);
+const lvl = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
 
-
-const lvl_instance = new Lvl({ name: "awesome" }); // Create an instance of model SomeModel
+const lvl_instance = new lvl({ name: "awesome" }); // Create an instance of model SomeModel
 
 lvl_instance.save((err) => {
   if (err) return handleError(err);
   //saved!
+  console.log("written!");
 });
 
 //Poss options for schemas
