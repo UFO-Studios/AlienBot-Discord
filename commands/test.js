@@ -17,9 +17,7 @@ module.exports = {
   async execute(interaction, client) {
     await interaction.deferReply();
     const mongoS = new Date();
-    await mongoose.connect(
-      "mongodb+srv://AB:xKBuXE6sQxDT2zp3@abdb.dijoszh.mongodb.net/level"
-    );
+    await mongoose.connect(client.C.MONGO_CONFIG);
     console.log("loaded!");
 
     const db = await mongoose.connection;
