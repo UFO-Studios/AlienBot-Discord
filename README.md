@@ -8,7 +8,7 @@
 
 ## Todo
 
-1. Linking a nicer DB, like mongo or sql. (currently using firebase)
+1. Linking a nicer DB, like mongo or sql (currently using firebase)
 
 2. leveling system.
 
