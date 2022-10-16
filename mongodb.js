@@ -10,7 +10,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:")); //tell
 
 const Schema = mongoose.Schema; //What is a schema? This!
 const LvlSchema = new Schema({ //Define the schema "LvlSchema". Basically a template for data
-    user_id: Number,
+    user_id: Number,// declair your vars (data to be written) here
     lvl: Number,
   });
 
@@ -39,3 +39,4 @@ const schemaFeilds = new Schema({
     nested: { stuff: { type: String, lowercase: true, trim: true } },
   });
   
+
