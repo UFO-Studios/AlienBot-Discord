@@ -1,9 +1,11 @@
 ﻿// const db = require("easy-db-json");
 // db.setFile("./db.json");
+const Firebase = require("./firebase.js");
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
 const edb = require("easy-db-json");
+const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
 edb.setFile("./db/level.json")
 
 /**
@@ -33,55 +35,7 @@ module.exports = {
   async execute(message, client) {
     const pointGain = Math.random();
     if (message.author.bot) return;
-    // if (message.channel.type === ChannelType.DM) {
-    //   await client.guilds.fetch();
-    //   const guildsIn = [];
-    //   for (let guild of [...client.guilds.cache.values()]) {
-    //     try {
-    //       await guild.members.fetch(message.author.id);
-    //       guildsIn.push(guild);
-    //     } catch (error) {
-    //       if (error) {
-    //         console.log(error);
-    //         return message.author.send({ content: `Error! ${error}` });
-    //       }
-    //     }
-    //   }
 
-    //   if (guildsIn.length == 0) {
-    //     await message.author("You are not in any server that have me in them!");
-    //   } else if (guildsIn.length == 1) {
-    //     const data = client.F.getData("mail", message.guildId);
-    //     if (!data)
-    //       return await message.author.send({
-    //         content: `The modmail feature isnt turned on in ${guildsIn[0].name}`,
-    //       });
-    //     message.author.send({ content: "you are in 1 server that have me" });
-    //     // client.StartSupport(
-    //     //   message.content,
-    //     //   message.author,
-    //     //   guildsIn[0],
-    //     //   data.url,
-    //     //   client
-    //     // );
-    //   } else {
-    //     const embedFields = guildsIn.map((g) => {
-    //       return { name: g.name, value: `ID: ${g.id}`, inline: true };
-    //     });
-
-    //     const embed = new EmbedBuilder()
-    //       .setTitle("servers")
-    //       .setDescription("Select a server you want to contact mods of.")
-    //       .addFields(embedFields)
-    //       .setTimestamp()
-    //       .setFooter({ text: "Select a server!" });
-
-    //     const msg = await message.author
-    //       .send({ embeds: [embed] })
-    //       .then((m) => m);
-    //     react(msg, guildsIn.length - 1);
-    //   }
-    // } else {
       
     // banned words
     const data = client.F.getData("banned-words", message.guild.id);
@@ -90,15 +44,23 @@ module.exports = {
     // levling code
 
     const levelServer = message.guild.id
+    const dataLvl = await client.F.getData();
     const msgAuthor = message.author.id
-       const lvlOld =  client.F.getData("level", msgAuthor);  //edb.get(msgAuthor)
-       console.log(lvlOld, "old");
-       const lvlGain = Math.trunc(Math.random() * 10);
-       const lvlNew = lvlOld + lvlGain;
-       console.log(lvlNew)
-       client.F.addData("level", msgAuthor, {"lvl": lvlNew}) //edb.set(msgAuthor, lvlNew)
-        //client.F.addData("level", levelServer, {messageSender: lvlNew})
-    try {
+    //const lvlOld = client.F.getData("level", msgAuthor);
+    console.log(msgAuthor)
+
+    sleep(1).then(async () => {
+      const msgAuthor = "test_ID";
+      const lvlOld = await Firebase.getData("level", "test");
+      console.log(lvlOld + "is lvlOld");
+      const lvlGain = Math.trunc(Math.random() * 10);
+      const lvlNew = lvlOld + lvlGain;
+      await Firebase.addData("level", "test", {"tessa": lvlNew});
+      console.log("User with ID " + msgAuthor + " has had " + lvlGain + " added to their score")
+    });
+
+
+       try {
       const data = client.F.getData("banned-woreds", message.guildId);
       if (!data) return;
       if (data.toggleValue == "on") {

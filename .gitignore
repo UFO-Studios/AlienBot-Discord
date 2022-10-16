@@ -10,3 +10,5 @@ commands/sub2alien.js
 .env
 .addCompLib
 test.js
+launch.json
+mongodb.jsold
