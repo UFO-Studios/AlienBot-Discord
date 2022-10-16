@@ -1,4 +1,5 @@
-﻿﻿// const db = require("easy-db-json");
+﻿
+﻿// const db = require("easy-db-json");
 // db.setFile("./db.json");
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
