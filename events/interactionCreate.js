@@ -52,7 +52,7 @@ module.exports = {
         );
 
         setInterval(() => {
-          client.Timeout.delete(
+          client.CD.delete(
             `${interaction.commandName}-${interaction.user.id}`
           );
         }, 4000);

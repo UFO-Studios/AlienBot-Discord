@@ -1,29 +1,33 @@
 const {
-  SlashCommandBuilder,
-  ChatInputCommandInteraction,
+  ContextMenuCommandInteraction,
+  ContextMenuCommandBuilder,
   Client,
+  PermissionsBitField,
+  ApplicationCommandType,
   EmbedBuilder,
+  User,
 } = require("discord.js");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("rank")
-    .setDescription("Get your XP!")
-    .addUserOption((o) =>
-      o.setName("target").setDescription("User to check rank of")
-    ),
+  data: new ContextMenuCommandBuilder()
+    .setName("check rank")
+    .setType(ApplicationCommandType.User),
   global: true,
   /**
    *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {ContextMenuCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const target = interaction.options.getUser("target") || interaction.user;
-    if (target.bot)
-      return await interaction.reply("You cannot check XP of a bot!");
-
     const data = await client.F.getData("level", interaction.guild.id);
+    /**
+     * @type {User}
+     */
+    const target = interaction.targetUser;
+
+    if(target.bot) return await interaction.reply(
+        "You cannot check XP of a bot!"
+    ) 
 
     if (!data.level[target.id])
       return await interaction.reply({ content: "You dont have any XP!" });
@@ -45,4 +49,4 @@ module.exports = {
   },
 };
 
-console.log("rank.js run");
+console.log("rank-check.js run");
