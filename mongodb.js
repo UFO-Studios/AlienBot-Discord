@@ -2,36 +2,42 @@ const { add } = require('libsodium-wrappers');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://AB:xKBuXE6sQxDT2zp3@abdb.dijoszh.mongodb.net/level');
 
-const Cat = mongoose.model('Cat', { name: String });
+const db = mongoose.connection;
 
-const kitty = new Cat({ name: 'Zildjian' });
-kitty.save().then(() => console.log('meow'));
-
-const connect = async () => {
-    await mongoose.connect('mongodb+srv://AB:xKBuXE6sQxDT2zp3@abdb.dijoszh.mongodb.net/level');
-}
-
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 //TEMPLATE CODE DO NOT USE
 
-const testData = {
-    "tessa": "1"
-}
-const Schema = new mongoose.Schema;
+
+const Schema = mongoose.Schema; //What is a schema?
+
+const LvlSchema = new Schema({ //Define the schema "LvlSchema". Basically a template for data
+    user_id: Number,
+    lvl: Number,
+  });
+
+const Lvl = mongoose.model("Lvl", LvlSchema);
 
 
-/**
- *  @param {String} dbName name of the collection to add data to.
- *  @param {String} docName name of the document to add data to.
- *  @param dataObj JS object, the data to add to the document.
- *  @example await addData("users", "test", {hello: "world"})
- *  @returns data Reference
- **/
- const addData = async (dbName, docName, dataObj) => {
-    await mongoose.connect('mongodb+srv://AB:xKBuXE6sQxDT2zp3@abdb.dijoszh.mongodb.net/level');
-    console.log("connected");
-    mongoose.model(`lvl_test`, Schema(testData))
+const lvl_instance = new Lvl({ name: "awesome" }); // Create an instance of model SomeModel
 
-  };
+lvl_instance.save((err) => {
+  if (err) return handleError(err);
+  //saved!
+});
 
-  mongoose.model(`lvl_test`, new mongoose.Schema({"test": "hi!"}))
+//Poss options for schemas
+
+const schemaFeilds = new Schema({
+    name: String,
+    binary: Buffer,
+    living: Boolean,
+    updated: { type: Date, default: Date.now() },
+    age: { type: Number, min: 18, max: 65, required: true },
+    mixed: Schema.Types.Mixed,
+    _someId: Schema.Types.ObjectId,
+    array: [],
+    ofString: [String], // You can also have an array of each of the other types too.
+    nested: { stuff: { type: String, lowercase: true, trim: true } },
+  });
+  
