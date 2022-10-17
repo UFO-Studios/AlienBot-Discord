@@ -4,7 +4,10 @@
 
 <p align="center">
   <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/pmd.yml/badge.svg" />
+  
+[![Docker Image CI](https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/docker-image.yml/badge.svg)](https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/docker-image.yml)
 </p>
+
 
 ## Todo
 
