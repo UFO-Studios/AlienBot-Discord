@@ -1,5 +1,6 @@
 const { add } = require("libsodium-wrappers");
 const mongoose = require("mongoose");
+
 mongoose.connect(
   "mongodb+srv://AB:xKBuXE6sQxDT2zp3@abdb.dijoszh.mongodb.net/level"
 );
@@ -18,6 +19,10 @@ const LvlSchema = new Schema({
 const lvl = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
 
 const lvl_instance = new lvl({ name: "awesome" }); // Create an instance of model SomeModel
+
+//Im not sure if this will work but its worth a try!
+const lvl_instance_test = new lvl({ user_id: "76893261783627", lvl: "69" });
+//END of test
 
 lvl_instance.save((err) => {
   if (err) return handleError(err);
