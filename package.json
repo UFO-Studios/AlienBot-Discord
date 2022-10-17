@@ -3,8 +3,9 @@
   "license": "BSD-3-Clause",
   "main": "index.js",
   "scripts": {
-    "setup": "npm 1 && node index.js",
-    "start": "node ."
+    "setup": "npm i && node index.js",
+    "start": "node .",
+    "gh-action": "npm i && node deploy-commands.js && node index.js"
   },
   "dependencies": {
     "@discordjs/opus": "^0.8.0",

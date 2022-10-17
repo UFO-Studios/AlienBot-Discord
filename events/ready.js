@@ -1,4 +1,6 @@
 const { Client, ActivityType } = require("discord.js");
+const Config = require("../config.json");
+
 
 module.exports = {
   name: "ready",
@@ -142,9 +144,28 @@ module.exports = {
       array[randomNum]();
     }, 20 * 1000); // 20 seconds
 
-    console.log("Ready!");
+    const testENV = "dev";
+    const githubENV = "GHA";
+    const prodENV = "prod"
+
     await client.channels.cache
       .get(client.C.CHANNEL_ID)
-      .send("Bot is online! Running in dev mode :D");
-  },
-};
+      if (Config.ENV = githubENV){
+        client.channels.cache
+        .get(client.C.CHANNEL_ID)
+        .send("Bot is running tests!");
+        console.log("ready!")
+      } else if (Config.ENV = "dev") {
+          client.channels.cache
+          .get(client.C.CHANNEL_ID)
+          .send("Bot is running in dev mode!");
+          console.log("ready!")
+        } else {
+          client.channels.cache
+          .get(client.C.CHANNEL_ID)
+          .send("Bot is running in prod mode!");
+          console.log("ready!")
+        }
+      }
+}
+
