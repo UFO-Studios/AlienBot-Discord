@@ -21,8 +21,7 @@
 ## Download
 
 <a href="https://github.com/UFO-Studios/AlienBot-Discord/archive/refs/heads/main.zip">Click me</a>
-Or download the repo & run with docker! You can find install instructions for Docker <a href="https://docs.docker.com/get-docker/">Here</a>.
-Run it on Docker using `docker build -tag tadbot .` & <a href="https://docs.docker.com/language/nodejs/run-containers/"> these instructions</a>
+Docker support and Docker hub support coming soon™
 
 ## Contributing
 
