@@ -3,9 +3,9 @@
 <p align="center">An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord!<p>
 
 <p align="center">
-  <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/pmd.yml/badge.svg" />
   
-[![Docker Image CI](https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/docker-image.yml/badge.svg)](https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/docker-image.yml)
+  <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/pmd.yml/badge.svg" />
+  <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/docker-image.yml/badge.svg" />
 </p>
 
 
