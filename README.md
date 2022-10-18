@@ -11,11 +11,9 @@
 
 ## Todo
 
-1. Linking a better DB, like self-host mongo or sql. (currently using firestore) - almost done, check <a href="https://github.com/UFO-Studios/AlienBot-Discord/tree/Mongo">Mongo branch.</a>
+1. economic system.
 
-2. leveling system.
-
-3. economic system.
+2. maybe Youtube-to-Discord, Twitch-to-Discord and Twitter-to-Discord features in the future.
 
 ## Invite Link
 
