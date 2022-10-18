@@ -50,14 +50,12 @@ const schemaFeilds = new Schema({
 const saveLvlData = (UserID, UserLevel) => {
   new lvl_module({ user_id: UserID, lvl: UserLevel});
   console.log("Data added to dB!")
-}
-
-//const saveLvlData = new lvl_module({ user_id: UserID, lvl: UserLevel})
+};
 
 const connectToDB = () => {
   mongoose.connection(config.MONGO_CONFIG);
   console.log("Connected to MongoDB!")
-}
+};
 
 module.exports = {
   saveLvlData,
