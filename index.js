@@ -66,7 +66,7 @@ client.discordTogether = new DiscordTogether(client);
 client.P = player;
 client.C = Config;
 client.F = Firebase;
-client.Timeout = new Collection()
+client.CD = new Collection()
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");

@@ -4,8 +4,6 @@
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
-const edb = require("easy-db-json");
-edb.setFile("./db/level.json");
 
 const deleteBannedWords = async (message, client) => {
   try {
@@ -36,16 +34,13 @@ const deleteBannedWords = async (message, client) => {
 
 const levelingSystem = async (message, client) => {
   try {
-    const data = await client.F.getData("level", message.author.id);
-    let level = 0;
-    if (data) {
-      level = data.lvl;
-    }
+    const data = await client.F.getData("level", message.guild.id);
+    let level = data.level[message.author.id] || 0;
 
-    const gain = Math.trunc(Math.random() * 10);
-    const lvl = level + gain;
+    const gain = Math.floor(Math.random() * 10) + 1;
+    data.level[message.author.id] = level + gain;
 
-    client.F.addData("level", message.author.id, { lvl });
+    client.F.addData("level", message.guild.id, { level: data.level });
   } catch (e) {
     console.error(e);
   }

@@ -33,28 +33,26 @@ module.exports = {
       if (!command) return;
 
       try {
-        if (
-          client.Timeout.get(
-            `${interaction.commandName}-${interaction.user.id}`
-          )
-        )
+        if (client.CD.get(`${interaction.commandName}-${interaction.user.id}`))
           return interaction.reply({
             content: `You are on a cooldown! You need to wait ${ms(
-              client.Timeout.get(`${interaction.commandName}-${interaction.user.id}`) - Date.now(),
+              client.Timeout.get(
+                `${interaction.commandName}-${interaction.user.id}`
+              ) - Date.now(),
               { long: true }
-            )}!`,
+            )} more!`,
             ephemeral: true,
           });
 
         await command.execute(interaction, client);
 
-        client.Timeout.set(
+        client.CD.set(
           `${interaction.commandName}-${interaction.user.id}`,
-          Date.now() + 4000
+          Date.now() + 5000
         );
 
         setInterval(() => {
-          client.Timeout.delete(
+          client.CD.delete(
             `${interaction.commandName}-${interaction.user.id}`
           );
         }, 4000);
