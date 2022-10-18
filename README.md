@@ -11,7 +11,7 @@
 
 ## Todo
 
-1. Linking a nicer DB, like self-host mongo or sql. (currently using firebase) - almost done, check <a href="https://github.com/UFO-Studios/AlienBot-Discord/tree/Mongo">Mongo branch.</a>
+1. Linking a better DB, like self-host mongo or sql. (currently using firebase) - almost done, check <a href="https://github.com/UFO-Studios/AlienBot-Discord/tree/Mongo">Mongo branch.</a>
 
 2. leveling system.
 
