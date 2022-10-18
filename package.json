@@ -5,7 +5,8 @@
   "scripts": {
     "setup": "npm 1 && node index.js",
     "start": "node .",
-    "GHA": "npm i && node deploy-commands.js"
+    "GHA": "npm i && node deploy-commands.js",
+    "gha": "npm i && node deploy-commands.js"
   },
   "dependencies": {
     "@discordjs/opus": "^0.8.0",
