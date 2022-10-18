@@ -1,11 +1,9 @@
 const { add } = require("libsodium-wrappers");
 const mongoose = require("mongoose");
+const config = require("./config.json")
 
-mongoose.connect(
-  "mongodb+srv://AB:xKBuXE6sQxDT2zp3@abdb.dijoszh.mongodb.net/level"
-);
+mongoose.connect(config.MONGO_CONFIG);
 console.log("loaded!");
-
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
 
@@ -16,13 +14,9 @@ const LvlSchema = new Schema({
   lvl: Number,
 });
 
-const lvl = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
+const lvl_module = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
+const lvl_instance = new lvl_module({ name: "awesome" }); // Create an instance (use of) of model SomeModel
 
-const lvl_instance = new lvl({ name: "awesome" }); // Create an instance of model SomeModel
-
-//Im not sure if this will work but its worth a try!
-const lvl_instance_test = new lvl({ user_id: "76893261783627", lvl: "69" });
-//END of test
 
 lvl_instance.save((err) => {
   if (err) return handleError(err);
@@ -44,3 +38,5 @@ const schemaFeilds = new Schema({
   ofString: [String], // You can also have an array of each of the other types too.
   nested: { stuff: { type: String, lowercase: true, trim: true } },
 });
+
+module.exports;{ LvlSchema }
