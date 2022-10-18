@@ -144,18 +144,14 @@ module.exports = {
       array[randomNum]();
     }, 20 * 1000); // 20 seconds
 
-    const testENV = "dev";
     const githubENV = "GHA";
-    const prodENV = "prod"
 
-    await client.channels.cache
-      .get(client.C.CHANNEL_ID)
-      if (Config.ENV = githubENV){
+      if (Config.ENV == githubENV){
         client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running tests!");
         console.log("ready!")
-      } else if (Config.ENV = "dev") {
+      } else if (Config.ENV == "dev") {
           client.channels.cache
           .get(client.C.CHANNEL_ID)
           .send("Bot is running in dev mode!");
