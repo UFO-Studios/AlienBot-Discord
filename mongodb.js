@@ -1,4 +1,3 @@
-const { add } = require("libsodium-wrappers");
 const mongoose = require("mongoose");
 const config = require("./config.json")
 
@@ -39,4 +38,28 @@ const schemaFeilds = new Schema({
   nested: { stuff: { type: String, lowercase: true, trim: true } },
 });
 
-module.exports;{ LvlSchema }
+
+//STUFF DOR EXPORT:
+
+/**
+ *  @param {Number} UserID ID of the user who`s level you need to save.
+ *  @param {Number} UserLevel The new level for the user.
+ *  @example lvlData.save({ user_id: "UserID", lvl: "UserLevel"})
+ *  @returns Returns nothing.... I think
+ **/
+const saveLvlData = (UserID, UserLevel) => {
+  new lvl_module({ user_id: UserID, lvl: UserLevel});
+  console.log("Data added to dB!")
+}
+
+//const saveLvlData = new lvl_module({ user_id: UserID, lvl: UserLevel})
+
+const connectToDB = () => {
+  mongoose.connection(config.MONGO_CONFIG);
+  console.log("Connected to MongoDB!")
+}
+
+module.exports = {
+  saveLvlData,
+  connectToDB
+}
