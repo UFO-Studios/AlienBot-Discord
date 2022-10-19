@@ -72,5 +72,5 @@ const saveXP = async (UserID, UserLevel) => {
 
 
 module.exports = {
-  saveLvlData
+  saveXP
 }
