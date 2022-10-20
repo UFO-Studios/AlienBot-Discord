@@ -3,16 +3,17 @@
 <p align="center">An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord!<p>
 
 <p align="center">
+  
   <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/pmd.yml/badge.svg" />
+  <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/docker-image.yml/badge.svg" />
 </p>
+
 
 ## Todo
 
-1. Linking a nicer DB, like mongo or sql. (currently using firebase) - almost done, check <a href="https://github.com/UFO-Studios/AlienBot-Discord/tree/Mongo">Mongo branch.</a>
+1. economic system.
 
-2. leveling system.
-
-3. economic system.
+2. maybe Youtube-to-Discord, Twitch-to-Discord and Twitter-to-Discord features in the future.
 
 ## Invite Link
 
@@ -21,8 +22,7 @@
 ## Download
 
 <a href="https://github.com/UFO-Studios/AlienBot-Discord/archive/refs/heads/main.zip">Click me</a>
-Or download the repo & run with docker! You can find install instructions for Docker <a href="https://docs.docker.com/get-docker/">Here</a>.
-Run it on Docker using `docker build -tag tadbot .` & <a href="https://docs.docker.com/language/nodejs/run-containers/"> these instructions</a>
+Docker support and Docker hub support coming soon™
 
 ## Contributing
 

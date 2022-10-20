@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Test TADbot
 
 on:
   push:
@@ -14,5 +14,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag tad-discord-bot:$(date +%s)
+    - name: Test TADbot
+      run: npm run gha

@@ -3,8 +3,6 @@
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
-const edb = require("easy-db-json");
-edb.setFile("./db/level.json");
 
 const deleteBannedWords = async (message, client) => {
   try {
