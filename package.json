@@ -1,5 +1,5 @@
 {
-  "name": "alienbot-2.0",
+  "name": "alienbot",
   "license": "BSD-3-Clause",
   "main": "index.js",
   "scripts": {
