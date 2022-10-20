@@ -1,31 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("./config.json")
 
-// lvl_instance.save((err) => {
-//   if (err) return handleError(err);
-  //saved!
-//  console.log("written!");
-//});
-
-//Poss options for schemas
-
-//const schemaFeilds = new Schema({
- // name: String,
-  //binary: Buffer,
-  //living: Boolean,
-  //updated: { type: Date, default: Date.now() },
-  //age: { type: Number, min: 18, max: 65, required: true },
-  //mixed: Schema.Types.Mixed,
-  //_someId: Schema.Types.ObjectId,
-  //array: [],
-  //ofString: [String], // You can also have an array of each of the other types too.
-  //nested: { stuff: { type: String, lowercase: true, trim: true } },
-//});
-
-
-
-
-//STUFF FOR EXPORT:
 
 let connected;
 let db;
@@ -35,7 +10,7 @@ const LvlSchema = new mongoose.Schema({
   xp: Number,
 });
 
-// const lvl_module = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
+const lvl_module = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
 
 const connectToDB = async () => {
   await mongoose.connect(config.MONGO_CONFIG);
@@ -57,7 +32,7 @@ const saveXP = async (UserID, UserLevel) => {
     await connectToDB() 
   }
   
-  const lvlnew = lvl_module({ userId: UserID, xp: UserLevel})
+  const lvlnew = lvl_module({ userId: UserID, xp: UserLevel}) //create a new "lvlNew" object (data)
    
   await lvlnew.save(err => {
     if (err) {
@@ -69,8 +44,29 @@ const saveXP = async (UserID, UserLevel) => {
   console.log("Data added to DB!")
   return true
 };
+//END (saveXP)
+
+//START (getXP)
+
+/**
+ *  @param {Number} UserID ID of the user who`s level you need to save.
+ *  @example const userXP = await getXP(UserID)
+ *  @returns {Number} Value of the users XP.
+ **/
+ const getXP = async (UserID) => {
+   
+  if(!connected || !db) {
+    await connectToDB() 
+  }
+  
+  const userXP = await lvl_module.findOne({ userId: UserID });
+  
+  console.log("Data recived from DB!")
+  return userXP
+};
 
 
 module.exports = {
-  saveXP
+  saveXP,
+  getXP
 }
