@@ -1,5 +1,6 @@
 const { Client, ActivityType } = require("discord.js");
 const Config = require("../config.json");
+const mongo = require("../mongodb");
 
 
 module.exports = {
@@ -144,9 +145,11 @@ module.exports = {
       array[randomNum]();
     }, 20 * 1000); // 20 seconds
 
-    const githubENV = "GHA";
+    const d = new Date();
+    const startTime = d.getTime();
+    mongo.startTime(startTime);
 
-      if (Config.ENV == githubENV){
+      if (Config.ENV == "GHA"){
         client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running tests!");

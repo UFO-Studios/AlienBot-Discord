@@ -10,7 +10,13 @@ const LvlSchema = new mongoose.Schema({
   xp: Number,
 });
 
+const uptimeSchema = new mongoose.Schema({
+  time: Number
+});
+
 const lvl_module = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
+
+const uptimeModule = mongoose.model("uptime", uptimeSchema);
 
 const connectToDB = async () => {
   await mongoose.connect(config.MONGO_CONFIG);
@@ -65,8 +71,39 @@ const saveXP = async (UserID, UserLevel) => {
   return userXP
 };
 
+//END (getXP)
+
+//START (saveUptime)
+
+/**
+ *  @param {Number} startTime Start time of the bot
+ *  @example await startTime("time")
+ * @returns {Bool} true if saved sccessfully, false if not.
+ **/
+ const startTime = async (startTime) => {
+   
+  if(!connected || !db) {
+    await connectToDB() 
+  }
+  
+  const UPMN = uptimeModule({time: startTime}) //create a new "lvlNew" object (data)
+   //UPMN is UpTime Module New
+  await UPMN.save(err => {
+    if (err) {
+      console.error(err)
+      return false;
+    }
+  })
+  
+  console.log("Start time logged and written! Bot started at " + startTime)
+  return true
+};
+//END (saveXP)
+
+
 
 module.exports = {
   saveXP,
-  getXP
+  getXP,
+  startTime
 }
