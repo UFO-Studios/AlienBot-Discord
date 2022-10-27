@@ -23,7 +23,7 @@
 <h2>Download</h2>    
 
 <a href="https://github.com/UFO-Studios/AlienBot-Discord/archive/refs/heads/main.zip">Click me</a>    
-Docker support and Docker hub support coming soon™    
+Docker and Docker hub support coming soon™    
 
 <h2>Contributing</h2>    
 
