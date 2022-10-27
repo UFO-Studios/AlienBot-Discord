@@ -91,19 +91,6 @@ for (const file of contextFiles) {
     client.commands.set(command.data.name, command);
 }
 
-// const functionsPath = path.join(__dirname, "functions");
-// const functionsFiles = fs
-//   .readdirSync(functionsPath)
-//   .filter((f) => f.endsWith(".js"));
-
-// client.functions = new Collection();
-
-// for (const file of functionsFiles) {
-//   const filePath = path.join(functionsPath, file);
-//   const Function = require(filePath);
-//   client.functions.set(Function.name, Function.execute);
-// }
-
 const imagesPath = path.join(__dirname, "./images/welcomeImages");
 const imagesFiles = fs
     .readdirSync(imagesPath)

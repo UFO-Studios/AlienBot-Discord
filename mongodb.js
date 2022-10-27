@@ -32,13 +32,13 @@ const connectToDB = async () => {
  *  @example await saveXP("userID", "XP")
  * @returns {Bool} true if saved sccessfully, false if not.
  **/
-const saveXP = async (UserID, UserLevel) => {
+const saveXP = async (userId, xp) => {
    
   if(!connected || !db) {
     await connectToDB() 
   }
   
-  const lvlnew = lvl_module({ userId: UserID, xp: UserLevel}) //create a new "lvlNew" object (data)
+  const lvlnew = lvl_module({ userId, xp}) //create a new "lvlNew" object (data)
    
   await lvlnew.save(err => {
     if (err) {
@@ -59,15 +59,16 @@ const saveXP = async (UserID, UserLevel) => {
  *  @example const userXP = await getXP(UserID)
  *  @returns {Number} Value of the users XP.
  **/
- const getXP = async (UserID) => {
+ const getXP = async (userId) => {
    
   if(!connected || !db) {
     await connectToDB() 
   }
   
-  const userXP = await lvl_module.findOne({ userId: UserID });
+  const userXP = await lvl_module.findOne({ userId });
   
   console.log("Data recived from DB!")
+  console.log(userXP)
   return userXP
 };
 
@@ -98,12 +99,37 @@ const saveXP = async (UserID, UserLevel) => {
   console.log("Start time logged and written! Bot started at " + startTime)
   return true
 };
-//END (saveXP)
+//END (saveUptime)
+
+//Start (bannedWords)
+
+const bannedWordsSchema = new mongoose.Schema({
+  word: String
+});
+
+const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
+
+/**
+ * 
+ * @param {string} word
+ * @returns boolean  
+ */
+const checkWord = async (word) => {
+  const wordCheck = await bannedWordsModule.findOne({ word });
+  if (word == wordCheck) {
+    return true;
+  }
+  else {
+    return false;
+  }
+};
+//END (bannedWords)
 
 
 
 module.exports = {
   saveXP,
   getXP,
-  startTime
+  startTime,
+  checkWord
 }

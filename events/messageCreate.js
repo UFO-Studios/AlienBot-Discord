@@ -1,6 +1,4 @@
-﻿
-﻿// const db = require("easy-db-json");
-// db.setFile("./db.json");
+﻿const mongo = require("../mongodb") //can you work on banned words? okay sure thx :D :D *how tho?* 
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
@@ -34,13 +32,12 @@ const deleteBannedWords = async (message, client) => {
 
 const levelingSystem = async (message, client) => {
   try {
-    const data = await client.F.getData("level", message.guild.id);
-    let level = data.level[message.author.id] || 0;
+    const data = await mongo.getXP(message.author.id)
+    let level = xp || 0;  
 
-    const gain = Math.floor(Math.random() * 10) + 1;
-    data.level[message.author.id] = level + gain;
+    const gain = (Math.floor(Math.random() * 10) + 1) + level; 
 
-    client.F.addData("level", message.guild.id, { level: data.level });
+    mongo.saveXP(message.author.id, gain) 
   } catch (e) {
     console.error(e);
   }
