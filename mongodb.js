@@ -24,6 +24,7 @@ const connectToDB = async () => {
   console.log("MongoDB is loaded!");
   db = await mongoose.connection;
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
+  console.log("Complete!"); 
 };
 
 /**
@@ -114,14 +115,38 @@ const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
  * @param {string} word
  * @returns boolean  
  */
-const checkWord = async (word) => {
-  const wordCheck = await bannedWordsModule.findOne({ word });
-  if (word == wordCheck) {
-    return true;
+ const addBW = async (Bword) => {
+  if(!connected || !db) {
+    await mongodbjs.connectToDB() 
   }
-  else {
-    return false;
-  }
+  const newBW = await bannedWordsModule({"word": Bword})
+  await newBW.save(err => {
+    if (err) {
+      console.error(err)
+      return false;
+    }
+  })
+  console.log("run")
+};
+
+/**
+ * 
+ * @param {string} word 
+ * @returns boolean
+ * @example const BWCheck = checkBW("YOUR_WORD") if (returns false)
+ */
+
+const checkBW =  async (word) => {
+  if(!connected || !db) {
+    await mongodbjs.connectToDB() 
+  } //conect
+
+  const checkWord = await bannedWordsModule.findById(word)
+  if (checkWord = !data)
+    return false
+  else
+    return true
+
 };
 //END (bannedWords)
 
@@ -131,5 +156,6 @@ module.exports = {
   saveXP,
   getXP,
   startTime,
-  checkWord
+  checkBW,
+  connectToDB
 }

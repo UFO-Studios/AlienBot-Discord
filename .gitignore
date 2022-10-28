@@ -12,3 +12,4 @@ commands/sub2alien.js
 launch.json
 mongodb.jsold
 test.js
+*.mongodb
