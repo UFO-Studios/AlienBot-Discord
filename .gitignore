@@ -11,5 +11,5 @@ commands/sub2alien.js
 .addCompLib
 launch.json
 mongodb.jsold
-test.js
-*.mongodb
+
+test.*

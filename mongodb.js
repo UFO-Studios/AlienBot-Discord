@@ -14,10 +14,16 @@ const uptimeSchema = new mongoose.Schema({
   time: Number
 });
 
+//START modules
 const lvl_module = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
 
 const uptimeModule = mongoose.model("uptime", uptimeSchema);
+//END modules
 
+/**
+ *  @example await connectToDB
+ * @returns {Boolean} true if connected sccessfully, false if not.
+ **/
 const connectToDB = async () => {
   await mongoose.connect(config.MONGO_CONFIG);
   connected = true;

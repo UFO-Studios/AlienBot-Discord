@@ -48,3 +48,4 @@ module.exports = {
     // data.items[0].id.split(":")[2]
   },
 };
+console.log("ref/checkYT.js run!")
