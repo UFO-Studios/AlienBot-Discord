@@ -3,8 +3,9 @@
   "license": "BSD-3-Clause",
   "main": "index.js",
   "scripts": {
-    "setup": "npm 1 && node index.js",
+    "setup": "npm i && node index.js",
     "start": "node .",
+    "dev": "node index.js",
     "GHA": "npm i && node deploy-commands.js",
     "gha": "npm i && node deploy-commands.js"
   },

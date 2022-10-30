@@ -31,11 +31,16 @@ const deleteBannedWords = async (message, client) => {
 };
 
 const levelingSystem = async (message, client) => {
-  const oldXP = await mongo.getXP(client)
+  const oldXP = await mongo.getXP(message.author.id)
+  if (oldXP == "NaN"){
+    mongo.saveXP(message.author.id, "1");
+  } else if (oldXP == "null") {
+    mongo.saveXP(message.author.id, "1");
+  } else {
   const newXP = Math.trunc(Math.random * 10) + oldXP;
   console.log(newXP)
-  //await mongo.saveXP(client, newXP);
-  //return true
+  };
+
 };
 
 module.exports = {
@@ -55,4 +60,4 @@ module.exports = {
     await levelingSystem(message, client);
   },
 };
-console.log("events/ready.js run")
+console.log("events/messageCreate.js run")
