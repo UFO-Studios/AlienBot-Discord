@@ -2,6 +2,11 @@
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
+const io = require('@pm2/io')
+
+const cmdsRun = io.metric({
+  name: 'Commands',
+});
 
 const deleteBannedWords = async (message, client) => {
   try {
@@ -58,6 +63,14 @@ module.exports = {
 
     // leveling
     await levelingSystem(message, client);
+
+    //PM2
+    if (oldCmdCount == !data) {
+      cmdsRun.set(1);
+    } else {
+      const newCmdCount = newCmdCount + 1
+      cmdsRun.set(newCmdCount)
+    }
   },
 };
 console.log("events/messageCreate.js run")
