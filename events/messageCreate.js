@@ -35,15 +35,18 @@ const deleteBannedWords = async (message, client) => {
   }
 };
 
-const levelingSystem = async (message, client) => {
-  const oldXP = await mongo.getXP(message.author.id)
-  if (oldXP == "NaN"){
-    mongo.saveXP(message.author.id, "1");
-  } else if (oldXP == "null") {
-    mongo.saveXP(message.author.id, "1");
+const levelingSystem = async (messageID, client) => {
+  const oldXP = await mongo.getXP(messageID)
+  const oldXpJSON = JSON.parse(oldXP);
+  return oldXpJSON["xp"]; //work out why it is grey and check its returning the right data tommorow nicey!
+  console.log(oldXP)
+  if (oldXP == "null"){
+    //mongo.saveXP(message.author.id, "1");
+    console.log("aaaa")
   } else {
   const newXP = Math.trunc(Math.random * 10) + oldXP;
-  console.log(newXP)
+  //await mongo.saveXP(messageID, newXP);
+  console.log(newXP + "is newXP")
   };
 
 };
@@ -62,15 +65,8 @@ module.exports = {
     await deleteBannedWords(message, client);
 
     // leveling
-    await levelingSystem(message, client);
+    await levelingSystem(message.author.id, client);
 
-    //PM2
-    if (oldCmdCount == !data) {
-      cmdsRun.set(1);
-    } else {
-      const newCmdCount = newCmdCount + 1
-      cmdsRun.set(newCmdCount)
-    }
   },
 };
 console.log("events/messageCreate.js run")
