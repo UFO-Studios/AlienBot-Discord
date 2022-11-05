@@ -46,7 +46,8 @@ const saveXP = async (userId, xp) => {
   }
   
   const lvlnew = lvl_module({ userId, xp}) //create a new "lvlNew" object (data)
-   
+  
+  //we need to delete the old one here
   await lvlnew.save(err => {
     if (err) {
       console.error(err)
@@ -156,6 +157,12 @@ const checkBW =  async (word) => {
 };
 //END (bannedWords)
 
+const getJsonValue = (input, valueNeeded) => {
+  var string = JSON.stringify(input);
+  var objectValue = JSON.parse(string);
+  return objectValue[valueNeeded];
+};
+
 
 
 module.exports = {
@@ -163,5 +170,7 @@ module.exports = {
   getXP,
   startTime,
   checkBW,
-  connectToDB
-}
+  connectToDB,
+  getJsonValue
+};
+console.log("mongoDB.js run!")

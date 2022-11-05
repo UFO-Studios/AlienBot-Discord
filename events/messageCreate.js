@@ -2,11 +2,7 @@
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
-const io = require('@pm2/io')
 
-const cmdsRun = io.metric({
-  name: 'Commands',
-});
 
 const deleteBannedWords = async (message, client) => {
   try {
@@ -37,16 +33,15 @@ const deleteBannedWords = async (message, client) => {
 
 const levelingSystem = async (messageID, client) => {
   const oldXP = await mongo.getXP(messageID)
-  const oldXpJSON = JSON.parse(oldXP);
-  return oldXpJSON["xp"]; //work out why it is grey and check its returning the right data tommorow nicey!
-  console.log(oldXP)
-  if (oldXP == "null"){
-    //mongo.saveXP(message.author.id, "1");
-    console.log("aaaa")
+  const oldXPValue = await mongo.getJsonValue(oldXP, "xp")  
+  console.log(oldXPValue + " is oldXPValue")
+  if (oldXPValue == "null"){
+    mongo.saveXP(message.author.id, "1");
+    console.log("User has been added to leveling DB.")
   } else {
-  const newXP = Math.trunc(Math.random * 10) + oldXP;
-  //await mongo.saveXP(messageID, newXP);
-  console.log(newXP + "is newXP")
+  const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
+  await mongo.saveXP(messageID, newXP);
+  console.log(newXP + " is newXP")
   };
 
 };
