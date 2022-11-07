@@ -16,19 +16,13 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
-    let data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
-      (res) => res.json()
-    );
-    
-    if (!interaction.channel.nsfw && data.nsfw) {
-      console.log(data.nsfw);
-      while (data.nsfw) {
-        console.log("while loop run");
-        data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
-          (res) => res.json()
-        );
-      }
-    }
+    let data;
+
+    do {
+      data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
+        (res) => res.json()
+      );
+    } while (data.nsfw);
 
     const embed = new EmbedBuilder()
       .setTitle(data.title)
