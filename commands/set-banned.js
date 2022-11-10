@@ -4,6 +4,36 @@ const {
   Client,
   PermissionsBitField,
 } = require("discord.js");
+const mongoose = require("mongoose");
+const mongo = require("../mongodb");
+
+//DB Stuffs
+
+const setBannedSchema = new mongoose.Schema({
+  active: Boolean,
+  guildId: String
+});
+
+const setBannedModel = new mongoose.model("setBanned", setBannedSchema);
+const setBannedEnforced = async (guildId, boolean) => {
+    
+  if(!connected || !db) {
+    await mongo.connectToDB() 
+  }
+  
+  const SB = setBannedModel({ boolean, guildId })
+  
+  //we need to delete the old one here
+  await SB.save(err => {
+    if (err) {
+      console.error(err)
+      return false;
+    }
+  })
+  
+  console.log("Added to DB")
+  return true
+};
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,9 +66,9 @@ module.exports = {
 
     const toggle = await interaction.options.getString("toggle-value");
 
-    await client.F.addData("banned-words", interaction.guildId, {
-      toggleValue: toggle,
-    });
+
+    await SB(toggle, guildId);
+    
 
     return await interaction.reply({
       content: `Toggled banned words to ${toggle}!`,

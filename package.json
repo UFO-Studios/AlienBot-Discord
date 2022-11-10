@@ -7,7 +7,8 @@
     "start": "node .",
     "dev": "node index.js",
     "GHA": "npm i && node deploy-commands.js",
-    "gha": "npm i && node deploy-commands.js"
+    "gha": "npm i && node deploy-commands.js",
+    "first": "npm i && node deploy-commands.js && node index.js"
   },
   "dependencies": {
     "@discordjs/opus": "^0.8.0",

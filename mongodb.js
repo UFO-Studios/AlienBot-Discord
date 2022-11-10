@@ -46,8 +46,17 @@ const saveXP = async (userId, xp) => {
   }
   
   const lvlnew = lvl_module({ userId, xp}) //create a new "lvlNew" object (data)
+  const lvlToBeRemoved = lvl_module({ userId })
   
-  //we need to delete the old one here
+  //delete old entry, it will delete everything on that user but its fine as we already have the data to be added in cache (see values "userID" & "xp");
+  await lvlToBeRemoved.findOneAndRemove(err => {
+    if (err) {
+      console.error(err)
+      return false;
+    } else {
+      return true;
+    }
+  });
   await lvlnew.save(err => {
     if (err) {
       console.error(err)

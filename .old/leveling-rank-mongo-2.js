@@ -9,7 +9,7 @@ const mongo = require("../mongodb");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("rank")
+    .setName("rankMongo")
     .setDescription("Get your XP!")
     .addUserOption((o) =>
       o.setName("target").setDescription("User to check rank of")
