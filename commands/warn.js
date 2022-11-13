@@ -92,9 +92,11 @@ module.exports = {
           interaction.user.tag
         } and now has ${warns.warns + 1} warns. reason: ${reason}`,
       });
-    } else if (interaction.options.getSubcommand() == "view") {
+    } else if (interaction.options.getSubcommand() == "view") { //START Check warns
       // view a member's warns
       const target = await interaction.options.getMember("target");
+      const ClientID = interaction.member.id;
+      const ServerID = interaction.guild.id;
       const warns = await mongo.getWarnCount(ServerID, ClientID);
 
       if (!warns) {
@@ -111,9 +113,9 @@ module.exports = {
       const target = await interaction.options.getUser("member");
       await client.F.deleteData("warns", target.id);
 
-      return await interaction.editReply({
-        content: `Cleared all warns of ${target.tag}.`,
-      });
+      //return await interaction.editReply({
+        //content: `Cleared all warns of ${target.tag}.`,
+      //});
     }
   },
 };

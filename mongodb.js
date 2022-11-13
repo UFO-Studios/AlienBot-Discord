@@ -194,9 +194,16 @@ const addWarn = async (GuildID, ClientID) => {
     await mongodbjs.connectToDB() 
   }; //connect
   const oldWarnCount = await AWModel.findOne(GuildID, ClientID);
+  if (oldWarnCount == null) {
+    const firstWarnForUser = await bannedWordsModule({"guildID": GuildID, "UserID": ClientID, "Warns": newWarnCount});
+  await firstWarnForUser.save(err => {
+    if (err) {
+      console.error(err)
+      console.log("error!");
+    };
+  })} else {
   await AWModel.findOneAndRemove(GuildID, ClientID);
   const newWarnCount = oldWarnCount + 1;
-  
   const newWC = await bannedWordsModule({"guildID": GuildID, "UserID": ClientID, "Warns": newWarnCount});
   await newWC.save(err => {
     if (err) {
@@ -204,7 +211,8 @@ const addWarn = async (GuildID, ClientID) => {
       console.log("error!");
     };
     return newWarnCount;
-  })
+    })
+  }
 };
 
 const getWarnCount = async (GuildID, ClientID) => {
