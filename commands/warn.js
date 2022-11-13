@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
+const mongo = require("../mongodb");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -81,15 +82,10 @@ module.exports = {
           ephemeral: true,
         });
 
-      let warns = await client.F.getData("warns", `${target.id}`);
+        const ClientID = interaction.member.id;
+        const ServerID = interaction.guild.id;
+        mongo.addWarn(ServerID, ClientID);
 
-      if (!warns) {
-        await client.F.addData("warns", `${target.id}`, { warns: 1 });
-      } else {
-        await client.F.addData("warns", `${target.id}`, {
-          warns: warns.warns + 1,
-        });
-      }
 
       await interaction.editReply({
         content: `${target.user.tag} got warned by ${
@@ -99,7 +95,7 @@ module.exports = {
     } else if (interaction.options.getSubcommand() == "view") {
       // view a member's warns
       const target = await interaction.options.getMember("target");
-      const warns = await client.F.getData("warns", `${target.id}`);
+      const warns = await mongo.getWarnCount(ServerID, ClientID);
 
       if (!warns) {
         return await interaction.editReply({

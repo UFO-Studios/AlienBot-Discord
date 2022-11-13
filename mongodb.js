@@ -172,6 +172,48 @@ const getJsonValue = (input, valueNeeded) => {
   return objectValue[valueNeeded];
 };
 
+//warns (AW = Add Warns)
+const AWSchema = new mongoose.Schema({
+  guildID: Number,
+  UserID: Number,
+  Warns: Number
+});
+
+const AWModel = new mongoose.model("warns", AWSchema);
+
+
+/**
+ * 
+ * @param {number} GuildID
+ * @param {number} ClientID 
+ * @returns boolean
+ * @example await addWarn(GuildID, ClientID)
+ */
+const addWarn = async (GuildID, ClientID) => {
+  if(!connected || !db) {
+    await mongodbjs.connectToDB() 
+  }; //connect
+  const oldWarnCount = await AWModel.findOne(GuildID, ClientID);
+  await AWModel.findOneAndRemove(GuildID, ClientID);
+  const newWarnCount = oldWarnCount + 1;
+  
+  const newWC = await bannedWordsModule({"guildID": GuildID, "UserID": ClientID, "Warns": newWarnCount});
+  await newWC.save(err => {
+    if (err) {
+      console.error(err)
+      console.log("error!");
+    };
+    return newWarnCount;
+  })
+};
+
+const getWarnCount = async (GuildID, ClientID) => {
+  if(!connected || !db) {
+    await mongodbjs.connectToDB() 
+  }; //connect
+  const warnCountX = await AWModel.findOne(GuildID, ClientID);
+  return warnCountX
+}
 
 
 module.exports = {
@@ -180,6 +222,8 @@ module.exports = {
   startTime,
   checkBW,
   connectToDB,
-  getJsonValue
+  getJsonValue,
+  addWarn,
+  getWarnCount
 };
 console.log("mongoDB.js run!")
