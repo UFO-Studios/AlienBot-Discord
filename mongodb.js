@@ -193,7 +193,12 @@ const addWarn = async (GuildID, ClientID) => {
   if(!connected || !db) {
     await mongodbjs.connectToDB() 
   }; //connect
-  const oldWarnCount = await AWModel.findOne(GuildID, ClientID);
+  const oldWarnCountJSON = await AWModel.findOne(GuildID, ClientID);
+
+    var string = JSON.stringify(oldWarnCountJSON);
+    var objectValue = JSON.parse(string);
+    const oldWarnCount =  objectValue["Warns"];
+
   if (oldWarnCount == null) {
     const firstWarnForUser = await bannedWordsModule({"guildID": GuildID, "UserID": ClientID, "Warns": newWarnCount});
   await firstWarnForUser.save(err => {
