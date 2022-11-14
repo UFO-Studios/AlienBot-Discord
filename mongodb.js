@@ -195,6 +195,7 @@ const addWarn = async (GuildID, ClientID) => {
   }; //connect
   const oldWarnCountJSON = await AWModel.findOne(GuildID, ClientID);
 
+    //PARSE THE JSON!
     var string = JSON.stringify(oldWarnCountJSON);
     var objectValue = JSON.parse(string);
     const oldWarnCount =  objectValue["Warns"];
@@ -204,7 +205,7 @@ const addWarn = async (GuildID, ClientID) => {
   await firstWarnForUser.save(err => {
     if (err) {
       console.error(err)
-      console.log("error!");
+      console.log("error! Aborted operation");
     };
   })} else {
   await AWModel.findOneAndRemove(GuildID, ClientID);

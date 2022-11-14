@@ -32,10 +32,11 @@ const deleteBannedWords = async (message, client) => {
 };
 
 const levelingSystem = async (messageID, client) => {
+  console.log("XP system loaded")
   const oldXP = await mongo.getXP(messageID)
   const oldXPValue = await mongo.getJsonValue(oldXP, "xp")  
   console.log(oldXPValue + " is oldXPValue")
-  if (oldXPValue == "null"){
+  if (oldXPValue == !oldXPValue){
     mongo.saveXP(message.author.id, "1");
     console.log("User has been added to leveling DB.")
   } else {
