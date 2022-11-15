@@ -36,8 +36,8 @@ const levelingSystem = async (messageID, client) => {
   const oldXP = await mongo.getXP(messageID)
   const oldXPValue = await mongo.getJsonValue(oldXP, "xp")  
   console.log(oldXPValue + " is oldXPValue")
-  if (oldXPValue == !oldXPValue){
-    mongo.saveXP(message.author.id, "1");
+  if (oldXPValue == null){
+    mongo.saveXP(messageID, "1");
     console.log("User has been added to leveling DB.")
   } else {
   const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
@@ -61,7 +61,8 @@ module.exports = {
     await deleteBannedWords(message, client);
 
     // leveling
-    await levelingSystem(message.author.id, client);
+    const MSGID = message.author.id;
+    await levelingSystem(MSGID, client);
 
   },
 };

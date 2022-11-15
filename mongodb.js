@@ -46,17 +46,17 @@ const saveXP = async (userId, xp) => {
   }
   
   const lvlnew = lvl_module({ userId, xp}) //create a new "lvlNew" object (data)
-  const lvlToBeRemoved = lvl_module({ userId })
+  //const lvlToBeRemoved = lvl_module({ userId })
   
   //delete old entry, it will delete everything on that user but its fine as we already have the data to be added in cache (see values "userID" & "xp");
-  await lvlToBeRemoved.findOneAndRemove(err => {
-    if (err) {
-      console.error(err)
-      return false;
-    } else {
-      return true;
-    }
-  });
+//  await lvlToBeRemoved.findOneAndRemove(err => {
+  //  if (err) {
+  //    console.error(err)
+  //    return false;       Ill work on it on stage 2
+  //  } else {
+  //    return true;
+  //  }
+  //});
   await lvlnew.save(err => {
     if (err) {
       console.error(err)
@@ -158,7 +158,7 @@ const checkBW =  async (word) => {
   } //conect
 
   const checkWord = await bannedWordsModule.findById(word)
-  if (checkWord = !data)
+  if (checkWord = null)
     return false
   else
     return true
@@ -166,9 +166,10 @@ const checkBW =  async (word) => {
 };
 //END (bannedWords)
 
-const getJsonValue = (input, valueNeeded) => {
-  var string = JSON.stringify(input);
-  var objectValue = JSON.parse(string);
+const getJsonValue = async (input, valueNeeded) => {
+  var string = await JSON.stringify(input);
+  var objectValue = await JSON.parse(string);
+  console.log(objectValue + "is ObjectValue");
   return objectValue[valueNeeded];
 };
 
