@@ -169,7 +169,7 @@ const checkBW =  async (word) => {
 const getJsonValue = async (input, valueNeeded) => {
   var string = await JSON.stringify(input);
   var objectValue = await JSON.parse(string);
-  console.log(objectValue + "is ObjectValue");
+  console.log(`${objectValue}is ObjectValue`);
   return objectValue[valueNeeded];
 };
 
