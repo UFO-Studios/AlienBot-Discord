@@ -2,6 +2,7 @@
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
+const mongoNative = require("mongodb");
 
 
 const deleteBannedWords = async (message, client) => {
@@ -34,15 +35,16 @@ const deleteBannedWords = async (message, client) => {
 const levelingSystem = async (messageID, client) => {
   console.log("XP system loaded")
   const oldXP = await mongo.getXP(messageID)
-  const oldXPValue = await mongo.getJsonValue(oldXP, "xp")  
+  const oldXPValue = await mongo.getJsonValue(oldXP, "xp")
+  const oldXpID = await mongo.getJsonValue(oldXP, "_id");
   console.log(oldXPValue + " is oldXPValue")
   if (oldXPValue == null){
     mongo.saveXP(messageID, "1");
     console.log("User has been added to leveling DB.")
   } else {
-  const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
-  await mongo.saveXP(messageID, newXP);
-  console.log(newXP + " is newXP")
+    const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
+    await mongo.saveXP(messageID, newXP, oldXpID);
+    console.log(newXP + " is newXP")
   };
 
 };

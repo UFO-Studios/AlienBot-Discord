@@ -111,7 +111,7 @@ module.exports = {
     } else if (interaction.options.getSubcommand() == "clear") {
       // clear a member's warns
       const target = await interaction.options.getUser("member");
-      await client.F.deleteData("warns", target.id);
+      await interaction.editReply("Uh-oh! this feature is not avalible right now. Please submit a bug on the github") //client.F.deleteData("warns", target.id);
 
       //return await interaction.editReply({
         //content: `Cleared all warns of ${target.tag}.`,
@@ -119,3 +119,4 @@ module.exports = {
     }
   },
 };
+console.log("warn.js run")

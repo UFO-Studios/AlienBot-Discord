@@ -36,10 +36,11 @@ const connectToDB = async () => {
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
  *  @param {Number} UserLevel The new level for the user.
+ *  @param {String} _ID The ID. Yes im lazy
  *  @example await saveXP("userID", "XP")
  * @returns {Bool} true if saved sccessfully, false if not.
  **/
-const saveXP = async (userId, xp) => {
+const saveXP = async (userId, xp, _id) => {
    
   if(!connected || !db) {
     await connectToDB() 
@@ -49,7 +50,10 @@ const saveXP = async (userId, xp) => {
   //const lvlToBeRemoved = lvl_module({ userId })
   
   //delete old entry, it will delete everything on that user but its fine as we already have the data to be added in cache (see values "userID" & "xp");
-//  await lvlToBeRemoved.findOneAndRemove(err => {
+
+  await lvl_module.findByIdAndDelete({ _id });
+
+  //  await lvlToBeRemoved.findOneAndRemove(err => {
   //  if (err) {
   //    console.error(err)
   //    return false;       Ill work on it on stage 2
