@@ -15,24 +15,30 @@ const setBannedSchema = new mongoose.Schema({
 });
 
 const setBannedModel = new mongoose.model("setBanned", setBannedSchema);
-const setBannedEnforced = async (guildId, boolean) => {
-    
+const setBannedEnforcement = async (GuildID, ToggleValue) => {
   if(!connected || !db) {
     await mongo.connectToDB() 
-  }
-  
-  const SB = setBannedModel({ boolean, guildId })
-  
-  //we need to delete the old one here
-  await SB.save(err => {
+  };
+
+  const SBE_NEW = setBannedModel( GuildID, ToggleValue )
+
+  await SBE_NEW.save(err => {
     if (err) {
       console.error(err)
-      return false;
-    }
-  })
-  
-  console.log("Added to DB")
-  return true
+      console.log("error!");
+    };
+    return true;
+    })
+};
+
+const checkBannedEnforcement = async (GuildID) => {
+  if(!connected || !db) {
+    await mongo.connectToDB() 
+  };
+
+  const setBannedModel2 = new mongoose.model("setBanned", setBannedSchema);
+  const dataOut = await setBannedModel2.findOne( GuildID )
+
 };
 
 module.exports = {
@@ -66,8 +72,8 @@ module.exports = {
 
     const toggle = await interaction.options.getString("toggle-value");
 
-
-    await SB(toggle, guildId);
+      const guild_id = interaction.guild.id;
+    await setBannedEnforcement(guild_id, toggle);
     
 
     return await interaction.reply({

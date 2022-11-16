@@ -2,7 +2,6 @@
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
-const mongoNative = require("mongodb");
 
 
 const deleteBannedWords = async (message, client) => {

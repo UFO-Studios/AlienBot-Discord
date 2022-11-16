@@ -47,20 +47,11 @@ const saveXP = async (userId, xp, _id) => {
   }
   
   const lvlnew = lvl_module({ userId, xp}) //create a new "lvlNew" object (data)
-  //const lvlToBeRemoved = lvl_module({ userId })
   
   //delete old entry, it will delete everything on that user but its fine as we already have the data to be added in cache (see values "userID" & "xp");
 
   await lvl_module.findByIdAndDelete({ _id });
 
-  //  await lvlToBeRemoved.findOneAndRemove(err => {
-  //  if (err) {
-  //    console.error(err)
-  //    return false;       Ill work on it on stage 2
-  //  } else {
-  //    return true;
-  //  }
-  //});
   await lvlnew.save(err => {
     if (err) {
       console.error(err)
@@ -135,7 +126,7 @@ const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
  * @param {string} word
  * @returns boolean  
  */
- const addBW = async (Bword) => {
+ const addBW = async (Bword) => { //only to be used manually!
   if(!connected || !db) {
     await mongodbjs.connectToDB() 
   }
@@ -161,12 +152,12 @@ const checkBW =  async (word) => {
     await mongodbjs.connectToDB() 
   } //conect
 
-  const checkWord = await bannedWordsModule.findById(word)
-  if (checkWord = null)
+  const wordTBC = await bannedWordsModule.findById(word)
+  if (wordTBC = null) {
     return false
-  else
+  } else {
     return true
-
+  };
 };
 //END (bannedWords)
 
@@ -245,4 +236,4 @@ module.exports = {
   addWarn,
   getWarnCount
 };
-console.log("mongoDB.js run!")
+console.log("mongoDB.js run")
