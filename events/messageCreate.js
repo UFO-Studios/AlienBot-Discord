@@ -38,12 +38,14 @@ const levelingSystem = async (messageID, client) => {
   const oldXpID = await mongo.getJsonValue(oldXP, "_id");
   console.log(oldXPValue + " is oldXPValue")
   if (oldXPValue == null){
-    mongo.saveXP(messageID, "1");
+    await mongo.saveXP(messageID, "1");
     console.log("User has been added to leveling DB.")
+    return true //we could change this so we could dm a new user stuff but thats a later me problem
   } else {
     const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
     await mongo.saveXP(messageID, newXP, oldXpID);
     console.log(newXP + " is newXP")
+    return true
   };
 
 };

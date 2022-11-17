@@ -2,15 +2,15 @@
 
 <p align="center">An open source Discord bot thats currently in alpha, originally made for The Alien Empire community Discord!<p>     
 
-<p align="center">      
+<p align="center">
   <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/pmd.yml/badge.svg" />     
   <img src="https://github.com/UFO-Studios/AlienBot-Discord/actions/workflows/docker-image.yml/badge.svg" />     
-</p>      
+</p>
 
-<h2>Todo</h2>        
+<h2>Todo</h2>
 
 <p>
-1. economic system.    
+1. economic system.
 </p>
 <p>
 2. maybe Youtube-to-Discord, Twitch-to-Discord and Twitter-to-Discord features in the future.    

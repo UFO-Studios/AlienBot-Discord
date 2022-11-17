@@ -50,7 +50,11 @@ const saveXP = async (userId, xp, _id) => {
   
   //delete old entry, it will delete everything on that user but its fine as we already have the data to be added in cache (see values "userID" & "xp");
 
-  await lvl_module.findByIdAndDelete({ _id });
+  if (_id == null){
+    console.log("Document ID is "+ _id + " ! Skipping deletion...")
+  } else {
+    await lvl_module.findByIdAndDelete({ _id });
+  };
 
   await lvlnew.save(err => {
     if (err) {
@@ -164,8 +168,11 @@ const checkBW =  async (word) => {
 const getJsonValue = async (input, valueNeeded) => {
   var string = await JSON.stringify(input);
   var objectValue = await JSON.parse(string);
-  console.log(`${objectValue}is ObjectValue`);
+  if (objectValue == null) {
+    console.log("JSON is null! Did you format it correctly?")
+  } else {
   return objectValue[valueNeeded];
+  }
 };
 
 //warns (AW = Add Warns)
