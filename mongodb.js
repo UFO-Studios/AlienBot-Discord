@@ -224,13 +224,27 @@ const addWarn = async (GuildID, ClientID) => {
   }
 };
 
-const getWarnCount = async (GuildID, ClientID) => {
-  if(!connected || !db) {
-    await mongodbjs.connectToDB() 
-  }; //connect
-  const warnCountX = await AWModel.findOne(GuildID, ClientID);
-  return warnCountX
+const getWarns = async (GuildID, ClientID) => {
+    if (!connected || !db) {
+        await mongodbjs.connectToDB()
+    }; //connect
+    const warnCount = await AWModel.findOne(GuildID, ClientID);
+    if (warnCount == null) {
+        return 0;
+    } else {
+        return warnCount;
+    }
 }
+
+const clearWarns = async (GuildID, ClientID) => {
+    if (!connected || !db) {
+        await mongodbjs.connectToB()
+    }; //connect
+    await AWModel.findOneAndRemove(GuildID, ClientID);
+    return true;
+}
+
+
 
 
 module.exports = {
@@ -241,6 +255,7 @@ module.exports = {
   connectToDB,
   getJsonValue,
   addWarn,
-  getWarnCount
+  getWarns,
+  clearWarns
 };
 console.log("mongoDB.js run")
