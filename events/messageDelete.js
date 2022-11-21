@@ -1,4 +1,5 @@
 const { Message, EmbedBuilder, WebhookClient } = require("discord.js");
+const mongo = require("../mongodb");
 
 module.exports = {
   name: "messageDelete",

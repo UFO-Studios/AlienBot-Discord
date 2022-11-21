@@ -244,7 +244,36 @@ const clearWarns = async (GuildID, ClientID) => {
     return true;
 }
 
+const loggingURLSchema = new mongoose.Schema({
+    guildID: Number,
+    URL: String
+})
 
+const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
+
+const addURL = async (guildID, boolean) => {
+    if (!connected || !db) {
+        await mongodbjs.connectToDB()
+    }; //connect
+    if (boolean = true) {
+        const URLNew = loggingURLModel("GuildID": guildID, )
+    }
+}
+
+const getURL = async (guildID) => {
+    if (!connected || !db) {
+        await mongodbjs.connectToDB()
+    }; //connect
+    const URLJSON = await loggingURLModel.findOne(guildID);
+    if (URLJSON == null) {
+        return false;
+    } else {
+        var string = JSON.stringify(URLJSON);
+        var objectValue = JSON.parse(string);
+        const URL = objectValue["URL"];         //parses the json so we only get the URL out
+        return URL;
+    }
+}
 
 
 module.exports = {
@@ -256,6 +285,8 @@ module.exports = {
   getJsonValue,
   addWarn,
   getWarns,
-  clearWarns
+    clearWarns,
+    getURL,
+  updateURL
 };
 console.log("mongoDB.js run")
