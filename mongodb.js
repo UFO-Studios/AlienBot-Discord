@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("./config.json")
+const { Channel } = require("discord.js");
 
 
 let connected;
@@ -256,7 +257,8 @@ const addURL = async (guildID, boolean) => {
         await mongodbjs.connectToDB()
     }; //connect
     if (boolean = true) {
-        const URLNew = loggingURLModel("GuildID": guildID, )
+        return true;
+        //const URLNew = loggingURLModel( GuildID: guildID)
     }
 }
 
@@ -275,6 +277,8 @@ const getURL = async (guildID) => {
     }
 }
 
+//URL: if there is data, they want logging and the data is where to send said data
+
 
 module.exports = {
   saveXP,
@@ -286,7 +290,6 @@ module.exports = {
   addWarn,
   getWarns,
     clearWarns,
-    getURL,
-  updateURL
+    getURL
 };
 console.log("mongoDB.js run")

@@ -24,7 +24,13 @@ module.exports = {
       }
       const loggingBool = interaction.options.getBoolean("setenabled");
       if (loggingBool = true) {
-          await mongo.updateURL(interaction.guild.id, true);
+          const URL = () => {
+              channel.createWebhook({
+                  name: 'AlienBot',
+                  avatar: 'https://i.imgur.com/AfFp7pu.png',
+              })
+          }
+          await mongo.addURL(interaction.guild.id, true);
           return interaction.reply({
               content: "Updated! Logging is now enabled",
               ephemeral: false,

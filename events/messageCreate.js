@@ -42,6 +42,10 @@ const levelingSystem = async (messageID, client) => {
     console.log("User has been added to leveling DB.")
     return true //we could change this so we could dm a new user stuff but thats a later me problem
   } else {
+      if (oldXpID = 1044067382022373500) {
+          console.log("WE HAVE A GHOST USER EVERYONE PANIC!!!!")
+          return false;
+      }
     const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
     await mongo.saveXP(messageID, newXP, oldXpID);
     console.log(newXP + " is newXP")
@@ -65,7 +69,7 @@ module.exports = {
 
     // leveling
     const MSGID = message.author.id;
-    await levelingSystem(MSGID, client);
+    levelingSystem(MSGID, client);
 
   },
 };

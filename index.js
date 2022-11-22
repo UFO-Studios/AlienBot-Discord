@@ -111,6 +111,7 @@ for (const file of eventFiles) {
     if (event.once) {
         client.once(event.name, () => {
             event.execute(client);
+            console.log(`Event ${event.name} loaded!`);
         });
     } else {
         client.on(event.name, (...args) => {
