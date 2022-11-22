@@ -2,8 +2,7 @@ const registerCommands = () => {
   const Config = require("./config.json");
   const fs = require("node:fs");
   const path = require("node:path");
-  const { REST } = require("@discordjs/rest");
-  const { Routes } = require("discord.js");
+  const { Routes, REST } = require("discord.js");
 
   const commands = [];
   const globalCommands = [];
