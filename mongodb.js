@@ -264,6 +264,7 @@ const saveLogToggle = async (guildID, logToggle) => {
         await mongodbjs.connectToB()
     }; //connect
     const newToggle = await loggingToggleModel({ "guildID": guildID, "toggle": logToggle });
+    
     await loggingToggleModel.findOneAndRemove(guildID);
     await newToggle.save(err => {
         if (err) {
@@ -273,7 +274,18 @@ const saveLogToggle = async (guildID, logToggle) => {
         };
         return true;
     })
- }
+}
+
+const getLogToggle = async (guildID) => {
+    if (!connected || !db) {
+        await mongodbjs.connectToB()
+    }; //connect
+    const logToggleJSON = await loggingToggleModel.findOne(guildID)
+    var string = JSON.stringify(logToggleJSON);
+    var objectValue = JSON.parse(string);
+    const logToggle = objectValue["toggle"];
+    return logToggle;
+}
 
 
 
@@ -287,6 +299,8 @@ module.exports = {
   getJsonValue,
   addWarn,
   getWarns,
-    clearWarns
+    clearWarns,
+    saveLogToggle,
+    getLogToggle
 };
 console.log("mongoDB.js run")
