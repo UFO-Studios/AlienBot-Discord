@@ -272,8 +272,9 @@ const saveLogToggle = async (guildID, logToggle) => {
             return false;
         };
         return true;
-    }
-}
+    })
+ }
+
 
 
 
