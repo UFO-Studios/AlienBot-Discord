@@ -250,34 +250,31 @@ const loggingURLSchema = new mongoose.Schema({
     URL: String
 })
 
+const loggingToggleSchema = new mongoose.Schema({
+    guildID: Number,
+    toggle: Boolean
+})
+
+const loggingToggleModel = new mongoose.model("loggingToggle", loggingToggleSchema);
+
 const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 
-const addURL = async (guildID, boolean) => {
+const saveLogToggle = async (guildID, logToggle) => {
     if (!connected || !db) {
-        await mongodbjs.connectToDB()
+        await mongodbjs.connectToB()
     }; //connect
-    if (boolean = true) {
+    const newToggle = await loggingToggleModel({ "guildID": guildID, "toggle": logToggle });
+    await loggingToggleModel.findOneAndRemove(guildID);
+    await newToggle.save(err => {
+        if (err) {
+            console.error(err)
+            console.log("error!");
+            return false;
+        };
         return true;
-        //const URLNew = loggingURLModel( GuildID: guildID)
     }
 }
 
-const getURL = async (guildID) => {
-    if (!connected || !db) {
-        await mongodbjs.connectToDB()
-    }; //connect
-    const URLJSON = await loggingURLModel.findOne(guildID);
-    if (URLJSON == null) {
-        return false;
-    } else {
-        var string = JSON.stringify(URLJSON);
-        var objectValue = JSON.parse(string);
-        const URL = objectValue["URL"];         //parses the json so we only get the URL out
-        return URL;
-    }
-}
-
-//URL: if there is data, they want logging and the data is where to send said data
 
 
 module.exports = {
@@ -289,7 +286,6 @@ module.exports = {
   getJsonValue,
   addWarn,
   getWarns,
-    clearWarns,
-    getURL
+    clearWarns
 };
 console.log("mongoDB.js run")
