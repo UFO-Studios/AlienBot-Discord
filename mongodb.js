@@ -278,9 +278,15 @@ const saveLogToggle = async (guildID, logToggle) => {
 
 const getLogToggle = async (guildID) => {
     if (!connected || !db) {
-        await mongodbjs.connectToB()
+        await connectToB()
+        console.log("connected")
     }; //connect
+    console.log("this is for testing")
     const logToggleJSON = await loggingToggleModel.findOne(guildID)
+    console.log(logToggleJSON + "is LTJ")
+    if (logToggleJSON == null) {
+        return false;
+    }
     var string = JSON.stringify(logToggleJSON);
     var objectValue = JSON.parse(string);
     const logToggle = objectValue["toggle"];

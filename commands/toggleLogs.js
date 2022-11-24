@@ -6,13 +6,13 @@ module.exports = {
     .setName("togglelogs")
     .setDescription("Toggle logging in your discord server."),
   global: true,
-  async execute(interaction) {
-      const data = await mongo.getLogToggle(interaction.guildId);
-      if (!data) {
-          await mongo.saveLogs(interaction.guildId, true);
+  async execute(interaction, client) {
+      const data = await mongo.getLogToggle(interaction.guildid);
+      if (data == false) {
+          await mongo.saveLogToggle(interaction.guildId, true);
           interaction.reply("Logging has been turned on!");
       } else {
-          if (data.toggleValue == "on") {
+          if (data.toggleValue == true) {
               await mongo.saveLogToggle(interaction.guildId, false);
               interaction.reply("Logging has been turned off!");
           } else {
