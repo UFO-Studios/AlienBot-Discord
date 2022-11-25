@@ -2,7 +2,13 @@ const registerCommands = () => {
   const Config = require("./config.json");
   const fs = require("node:fs");
   const path = require("node:path");
-  const { Routes, REST } = require("discord.js");
+    const { Routes, REST } = require("discord.js");
+
+    //deletes old commands to avoid duplicates that dont work
+    rest.put(Routes.applicationCommands(Config.CLIENT_ID), { body: [] })
+        .then(() => console.log('Successfully deleted all application commands.'))
+        .catch(console.error);
+    //end of delete old commands
 
   const commands = [];
   const globalCommands = [];

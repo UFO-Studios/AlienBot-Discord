@@ -19,6 +19,4 @@ module.exports = {
         }
     },
 };
-console.log("toggleLogs.js run");
-
-console.log("set-banned.js run");
+console.log("toggleBanned.js run")
