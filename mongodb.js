@@ -7,11 +7,11 @@ let db;
 
 const LvlSchema = new mongoose.Schema({
   userId: Number,
-  xp: Number,
+  xp: Number
 });
 
 const uptimeSchema = new mongoose.Schema({
-  time: Number,
+  time: Number
 });
 
 //START modules
@@ -117,7 +117,7 @@ const startTime = async (startTime) => {
 //Start (bannedWords)
 
 const bannedWordsSchema = new mongoose.Schema({
-  word: String,
+  word: String
 });
 
 const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
@@ -177,7 +177,7 @@ const getJsonValue = async (input, valueNeeded) => {
 const AWSchema = new mongoose.Schema({
   guildID: Number,
   UserID: Number,
-  Warns: Number,
+  Warns: Number
 });
 
 const AWModel = new mongoose.model("warns", AWSchema);
@@ -252,12 +252,12 @@ const clearWarns = async (GuildID, ClientID) => {
 
 const loggingURLSchema = new mongoose.Schema({
   guildID: Number,
-  URL: String,
+  URL: String
 });
 
 const loggingToggleSchema = new mongoose.Schema({
   guildID: Number,
-  toggle: Boolean,
+  toggle: Boolean
 });
 
 const loggingToggleModel = new mongoose.model(
@@ -292,9 +292,7 @@ const getLogToggle = async (guildID) => {
     await connectToDB();
     console.log("connected");
   } //connect
-  console.log("this is for testing");
   const logToggleJSON = await loggingToggleModel.findOne(guildID);
-  console.log(logToggleJSON + "is LTJ");
   if (logToggleJSON == null) {
     return false;
   }
@@ -315,7 +313,7 @@ module.exports = {
   getWarns,
   clearWarns,
   saveLogToggle,
-  getLogToggle,
+  getLogToggle
 };
 
 console.log("mongodb.js run");
