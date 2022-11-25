@@ -142,26 +142,6 @@ const addBW = async (Bword) => {
   console.log("run");
 };
 
-/**
- *
- * @param {string} word
- * @returns boolean
- * @example const BWCheck = checkBW("YOUR_WORD") if (returns false)
- */
-
-const checkBW = async (word) => {
-  if (!connected || !db) {
-    await connectToDB();
-  } //conect
-
-  const wordTBC = await bannedWordsModule.findById(word);
-  if ((wordTBC = null)) {
-    return false;
-  } else {
-    return true;
-  }
-};
-//END (bannedWords)
 
 const getJsonValue = async (input, valueNeeded) => {
   var string = await JSON.stringify(input);
@@ -302,18 +282,60 @@ const getLogToggle = async (guildID) => {
   return logToggle;
 };
 
+const BWToggleSchema = new mongoose.Schema({
+    guildID: Number,
+    toggle: Boolean
+});
+
+const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
+
+const getBannedWordToggle = async (guildID) => {
+    if (!connected || !db) {
+        await connectToDB();
+        console.log("connected");
+    } //connect
+    const BWToggleJSON = await BWToggleModel.findOne(guildID);
+    if (BWToggleJSON == null) {
+        return false;
+    } else {
+        var string = JSON.stringify(BWToggleJSON);
+        var objectValue = JSON.parse(string);
+        const BWToggle = objectValue["toggle"];
+        return BWToggle;
+    }
+};
+
+
+const saveBannedWordToggle = async (guildID, BWToggle) => {
+    if (!connected || !db) {
+        await connectToDB();
+    } //connect
+    const newToggle = BWToggleModel({ guildID: guildID, toggle: BWToggle });
+    
+    await BWToggleModel.findOneAndRemove(guildID);
+    await newToggle.save((err) => {
+        if (err) {
+            console.error(err);
+            console.log("error!");
+            return false;
+        }
+        return true;
+    });
+}
+
 module.exports = {
   saveXP,
   getXP,
   startTime,
-  checkBW,
   connectToDB,
   getJsonValue,
   addWarn,
   getWarns,
   clearWarns,
   saveLogToggle,
-  getLogToggle
+  getLogToggle,
+  getBannedWordToggle,
+  saveBannedWordToggle
 };
 
 console.log("mongodb.js run");

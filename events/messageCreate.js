@@ -6,7 +6,7 @@ const emojiFromText = require("emoji-from-text");
 
 const deleteBannedWords = async (message, client) => {
   try {
-    const data = client.F.getData("banned-words", message.guildId);
+      const data = await mongo.getBannedWordToggle(message.guild.id);
     if (!data) return;
     if (!data.toggleValue == "on") return;
 

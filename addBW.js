@@ -1,22 +1,21 @@
-const firestore = require("./firebase")
-const mongoose = require("mongoose");
-const mongodbjs = require("./mongodb");
+import { Schema, model } from "mongoose";
+import { connectToDB } from "./mongodb";
 
 let connected;
 let db;
 
-const bannedWordsSchema = new mongoose.Schema({
+const bannedWordsSchema = new Schema({
     word: String
   },
   {collection: "bannedwords"});
   
-  const bannedWordsModule = mongoose.model("bannedwords", bannedWordsSchema);
+  const bannedWordsModule = model("bannedwords", bannedWordsSchema);
   //END schema
   
   //START module
 const addBW = async (Bword) => {
   if(!connected || !db) {
-    await mongodbjs.connectToDB() 
+    await connectToDB() 
   }
   const newBW = await bannedWordsModule({"word": Bword})
   await newBW.save(err => {
@@ -30,7 +29,7 @@ const addBW = async (Bword) => {
 
 const checkBW =  async (word) => {
   if(!connected || !db) {
-    await mongodbjs.connectToDB() 
+    await connectToDB() 
   } //conect
 
   const checkWord = await bannedWordsModule.findById(word)
