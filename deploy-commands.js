@@ -5,9 +5,7 @@ const registerCommands = () => {
     const { Routes, REST } = require("discord.js");
 
     //deletes old commands to avoid duplicates that dont work
-    rest.put(Routes.applicationCommands(Config.CLIENT_ID), { body: [] })
-        .then(() => console.log('Successfully deleted all application commands.'))
-        .catch(console.error);
+    
     //end of delete old commands
 
   const commands = [];
@@ -75,6 +73,15 @@ const registerCommands = () => {
   }
 };
 
+const deleteOld = async () => {
+    const { rest } = require("discord.js");
+    const config = require("./config.json");
+    rest.put(Routes.applicationCommands(config.CLIENT_ID), { body: [] })
+        .then(() => console.log('Successfully deleted all application commands.'))
+        .catch(console.error);
+}
+
 module.exports = {
-  registerCommands,
+    registerCommands,
+    deleteOld
 };

@@ -1,3 +1,4 @@
+//require("./deploy-commands.js").deleteOld();
 require("./deploy-commands.js").registerCommands();
 const fs = require("node:fs");
 const path = require("node:path");
