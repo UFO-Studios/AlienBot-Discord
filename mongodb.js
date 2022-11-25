@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const config = require("./config.json")
+const config = require("./config.json");
 const { Channel } = require("discord.js");
-
 
 let connected;
 let db;
@@ -12,7 +11,7 @@ const LvlSchema = new mongoose.Schema({
 });
 
 const uptimeSchema = new mongoose.Schema({
-  time: Number
+  time: Number,
 });
 
 //START modules
@@ -31,7 +30,7 @@ const connectToDB = async () => {
   console.log("MongoDB is loaded!");
   db = await mongoose.connection;
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
-  console.log("Complete!"); 
+  console.log("Complete!");
 };
 
 /**
@@ -39,33 +38,32 @@ const connectToDB = async () => {
  *  @param {Number} UserLevel The new level for the user.
  *  @param {String} _ID The ID. Yes im lazy
  *  @example await saveXP("userID", "XP")
- * @returns {Bool} true if saved sccessfully, false if not.
+ * @returns {Bool} true if saved successfully, false if not.
  **/
 const saveXP = async (userId, xp, _id) => {
-   
-  if(!connected || !db) {
-    await connectToDB() 
+  if (!connected || !db) {
+    await connectToDB();
   }
-  
-  const lvlnew = lvl_module({ userId, xp}) //create a new "lvlNew" object (data)
-  
+
+  const lvlnew = lvl_module({ userId, xp }); //create a new "lvlNew" object (data)
+
   //delete old entry, it will delete everything on that user but its fine as we already have the data to be added in cache (see values "userID" & "xp");
 
-  if (_id == null){
-    console.log("Document ID is "+ _id + " ! Skipping deletion...")
+  if (_id == null) {
+    console.log("Document ID is " + _id + " ! Skipping deletion...");
   } else {
     await lvl_module.findByIdAndDelete({ _id });
-  };
+  }
 
-  await lvlnew.save(err => {
+  await lvlnew.save((err) => {
     if (err) {
-      console.error(err)
+      console.error(err);
       return false;
     }
-  })
-  
-  console.log("Data added to DB!")
-  return true
+  });
+
+  console.log("Data added to DB!");
+  return true;
 };
 //END (saveXP)
 
@@ -76,17 +74,16 @@ const saveXP = async (userId, xp, _id) => {
  *  @example const userXP = await getXP(UserID)
  *  @returns {Number} Value of the users XP.
  **/
- const getXP = async (userId) => {
-   
-  if(!connected || !db) {
-    await connectToDB() 
+const getXP = async (userId) => {
+  if (!connected || !db) {
+    await connectToDB();
   }
-  
+
   const userXP = await lvl_module.findOne({ userId });
-  
-  console.log("Data recived from DB!")
-  console.log(userXP)
-  return userXP
+
+  console.log("Data recived from DB!");
+  console.log(userXP);
+  return userXP;
 };
 
 //END (getXP)
@@ -98,71 +95,71 @@ const saveXP = async (userId, xp, _id) => {
  *  @example await startTime("time")
  * @returns {Bool} true if saved sccessfully, false if not.
  **/
- const startTime = async (startTime) => {
-   
-  if(!connected || !db) {
-    await connectToDB() 
+const startTime = async (startTime) => {
+  if (!connected || !db) {
+    await connectToDB();
   }
-  
-  const UPMN = uptimeModule({time: startTime}) //create a new "lvlNew" object (data)
-   //UPMN is UpTime Module New
-  await UPMN.save(err => {
+
+  const UPMN = uptimeModule({ time: startTime }); //create a new "lvlNew" object (data)
+  //UPMN is UpTime Module New
+  await UPMN.save((err) => {
     if (err) {
-      console.error(err)
+      console.error(err);
       return false;
     }
-  })
-  
-  console.log("Start time logged and written! Bot started at " + startTime)
-  return true
+  });
+
+  console.log("Start time logged and written! Bot started at " + startTime);
+  return true;
 };
 //END (saveUptime)
 
 //Start (bannedWords)
 
 const bannedWordsSchema = new mongoose.Schema({
-  word: String
+  word: String,
 });
 
 const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
 
 /**
- * 
+ *
  * @param {string} word
- * @returns boolean  
+ * @returns boolean
  */
- const addBW = async (Bword) => { //only to be used manually!
-  if(!connected || !db) {
-    await mongodbjs.connectToDB() 
+const addBW = async (Bword) => {
+  //only to be used manually!
+  if (!connected || !db) {
+    await connectToDB();
   }
-  const newBW = await bannedWordsModule({"word": Bword})
-  await newBW.save(err => {
+  const newBW = await bannedWordsModule({ word: Bword });
+  await newBW.save((err) => {
     if (err) {
-      console.error(err)
+      console.error(err);
       return false;
     }
-  })
-  console.log("run")
+  });
+  console.log("run");
 };
 
 /**
- * 
- * @param {string} word 
+ *
+ * @param {string} word
  * @returns boolean
  * @example const BWCheck = checkBW("YOUR_WORD") if (returns false)
  */
 
-const checkBW =  async (word) => {
-  if(!connected || !db) {
-    await mongodbjs.connectToDB() 
+const checkBW = async (word) => {
+  if (!connected || !db) {
+    await connectToDB();
   } //conect
 
-  const wordTBC = await bannedWordsModule.findById(word)
-  if (wordTBC = null) {
-    return false
+  const wordTBC = await bannedWordsModule.findById(word);
+  if ((wordTBC = null)) {
+    return false;
   } else {
-    return true
-  };
+    return true;
+  }
 };
 //END (bannedWords)
 
@@ -170,9 +167,9 @@ const getJsonValue = async (input, valueNeeded) => {
   var string = await JSON.stringify(input);
   var objectValue = await JSON.parse(string);
   if (objectValue == null) {
-    console.log("JSON is null! Did you format it correctly?")
+    console.log("JSON is null! Did you format it correctly?");
   } else {
-  return objectValue[valueNeeded];
+    return objectValue[valueNeeded];
   }
 };
 
@@ -180,121 +177,132 @@ const getJsonValue = async (input, valueNeeded) => {
 const AWSchema = new mongoose.Schema({
   guildID: Number,
   UserID: Number,
-  Warns: Number
+  Warns: Number,
 });
 
 const AWModel = new mongoose.model("warns", AWSchema);
 
-
 /**
- * 
+ *
  * @param {number} GuildID
- * @param {number} ClientID 
+ * @param {number} ClientID
  * @returns boolean
  * @example await addWarn(GuildID, ClientID)
  */
 const addWarn = async (GuildID, ClientID) => {
-  if(!connected || !db) {
-    await mongodbjs.connectToDB() 
-  }; //connect
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
   const oldWarnCountJSON = await AWModel.findOne(GuildID, ClientID);
 
-    //PARSE THE JSON!
-    var string = JSON.stringify(oldWarnCountJSON);
-    var objectValue = JSON.parse(string);
-    const oldWarnCount =  objectValue["Warns"];
+  //PARSE THE JSON!
+  var string = JSON.stringify(oldWarnCountJSON);
+  var objectValue = JSON.parse(string);
+  const oldWarnCount = objectValue["Warns"];
 
   if (oldWarnCount == null) {
-    const firstWarnForUser = await bannedWordsModule({"guildID": GuildID, "UserID": ClientID, "Warns": newWarnCount});
-  await firstWarnForUser.save(err => {
-    if (err) {
-      console.error(err)
-      console.log("error! Aborted operation");
-    };
-  })} else {
-  await AWModel.findOneAndRemove(GuildID, ClientID);
-  const newWarnCount = oldWarnCount + 1;
-  const newWC = await bannedWordsModule({"guildID": GuildID, "UserID": ClientID, "Warns": newWarnCount});
-  await newWC.save(err => {
-    if (err) {
-      console.error(err)
-      console.log("error!");
-    };
-    return newWarnCount;
-    })
+    const firstWarnForUser = await bannedWordsModule({
+      guildID: GuildID,
+      UserID: ClientID,
+      Warns: newWarnCount,
+    });
+    await firstWarnForUser.save((err) => {
+      if (err) {
+        console.error(err);
+        console.log("error! Aborted operation");
+      }
+    });
+  } else {
+    await AWModel.findOneAndRemove(GuildID, ClientID);
+    const newWarnCount = oldWarnCount + 1;
+    const newWC = await bannedWordsModule({
+      guildID: GuildID,
+      UserID: ClientID,
+      Warns: newWarnCount,
+    });
+    await newWC.save((err) => {
+      if (err) {
+        console.error(err);
+        console.log("error!");
+      }
+      return newWarnCount;
+    });
   }
 };
 
 const getWarns = async (GuildID, ClientID) => {
-    if (!connected || !db) {
-        await mongodbjs.connectToDB()
-    }; //connect
-    const warnCount = await AWModel.findOne(GuildID, ClientID);
-    if (warnCount == null) {
-        return 0;
-    } else {
-        return warnCount;
-    }
-}
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
+  const warnCount = await AWModel.findOne(GuildID, ClientID);
+  if (warnCount == null) {
+    return 0;
+  } else {
+    return warnCount;
+  }
+};
 
 const clearWarns = async (GuildID, ClientID) => {
-    if (!connected || !db) {
-        await mongodbjs.connectToB()
-    }; //connect
-    await AWModel.findOneAndRemove(GuildID, ClientID);
-    return true;
-}
+  if (!connected || !db) {
+    await connectToB();
+  } //connect
+  await AWModel.findOneAndRemove(GuildID, ClientID);
+  return true;
+};
 
 const loggingURLSchema = new mongoose.Schema({
-    guildID: Number,
-    URL: String
-})
+  guildID: Number,
+  URL: String,
+});
 
 const loggingToggleSchema = new mongoose.Schema({
-    guildID: Number,
-    toggle: Boolean
-})
+  guildID: Number,
+  toggle: Boolean,
+});
 
-const loggingToggleModel = new mongoose.model("loggingToggle", loggingToggleSchema);
+const loggingToggleModel = new mongoose.model(
+  "loggingToggle",
+  loggingToggleSchema
+);
 
 const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 
 const saveLogToggle = async (guildID, logToggle) => {
-    if (!connected || !db) {
-        await mongodbjs.connectToB()
-    }; //connect
-    const newToggle = await loggingToggleModel({ "guildID": guildID, "toggle": logToggle });
-    
-    await loggingToggleModel.findOneAndRemove(guildID);
-    await newToggle.save(err => {
-        if (err) {
-            console.error(err)
-            console.log("error!");
-            return false;
-        };
-        return true;
-    })
-}
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
+  const newToggle = await loggingToggleModel({
+    guildID: guildID,
+    toggle: logToggle,
+  });
+
+  await loggingToggleModel.findOneAndRemove(guildID);
+  await newToggle.save((err) => {
+    if (err) {
+      console.error(err);
+      console.log("error!");
+      return false;
+    }
+    return true;
+  });
+};
 
 const getLogToggle = async (guildID) => {
-    if (!connected || !db) {
-        await connectToB()
-        console.log("connected")
-    }; //connect
-    console.log("this is for testing")
-    const logToggleJSON = await loggingToggleModel.findOne(guildID)
-    console.log(logToggleJSON + "is LTJ")
-    if (logToggleJSON == null) {
-        return false;
-    }
-    var string = JSON.stringify(logToggleJSON);
-    var objectValue = JSON.parse(string);
-    const logToggle = objectValue["toggle"];
-    return logToggle;
-}
-
-
-
+  if (!connected || !db) {
+    await connectToDB();
+    console.log("connected");
+  } //connect
+  console.log("this is for testing");
+  const logToggleJSON = await loggingToggleModel.findOne(guildID);
+  console.log(logToggleJSON + "is LTJ");
+  if (logToggleJSON == null) {
+    return false;
+  }
+  var string = JSON.stringify(logToggleJSON);
+  var objectValue = JSON.parse(string);
+  const logToggle = objectValue["toggle"];
+  return logToggle;
+};
 
 module.exports = {
   saveXP,
@@ -305,8 +313,9 @@ module.exports = {
   getJsonValue,
   addWarn,
   getWarns,
-    clearWarns,
-    saveLogToggle,
-    getLogToggle
+  clearWarns,
+  saveLogToggle,
+  getLogToggle,
 };
-console.log("mongoDB.js run")
+
+console.log("mongodb.js run");
