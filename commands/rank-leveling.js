@@ -26,7 +26,8 @@ module.exports = {
       return await interaction.reply("You cannot check XP of a bot!");
 
       const authorID = interaction.member.id
-      const data = await mongo.getXP(authorID)
+      const dataJSON = await mongo.getXP(authorID)
+      const data = await mongo.getJsonValue(dataJSON, "xp")
     console.log(authorID + " is the id of the user, the data is " + data);
 
     if (!data.level[target.id])
