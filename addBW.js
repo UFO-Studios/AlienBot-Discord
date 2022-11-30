@@ -1,21 +1,25 @@
-import { Schema, model } from "mongoose";
-import { connectToDB } from "./mongodb";
+const mongoose = require("mongoose");
+const mongo = require("./mongodb")
+const Firebase = require("./firebase.js");
+//const { Client } = require("./node_modules/discord.js/typings/index");
 
 let connected;
 let db;
 
-const bannedWordsSchema = new Schema({
+const bannedWordsSchema = new mongoose.Schema({
     word: String
-  },
-  {collection: "bannedwords"});
+});
   
-  const bannedWordsModule = model("bannedwords", bannedWordsSchema);
+const bannedWordsModule = new mongoose.model("bannedwords", bannedWordsSchema);
+
+
+
   //END schema
   
   //START module
 const addBW = async (Bword) => {
   if(!connected || !db) {
-    await connectToDB() 
+    await mongo.connectToDB() 
   }
   const newBW = await bannedWordsModule({"word": Bword})
   await newBW.save(err => {
@@ -40,6 +44,4 @@ const checkBW =  async (word) => {
 
 };
 
-
-
-
+addBW("your_banned_word")
