@@ -7,20 +7,17 @@ let db;
 
 const LvlSchema = new mongoose.Schema({
   userId: Number,
-  xp: Number
+  xp: Number,
 });
 
 const uptimeSchema = new mongoose.Schema({
-  time: Number
+  time: Number,
 });
 
 //START modules
 const lvl_module = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
 
 const uptimeModule = mongoose.model("uptime", uptimeSchema);
-
-
-
 
 //END modules
 
@@ -135,7 +132,7 @@ const startTime = async (startTime) => {
 //Start (bannedWords)
 
 const bannedWordsSchema = new mongoose.Schema({
-  word: String
+  word: String,
 });
 
 const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
@@ -160,7 +157,6 @@ const addBW = async (Bword) => {
   console.log("run");
 };
 
-
 const getJsonValue = async (input, valueNeeded) => {
   var string = await JSON.stringify(input);
   var objectValue = await JSON.parse(string);
@@ -175,7 +171,7 @@ const getJsonValue = async (input, valueNeeded) => {
 const AWSchema = new mongoose.Schema({
   guildID: Number,
   UserID: Number,
-  Warns: Number
+  Warns: Number,
 });
 
 const AWModel = new mongoose.model("warns", AWSchema);
@@ -250,12 +246,12 @@ const clearWarns = async (GuildID, ClientID) => {
 
 const loggingURLSchema = new mongoose.Schema({
   guildID: Number,
-  URL: String
+  URL: String,
 });
 
 const loggingToggleSchema = new mongoose.Schema({
   guildID: Number,
-  toggle: Boolean
+  toggle: Boolean,
 });
 
 const loggingToggleModel = new mongoose.model(
@@ -301,45 +297,44 @@ const getLogToggle = async (guildID) => {
 };
 
 const BWToggleSchema = new mongoose.Schema({
-    guildID: Number,
-    toggle: Boolean
+  guildID: Number,
+  toggle: Boolean,
 });
 
 const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
 
 const getBannedWordToggle = async (guildID) => {
-    if (!connected || !db) {
-        await connectToDB();
-        console.log("connected");
-    } //connect
-    const BWToggleJSON = await BWToggleModel.findOne(guildID);
-    if (BWToggleJSON == null) {
-        return false;
-    } else {
-        var string = JSON.stringify(BWToggleJSON);
-        var objectValue = JSON.parse(string);
-        const BWToggle = objectValue["toggle"];
-        return BWToggle;
-    }
+  if (!connected || !db) {
+    await connectToDB();
+    console.log("connected");
+  } //connect
+  const BWToggleJSON = await BWToggleModel.findOne(guildID);
+  if (BWToggleJSON == null) {
+    return false;
+  } else {
+    var string = JSON.stringify(BWToggleJSON);
+    var objectValue = JSON.parse(string);
+    const BWToggle = objectValue["toggle"];
+    return BWToggle;
+  }
 };
 
-
 const saveBannedWordToggle = async (guildID, BWToggle) => {
-    if (!connected || !db) {
-        await connectToDB();
-    } //connect
-    const newToggle = BWToggleModel({ guildID: guildID, toggle: BWToggle });
-    
-    await BWToggleModel.findOneAndRemove(guildID);
-    await newToggle.save((err) => {
-        if (err) {
-            console.error(err);
-            console.log("error!");
-            return false;
-        }
-        return true;
-    });
-}
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
+  const newToggle = BWToggleModel({ guildID: guildID, toggle: BWToggle });
+
+  await BWToggleModel.findOneAndRemove(guildID);
+  await newToggle.save((err) => {
+    if (err) {
+      console.error(err);
+      console.log("error!");
+      return false;
+    }
+    return true;
+  });
+};
 
 module.exports = {
   saveXP,
@@ -353,8 +348,7 @@ module.exports = {
   saveLogToggle,
   getLogToggle,
   getBannedWordToggle,
-  saveBannedWordToggle,
-  checkBW
+  saveBannedWordToggle
 };
 
 console.log("mongodb.js run");
