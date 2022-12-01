@@ -16,18 +16,15 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
-    let data;
 
-    do {
-      data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
-        (res) => res.json()
-      );
-    } while (data.nsfw);
+    const data = await fetch(
+      `https://api.humorapi.com/memes/random?api-key=${client.C.MEME_API_KEY}`
+    ).then((res) => res.json());
 
     const embed = new EmbedBuilder()
-      .setTitle(data.title)
-      .setURL(data.postLink)
-      .setAuthor({ name: data.author })
+      .setTitle("Memes")
+      .setURL(data.url)
+      .setAuthor({ name: interaction.user.tag })
       .setImage(data.url)
       .setTimestamp()
       .setColor("Blue")
