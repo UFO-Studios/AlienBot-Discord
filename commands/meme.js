@@ -38,4 +38,4 @@ module.exports = {
   },
 };
 
-console.log("memes.js run");
+console.log("meme.js run");
