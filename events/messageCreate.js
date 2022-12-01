@@ -13,14 +13,14 @@ const deleteBannedWords = async (message, client) => {
     const array = message.content.split(" ");
 
     for (const word of array) {
-      if (client.BANNED_WORDS.includes(word.toLowerCase())) {
+        if (mongo.checkBW(word) == true) {
         message.reply({
           content: "You cannot use that word!",
           reply: true,
         });
 
         setTimeout(() => {
-          message.delete();
+          message.delete();  // this seems to not be working
         }, 1000);
       }
     }
@@ -32,11 +32,9 @@ const deleteBannedWords = async (message, client) => {
 };
 
 const levelingSystem = async (messageID, client) => {
-  console.log("XP system loaded")
   const oldXP = await mongo.getXP(messageID)
   const oldXPValue = await mongo.getJsonValue(oldXP, "xp")
   const oldXpID = await mongo.getJsonValue(oldXP, "_id");
-  console.log(oldXPValue + " is oldXPValue")
   if (oldXPValue == null){
     await mongo.saveXP(messageID, "1");
     console.log("User has been added to leveling DB.")
@@ -48,7 +46,7 @@ const levelingSystem = async (messageID, client) => {
       }
     const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
     await mongo.saveXP(messageID, newXP, oldXpID);
-    console.log(newXP + " is newXP")
+      console.log("User has been updated in leveling DB. Was " + oldXPValue + " is now " + newXP)
     return true
   };
 

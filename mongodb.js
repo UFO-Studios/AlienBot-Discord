@@ -37,6 +37,20 @@ const connectToDB = async () => {
   console.log("Complete!");
 };
 
+
+const checkBW = async (word) => {
+    if (!connected || !db) {
+        await connectToDB()
+    };
+
+    const checkWord = await bannedWordsModule.find(word);
+    if (checkWord == !data)
+        return false
+    else
+        return true
+
+};
+
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
  *  @param {Number} UserLevel The new level for the user.
@@ -339,7 +353,8 @@ module.exports = {
   saveLogToggle,
   getLogToggle,
   getBannedWordToggle,
-  saveBannedWordToggle
+  saveBannedWordToggle,
+  checkBW
 };
 
 console.log("mongodb.js run");
