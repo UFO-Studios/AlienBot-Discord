@@ -5,6 +5,7 @@ const { Channel } = require("discord.js");
 let connected;
 let db;
 
+//START schemas
 const LvlSchema = new mongoose.Schema({
   userId: Number,
   xp: Number,
@@ -14,12 +15,44 @@ const uptimeSchema = new mongoose.Schema({
   time: Number,
 });
 
+//warns (AW = Add Warns)
+const AWSchema = new mongoose.Schema({
+  guildID: Number,
+  UserID: Number,
+  Warns: Number,
+});
+
+const bannedWordsSchema = new mongoose.Schema({
+  word: String,
+});
+
+const loggingURLSchema = new mongoose.Schema({
+  guildID: Number,
+  URL: String,
+});
+
+const loggingToggleSchema = new mongoose.Schema({
+  guildID: Number,
+  toggle: Boolean,
+});
+
+const BWToggleSchema = new mongoose.Schema({
+  guildID: Number,
+  toggle: Boolean,
+});
+
+//END (schemas) 
+
 //START modules
-const lvl_module = mongoose.model("lvl", LvlSchema); // what template (schema) do i use? This one!
-
+const lvl_module = mongoose.model("lvl", LvlSchema);
 const uptimeModule = mongoose.model("uptime", uptimeSchema);
-
+const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
+const AWModel = new mongoose.model("warns", AWSchema);
+const loggingToggleModel = new mongoose.model( "loggingToggle", loggingToggleSchema);
+const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
+const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
 //END modules
+
 
 /**
  *  @example await connectToDB
@@ -34,6 +67,19 @@ const connectToDB = async () => {
   console.log("Complete!");
 };
 
+const checkBW = async (word) => {
+    if (!connected || !db) {
+        await connectToDB()
+    };
+
+    const checkWord = await bannedWordsModule.find(word);
+    if (checkWord == !data)
+        return false
+    else
+        return true
+
+};
+
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
  *  @param {Number} UserLevel The new level for the user.
@@ -46,9 +92,7 @@ const saveXP = async (userId, xp, _id) => {
     await connectToDB();
   }
 
-  const lvlnew = lvl_module({ userId, xp }); //create a new "lvlNew" object (data)
-
-  //delete old entry, it will delete everything on that user but its fine as we already have the data to be added in cache (see values "userID" & "xp");
+  const lvlnew = lvl_module({ userId, xp }); 
 
   if (_id == null) {
     console.log("Document ID is " + _id + " ! Skipping deletion...");
@@ -87,9 +131,7 @@ const getXP = async (userId) => {
   return userXP;
 };
 
-//END (getXP)
 
-//START (saveUptime)
 
 /**
  *  @param {Number} startTime Start time of the bot
@@ -113,15 +155,7 @@ const startTime = async (startTime) => {
   console.log("Start time logged and written! Bot started at " + startTime);
   return true;
 };
-//END (saveUptime)
 
-//Start (bannedWords)
-
-const bannedWordsSchema = new mongoose.Schema({
-  word: String,
-});
-
-const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
 
 /**
  *
@@ -153,14 +187,6 @@ const getJsonValue = async (input, valueNeeded) => {
   }
 };
 
-//warns (AW = Add Warns)
-const AWSchema = new mongoose.Schema({
-  guildID: Number,
-  UserID: Number,
-  Warns: Number,
-});
-
-const AWModel = new mongoose.model("warns", AWSchema);
 
 /**
  *
@@ -230,22 +256,6 @@ const clearWarns = async (GuildID, ClientID) => {
   return true;
 };
 
-const loggingURLSchema = new mongoose.Schema({
-  guildID: Number,
-  URL: String,
-});
-
-const loggingToggleSchema = new mongoose.Schema({
-  guildID: Number,
-  toggle: Boolean,
-});
-
-const loggingToggleModel = new mongoose.model(
-  "loggingToggle",
-  loggingToggleSchema
-);
-
-const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 
 const saveLogToggle = async (guildID, logToggle) => {
   if (!connected || !db) {
@@ -281,13 +291,6 @@ const getLogToggle = async (guildID) => {
   const logToggle = objectValue["toggle"];
   return logToggle;
 };
-
-const BWToggleSchema = new mongoose.Schema({
-  guildID: Number,
-  toggle: Boolean,
-});
-
-const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
 
 const getBannedWordToggle = async (guildID) => {
   if (!connected || !db) {
@@ -334,7 +337,7 @@ module.exports = {
   saveLogToggle,
   getLogToggle,
   getBannedWordToggle,
-  saveBannedWordToggle,
+  saveBannedWordToggle
 };
 
 console.log("mongodb.js run");

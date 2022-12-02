@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const mongo = require("./mongodb")
-const Firebase = require("./firebase.js");
-//const { Client } = require("./node_modules/discord.js/typings/index");
+
 
 let connected;
 let db;
