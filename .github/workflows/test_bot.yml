@@ -27,4 +27,4 @@ jobs:
       run: npm i
 
     - name: Build
-      run: node deploy-commands.js
+      run: node index.js
