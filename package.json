@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "npm i && node index.js",
-    "start": "node .",
+    "start": "node ."
   },
   "dependencies": {
     "@discordjs/opus": "^0.8.0",
