@@ -339,7 +339,7 @@ const saveBannedWordToggle = async (guildID, BWToggle) => {
 };
 
 
-const addIgnoredChannel = (guildID, channelID) => {
+const addIgnoredChannel = async (guildID, channelID) => {
     if (!connected || !db) {
         await connectToDB();
     } //connect
@@ -354,7 +354,7 @@ const addIgnoredChannel = (guildID, channelID) => {
     });
 };
 
-const checkIgnoredChannel = (guildID, channelID) => {
+const checkIgnoredChannel = async (guildID, channelID) => {
     if (!connected || !db) {
         await connectToDB();
     } //connect
