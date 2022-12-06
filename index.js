@@ -58,7 +58,7 @@ player.on("trackStart", (queue, track) =>{
         .setFooter({
             text: "Music System • Alienbot",
             iconURL:
-            "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
     queue.metadata.channel.send({ embeds: [embed] });
 });

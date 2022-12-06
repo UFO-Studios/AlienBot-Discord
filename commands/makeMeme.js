@@ -67,7 +67,7 @@ module.exports = {
         .setFooter({
           text: "/ad • AlienBot",
           iconURL:
-            "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
       await interaction.reply({ embeds: [embed] });
     } else if (interaction.options.getSubcommand() == "beautiful") {
@@ -88,7 +88,7 @@ module.exports = {
         .setFooter({
           text: "/beautiful • AlienBot",
           iconURL:
-            "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
       await interaction.reply({ embeds: [embed] });
     } else if (interaction.options.getSubcommand() == "bobross") {
@@ -109,7 +109,7 @@ module.exports = {
         .setFooter({
           text: "/bobross • AlienBot",
           iconURL:
-            "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
       await interaction.reply({ embeds: [embed] });
     }
