@@ -41,6 +41,17 @@ const BWToggleSchema = new mongoose.Schema({
   toggle: Boolean,
 });
 
+const addIgnoredChannelSchema = new mongoose.Schema({
+    guildID: Number,
+    channelID: Number
+});
+
+const setWelcomeSchema = new mongoose.Schema({
+    guildID: Number,
+    channelID: Number,
+    message: String
+});
+
 //END (schemas) 
 
 //START modules
@@ -51,6 +62,8 @@ const AWModel = new mongoose.model("warns", AWSchema);
 const loggingToggleModel = new mongoose.model( "loggingToggle", loggingToggleSchema);
 const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
+const ignoredChannelModel = new mongoose.model("ignoredChannel", addIgnoredChannelSchema);
+const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
 //END modules
 
 
@@ -297,7 +310,7 @@ const getBannedWordToggle = async (guildID) => {
     await connectToDB();
     console.log("connected");
   } //connect
-  const BWToggleJSON = await BWToggleModel.findOne(guildID);
+  const BWToggleJSON = await BWToggleModel.findOne(guildID); //This is the "filter must be findOne()" error code
   if (BWToggleJSON == null) {
     return false;
   } else {
@@ -325,6 +338,49 @@ const saveBannedWordToggle = async (guildID, BWToggle) => {
   });
 };
 
+
+const addIgnoredChannel = async (guildID, channelID) => {
+    if (!connected || !db) {
+        await connectToDB();
+    } //connect
+    const newIgnoredChannel = await ignoredChannelModel({ guildID: guildID, channelID: channelID });
+    await newIgnoredChannel.save((err) => {
+        if (err) {
+            console.error(err);
+            console.log("error!");
+            return false;
+        }
+        return true;
+    });
+};
+
+const checkIgnoredChannel = async (guildID, channelID) => {
+    if (!connected || !db) {
+        await connectToDB();
+    } //connect
+    const ignoredChannelJSON = await ignoredChannelModel.findOne(guildID);
+    if (ignoredChannelJSON == null) {
+        return false;
+    } else {
+        return true;
+    }
+};
+
+const setWelcome = async (guildID, welcomeMessage) => {
+    if (!connected || !db) {
+        await connectToDB();
+    } //connect
+    const newWelcome = await welcomeModel({ guildID: guildID, welcomeMessage: welcomeMessage });
+    await newWelcome.save((err) => {
+        if (err) {
+            console.error(err);
+            console.log("error!");
+            return false;
+        }
+        return true;
+    });
+}
+
 module.exports = {
   saveXP,
   getXP,
@@ -337,7 +393,10 @@ module.exports = {
   saveLogToggle,
   getLogToggle,
   getBannedWordToggle,
-  saveBannedWordToggle
+  saveBannedWordToggle,
+  addIgnoredChannel,
+  checkIgnoredChannel,
+  setWelcome
 };
 
 console.log("mongodb.js run");

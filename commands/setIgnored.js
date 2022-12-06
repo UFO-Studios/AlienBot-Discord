@@ -4,6 +4,7 @@ const {
   Client,
   PermissionsBitField,
 } = require("discord.js");
+const mongoose = require("mongoose");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,23 +31,17 @@ module.exports = {
     const channel = interaction.options.getChannel("channel");
 
     await interaction.deferReply();
-    const data = await client.F.getData("ignore-channels", channel.guildId);
+      const data = await mongo.checkIgnoredChannel(interaction.guildId, channel.id);
     if (!data) {
-      await client.F.addData("ignore-channels", channel.guildId, {
-        channels: [channel.id],
-      });
+        await mongo.setIgnoredChannel(interaction.guildId, channel.id);
+        return await interaction.editReply({
+            content: `#${channel.name} will now be ignored for channel update logs!`,
+        });
     } else {
-      await data.channels.push(channel.id);
-      const channels = [...new Set(data.channels)];
-
-      await client.F.addData("ignore-channels", channel.guildId, {
-        channels,
-      });
+        return await interaction.editReply({
+            content: "This channel is already ignored!"
+        })
     }
-
-    return await interaction.editReply({
-      content: `#${channel.name} will now be ignored for channel update logs!`,
-    });
   },
 };
 

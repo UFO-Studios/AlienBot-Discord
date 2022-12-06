@@ -4,6 +4,7 @@ const {
   Client,
   ApplicationCommandType,
 } = require("discord.js");
+const mongo = require("../mongodb");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -16,11 +17,11 @@ module.exports = {
    */
   async execute(interaction, client) {
     const user = interaction.targetUser
-    const data = await client.F.getData("warns", user.id);
-    const warns = data ? data.warns : 0
+    const data = await mongo.getWarns(interaction.guild.id, user.id)
+    
 
     return await interaction.reply({
-      content: `${user.tag} has ${warns} warns.`,
+      content: `${user.tag} has ${data} warns.`,
       ephemeral: true,
     });
   },

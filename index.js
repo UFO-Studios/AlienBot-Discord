@@ -40,20 +40,20 @@ const client = new Client({
 
 const player = new Player(client, { ytdlOptions: { quality: "highestaudio" } });
 
-player.on("trackStart", (queue, track) => {
-  const embed = new EmbedBuilder()
-    .setTitle("Play song")
-    .setDescription(`Now playing **${track.title}**!`)
-    .setColor("Green")
-    .setAuthor({ name: client.user.tag })
-    .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
-    .setTimestamp()
-    .setFooter({
-      text: "Music System • Alienbot",
-      iconURL:
-        "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
-    });
-  queue.metadata.channel.send({ embeds: [embed] });
+player.on("trackStart", (queue, track) =>{
+    const embed = new EmbedBuilder()
+        .setTitle("Play song")
+        .setDescription(`Now playing **${track.title}**!`)
+        .setColor("Green")
+        .setAuthor({ name: client.user.tag })
+        .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
+        .setTimestamp()
+        .setFooter({
+            text: "Music System • Alienbot",
+            iconURL:
+            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        });
+    queue.metadata.channel.send({ embeds: [embed] });
 });
 
 client.discordTogether = new DiscordTogether(client);
