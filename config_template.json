@@ -6,6 +6,5 @@
     "APP_ID":"",
     "ENV":"prod",
     "WEBHOOK_URL":"",
-    "MONGO_CONFIG": "",
-    "MEME_API_KEY": ""
+    "MONGO_CONFIG": ""
 }
