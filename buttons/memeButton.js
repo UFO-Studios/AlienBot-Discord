@@ -1,25 +1,21 @@
 const {
-  SlashCommandBuilder,
-  ChatInputCommandInteraction,
+  MessageComponentInteraction,
   Client,
-  EmbedBuilder,
+  ButtonStyle,
   ActionRowBuilder,
   ButtonBuilder,
-  ButtonStyle,
+  EmbedBuilder,
 } = require("discord.js");
 const fetch = require("node-fetch");
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("meme").setDescription("get memes!"),
-  global: true,
+  name: "memeButton",
   /**
    *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {MessageComponentInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-    await interaction.deferReply();
-
     const data = await fetch(`https://meme-api.com/gimme`).then((res) =>
       res.json()
     );
@@ -44,8 +40,6 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
 
-    return await interaction.editReply({ embeds: [embed], components: [row] });
+    return await interaction.update({ embeds: [embed], components: [row] });
   },
 };
-
-console.log("meme.js run");

@@ -1,8 +1,4 @@
-const {
-  InteractionType,
-  ChatInputCommandInteraction,
-  Client,
-} = require("discord.js");
+const { InteractionType, CommandInteraction, Client } = require("discord.js");
 const ms = require("ms");
 
 module.exports = {
@@ -10,7 +6,7 @@ module.exports = {
   once: false,
   /**
    *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {CommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
@@ -87,6 +83,14 @@ module.exports = {
             ephemeral: true,
           });
         }
+      }
+    } else if (interaction.isButton()) {
+      const button = client.buttons.get(interaction.customId);
+      if (!button) return;
+      try {
+        await button.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
       }
     }
   },
