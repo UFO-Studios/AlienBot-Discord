@@ -40,7 +40,7 @@ const addData = async (collectionName, docName, dataObj) => {
   const dataRef = db.collection(collectionName).doc(docName);
 
   const dataSet = await dataRef.set(dataObj);
-  
+
   return dataSet;
 };
 

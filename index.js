@@ -1,5 +1,4 @@
-//require("./deploy-commands.js").deleteOld();
-require("./deploy-commands.js").registerCommands();
+const { deleteOld, registerCommands } = require("./deploy-commands.js");
 const fs = require("node:fs");
 const path = require("node:path");
 const {
@@ -13,6 +12,9 @@ const Firebase = require("./firebase.js");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
+
+deleteOld();
+registerCommands();
 
 const Intents = new IntentsBitField([
   IntentsBitField.Flags.Guilds,
