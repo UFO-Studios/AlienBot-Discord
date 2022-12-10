@@ -48,8 +48,9 @@ const addIgnoredChannelSchema = new mongoose.Schema({
 
 const setWelcomeSchema = new mongoose.Schema({
     guildID: Number,
-    channelID: Number,
-    message: String
+    message: String,
+    webhookURL: String,
+    leaveMessage: String
 });
 
 //END (schemas) 
@@ -366,11 +367,11 @@ const checkIgnoredChannel = async (guildID, channelID) => {
     }
 };
 
-const setWelcome = async (guildID, welcomeMessage) => {
+async function setWelcome(guildID, welcomeMessage, leaveMessage,  webhookURL) {
     if (!connected || !db) {
         await connectToDB();
     } //connect
-    const newWelcome = await welcomeModel({ guildID: guildID, welcomeMessage: welcomeMessage });
+    const newWelcome = await setWelcomeModel({ guildID: guildID, welcomeMessage: welcomeMessage, webhookURL: webhookURL, leaveMessage: leaveMessage });
     await newWelcome.save((err) => {
         if (err) {
             console.error(err);
