@@ -45,8 +45,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Translate to English • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     interaction.reply({ embeds: [embed], ephemeral: true });

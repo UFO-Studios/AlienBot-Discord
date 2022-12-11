@@ -70,8 +70,7 @@ module.exports = {
       )
       .setFooter({
         text: "/user-info • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
     return await interaction.reply({ embeds: [embed] });
   },

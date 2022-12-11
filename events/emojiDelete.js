@@ -8,9 +8,9 @@ const {
 module.exports = {
   name: "emojiDelete",
   /**
-   * 
-   * @param {GuildEmoji} emoji 
-   * @param {Client} client 
+   *
+   * @param {GuildEmoji} emoji
+   * @param {Client} client
    */
   async execute(emoji, client) {
     const embed = new EmbedBuilder()
@@ -20,11 +20,10 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Emoji Deletion • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
-      }); 
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+      });
 
-      await emoji.guild.channels.fetch();
+    await emoji.guild.channels.fetch();
     const channel = emoji.guild.channels.cache.find(
       (channel) => channel.name == "alien-logs"
     );

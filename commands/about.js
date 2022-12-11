@@ -22,8 +22,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "/about • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
     await interaction.reply({ embeds: [embed] });
   },

@@ -66,8 +66,7 @@ module.exports = {
         .setColor("Blue")
         .setFooter({
           text: "/ad • AlienBot",
-          iconURL:
-            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
       await interaction.reply({ embeds: [embed] });
     } else if (interaction.options.getSubcommand() == "beautiful") {
@@ -87,8 +86,7 @@ module.exports = {
         .setColor("Blue")
         .setFooter({
           text: "/beautiful • AlienBot",
-          iconURL:
-            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
       await interaction.reply({ embeds: [embed] });
     } else if (interaction.options.getSubcommand() == "bobross") {
@@ -108,8 +106,7 @@ module.exports = {
         .setColor("Blue")
         .setFooter({
           text: "/bobross • AlienBot",
-          iconURL:
-            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
       await interaction.reply({ embeds: [embed] });
     }

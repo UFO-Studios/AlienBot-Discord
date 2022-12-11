@@ -16,9 +16,8 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const user = interaction.targetUser
-    const data = await mongo.getWarns(interaction.guild.id, user.id)
-    
+    const user = interaction.targetUser;
+    const data = await mongo.getWarns(interaction.guild.id, user.id);
 
     return await interaction.reply({
       content: `${user.tag} has ${data} warns.`,

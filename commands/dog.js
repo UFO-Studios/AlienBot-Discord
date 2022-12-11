@@ -17,7 +17,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    await interaction.deferReply()
+    await interaction.deferReply();
     const data = await fetch("https://dog.ceo/api/breeds/image/random").then(
       (d) => d.json()
     );
@@ -30,8 +30,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "/dog • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     return await interaction.editReply({

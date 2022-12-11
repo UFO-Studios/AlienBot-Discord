@@ -1,5 +1,9 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { Client, ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
+const {
+  Client,
+  ChatInputCommandInteraction,
+  EmbedBuilder,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -33,8 +37,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Music System • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     const errorEmbed = new EmbedBuilder()
@@ -46,8 +49,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Music System • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     return await interaction.editReply({

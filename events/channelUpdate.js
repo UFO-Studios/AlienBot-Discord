@@ -45,8 +45,8 @@ module.exports = {
       }
     }
 
-      const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
-      if (data == false) return;
+    const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
+    if (data == false) return;
 
     if (oldChannel.name !== NewChannel.name) {
       const embed = new EmbedBuilder()
@@ -58,8 +58,7 @@ module.exports = {
         .setTimestamp()
         .setFooter({
           text: "Channel Update • AlienBot",
-          iconURL:
-            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
       const channel = client.channels.cache.find(
         (channel) => channel.name === "alien-logs"
@@ -84,8 +83,7 @@ module.exports = {
         .setTimestamp()
         .setFooter({
           text: "Channel Update • AlienBot",
-          iconURL:
-            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
 
       await oldChannel.guild.channels.fetch();

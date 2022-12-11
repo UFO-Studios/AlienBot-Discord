@@ -25,9 +25,9 @@ module.exports = {
     if (target.bot)
       return await interaction.reply("You cannot check XP of a bot!");
 
-      const authorID = interaction.member.id
-      const dataJSON = await mongo.getXP(authorID)
-      const data = await mongo.getJsonValue(dataJSON, "xp")
+    const authorID = interaction.member.id;
+    const dataJSON = await mongo.getXP(authorID);
+    const data = await mongo.getJsonValue(dataJSON, "xp");
     console.log(authorID + " is the id of the user, the data is " + data);
 
     if (!data.level[target.id])
@@ -42,8 +42,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "/rank • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     return await interaction.reply({ embeds: [embed] });

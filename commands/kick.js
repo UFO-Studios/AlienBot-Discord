@@ -47,8 +47,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({
               text: "/kick • AlienBot",
-              iconURL:
-                "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+              iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
             });
           interaction.reply({ embeds: [successEmbed] });
           console.log(
@@ -62,7 +61,8 @@ module.exports = {
         }
       } else {
         return interaction.reply({
-          content: "You dont have the permissions to kick a member. You need the \"KickMembers\" permission!",
+          content:
+            'You dont have the permissions to kick a member. You need the "KickMembers" permission!',
           ephemeral: true,
         });
       }

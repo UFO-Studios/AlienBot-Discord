@@ -104,8 +104,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "/timeout • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     try {

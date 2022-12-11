@@ -2,7 +2,6 @@ const { Client, ActivityType } = require("discord.js");
 const Config = require("../config.json");
 const mongo = require("../mongodb");
 
-
 module.exports = {
   name: "ready",
   once: true,
@@ -26,7 +25,7 @@ module.exports = {
           status: "online",
         });
       },
-	  () => {
+      () => {
         client.user.setPresence({
           activities: [
             {
@@ -37,7 +36,7 @@ module.exports = {
           status: "online",
         });
       },
-	  () => {
+      () => {
         client.user.setPresence({
           activities: [
             {
@@ -171,22 +170,21 @@ module.exports = {
     const startTime = d.getTime();
     mongo.startTime(startTime);
 
-      if (Config.ENV == "GHA"){
-        client.channels.cache
+    if (Config.ENV == "GHA") {
+      client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running tests!");
-        console.log("ready!")
-      } else if (Config.ENV == "dev") {
-          client.channels.cache
-          .get(client.C.CHANNEL_ID)
-          .send("Bot is running in dev mode!");
-          console.log("ready!")
-        } else {
-          client.channels.cache
-          .get(client.C.CHANNEL_ID)
-          .send("Bot is running in prod mode!");
-          console.log("ready!")
-        }
-      }
-}
-
+      console.log("ready!");
+    } else if (Config.ENV == "dev") {
+      client.channels.cache
+        .get(client.C.CHANNEL_ID)
+        .send("Bot is running in dev mode!");
+      console.log("ready!");
+    } else {
+      client.channels.cache
+        .get(client.C.CHANNEL_ID)
+        .send("Bot is running in prod mode!");
+      console.log("ready!");
+    }
+  },
+};

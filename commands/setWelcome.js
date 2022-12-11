@@ -57,13 +57,17 @@ module.exports = {
     const webhook = await channel
       .createWebhook({
         name: "AlienBot",
-        avatar:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        avatar: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       })
       .then((w) => w);
 
-      console.log(`New webhook created: ${webhook.name}`);
-      await mongo.setWelcome(interaction.guild.id, welcomeMessage, leaveMessage, webhook.url);
+    console.log(`New webhook created: ${webhook.name}`);
+    await mongo.setWelcome(
+      interaction.guild.id,
+      welcomeMessage,
+      leaveMessage,
+      webhook.url
+    );
     return await interaction.reply({
       content: `Welcome channel set to #${channel.name}!`,
     });

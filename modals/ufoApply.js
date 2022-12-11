@@ -69,8 +69,7 @@ module.exports = {
         .setTimestamp()
         .setFooter({
           text: "UFO SMP • AlienBot",
-          iconURL:
-            "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
         });
 
       await webhook.send({ embeds: [embed] });

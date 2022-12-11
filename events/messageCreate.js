@@ -1,26 +1,25 @@
-﻿const mongo = require("../mongodb") 
+﻿const mongo = require("../mongodb");
 const { ChannelType, Message, Client } = require("discord.js");
 const convertor = require("number-to-words");
 const emojiFromText = require("emoji-from-text");
 
-
 const deleteBannedWords = async (message, client) => {
   try {
-      const data = await mongo.getBannedWordToggle(message.guild.id);
+    const data = await mongo.getBannedWordToggle(message.guild.id);
     if (!data) return;
     if (!data.toggleValue == "on") return;
 
     const array = message.content.split(" ");
 
     for (const word of array) {
-        if (mongo.checkBW(word) == true) {
+      if (mongo.checkBW(word) == true) {
         message.reply({
           content: "You cannot use that word!",
           reply: true,
         });
 
         setTimeout(() => {
-          message.delete();  // this seems to not be working
+          message.delete(); // this seems to not be working
         }, 1000);
       }
     }
@@ -32,24 +31,28 @@ const deleteBannedWords = async (message, client) => {
 };
 
 const levelingSystem = async (messageID, client) => {
-  const oldXP = await mongo.getXP(messageID)
-  const oldXPValue = await mongo.getJsonValue(oldXP, "xp")
+  const oldXP = await mongo.getXP(messageID);
+  const oldXPValue = await mongo.getJsonValue(oldXP, "xp");
   const oldXpID = await mongo.getJsonValue(oldXP, "_id");
-  if (oldXPValue == null){
+  if (oldXPValue == null) {
     await mongo.saveXP(messageID, "1");
-    console.log("User has been added to leveling DB.")
-    return true //we could change this so we could dm a new user stuff but thats a later me problem
+    console.log("User has been added to leveling DB.");
+    return true; //we could change this so we could dm a new user stuff but thats a later me problem
   } else {
-      if (oldXpID == "1044067382022373500") {
-          console.log("WE HAVE A GHOST USER EVERYONE PANIC!!!!")
-          return false;
-      }
+    if (oldXpID == "1044067382022373500") {
+      console.log("WE HAVE A GHOST USER EVERYONE PANIC!!!!");
+      return false;
+    }
     const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
     await mongo.saveXP(messageID, newXP, oldXpID);
-      console.log("User has been updated in leveling DB. Was " + oldXPValue + " is now " + newXP)
-    return true
-  };
-
+    console.log(
+      "User has been updated in leveling DB. Was " +
+        oldXPValue +
+        " is now " +
+        newXP
+    );
+    return true;
+  }
 };
 
 module.exports = {
@@ -68,7 +71,6 @@ module.exports = {
     // leveling
     const MSGID = message.author.id;
     levelingSystem(MSGID, client);
-
   },
 };
-console.log("events/messageCreate.js run")
+console.log("events/messageCreate.js run");

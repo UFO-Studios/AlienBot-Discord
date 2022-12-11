@@ -44,7 +44,7 @@ module.exports = {
 
     const id = interaction.user.id;
     const previousEconomy = await client.M.getEconomy(id);
-    
+
     const previousBalance = previousEconomy ? previousEconomy.balance : 0;
     const newBalance = num + previousBalance;
 

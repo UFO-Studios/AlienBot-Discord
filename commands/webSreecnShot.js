@@ -50,8 +50,7 @@ module.exports = {
       .setColor("Blue")
       .setFooter({
         text: "/web-screenshot • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
     return await interaction.editReply({ embeds: [embed] });
   },

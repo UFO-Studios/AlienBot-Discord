@@ -20,8 +20,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Emoji Creation • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
     await emoji.guild.channels.fetch();
     const channel = emoji.guild.channels.cache.find(

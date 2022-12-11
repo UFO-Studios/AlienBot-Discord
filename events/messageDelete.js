@@ -27,8 +27,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Message Edited • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     await message.guild.channels.fetch();

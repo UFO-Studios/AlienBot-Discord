@@ -25,7 +25,9 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("description")
-        .setDescription("the description to be displayed. use `newline` for newlines")
+        .setDescription(
+          "the description to be displayed. use `newline` for newlines"
+        )
         .setRequired(true)
     )
     .addStringOption((option) =>
@@ -93,8 +95,10 @@ module.exports = {
     const imageUrl = interaction.options.getString("image-url");
     const footerText = interaction.options.getString("footer-text");
     const footerIcon = interaction.options.getString("footer-icon");
-    const re = new RegExp("newline", "gi")
-    const newDescription = re.test(description) ? description.replace(re, "\n") : description
+    const re = new RegExp("newline", "gi");
+    const newDescription = re.test(description)
+      ? description.replace(re, "\n")
+      : description;
 
     if (title.length > 256)
       return interaction.reply({

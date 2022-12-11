@@ -35,8 +35,7 @@ module.exports = {
       .setColor("Blue")
       .setFooter({
         text: `/poll • AlienBot`,
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     const reply = await interaction.reply({

@@ -47,8 +47,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({
               text: "/ban • AlienBot",
-              iconURL:
-                "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+              iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
             });
           interaction.reply({ embeds: [successEmbed] });
           console.log(

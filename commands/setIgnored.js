@@ -26,21 +26,25 @@ module.exports = {
       !interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)
     )
       return await interaction.reply({
-        content: "You dont have the permissions to set ignore a channel. You need the \"ManageGuild\" permission!",
+        content:
+          'You dont have the permissions to set ignore a channel. You need the "ManageGuild" permission!',
       });
     const channel = interaction.options.getChannel("channel");
 
     await interaction.deferReply();
-      const data = await mongo.checkIgnoredChannel(interaction.guildId, channel.id);
+    const data = await mongo.checkIgnoredChannel(
+      interaction.guildId,
+      channel.id
+    );
     if (!data) {
-        await mongo.setIgnoredChannel(interaction.guildId, channel.id);
-        return await interaction.editReply({
-            content: `#${channel.name} will now be ignored for channel update logs!`,
-        });
+      await mongo.setIgnoredChannel(interaction.guildId, channel.id);
+      return await interaction.editReply({
+        content: `#${channel.name} will now be ignored for channel update logs!`,
+      });
     } else {
-        return await interaction.editReply({
-            content: "This channel is already ignored!"
-        })
+      return await interaction.editReply({
+        content: "This channel is already ignored!",
+      });
     }
   },
 };

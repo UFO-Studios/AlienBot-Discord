@@ -30,8 +30,7 @@ module.exports = {
       .setColor("Blue")
       .setFooter({
         text: "/vote • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       })
       .addFields(
         {

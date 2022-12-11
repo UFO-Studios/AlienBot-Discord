@@ -1,4 +1,9 @@
-const { SlashCommandBuilder, EmbedBuilder, ChannelType, ChatInputCommandInteraction } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  ChannelType,
+  ChatInputCommandInteraction,
+} = require("discord.js");
 
 const getMemberAndBots = async (interaction) => {
   return `Members - ${await interaction.guild.members.cache.filter(
@@ -14,8 +19,8 @@ module.exports = {
     .setDescription("Display info about this server."),
   global: true,
   /**
-   * 
-   * @param {ChatInputCommandInteraction} interaction  
+   *
+   * @param {ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
     try {
@@ -69,7 +74,8 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setAuthor({ name: interaction.user.tag })
         .setColor("Blue")
-        .setTitle("Server Info").setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+        .setTitle("Server Info")
+        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
         .addFields(
           {
             name: "server name",

@@ -1,9 +1,5 @@
-const {
-  EmbedBuilder,
-  GuildChannel,
-  Client
-} = require("discord.js");
-const mongo = require("../mongodb.js")
+const { EmbedBuilder, GuildChannel, Client } = require("discord.js");
+const mongo = require("../mongodb.js");
 
 module.exports = {
   name: "channelCreate",
@@ -14,7 +10,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(channel, client) {
-      const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
+    const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
     if (data == false) return;
 
     const embed = new EmbedBuilder()
@@ -24,8 +20,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Channel Created • AlienBot",
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     await channel.guild.channels.fetch();
