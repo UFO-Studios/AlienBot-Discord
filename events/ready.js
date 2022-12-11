@@ -26,6 +26,28 @@ module.exports = {
           status: "online",
         });
       },
+	  () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "Merry christmas!",
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "online",
+        });
+      },
+	  () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "New fancy thingy coming soon™️",
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "online",
+        });
+      },
       () => {
         client.user.setPresence({
           activities: [
