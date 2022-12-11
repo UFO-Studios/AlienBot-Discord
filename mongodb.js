@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const config = require("./config.json");
-const { Channel } = require("discord.js");
 
 let connected;
 let db;
@@ -42,30 +41,41 @@ const BWToggleSchema = new mongoose.Schema({
 });
 
 const addIgnoredChannelSchema = new mongoose.Schema({
-    guildID: Number,
-    channelID: Number
+  guildID: Number,
+  channelID: Number,
 });
 
 const setWelcomeSchema = new mongoose.Schema({
-    guildID: Number,
-    channelID: Number,
-    message: String
+  guildID: Number,
+  channelID: Number,
+  message: String,
 });
 
-//END (schemas) 
+const EconomySchema = new mongoose.Schema({
+  userId: Number,
+  balance: Number,
+});
+
+//END (schemas)
 
 //START modules
 const lvl_module = mongoose.model("lvl", LvlSchema);
+const economicModule = mongoose.model("economic", EconomySchema);
 const uptimeModule = mongoose.model("uptime", uptimeSchema);
 const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
 const AWModel = new mongoose.model("warns", AWSchema);
-const loggingToggleModel = new mongoose.model( "loggingToggle", loggingToggleSchema);
+const loggingToggleModel = new mongoose.model(
+  "loggingToggle",
+  loggingToggleSchema
+);
 const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
-const ignoredChannelModel = new mongoose.model("ignoredChannel", addIgnoredChannelSchema);
+const ignoredChannelModel = new mongoose.model(
+  "ignoredChannel",
+  addIgnoredChannelSchema
+);
 const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
 //END modules
-
 
 /**
  *  @example await connectToDB
@@ -81,16 +91,36 @@ const connectToDB = async () => {
 };
 
 const checkBW = async (word) => {
-    if (!connected || !db) {
-        await connectToDB()
-    };
+  if (!connected || !db) {
+    await connectToDB();
+  }
 
-    const checkWord = await bannedWordsModule.find(word);
-    if (checkWord == !data)
-        return false
-    else
-        return true
+  const checkWord = await bannedWordsModule.find(word);
+  if (checkWord == !data) return false;
+  else return true;
+};
 
+/**
+ *
+ * @param {Number} userId
+ * @param {Number} balance
+ */
+const saveEconomy = async (userId, balance) => {
+  if (!connected || !db) {
+    await connectToDB();
+  }
+
+  const economyNew = economicModule({ userId, balance });
+
+  economyNew.save((err) => {
+    if (err) {
+      console.error(err);
+      return false;
+    }
+  });
+
+  console.log("Data added to DB!");
+  return true;
 };
 
 /**
@@ -105,7 +135,7 @@ const saveXP = async (userId, xp, _id) => {
     await connectToDB();
   }
 
-  const lvlnew = lvl_module({ userId, xp }); 
+  const lvlnew = lvl_module({ userId, xp });
 
   if (_id == null) {
     console.log("Document ID is " + _id + " ! Skipping deletion...");
@@ -144,7 +174,17 @@ const getXP = async (userId) => {
   return userXP;
 };
 
+const getEconomy = async (userId) => {
+  if (!connected || !db) {
+    await connectToDB();
+  }
 
+  const userEconomy = await economicModule.findOne({ userId });
+
+  console.log("Data recived from DB!");
+  console.log(userEconomy);
+  return userEconomy;
+};
 
 /**
  *  @param {Number} startTime Start time of the bot
@@ -168,7 +208,6 @@ const startTime = async (startTime) => {
   console.log("Start time logged and written! Bot started at " + startTime);
   return true;
 };
-
 
 /**
  *
@@ -199,7 +238,6 @@ const getJsonValue = async (input, valueNeeded) => {
     return objectValue[valueNeeded];
   }
 };
-
 
 /**
  *
@@ -269,7 +307,6 @@ const clearWarns = async (GuildID, ClientID) => {
   return true;
 };
 
-
 const saveLogToggle = async (guildID, logToggle) => {
   if (!connected || !db) {
     await connectToDB();
@@ -310,7 +347,7 @@ const getBannedWordToggle = async (guildID) => {
     await connectToDB();
     console.log("connected");
   } //connect
-  const BWToggleJSON = await BWToggleModel.findOne(guildID); //This is the "filter must be findOne()" error code
+  const BWToggleJSON = await BWToggleModel.findOne({ guildID });
   if (BWToggleJSON == null) {
     return false;
   } else {
@@ -338,48 +375,53 @@ const saveBannedWordToggle = async (guildID, BWToggle) => {
   });
 };
 
-
 const addIgnoredChannel = async (guildID, channelID) => {
-    if (!connected || !db) {
-        await connectToDB();
-    } //connect
-    const newIgnoredChannel = await ignoredChannelModel({ guildID: guildID, channelID: channelID });
-    await newIgnoredChannel.save((err) => {
-        if (err) {
-            console.error(err);
-            console.log("error!");
-            return false;
-        }
-        return true;
-    });
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
+  const newIgnoredChannel = await ignoredChannelModel({
+    guildID: guildID,
+    channelID: channelID,
+  });
+  await newIgnoredChannel.save((err) => {
+    if (err) {
+      console.error(err);
+      console.log("error!");
+      return false;
+    }
+    return true;
+  });
 };
 
 const checkIgnoredChannel = async (guildID, channelID) => {
-    if (!connected || !db) {
-        await connectToDB();
-    } //connect
-    const ignoredChannelJSON = await ignoredChannelModel.findOne(guildID);
-    if (ignoredChannelJSON == null) {
-        return false;
-    } else {
-        return true;
-    }
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
+  const ignoredChannelJSON = await ignoredChannelModel.findOne(guildID);
+  if (ignoredChannelJSON == null) {
+    return false;
+  } else {
+    return true;
+  }
 };
 
 const setWelcome = async (guildID, welcomeMessage) => {
-    if (!connected || !db) {
-        await connectToDB();
-    } //connect
-    const newWelcome = await welcomeModel({ guildID: guildID, welcomeMessage: welcomeMessage });
-    await newWelcome.save((err) => {
-        if (err) {
-            console.error(err);
-            console.log("error!");
-            return false;
-        }
-        return true;
-    });
-}
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
+  const newWelcome = await welcomeModel({
+    guildID: guildID,
+    welcomeMessage: welcomeMessage,
+  });
+  await newWelcome.save((err) => {
+    if (err) {
+      console.error(err);
+      console.log("error!");
+      return false;
+    }
+    return true;
+  });
+};
 
 module.exports = {
   saveXP,
@@ -396,7 +438,9 @@ module.exports = {
   saveBannedWordToggle,
   addIgnoredChannel,
   checkIgnoredChannel,
-  setWelcome
+  setWelcome,
+  saveEconomy,
+  getEconomy,
 };
 
 console.log("mongodb.js run");

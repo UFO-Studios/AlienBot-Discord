@@ -8,7 +8,8 @@ const {
   Partials,
   IntentsBitField,
 } = require("discord.js");
-const Firebase = require("./firebase.js");
+const Mongodb = require("./mongodb.js");
+const Firebase = require("./firebase");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
@@ -60,8 +61,9 @@ player.on("trackStart", (queue, track) => {
 client.discordTogether = new DiscordTogether(client);
 client.P = player;
 client.C = Config;
-client.F = Firebase;
+client.M = Mongodb;
 client.CD = new Collection();
+client.F = Firebase;
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");

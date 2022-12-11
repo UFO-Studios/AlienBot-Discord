@@ -33,8 +33,7 @@ module.exports = {
       .setColor("Blue")
       .setFooter({
         text: `⬆ ${data.ups} • /meme • AlienBot`,
-        iconURL:
-          "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     const row = new ActionRowBuilder().addComponents(
