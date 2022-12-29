@@ -45,7 +45,7 @@ module.exports = {
           return await interaction.reply({
             content: `I dont have the permissions to add an emoji to this guild. I need the "ManageEmojisAndSticker" permission!`,
           });
-          
+
         return await interaction.reply({
           content: "Invalid Emoji",
           ephemeral: true,

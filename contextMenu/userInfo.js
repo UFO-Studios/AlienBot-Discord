@@ -4,7 +4,7 @@ const {
   Client,
   PermissionsBitField,
   ApplicationCommandType,
-  EmbedBuilder
+  EmbedBuilder,
 } = require("discord.js");
 
 module.exports = {

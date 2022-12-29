@@ -15,8 +15,8 @@ module.exports = {
     if (channel.type === ChannelType.DM || channel.type === ChannelType.GroupDM)
       return;
 
-    const data = await client.F.getData("logging", channel.guildId);
-    if (!data) return;
+    const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
+    if (data == false) return;
 
     const embed = new EmbedBuilder()
       .setTitle("Channel deletion")
@@ -25,17 +25,16 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Channel Deletion • AlienBot",
-        iconURL:
-          "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
-      await channel.guild.channels.fetch()
-      const logChannel = channel.guild.channels.cache.find(
-        (FChannel) => FChannel.name === "alien-logs"
-      );
-  
-      if (!logChannel) return;
-      
-      await logChannel.send({ embeds: [embed] });
+    await channel.guild.channels.fetch();
+    const logChannel = channel.guild.channels.cache.find(
+      (FChannel) => FChannel.name === "alien-logs"
+    );
+
+    if (!logChannel) return;
+
+    await logChannel.send({ embeds: [embed] });
   },
 };

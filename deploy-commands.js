@@ -1,10 +1,11 @@
-const registerCommands = () => {
-  const Config = require("./config.json");
-  const fs = require("node:fs");
-  const path = require("node:path");
-  const { REST } = require("@discordjs/rest");
-  const { Routes } = require("discord.js");
+const Config = require("./config.json");
+const fs = require("node:fs");
+const path = require("node:path");
+const { Routes, REST } = require("discord.js");
 
+const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
+
+const registerCommands = () => {
   const commands = [];
   const globalCommands = [];
   const localCommands = [];
@@ -45,8 +46,6 @@ const registerCommands = () => {
     ...localCommands,
   ];
 
-  const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
-
   if (Config.ENV == "prod") {
     // global commands
     rest.put(Routes.applicationCommands(Config.APP_ID), {
@@ -70,6 +69,16 @@ const registerCommands = () => {
   }
 };
 
+const deleteOld = async () => {
+  rest
+    .put(Routes.applicationCommands(Config.CLIENT_ID), { body: [] })
+    .then(() => {
+      console.log("Successfully deleted all application commands.");
+    })
+    .catch(console.error);
+};
+
 module.exports = {
   registerCommands,
+  deleteOld,
 };

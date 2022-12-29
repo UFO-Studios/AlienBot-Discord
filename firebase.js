@@ -1,4 +1,4 @@
-require("dotenv").config();
+// This file is just for old times sake at this point.
 const firebase = require("firebase-admin/app");
 const firestore = require("firebase-admin/firestore");
 const Config = require("./config.json");
@@ -40,7 +40,7 @@ const addData = async (collectionName, docName, dataObj) => {
   const dataRef = db.collection(collectionName).doc(docName);
 
   const dataSet = await dataRef.set(dataObj);
-  
+
   return dataSet;
 };
 

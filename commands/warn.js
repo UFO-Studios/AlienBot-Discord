@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
+const mongo = require("../mongodb");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -51,73 +52,79 @@ module.exports = {
    *
    * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
+   * @param {target} target
    */
-  async execute(interaction, client) {
-    await interaction.deferReply();
-
+  async execute(interaction, client, target) {
     if (interaction.options.getSubcommand() == "punish") {
-      // warn a member
-      const target = await interaction.options.getMember("target");
-      const reason =
-        (await interaction.options.getString("reason")) || "No reason given";
+      if (target.permissions.has(PermissionFlagsBits.Administrator)) {
+        return await interaction.editReply({
+          content: "You can`t warn an admin!",
+          ephemeral: false,
+        });
+      }
 
       if (
         !interaction.member.permissions.has(PermissionFlagsBits.ModerateMembers)
-      )
+      ) {
         return await interaction.editReply({
-          content: `You dont have the permissions to warn ${target.user.tag}!`,
-          ephemeral: true,
+          content: "You cant moderate users!",
+          ephemeral: false,
         });
-
-      if (target.permissions.has(PermissionFlagsBits.Administrator))
-        return await interaction.editReply({
-          content: "You cannot warn an admin!",
-          ephemeral: true,
-        });
+      }
 
       if (target.id == interaction.member.id)
         return interaction.editReply({
           content: "You cannot warn yourself!",
           ephemeral: true,
         });
-
-      let warns = await client.F.getData("warns", `${target.id}`);
-
-      if (!warns) {
-        await client.F.addData("warns", `${target.id}`, { warns: 1 });
-      } else {
-        await client.F.addData("warns", `${target.id}`, {
-          warns: warns.warns + 1,
-        });
-      }
-
-      await interaction.editReply({
-        content: `${target.user.tag} got warned by ${
-          interaction.user.tag
-        } and now has ${warns.warns + 1} warns. reason: ${reason}`,
-      });
-    } else if (interaction.options.getSubcommand() == "view") {
-      // view a member's warns
       const target = await interaction.options.getMember("target");
-      const warns = await client.F.getData("warns", `${target.id}`);
+      const targetID = await interaction.member.targetID;
+      const reason =
+        (await interaction.options.getString("reason")) || "No reason given";
+      const serverID = await interaction.options.serverID();
 
-      if (!warns) {
-        return await interaction.editReply({
-          content: `${target.user.tag} has 0 warns`,
-        });
-      }
-
-      await interaction.editReply(
-        `${target.user.tag} has ${warns.warns} warns.`
-      );
-    } else if (interaction.options.getSubcommand() == "clear") {
-      // clear a member's warns
-      const target = await interaction.options.getUser("member");
-      await client.F.deleteData("warns", target.id);
+      const warnCount = await mongo.addWarn(serverID, targetID);
 
       return await interaction.editReply({
-        content: `Cleared all warns of ${target.tag}.`,
+        content:
+          target +
+          " has been warned! Reason: " +
+          reason +
+          ". User has " +
+          warnCount +
+          " warns.",
+        ephemeral: false,
       });
+    }
+
+    if (interaction.options.getSubcommand() == "view") {
+      const targetID = await interaction.member.targetID;
+      const serverID = await interaction.options.serverID();
+      const warns = mongo.getWarns(serverID, targetID);
+      return await interaction.editReply({
+        content: target + " has " + warns + " warns.",
+        ephemeral: false,
+      });
+    }
+
+    if (interaction.options.getSubcommand() == "clear") {
+      const targetID = await interaction.member.targetID;
+      const target = await interaction.options.getMember("target");
+      const serverID = await interaction.options.serverID();
+      const CWS = await mongo.clearWarns(serverID, targetID);
+      if (CWS == true) {
+        return await interaction.editReply({
+          content: "Warns cleared!",
+          emhpereal: false,
+        });
+      } else {
+        return await interaction.editReply({
+          content:
+            "Error! Warns not cleared! Try again later or report this on the github.",
+        });
+      }
     }
   },
 };
+
+console.log("warn.js run");

@@ -1,28 +1,24 @@
 const {
-  SlashCommandBuilder,
-  ChatInputCommandInteraction,
+  MessageComponentInteraction,
   Client,
+  ButtonStyle,
+  ActionRowBuilder,
+  ButtonBuilder,
   EmbedBuilder,
 } = require("discord.js");
 const fetch = require("node-fetch");
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("meme").setDescription("get memes!"),
-  global: true,
+  name: "memeButton",
   /**
    *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {MessageComponentInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-    await interaction.deferReply();
-    let data;
-
-    do {
-      data = await fetch("https://meme-api.herokuapp.com/gimme/memes").then(
-        (res) => res.json()
-      );
-    } while (data.nsfw);
+    const data = await fetch(`https://meme-api.com/gimme`).then((res) =>
+      res.json()
+    );
 
     const embed = new EmbedBuilder()
       .setTitle(data.title)
@@ -32,13 +28,18 @@ module.exports = {
       .setTimestamp()
       .setColor("Blue")
       .setFooter({
-        text: `/meme • AlienBot`,
+        text: `⬆ ${data.ups} • /meme • AlienBot`,
         iconURL:
           "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
       });
 
-    return await interaction.editReply({ embeds: [embed] });
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("memeButton")
+        .setLabel("Next Meme")
+        .setStyle(ButtonStyle.Primary)
+    );
+
+    return await interaction.update({ embeds: [embed], components: [row] });
   },
 };
-
-console.log("memes.js run");

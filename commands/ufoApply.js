@@ -27,8 +27,7 @@ module.exports = {
       )
     ) {
       return await interaction.reply({
-        content:
-          "You are not level 5 in the discord! Chat more to level up",
+        content: "You are not level 5 in the discord! Chat more to level up",
       });
     }
 
@@ -40,7 +39,7 @@ module.exports = {
       .setCustomId("subToAlien")
       .setLabel("How long have you been subscribed to alien?")
       .setRequired(true)
-      .setStyle(TextInputStyle.Short)
+      .setStyle(TextInputStyle.Short);
 
     const breakRules = new TextInputBuilder()
       .setCustomId("breakRules")

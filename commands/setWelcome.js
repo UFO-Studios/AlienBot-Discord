@@ -4,6 +4,7 @@ const {
   Client,
   PermissionsBitField,
 } = require("discord.js");
+const mongo = require("../mongodb");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -56,17 +57,17 @@ module.exports = {
     const webhook = await channel
       .createWebhook({
         name: "AlienBot",
-        avatar:
-          "https://media.discordapp.net/attachments/864949202583683072/1010470792393408553/logo.png",
+        avatar: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       })
       .then((w) => w);
 
     console.log(`New webhook created: ${webhook.name}`);
-    await client.F.addData("welcome", interaction.guildId, {
+    await mongo.setWelcome(
+      interaction.guild.id,
       welcomeMessage,
       leaveMessage,
-      webhookUrl: webhook.url,
-    });
+      webhook.url
+    );
     return await interaction.reply({
       content: `Welcome channel set to #${channel.name}!`,
     });

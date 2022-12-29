@@ -1,9 +1,5 @@
-const {
-  EmbedBuilder,
-  GuildChannel,
-  Client,
-  WebhookClient,
-} = require("discord.js");
+const { EmbedBuilder, GuildChannel, Client } = require("discord.js");
+const mongo = require("../mongodb.js");
 
 module.exports = {
   name: "channelCreate",
@@ -14,8 +10,8 @@ module.exports = {
    * @param {Client} client
    */
   async execute(channel, client) {
-    const data = await client.F.getData("logging", channel.guildId);
-    if (!data) return;
+    const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
+    if (data == false) return;
 
     const embed = new EmbedBuilder()
       .setTitle("Channel Creation")
@@ -24,8 +20,7 @@ module.exports = {
       .setTimestamp()
       .setFooter({
         text: "Channel Created • AlienBot",
-        iconURL:
-          "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     await channel.guild.channels.fetch();

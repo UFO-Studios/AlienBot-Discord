@@ -1,4 +1,6 @@
 const { Client, ActivityType } = require("discord.js");
+const Config = require("../config.json");
+const mongo = require("../mongodb");
 
 module.exports = {
   name: "ready",
@@ -18,6 +20,28 @@ module.exports = {
               name: "Sub 2 Alien",
               type: ActivityType.Streaming,
               url: "https://www.youtube.com/c/TheAlienDoctor",
+            },
+          ],
+          status: "online",
+        });
+      },
+      () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "Merry christmas!",
+              type: ActivityType.Watching,
+            },
+          ],
+          status: "online",
+        });
+      },
+      () => {
+        client.user.setPresence({
+          activities: [
+            {
+              name: "New fancy thingy coming soon™️",
+              type: ActivityType.Watching,
             },
           ],
           status: "online",
@@ -142,9 +166,25 @@ module.exports = {
       array[randomNum]();
     }, 20 * 1000); // 20 seconds
 
-    console.log("Ready!");
-    await client.channels.cache
-      .get(client.C.CHANNEL_ID)
-      .send("Bot is online! Running in dev mode :D");
+    const d = new Date();
+    const startTime = d.getTime();
+    mongo.startTime(startTime);
+
+    if (Config.ENV == "GHA") {
+      client.channels.cache
+        .get(client.C.CHANNEL_ID)
+        .send("Bot is running tests!");
+      console.log("ready!");
+    } else if (Config.ENV == "dev") {
+      client.channels.cache
+        .get(client.C.CHANNEL_ID)
+        .send("Bot is running in dev mode!");
+      console.log("ready!");
+    } else {
+      client.channels.cache
+        .get(client.C.CHANNEL_ID)
+        .send("Bot is running in prod mode!");
+      console.log("ready!");
+    }
   },
 };
