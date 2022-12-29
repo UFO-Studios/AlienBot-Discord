@@ -62,8 +62,11 @@ module.exports = {
         { name: "URL", value: `\`\`\`${array[0].image}\`\`\``, inline: true },
         { name: "type", value: `\`\`\`${array[0].type}\`\`\``, inline: true }
       )
-      .setAuthor({ name: interaction.user.tag })
-      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+      .setAuthor({
+        name: interaction.user.tag,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      })
+      .setThumbnail(array[0].image)
       .setColor("Blue");
 
     return await interaction.reply({ embeds: [embed] });

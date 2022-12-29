@@ -13,7 +13,10 @@ module.exports = {
       "ignores this channel for log updates, note: this does not ignore msg updates from this channel"
     )
     .addChannelOption((option) =>
-      option.setName("channel").setDescription("the channel to be ignored")
+      option
+        .setName("channel")
+        .setDescription("the channel to be ignored")
+        .setRequired(true)
     ),
   global: true,
   /**
