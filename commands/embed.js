@@ -61,7 +61,7 @@ module.exports = {
     )
     .addStringOption((option) =>
       option
-        .setName("footer-image-url")
+        .setName("footer-icon")
         .setDescription(
           "the footer icon url to be displayed besides the footer text, defaults to none"
         )
@@ -95,6 +95,7 @@ module.exports = {
     const imageUrl = interaction.options.getString("image-url");
     const footerText = interaction.options.getString("footer-text");
     const footerIcon = interaction.options.getString("footer-icon");
+
     const re = new RegExp("newline", "gi");
     const newDescription = re.test(description)
       ? description.replace(re, "\n")

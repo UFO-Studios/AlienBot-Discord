@@ -14,6 +14,7 @@ module.exports = {
       option
         .setName("username")
         .setDescription("github username of the person to get info of")
+        .setRequired(true)
     ),
   global: true,
   /**
