@@ -16,9 +16,9 @@ const uptimeSchema = new mongoose.Schema({
 
 //warns (AW = Add Warns)
 const AWSchema = new mongoose.Schema({
-  guildID: Number,
-  UserID: Number,
-  Warns: Number,
+  guildId: Number,
+  userId: Number,
+  warns: Number,
 });
 
 const bannedWordsSchema = new mongoose.Schema({
@@ -247,23 +247,20 @@ const getJsonValue = async (input, valueNeeded) => {
  * @returns boolean
  * @example await addWarn(GuildID, ClientID)
  */
-const addWarn = async (GuildID, ClientID) => {
+const addWarn = async (guildId, userId) => {
   if (!connected || !db) {
     await connectToDB();
   } //connect
-  const oldWarnCountJSON = await AWModel.findOne(GuildID, ClientID);
 
-  //PARSE THE JSON!
-  var string = JSON.stringify(oldWarnCountJSON);
-  var objectValue = JSON.parse(string);
-  const oldWarnCount = objectValue["Warns"];
+  const oldWarnCount = (await AWModel.findOne({ guildId, userId })).warns;
 
   if (oldWarnCount == null) {
     const firstWarnForUser = await bannedWordsModule({
-      guildID: GuildID,
-      UserID: ClientID,
-      Warns: newWarnCount,
+      guildId,
+      userId,
+      warns: 1,
     });
+
     await firstWarnForUser.save((err) => {
       if (err) {
         console.error(err);
@@ -271,13 +268,15 @@ const addWarn = async (GuildID, ClientID) => {
       }
     });
   } else {
-    await AWModel.findOneAndRemove(GuildID, ClientID);
+    await AWModel.findOneAndRemove({ guildId, userId });
+
     const newWarnCount = oldWarnCount + 1;
     const newWC = await bannedWordsModule({
-      guildID: GuildID,
-      UserID: ClientID,
-      Warns: newWarnCount,
+      guildId,
+      userId,
+      warns: newWarnCount,
     });
+
     await newWC.save((err) => {
       if (err) {
         console.error(err);
@@ -288,11 +287,12 @@ const addWarn = async (GuildID, ClientID) => {
   }
 };
 
-const getWarns = async (GuildID, ClientID) => {
+const getWarns = async (guildId, userId) => {
   if (!connected || !db) {
     await connectToDB();
   } //connect
-  const warnCount = await AWModel.findOne(GuildID, ClientID);
+
+  const warnCount = await AWModel.findOne({ guildId, userId });
   if (warnCount == null) {
     return 0;
   } else {
@@ -300,11 +300,12 @@ const getWarns = async (GuildID, ClientID) => {
   }
 };
 
-const clearWarns = async (GuildID, ClientID) => {
+const clearWarns = async (guildId, userId) => {
   if (!connected || !db) {
-    await connectToB();
+    await connectToDB();
   } //connect
-  await AWModel.findOneAndRemove(GuildID, ClientID);
+
+  await AWModel.findOneAndRemove({ guildId, userId });
   return true;
 };
 
@@ -312,6 +313,7 @@ const saveLogToggle = async (guildID, logToggle) => {
   if (!connected || !db) {
     await connectToDB();
   } //connect
+
   const newToggle = await loggingToggleModel({
     guildID: guildID,
     toggle: logToggle,

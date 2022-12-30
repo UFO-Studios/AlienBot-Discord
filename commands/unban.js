@@ -1,4 +1,9 @@
-const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  PermissionsBitField,
+  ChatInputCommandInteraction,
+  Client,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,6 +17,12 @@ module.exports = {
       return option;
     }),
   global: true,
+  /**
+   *
+   * @param {ChatInputCommandInteraction} interaction
+   * @param {Client} client
+   * @returns
+   */
   async execute(interaction, client) {
     if (
       !interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)
@@ -21,25 +32,22 @@ module.exports = {
           'You dont have the perms to unban a member. You need the "BanMembers" permission!',
       });
 
-    const ID = interaction.options.getString("id");
+    const ID = interaction.options.getString("user-id");
 
     try {
-      const guild = await client.guilds.cache.get(interaction.guild.id);
-      guild.members
-        .unban(ID)
-        .then((user) => {
-          interaction.reply(`Unbanned ${user.username} from ${guild.name}`);
-          console.log(`Unbanned ${user.username} from ${guild.name}`);
-        })
-        .catch((e) => {
-          if (e) console.log(e);
-        });
+      const guild = await client.guilds.fetch(interaction.guildId);
+
+      const user = await guild.members.unban(ID);
+
+      await interaction.reply({
+        content: `${user.tag} has been unbanned from ${guild.name}!`,
+      });
     } catch (e) {
       if (e) {
         if (e.code == 50013)
           return await interaction.reply({
             content:
-              'I dont have th permissions to unban a member. I need the "BanMembers" permission!',
+              'I dont have the permissions to unban a member. I need the "BanMembers" permission!',
           });
         console.log(e);
         return interaction.reply({ content: "Invalid ID", ephemeral: true });
