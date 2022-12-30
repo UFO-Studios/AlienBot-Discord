@@ -6,17 +6,17 @@ module.exports = {
     .setName("toggle-banned-words")
     .setDescription("Toggles weather the bot is deleting banned words"),
   global: true,
-  async execute(interaction, client, channel) {
-    const data = await mongo.getLogToggle(interaction.guildid);
-    if (data == false) {
+  async execute(interaction, client) {
+    const data = await mongo.getBannedWordToggle(interaction.guildId);
+    console.log(data);
+    if (!data) {
       await mongo.saveBannedWordToggle(interaction.guildId, true);
-      interaction.reply("Banned words are now banned!");
+      return await interaction.reply("Banned words are now banned!");
     } else {
-      if (data.toggleValue == true) {
-        await mongo.saveLogToggle(interaction.guildId, false);
-        interaction.reply("Banned words have been allowed! ");
-      }
+      await mongo.saveBannedWordToggle(interaction.guildId, false);
+      interaction.reply("Banned words have been allowed! ");
     }
   },
 };
+
 console.log("toggleBanned.js run");

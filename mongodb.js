@@ -96,9 +96,12 @@ const checkBW = async (word) => {
     await connectToDB();
   }
 
-  const checkWord = await bannedWordsModule.find(word);
-  if (checkWord == !data) return false;
-  else return true;
+  const checkWord = await bannedWordsModule.find({ word });
+  if (checkWord == false) {
+    return false;
+  } else {
+    return true;
+  }
 };
 
 /**
@@ -230,9 +233,11 @@ const addBW = async (Bword) => {
   console.log("run");
 };
 
+// completely useless
 const getJsonValue = async (input, valueNeeded) => {
-  var string = await JSON.stringify(input);
-  var objectValue = await JSON.parse(string);
+  const string = await JSON.stringify(input);
+  const objectValue = await JSON.parse(string);
+
   if (objectValue == null) {
     console.log("JSON is null! Did you format it correctly?");
   } else {
@@ -446,6 +451,7 @@ module.exports = {
   setWelcome,
   saveEconomy,
   getEconomy,
+  checkBW,
 };
 
 console.log("mongodb.js run");

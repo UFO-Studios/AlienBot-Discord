@@ -22,7 +22,7 @@ module.exports = {
     );
 
     return await interaction.reply({
-      content: `Your custom generated password is: \`${data.password}\`. Keep it a secret, keep it safe.`,
+      content: `Your custom generated password is: \`${data.password}\`. Keep it secret, keep it safe.`,
       ephemeral: true,
     });
   },

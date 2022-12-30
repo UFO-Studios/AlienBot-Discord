@@ -1,19 +1,16 @@
 ﻿const mongo = require("../mongodb");
 const { ChannelType, Message, Client } = require("discord.js");
-const convertor = require("number-to-words");
-const emojiFromText = require("emoji-from-text");
 
 const deleteBannedWords = async (message, client) => {
   try {
     const data = await mongo.getBannedWordToggle(message.guild.id);
     if (!data) return;
-    if (!data.toggleValue == "on") return;
+    const msg = message.content.toLowerCase();
+    const words = msg.split(" ");
 
-    const array = message.content.split(" ");
-
-    for (const word of array) {
-      if (mongo.checkBW(word) == true) {
-        message.reply({
+    for (const word of words) {
+      if ((await mongo.checkBW(word)) == true) {
+        await message.reply({
           content: "You cannot use that word!",
           reply: true,
         });
@@ -30,27 +27,21 @@ const deleteBannedWords = async (message, client) => {
   }
 };
 
-const levelingSystem = async (messageID, client) => {
-  const oldXP = await mongo.getXP(messageID);
+/**
+ * @param {Message} message
+ * @param {Client} client
+ */
+const levelingSystem = async (message, client) => {
+  const oldXP = await mongo.getXP(message.author.id);
   const oldXPValue = await mongo.getJsonValue(oldXP, "xp");
   const oldXpID = await mongo.getJsonValue(oldXP, "_id");
+
   if (oldXPValue == null) {
-    await mongo.saveXP(messageID, "1");
-    console.log("User has been added to leveling DB.");
-    return true; //we could change this so we could dm a new user stuff but thats a later me problem
+    await mongo.saveXP(message.author.id, "1");
+    return true;
   } else {
-    if (oldXpID == "1044067382022373500") {
-      console.log("WE HAVE A GHOST USER EVERYONE PANIC!!!!");
-      return false;
-    }
-    const newXP = Math.trunc(Math.random() * 10) + oldXPValue;
-    await mongo.saveXP(messageID, newXP, oldXpID);
-    console.log(
-      "User has been updated in leveling DB. Was " +
-        oldXPValue +
-        " is now " +
-        newXP
-    );
+    const newXP = Math.floor(Math.random() * 10) + oldXPValue;
+    await mongo.saveXP(message.author.id, newXP, oldXpID);
     return true;
   }
 };
@@ -68,9 +59,8 @@ module.exports = {
     // banned words
     await deleteBannedWords(message, client);
 
-    // leveling
-    const MSGID = message.author.id;
-    levelingSystem(MSGID, client);
+    // LEVELING
+    levelingSystem(message, client);
   },
 };
 console.log("events/messageCreate.js run");
