@@ -4,6 +4,9 @@ const config = require("./config.json");
 let connected;
 let db;
 
+//silece mongoose warnings
+mongoose.set('strictQuery', true);
+
 //START schemas
 const LvlSchema = new mongoose.Schema({
   userId: Number,
