@@ -5,6 +5,7 @@ const {
   Client,
   ChannelType,
 } = require("discord.js");
+const mongo = require("../mongodb.js");
 
 module.exports = {
   name: "channelUpdate",
@@ -46,7 +47,7 @@ module.exports = {
     }
 
     const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
-    if (data == false) return;
+    if (data == !true) return;
 
     if (oldChannel.name !== NewChannel.name) {
       const embed = new EmbedBuilder()
