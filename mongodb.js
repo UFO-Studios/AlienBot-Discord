@@ -177,7 +177,7 @@ const getXP = async (userId) => {
   const userXP = await lvl_module.findOne({ userId });
 
   console.log("Data recived from DB!");
-  console.log(userXP);
+  //console.log(userXP);
   return userXP;
 };
 
