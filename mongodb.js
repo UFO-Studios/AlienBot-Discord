@@ -4,6 +4,9 @@ const config = require("./config.json");
 let connected;
 let db;
 
+//silece mongoose warnings
+mongoose.set('strictQuery', true);
+
 //START schemas
 const LvlSchema = new mongoose.Schema({
   userId: Number,
@@ -174,7 +177,7 @@ const getXP = async (userId) => {
   const userXP = await lvl_module.findOne({ userId });
 
   console.log("Data recived from DB!");
-  console.log(userXP);
+  //console.log(userXP);
   return userXP;
 };
 

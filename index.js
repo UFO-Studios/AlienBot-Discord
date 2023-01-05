@@ -13,8 +13,26 @@ const Firebase = require("./firebase");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
+const express = require("express");
+const { config } = require("dotenv");
 
-deleteOld();
+//express server for uptime robot
+const app = express()
+const port = 3333
+
+app.get('/', (req, res) => {
+  res.send('Bot is online!')
+  console.log("status page visited")
+});
+
+app.listen(port, () => {
+  console.log(`Status server is running on port ${port}`)
+});
+//end
+
+if (Config.DELETE_OLD == true) {
+  deleteOld();
+};
 registerCommands();
 
 const Intents = new IntentsBitField([

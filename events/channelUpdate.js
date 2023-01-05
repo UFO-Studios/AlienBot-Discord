@@ -5,6 +5,7 @@ const {
   Client,
   ChannelType,
 } = require("discord.js");
+const mongo = require("../mongodb.js");
 
 module.exports = {
   name: "channelUpdate",

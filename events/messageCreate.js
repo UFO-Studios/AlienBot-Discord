@@ -38,10 +38,12 @@ const levelingSystem = async (message, client) => {
 
   if (oldXPValue == null) {
     await mongo.saveXP(message.author.id, "1");
+    console.log("New user xp saved");
     return true;
   } else {
     const newXP = Math.floor(Math.random() * 10) + oldXPValue;
     await mongo.saveXP(message.author.id, newXP, oldXpID);
+    console.log("User xp updated, was " + oldXPValue + " now " + newXP)
     return true;
   }
 };
