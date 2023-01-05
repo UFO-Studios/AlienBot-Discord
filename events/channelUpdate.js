@@ -18,35 +18,15 @@ module.exports = {
     if (
       oldChannel.type === ChannelType.GroupDM ||
       oldChannel.type === ChannelType.DM
-    )
+    ) {
       return;
-
-    const ignoreChannelsData = await client.F.getData(
-      "ignore-channels",
-      oldChannel.guildId
-    );
-
-    if (ignoreChannelsData) {
-      if (!ignoreChannelsData.channels.length > 1) {
-        if (channels[0] == oldChannel.id) return;
-      } else {
-        // TODO: work on a better system to do this
-        const array = ignoreChannelsData.channels.map((id) => {
-          if (id == oldChannel.id) {
-            return "true";
-          } else {
-            return "false";
-          }
-        });
-
-        if (array.includes("true")) {
-          return;
-        }
-      }
     }
 
-    const data = await mongo.checkIgnoredChannel(channel.guild.id, channel.id);
-    if (data == false) return;
+    if (
+      !(await mongo.checkIgnoredChannel(oldChannel.guild.id, oldChannel.id))
+    ) {
+      return;
+    }
 
     if (oldChannel.name !== NewChannel.name) {
       const embed = new EmbedBuilder()
