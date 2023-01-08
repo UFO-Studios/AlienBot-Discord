@@ -17,22 +17,22 @@ const express = require("express");
 const { config } = require("dotenv");
 
 //express server for uptime robot
-const app = express()
-const port = 3333
+const app = express();
+const port = 3333;
 
-app.get('/', (req, res) => {
-  res.send('Bot is online!')
-  console.log("status page visited")
+app.get("/", (req, res) => {
+  res.send("Bot is online!");
+  console.log("status page visited");
 });
 
 app.listen(port, () => {
-  console.log(`Status server is running on port ${port}`)
+  console.log(`Status server is running on port ${port}`);
 });
 //end
 
 if (Config.DELETE_OLD == true) {
   deleteOld();
-};
+}
 registerCommands();
 
 const Intents = new IntentsBitField([

@@ -22,7 +22,7 @@ module.exports = {
       )
       .setDescription(`Message Content: \`\`\`${message.content}\`\`\``)
       .setAuthor({ name: message.author.tag })
-      .setColor("fcdf03")
+      .setColor("Purple")
       .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({

@@ -5,7 +5,7 @@ let connected;
 let db;
 
 //silece mongoose warnings
-mongoose.set('strictQuery', true);
+mongoose.set("strictQuery", true);
 
 //START schemas
 const LvlSchema = new mongoose.Schema({
@@ -34,7 +34,7 @@ const loggingURLSchema = new mongoose.Schema({
 });
 
 const loggingToggleSchema = new mongoose.Schema({
-  guildID: Number,
+  guildId: Number,
   toggle: Boolean,
 });
 
@@ -317,17 +317,17 @@ const clearWarns = async (guildId, userId) => {
   return true;
 };
 
-const saveLogToggle = async (guildID, logToggle) => {
+const saveLogToggle = async (guildId, toggle) => {
   if (!connected || !db) {
     await connectToDB();
   } //connect
 
   const newToggle = await loggingToggleModel({
-    guildID: guildID,
-    toggle: logToggle,
+    guildId,
+    toggle,
   });
 
-  await loggingToggleModel.findOneAndRemove(guildID);
+  await loggingToggleModel.findOneAndRemove({ guildId, toggle });
   await newToggle.save((err) => {
     if (err) {
       console.error(err);
@@ -338,12 +338,12 @@ const saveLogToggle = async (guildID, logToggle) => {
   });
 };
 
-const getLogToggle = async (guildID) => {
+const getLogToggle = async (guildId) => {
   if (!connected || !db) {
     await connectToDB();
     console.log("connected");
   } //connect
-  const logToggleJSON = await loggingToggleModel.findOne(guildID);
+  const logToggleJSON = await loggingToggleModel.findOne({ guildId });
   if (logToggleJSON == null) {
     return false;
   }
@@ -375,7 +375,7 @@ const saveBannedWordToggle = async (guildID, BWToggle) => {
   } //connect
   const newToggle = BWToggleModel({ guildID: guildID, toggle: BWToggle });
 
-  await BWToggleModel.findOneAndRemove(guildID);
+  await BWToggleModel.findOneAndRemove({ guildID });
   await newToggle.save((err) => {
     if (err) {
       console.error(err);
@@ -399,16 +399,21 @@ const addIgnoredChannel = async (guildID, channelID) => {
       console.error(err);
       console.log("error!");
       return false;
-    }
+    } 
     return true;
   });
 };
 
-const checkIgnoredChannel = async (guildID, channelID) => {
+const checkIgnoredChannel = async (guildId, channelId) => {
   if (!connected || !db) {
     await connectToDB();
-  } //connect
-  const ignoredChannelJSON = await ignoredChannelModel.findOne(guildID);
+  }
+
+  const ignoredChannelJSON = await ignoredChannelModel.findOne({
+    guildId,
+    channelId,
+  });
+  console.log(ignoredChannelJSON);
   if (ignoredChannelJSON == null) {
     return false;
   } else {

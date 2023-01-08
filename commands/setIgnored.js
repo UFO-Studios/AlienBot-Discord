@@ -4,7 +4,7 @@ const {
   Client,
   PermissionsBitField,
 } = require("discord.js");
-const mongoose = require("mongoose");
+const mongo = require("../mongodb");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -39,8 +39,9 @@ module.exports = {
       interaction.guildId,
       channel.id
     );
+
     if (!data) {
-      await mongo.setIgnoredChannel(interaction.guildId, channel.id);
+      await mongo.addIgnoredChannel(interaction.guildId, channel.id);
       return await interaction.editReply({
         content: `#${channel.name} will now be ignored for channel update logs!`,
       });
