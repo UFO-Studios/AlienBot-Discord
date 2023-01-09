@@ -10,7 +10,6 @@ const mongo = require("../mongodb.js");
 module.exports = {
   name: "channelUpdate",
   /**
-   *
    * @param {Channel} oldChannel
    * @param {Channel} NewChannel
    * @param {Client} client

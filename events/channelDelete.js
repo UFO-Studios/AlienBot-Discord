@@ -4,6 +4,7 @@ const {
   Channel,
   ChannelType,
 } = require("discord.js");
+const mongo = require("../mongodb");
 
 module.exports = {
   name: "channelDelete",
