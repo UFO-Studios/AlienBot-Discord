@@ -21,23 +21,22 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    await interaction.deferReply()
+
     const target = interaction.options.getUser("target") || interaction.user;
     if (target.bot)
       return await interaction.reply("You cannot check XP of a bot!");
 
-    const authorID = interaction.member.id;
-    const dataJSON = await mongo.getXP(authorID);
-    const data = await mongo.getJsonValue(dataJSON, "xp");
-    console.log(authorID + " is the id of the user, the data is " + data);
+    const data = await mongo.getXP(target.id);
 
-    if (!data.level[target.id])
-      return await interaction.reply({ content: "You dont have any XP!" });
+    if (!data === 0)
+      return await interaction.editReply({ content: "You dont have any XP!" });
 
     const embed = new EmbedBuilder()
       .setAuthor({ name: target.tag })
       .setThumbnail(target.displayAvatarURL({ dynamic: true }))
       .setTitle("Rank")
-      .setDescription(`${target.tag}'s XP is: ${data.level[target.id]}`)
+      .setDescription(`${target.tag}'s XP is: ${data}`)
       .setColor("Blue")
       .setTimestamp()
       .setFooter({
@@ -45,7 +44,7 @@ module.exports = {
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
-    return await interaction.reply({ embeds: [embed] });
+    return await interaction.editReply({ embeds: [embed] });
   },
 };
 
