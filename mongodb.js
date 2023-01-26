@@ -180,7 +180,7 @@ const getXP = async (userId) => {
     return 0;
   };
 
-  const xpOut = getJsonValue(userXp, xp)
+    const xpOut = getJsonValue(userXp, "xp");
   //console.log("Data recived from DB!");
   return xpOut;
 };
