@@ -144,11 +144,12 @@ const saveXP = async (userId, xp, _id) => {
 
   const lvlnew = lvl_module({ userId, xp });
 
-  if (_id == null) {
-    console.log("Document ID is " + _id + " ! Skipping deletion...");
-  } else {
+    //if (_id == null) {
+    //  console.log(_id)
+    //console.log("Document ID is " + _id + " ! Skipping deletion...");
+  //} else {
     await lvl_module.findByIdAndDelete({ _id });
-  }
+  //}
 
   await lvlnew.save((err) => {
     if (err) {
@@ -175,7 +176,7 @@ const getXP = async (userId) => {
   }
 
   const userXp = await lvl_module.findOne({ userId });
-  //console.log(userXp);
+  console.log(userXp);
   if (userXp == null) {
     return 0;
   };
@@ -243,11 +244,15 @@ const addBW = async (Bword) => {
 // completely useless
 const getJsonValue = async (input, valueNeeded) => {
   const string = await JSON.stringify(input);
-  const objectValue = await JSON.parse(string);
+    const objectValue = await JSON.parse(string);
+    console.log(objectValue + "is objectvalue")
 
   if (objectValue == null) {
     console.log("JSON is null! Did you format it correctly?");
+  } else if (objectValue == undefined) {
+      console.log("JSON is undefined! Did you format it correctly?");
   } else {
+    console.log(objectValue[valueNeeded] + " is being returned");
     return objectValue[valueNeeded];
   }
 };
