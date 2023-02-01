@@ -9,7 +9,6 @@ const {
   IntentsBitField,
 } = require("discord.js");
 const Mongodb = require("./mongodb.js");
-const Firebase = require("./firebase");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
@@ -54,11 +53,6 @@ const client = new Client({
   partials: [Partials.Channel],
 });
 
-(async () => {
-  const data = await Firebase.getData("db", "BANNED_WORDS");
-  client.BANNED_WORDS = await data.WORDS;
-})();
-
 const player = new Player(client, { ytdlOptions: { quality: "highestaudio" } });
 
 player.on("trackStart", (queue, track) => {
@@ -81,7 +75,6 @@ client.P = player;
 client.C = Config;
 client.M = Mongodb;
 client.CD = new Collection();
-client.F = Firebase;
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");

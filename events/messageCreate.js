@@ -1,22 +1,27 @@
 ﻿const mongo = require("../mongodb");
 const { ChannelType, Message, Client } = require("discord.js");
+const { randomInRange } = require("make-random");
 
+/**
+ * @param {Message} message
+ * @param {Client} client
+ */
 const deleteBannedWords = async (message, client) => {
   try {
     const data = await mongo.getBannedWordToggle(message.guild.id);
     if (!data) return;
     const msg = message.content.toLowerCase();
-    const words = msg.split(" ");
+    const words = msg.split(/ |_|-/);
 
     for (const word of words) {
-      if ((await mongo.checkBW(word)) == true) {
+      if (await mongo.checkBW(word)) {
         await message.reply({
           content: "You cannot use that word!",
           reply: true,
         });
 
         setTimeout(() => {
-          message.delete(); // this seems to not be working
+          message.delete();
         }, 1000);
       }
     }
@@ -34,36 +39,24 @@ const checkLevel = async (xp) => {};
  * @param {Client} client
  */
 const addXp = async (message, client) => {
-  const oldXP = await mongo.getXP(message.author.id);
-  const oldXPValue = await mongo.getJsonValue(oldXP, "xp");
-  const oldLevelValue = await mongo.getJsonValue(oldXP, "xp");
-  const oldXpID = await mongo.getJsonValue(oldXP, "_id");
+  const oldXpObject = await mongo.getXP(message.author.id);
+  const oldXpObjectId = oldXpObject._id;
+  const oldXp = oldXpObject.xp;
+  const oldLevel = oldXpObject.level;
 
-  if (oldXPValue == null) {
-    await mongo.saveXP(message.author.id, "1");
-    console.log("New user added to the DB");
-    return true;
-  } else {
-    const newXP = Math.floor(Math.random() * 10) + oldXPValue;
-    await mongo.saveXP(message.author.id, newXP, oldXpID);
-    console.log("User xp updated, was " + oldXPValue + " now " + newXP);
+  const newXp = oldXp + (await randomInRange(15, 50));
+  const newLevel = newXp > oldLevel * 500 ? oldLevel + 1 : oldLevel;
 
-    return true;
+  if (newLevel > oldLevel) {
+    message.channel.send({
+      content: `@${message.author.tag} you just leveled up to ${newLevel}!`,
+    });
   }
-};
 
-/**
- * @param {Message} message
- * @param {Client} client
- */
-const addLevels = async (message, client) => {
-  const { xp, level } = await mongo.getXP(message.user.id);
+  console.log(newLevel, newXp);
 
-  if (xp > (level > 0 ? level : 1) * 100) {
-    console.log("new level");
-  } else {
-    console.log("no new level.");
-  }
+  await mongo.saveXP(message.author.id, newXp, newLevel, oldXpObjectId);
+  return true;
 };
 
 module.exports = {
@@ -81,9 +74,7 @@ module.exports = {
 
     // adding xp
     await addXp(message, client);
-
-    // adding levels
-    await addLevels(message, client);
   },
 };
+
 console.log("events/messageCreate.js run");

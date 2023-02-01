@@ -91,8 +91,10 @@ const connectToDB = async () => {
   connected = true;
   console.log("MongoDB is loaded!");
   db = await mongoose.connection;
+
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
   console.log("Complete!");
+  return true;
 };
 
 const checkBW = async (word) => {
@@ -101,7 +103,7 @@ const checkBW = async (word) => {
   }
 
   const checkWord = await bannedWordsModule.find({ word });
-  if (checkWord == false) {
+  if (!checkWord) {
     return false;
   } else {
     return true;
@@ -138,29 +140,14 @@ const saveEconomy = async (userId, balance) => {
  *  @example await saveXP("userID", "XP")
  * @returns {Bool} true if saved successfully, false if not.
  **/
-const saveXP = async (userId, xp, _id) => {
+const saveXP = async (userId, xp, level, _id) => {
   if (!connected || !db) {
     await connectToDB();
   }
 
-  const lvlnew = lvl_module({ userId, xp });
+  await lvl_module.findByIdAndUpdate(_id, { userId, xp, level });
 
-    if (_id == null) {
-      //console.log(_id)
-    console.log("Document ID is " + _id + " ! Skipping deletion...");
-  } else {
-        await lvl_module.findByIdAndDelete({ _id });
-        console.log("Old entry deleted!");
-    };
-
-  await lvlnew.save((err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-  });
-
-  console.log("Data added to DB!");
+  console.log("Data updated in DB!");
   return true;
 };
 //END (saveXP)
@@ -197,7 +184,7 @@ const getXP = async (userId) => {
   console.log(returnObject);
   return returnObject;
 };
-//////////////////////////////////////////////////////////////
+
 const getEconomy = async (userId) => {
   if (!connected || !db) {
     await connectToDB();
@@ -256,14 +243,14 @@ const addBW = async (Bword) => {
 // completely useless
 const getJsonValue = async (input, valueNeeded) => {
   const string = await JSON.stringify(input);
-    const objectValue = await JSON.parse(string);
-    //console.log(objectValue + "is objectvalue")
+  const objectValue = await JSON.parse(string);
+  //console.log(objectValue + "is objectvalue")
 
   if (objectValue == null) {
     console.log("JSON is null! Did you format it correctly?");
   } else if (objectValue == undefined) {
-      console.log("JSON is undefined! Did you format it correctly?");
-      return null;
+    console.log("JSON is undefined! Did you format it correctly?");
+    return null;
   } else {
     //console.log(objectValue[valueNeeded] + " is being returned");
     return objectValue[valueNeeded];
