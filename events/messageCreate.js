@@ -41,7 +41,7 @@ const addXp = async (message, client) => {
 
   if (oldXPValue == null) {
     await mongo.saveXP(message.author.id, "1");
-    console.log("New user xp saved");
+    console.log("New user added to the DB");
     return true;
   } else {
     const newXP = Math.floor(Math.random() * 10) + oldXPValue;
