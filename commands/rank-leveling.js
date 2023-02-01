@@ -21,7 +21,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    await interaction.deferReply()
+    await interaction.deferReply();
 
     const target = interaction.options.getUser("target") || interaction.user;
     if (target.bot)
@@ -29,14 +29,16 @@ module.exports = {
 
     const data = await mongo.getXP(target.id);
 
-    if (!data === 0)
+    if (data.xp === 0)
       return await interaction.editReply({ content: "You dont have any XP!" });
 
     const embed = new EmbedBuilder()
       .setAuthor({ name: target.tag })
       .setThumbnail(target.displayAvatarURL({ dynamic: true }))
       .setTitle("Rank")
-      .setDescription(`${target.tag}'s XP is: ${data}`)
+      .setDescription(
+        `${target.tag}'s XP is: ${data.xp}. Level is ${data.level}`
+      )
       .setColor("Blue")
       .setTimestamp()
       .setFooter({

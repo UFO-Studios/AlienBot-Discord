@@ -11,6 +11,7 @@ mongoose.set("strictQuery", true);
 const LvlSchema = new mongoose.Schema({
   userId: Number,
   xp: Number,
+  level: Number,
 });
 
 const uptimeSchema = new mongoose.Schema({
@@ -175,14 +176,24 @@ const getXP = async (userId) => {
   }
 
   const userXp = await lvl_module.findOne({ userId });
-  
   console.log(userXp);
+
+  let returnObject = userXp;
+
   if (!userXp.xp) {
-    return 0
+    returnObject.xp = 0;
   }
 
+  if (!userXp.level) {
+    returnObject.level = 0;
+  }
+
+  returnObject.xp = userXp.xp;
+  returnObject.level = userXp.level;
+
   console.log("Data recived from DB!");
-  return userXp.xp;
+  console.log(returnObject);
+  return returnObject;
 };
 
 const getEconomy = async (userId) => {
@@ -403,7 +414,7 @@ const addIgnoredChannel = async (guildID, channelID) => {
       console.error(err);
       console.log("error!");
       return false;
-    } 
+    }
     return true;
   });
 };
