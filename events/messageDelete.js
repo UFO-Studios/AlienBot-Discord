@@ -9,10 +9,6 @@ module.exports = {
    * @param {Message} message
    */
   async execute(message, client) {
-    const data = await client.F.getData("logging", message.guildId);
-
-    if (!data) return;
-
     //checks
     if (message.author.bot) return;
 
@@ -31,12 +27,8 @@ module.exports = {
       });
 
     await message.guild.channels.fetch();
-    const channel = message.guild.channels.cache.find(
-      (channel) => channel.name == "alien-logs"
-    );
-
-    if (!channel) return;
-
-    await channel.send({ embeds: [embed] });
+    return await message.guild.channels.cache
+      .find((channel) => channel.name == "alien-logs")
+      .send({ embeds: [embed] });
   },
 };

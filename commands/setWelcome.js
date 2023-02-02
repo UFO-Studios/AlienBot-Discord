@@ -59,15 +59,16 @@ module.exports = {
         name: "AlienBot",
         avatar: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       })
-      .then((w) => w);
+      .then((w) => w.url);
 
-    console.log(`New webhook created: ${webhook.name}`);
-    await mongo.setWelcome(
-      interaction.guild.id,
+    await mongo.saveWelcomeToggle(
+      interaction.guildId,
+      true,
+      webhook,
       welcomeMessage,
-      leaveMessage,
-      webhook.url
+      leaveMessage
     );
+
     return await interaction.reply({
       content: `Welcome channel set to #${channel.name}!`,
     });

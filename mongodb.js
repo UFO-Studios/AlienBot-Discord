@@ -44,6 +44,14 @@ const BWToggleSchema = new mongoose.Schema({
   toggle: Boolean,
 });
 
+const welcomeToggleSchema = new mongoose.Schema({
+  guildId: Number,
+  toggle: Boolean,
+  webhookUrl: String,
+  welcomeMsg: String,
+  leaveMsg: String,
+});
+
 const addIgnoredChannelSchema = new mongoose.Schema({
   guildID: Number,
   channelID: Number,
@@ -75,6 +83,10 @@ const loggingToggleModel = new mongoose.model(
 );
 const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
+const welcomeToggleModel = new mongoose.model(
+  "welcomeToggle",
+  welcomeToggleSchema
+);
 const ignoredChannelModel = new mongoose.model(
   "ignoredChannel",
   addIgnoredChannelSchema
@@ -103,7 +115,8 @@ const checkBW = async (word) => {
   }
 
   const checkWord = await bannedWordsModule.find({ word });
-  if (!checkWord) {
+
+  if (!checkWord[0]) {
     return false;
   } else {
     return true;
@@ -367,15 +380,60 @@ const getBannedWordToggle = async (guildID) => {
     await connectToDB();
     console.log("connected");
   } //connect
+
   const BWToggleJSON = await BWToggleModel.findOne({ guildID });
-  if (BWToggleJSON == null) {
+  if (!BWToggleJSON) {
     return false;
   } else {
-    var string = JSON.stringify(BWToggleJSON);
-    var objectValue = JSON.parse(string);
-    const BWToggle = objectValue["toggle"];
-    return BWToggle;
+    return BWToggleJSON["toggle"];
   }
+};
+
+const getWelcomeToggle = async (guildId) => {
+  if (!connected || !db) {
+    await connectToDB();
+    console.log("connected");
+  } //connect
+
+  const welcomeToggle = await welcomeToggleModel.findOne({ guildId });
+  console.log(welcomeToggle);
+  if (!welcomeToggle) {
+    return false;
+  } else {
+    return welcomeToggle;
+  }
+};
+
+const saveWelcomeToggle = async (
+  guildId,
+  toggle,
+  webhookUrl,
+  welcomeMsg,
+  leaveMsg
+) => {
+  if (!connected || !db) {
+    await connectToDB();
+  } //connect
+
+  const newToggle = welcomeToggleModel({
+    guildId,
+    toggle,
+    webhookUrl,
+    welcomeMsg,
+    leaveMsg,
+  });
+
+  await welcomeToggleModel.findOneAndRemove({ guildId });
+  await newToggle.save((err) => {
+    if (err) {
+      console.error(err);
+      console.log("error!");
+      return false;
+    }
+    return true;
+  });
+
+  return true;
 };
 
 const saveBannedWordToggle = async (guildID, BWToggle) => {
@@ -430,26 +488,6 @@ const checkIgnoredChannel = async (guildId, channelId) => {
   }
 };
 
-async function setWelcome(guildID, welcomeMessage, leaveMessage, webhookURL) {
-  if (!connected || !db) {
-    await connectToDB();
-  } //connect
-  const newWelcome = await setWelcomeModel({
-    guildID: guildID,
-    welcomeMessage: welcomeMessage,
-    webhookURL: webhookURL,
-    leaveMessage: leaveMessage,
-  });
-  await newWelcome.save((err) => {
-    if (err) {
-      console.error(err);
-      console.log("error!");
-      return false;
-    }
-    return true;
-  });
-}
-
 module.exports = {
   saveXP,
   getXP,
@@ -465,10 +503,11 @@ module.exports = {
   saveBannedWordToggle,
   addIgnoredChannel,
   checkIgnoredChannel,
-  setWelcome,
   saveEconomy,
   getEconomy,
+  saveWelcomeToggle,
   checkBW,
+  getWelcomeToggle,
 };
 
 console.log("mongodb.js run");
