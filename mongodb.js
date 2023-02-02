@@ -383,7 +383,7 @@ const getBannedWordToggle = async (guildID) => {
 
   const BWToggleJSON = await BWToggleModel.findOne({ guildID });
   if (!BWToggleJSON) {
-    return false;
+    return { toggle: false };
   } else {
     return BWToggleJSON["toggle"];
   }
@@ -398,7 +398,7 @@ const getWelcomeToggle = async (guildId) => {
   const welcomeToggle = await welcomeToggleModel.findOne({ guildId });
   console.log(welcomeToggle);
   if (!welcomeToggle) {
-    return false;
+    return { toggle: false };
   } else {
     return welcomeToggle;
   }

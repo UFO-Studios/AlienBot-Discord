@@ -6,6 +6,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
+const mongo = require("../mongodb");
 
 module.exports = {
   name: "guildMemberRemove",
@@ -39,15 +40,15 @@ module.exports = {
     }
 
     // Welcome image
-    const data = await client.F.getData("welcome", member.guild.id);
-    if (!data) {
+    const data = await mongo.getWelcomeToggle(member.guild.id);
+    if (!data.toggle) {
       return;
     }
 
     const leaveRE = new RegExp("{username}", "g");
     const leaveRE2 = new RegExp("{memberCount}", "g");
 
-    const str = data.leaveMessage.replace(leaveRE, member.displayName);
+    const str = data.leaveMsg.replace(leaveRE, member.displayName);
     const strULTIMATE = str.replace(leaveRE2, member.guild.memberCount);
 
     const applyText = (canvas, text, fontSize, font) => {
