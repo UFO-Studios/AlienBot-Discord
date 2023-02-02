@@ -10,9 +10,6 @@ module.exports = {
    * @param {Client} client
    */
   async execute(oldMessage, newMessage, client) {
-    const data = await client.F.getData("logging", oldMessage.guildId);
-
-    if (!data) return;
     //checks
     if (oldMessage.author.bot) return;
     if (oldMessage.content == newMessage.content) return;
@@ -45,12 +42,8 @@ module.exports = {
       });
 
     await oldMessage.guild.channels.fetch();
-    const channel = oldMessage.guild.channels.cache.find(
-      (channel) => channel.name == "alien-logs"
-    );
-
-    if (!channel) return;
-
-    await channel.send({ embeds: [embed] });
+    return await oldMessage.guild.channels.cache
+      .find((channel) => channel.name == "alien-logs")
+      .send({ embeds: [embed] });
   },
 };
