@@ -177,25 +177,27 @@ const getXP = async (userId) => {
     await connectToDB();
   }
 
-  const userXp = await lvl_module.findOne({ userId });
-  console.log(userXp);
+    const userXp = await lvl_module.findOne({ userId });
+    const xpNum = getJsonValue(userXp, "xp")
+  //console.log(userXp);
 
-  let returnObject = userXp;
+  //let returnObject = userXp;
 
-  if (!userXp.xp) {
-    returnObject.xp = 0;
-  }
+  //if (!userXp.xp) {
+    //returnObject.xp = 0;
+  //}
 
-  if (!userXp.level) {
-    returnObject.level = 0;
-  }
+  //if (!userXp.level) {
+    //returnObject.level = 0;
+  //}
 
   returnObject.xp = userXp.xp;
   returnObject.level = userXp.level;
 
-  console.log("Data recived from DB!");
-  console.log(returnObject);
-  return returnObject;
+  //console.log("Data recived from DB!");
+  //console.log(returnObject);
+  //return returnObject;
+    return xpNum
 };
 
 const getEconomy = async (userId) => {
