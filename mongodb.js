@@ -180,20 +180,11 @@ const getXP = async (userId) => {
   const userXp = await lvl_module.findOne({ userId });
   console.log(userXp);
 
-  let returnObject = userXp;
+  const returnObject = {
+    xp: userXp.xp ? userXp.xp : 0,
+    level: userXp.level ? userXp.level : 0,
+  };
 
-  if (!userXp.xp) {
-    returnObject.xp = 0;
-  }
-
-  if (!userXp.level) {
-    returnObject.level = 0;
-  }
-
-  returnObject.xp = userXp.xp;
-  returnObject.level = userXp.level;
-
-  console.log("Data recived from DB!");
   console.log(returnObject);
   return returnObject;
 };
