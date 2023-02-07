@@ -149,7 +149,7 @@ const saveEconomy = async (userId, balance) => {
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
  *  @param {Number} UserLevel The new level for the user.
- *  @param {String} _ID The ID. Yes im lazy
+ *  @param {String} _ID The ID. Yes i`m lazy
  *  @example await saveXP("userID", "XP")
  * @returns {Bool} true if saved successfully, false if not.
  **/
