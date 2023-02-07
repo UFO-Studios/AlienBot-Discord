@@ -181,6 +181,7 @@ const getXP = async (userId) => {
     const xpNum = getJsonValue(userXp, "xp")
   //console.log(userXp);
 
+<<<<<<< HEAD
   //let returnObject = userXp;
 
   //if (!userXp.xp) {
@@ -198,6 +199,15 @@ const getXP = async (userId) => {
   //console.log(returnObject);
   //return returnObject;
     return xpNum
+=======
+  const returnObject = {
+    xp: userXp.xp ? userXp.xp : 0,
+    level: userXp.level ? userXp.level : 0,
+  };
+
+  console.log(returnObject);
+  return returnObject;
+>>>>>>> cf78f0938f389e4b3ee8233068ae09a8655a7410
 };
 
 const getEconomy = async (userId) => {
