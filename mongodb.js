@@ -18,7 +18,6 @@ const uptimeSchema = new mongoose.Schema({
   time: Number,
 });
 
-//warns (AW = Add Warns)
 const AWSchema = new mongoose.Schema({
   guildId: Number,
   userId: Number,
