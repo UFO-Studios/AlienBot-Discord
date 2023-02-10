@@ -18,7 +18,6 @@ const uptimeSchema = new mongoose.Schema({
   time: Number,
 });
 
-//warns (AW = Add Warns)
 const AWSchema = new mongoose.Schema({
   guildId: Number,
   userId: Number,
@@ -149,7 +148,7 @@ const saveEconomy = async (userId, balance) => {
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
  *  @param {Number} UserLevel The new level for the user.
- *  @param {String} _ID The ID. Yes im lazy
+ *  @param {String} _ID The ID. Yes i`m lazy
  *  @example await saveXP("userID", "XP")
  * @returns {Bool} true if saved successfully, false if not.
  **/
@@ -177,9 +176,29 @@ const getXP = async (userId) => {
     await connectToDB();
   }
 
-  const userXp = await lvl_module.findOne({ userId });
-  console.log(userXp);
+    const userXp = await lvl_module.findOne({ userId });
+    const xpNum = getJsonValue(userXp, "xp")
+  //console.log(userXp);
 
+<<<<<<< HEAD
+  //let returnObject = userXp;
+
+  //if (!userXp.xp) {
+    //returnObject.xp = 0;
+  //}
+
+  //if (!userXp.level) {
+    //returnObject.level = 0;
+  //}
+
+  returnObject.xp = userXp.xp;
+  returnObject.level = userXp.level;
+
+  //console.log("Data recived from DB!");
+  //console.log(returnObject);
+  //return returnObject;
+    return xpNum
+=======
   const returnObject = {
     xp: userXp.xp ? userXp.xp : 0,
     level: userXp.level ? userXp.level : 0,
@@ -187,6 +206,7 @@ const getXP = async (userId) => {
 
   console.log(returnObject);
   return returnObject;
+>>>>>>> cf78f0938f389e4b3ee8233068ae09a8655a7410
 };
 
 const getEconomy = async (userId) => {
