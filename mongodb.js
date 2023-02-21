@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
 const config = require("./config.json");
 
+//Startup
+console.log(` 
+    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |  
+_ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
+    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
+    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
+    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | `)
+//Startup end
+
 let connected;
 let db;
 
@@ -180,7 +189,7 @@ const getXP = async (userId) => {
     const xpNum = getJsonValue(userXp, "xp")
   //console.log(userXp);
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
   //let returnObject = userXp;
 
   //if (!userXp.xp) {
@@ -191,22 +200,22 @@ const getXP = async (userId) => {
     //returnObject.level = 0;
   //}
 
-  returnObject.xp = userXp.xp;
-  returnObject.level = userXp.level;
+  //returnObject.xp = userXp.xp;
+  //returnObject.level = userXp.level;
 
   //console.log("Data recived from DB!");
   //console.log(returnObject);
   //return returnObject;
     return xpNum
-=======
+//=======
   const returnObject = {
     xp: userXp.xp ? userXp.xp : 0,
     level: userXp.level ? userXp.level : 0,
   };
 
   console.log(returnObject);
-  return returnObject;
->>>>>>> cf78f0938f389e4b3ee8233068ae09a8655a7410
+  //return returnObject;
+//>>>>>>> cf78f0938f389e4b3ee8233068ae09a8655a7410
 };
 
 const getEconomy = async (userId) => {
