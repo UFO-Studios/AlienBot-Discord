@@ -2,7 +2,7 @@
 // Free advertisement: https://www.npmjs.com/package/node-firestore
 const firebase = require("firebase-admin/app");
 const firestore = require("firebase-admin/firestore");
-const Config = require("./config.json");
+const Config = require("../config.json");
 
 const app = firebase.initializeApp({
   credential: firebase.cert(Config.FIREBASE_CONFIG),
