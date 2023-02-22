@@ -69,7 +69,10 @@ module.exports = {
       await oldChannel.guild.channels.fetch();
       const channel = oldChannel.guild.channels.cache.find(
         (channel) => channel.name === "alien-logs"
-      );
+        );
+
+        await mongo.addLoggingChannel(oldChannel.guild.id, channel.id);
+        console.log(oldChannel.guild.id, channel.id + "for test")
 
       if (!channel) return;
 

@@ -1,15 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("./config.json");
 
-//Startup
-console.log(` 
-    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |  
-_ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ |
-    _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | _ | `)
-//Startup end
-
 let connected;
 let db;
 
@@ -77,9 +68,15 @@ const EconomySchema = new mongoose.Schema({
   balance: Number,
 });
 
+const loggingChannelSchema = new mongoose.Schema({
+    guildID: Number,
+    channelID: Number,
+    });
+
 //END (schemas)
 
 //START modules
+const loggingChannelModule = mongoose.model("loggingChannel", loggingChannelSchema);
 const lvl_module = mongoose.model("lvl", LvlSchema);
 const economicModule = mongoose.model("economic", EconomySchema);
 const uptimeModule = mongoose.model("uptime", uptimeSchema);
@@ -116,6 +113,21 @@ const connectToDB = async () => {
   console.log("Complete!");
   return true;
 };
+
+const addLoggingChannel = async (guildID, channelID) => {
+    if (!connected || !db) {
+        await connectToDB();
+    }
+    const loggingChannelNew = loggingChannelModule({ guildID, channelID });
+    loggingChannelNew.save((err) => {
+        if (err) {
+            console.error(err);
+            return false;
+        }
+    });
+    return true;
+};
+
 
 const checkBW = async (word) => {
   if (!connected || !db) {
