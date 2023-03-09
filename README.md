@@ -28,3 +28,7 @@ Docker and Docker hub support coming soon™
 <h2>Contributing</h2>    
 
 If you see anything wrong, mis-placed or have a feature request, dont hesitate to open a <a href="https://github.com/UFO-Studios/AlienBot-Discord/pulls">Pull request!</a>  
+
+<h2> Docker </h2>
+
+Coming soon™

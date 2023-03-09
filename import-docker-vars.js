@@ -15,16 +15,30 @@ const token = { "token": token };
 writeJson(token);
 
 const channelIDENV = process.env.channelid;
-const channelID = { "channelID": channelIDENV };
+const channelID = { "CHANNEL_ID": channelIDENV };
 writeJson(channelID);
 
 const guildIDEnv = process.env.guildid;
-const guildID = { "guildID": guildIDEnv };
+const guildID = { "GUILD_ID": guildIDEnv };
 writeJson(guildID);
 
 const mongoURIENV = process.env.mongouri;
-const mongoURI = { "mongoURI": mongoURIENV };
+const mongoURI = { "MONGO_CONFIG": mongoURIENV };
 writeJson(mongoURI);
+
+const appIDENV = process.env.appid;
+const appid = { "APP_ID": appIDENV };
+writeJson(appid); //app and client id are the same thing
+const clientid = { "CLIENT_ID": appIDENV };
+writeJson(clientid);
+
+const webhookENV = process.env.webhook;
+const webhook = { "WEBHOOK_URL": webhook };
+writeJson(mongoURI);
+
+//suff that is always set like this
+writeJson({"ENV": "prod"});
+
     } else {
         console.log('Variables already added! Or theres an error. Oops... :/');
     }
