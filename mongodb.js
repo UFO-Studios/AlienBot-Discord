@@ -104,7 +104,7 @@ const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
  * @returns {Boolean} true if connected sccessfully, false if not.
  **/
 const connectToDB = async () => {
-  await mongoose.connect(config.MONGO_CONFIG);
+  await mongoose.connect(client.c.mongouri);
   connected = true;
   console.log("MongoDB is loaded!");
   db = await mongoose.connection;
