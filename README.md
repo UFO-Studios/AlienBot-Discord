@@ -31,4 +31,5 @@ If you see anything wrong, mis-placed or have a feature request, dont hesitate t
 
 <h2> Docker </h2>
 
-Coming soon™
+[![Alt text](https://raw.githubusercontent.com/UFO-Studios/AlienBot-Discord/docker/images/readme/env_vars_gui.png)]
+This is how the config should be set up in the docker container! 
