@@ -1,4 +1,4 @@
-const Config = require("./config.json");
+const Config = require(process.env);
 const fs = require("node:fs");
 const path = require("node:path");
 const { Routes, REST } = require("discord.js");

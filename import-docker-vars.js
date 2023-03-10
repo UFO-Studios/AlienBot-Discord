@@ -9,7 +9,7 @@ const writeJson = async (dataIn) => {
 
 const addVars = async () => {
 
-    if (config.token == !null) {
+
 const tokenEnv = process.env.token;
 const token = { "token": token };
 writeJson(token);
@@ -39,9 +39,6 @@ writeJson(mongoURI);
 //suff that is always set like this
 writeJson({"ENV": "prod"});
 
-    } else {
-        console.log('Variables already added! Or theres an error. Oops... :/');
-    }
 };
 
 addVars();

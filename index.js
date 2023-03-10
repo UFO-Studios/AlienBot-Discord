@@ -13,7 +13,7 @@ const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
 const express = require("express");
-const { config } = require("dotenv");
+//sconst { config } = require("dotenv");
 
 //express server for uptime robot
 const app = express();
