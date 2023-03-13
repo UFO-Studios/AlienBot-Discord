@@ -32,32 +32,19 @@ const deleteBannedWords = async (message, client) => {
   }
 };
 
-const checkLevel = async (xp) => {};
-
-/**
- * @param {Message} message
- * @param {Client} client
- */
-//const addXp = async (message, client) => {
-//  const oldXpObject = await mongo.getXP(message.author.id);
-//  const oldXpObjectId = oldXpObject._id;
-//  const oldXp = oldXpObject.xp;
-//  const oldLevel = oldXpObject.level;
-//
-//  const newXp = oldXp + (await randomInRange(15, 50));
-//  const newLevel = newXp > oldLevel * 500 ? oldLevel + 1 : oldLevel;
-//
-//  if (newLevel > oldLevel) {
- //   message.channel.send({
-//      content: `@${message.author.tag} you just leveled up to ${newLevel}!`,
-//    });
-//  }
-//
-//  console.log(newLevel, newXp);
-//
-//  await mongo.saveXP(message.author.id, newXp, newLevel, oldXpObjectId);
-//  return true;
-//};
+const checkLevel = async (xp) => {
+const oldXpNum = await mongo.getXP(message.author.id);
+const XPGain = await randomInRange(2, 10);
+const newXpNum = oldXpNum + XPGain;
+if (Number.isIntege(Math.sqrt(newXpNum)) == True) {
+  var rankAlert = "You have leveled up to " + Math.sqrt(newXpNum) + "!";
+  await message.reply({
+    content: rankAlert,
+    reply: true,
+  });
+  };
+  await mongo.saveXP(message.author.id, newXpNum);
+};
 
 module.exports = {
   name: "messageCreate",
@@ -73,7 +60,7 @@ module.exports = {
       await deleteBannedWords(message, client);
 
     // adding xp
-    //await addXp(message, client);
+    //await mongo.saveXP(message.author.id, newXpNum);
   },
 };
 

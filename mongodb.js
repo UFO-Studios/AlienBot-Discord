@@ -99,6 +99,23 @@ const ignoredChannelModel = new mongoose.model(
 const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
 //END modules
 
+//Start JSON Management
+const getJsonValue = async (input, valueNeeded) => {
+  const string = await JSON.stringify(input);
+  const objectValue = await JSON.parse(string);
+  //console.log(objectValue + "is objectvalue")
+
+  if (objectValue == null) {
+    console.log("JSON is null! Did you format it correctly?");
+  } else if (objectValue == undefined) {
+    console.log("JSON is undefined! Did you format it correctly?");
+    return null;
+  } else {
+    //console.log(objectValue[valueNeeded] + " is being returned");
+    return objectValue[valueNeeded];
+  }
+};
+//End JSON Management
 /**
  *  @example await connectToDB
  * @returns {Boolean} true if connected sccessfully, false if not.
@@ -199,35 +216,8 @@ const getXP = async (userId) => {
 
     const userXp = await lvl_module.findOne({ userId });
     const xpNum = getJsonValue(userXp, "xp")
-  //console.log(userXp);
-
-//<<<<<<< HEAD
-  //let returnObject = userXp;
-
-  //if (!userXp.xp) {
-    //returnObject.xp = 0;
-  //}
-
-  //if (!userXp.level) {
-    //returnObject.level = 0;
-  //}
-
-  //returnObject.xp = userXp.xp;
-  //returnObject.level = userXp.level;
-
-  //console.log("Data recived from DB!");
-  //console.log(returnObject);
-  //return returnObject;
-    return xpNum
-//=======
-  const returnObject = {
-    xp: userXp.xp ? userXp.xp : 0,
-    level: userXp.level ? userXp.level : 0,
-  };
-
-  console.log(returnObject);
-  //return returnObject;
-//>>>>>>> cf78f0938f389e4b3ee8233068ae09a8655a7410
+    
+    return xpNum;
 };
 
 const getEconomy = async (userId) => {
@@ -285,22 +275,7 @@ const addBW = async (Bword) => {
   console.log("run");
 };
 
-// completely useless
-const getJsonValue = async (input, valueNeeded) => {
-  const string = await JSON.stringify(input);
-  const objectValue = await JSON.parse(string);
-  //console.log(objectValue + "is objectvalue")
 
-  if (objectValue == null) {
-    console.log("JSON is null! Did you format it correctly?");
-  } else if (objectValue == undefined) {
-    console.log("JSON is undefined! Did you format it correctly?");
-    return null;
-  } else {
-    //console.log(objectValue[valueNeeded] + " is being returned");
-    return objectValue[valueNeeded];
-  }
-};
 
 /**
  *
