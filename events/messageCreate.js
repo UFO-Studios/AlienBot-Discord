@@ -32,7 +32,7 @@ const deleteBannedWords = async (message, client) => {
   }
 };
 
-const checkLevel = async (xp) => {
+const checkLevel = async () => {
 const oldXpNum = await mongo.getXP(message.author.id);
 const XPGain = await randomInRange(2, 10);
 const newXpNum = oldXpNum + XPGain;

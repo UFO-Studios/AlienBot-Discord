@@ -73,6 +73,11 @@ const loggingChannelSchema = new mongoose.Schema({
     channelID: Number,
     });
 
+const rankSchema = new mongoose.Schema({
+  userId: Number,
+  rank: Number,
+  });
+
 //END (schemas)
 
 //START modules
@@ -82,21 +87,13 @@ const economicModule = mongoose.model("economic", EconomySchema);
 const uptimeModule = mongoose.model("uptime", uptimeSchema);
 const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
 const AWModel = new mongoose.model("warns", AWSchema);
-const loggingToggleModel = new mongoose.model(
-  "loggingToggle",
-  loggingToggleSchema
-);
+const loggingToggleModel = new mongoose.model("loggingToggle", loggingToggleSchema);
 const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
-const welcomeToggleModel = new mongoose.model(
-  "welcomeToggle",
-  welcomeToggleSchema
-);
-const ignoredChannelModel = new mongoose.model(
-  "ignoredChannel",
-  addIgnoredChannelSchema
-);
+const welcomeToggleModel = new mongoose.model("welcomeToggle", welcomeToggleSchema);
+const ignoredChannelModel = new mongoose.model("ignoredChannel", addIgnoredChannelSchema);
 const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
+const rankModule = mongoose.model("rank", rankSchema);
 //END modules
 
 //Start JSON Management
@@ -129,6 +126,32 @@ const connectToDB = async () => {
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
   console.log("Complete!");
   return true;
+};
+
+const setRank = async (userId, rank) => {
+  if (!connected || !db) {
+    await connectToDB();
+  }
+
+  const rankNew = rankModule({ userId, rank });
+
+  rankNew.save((err) => {
+    if (err) {
+      console.error(err);
+      return false;
+  } else {
+    return true;
+  };
+});
+
+const getRank = async (userId) => {
+  if (!connected || !db) {
+    await connectToDB();
+  };
+
+  const rankJSON = await rankModule.find({ userId });
+  getJsonValue(rankJSON, "rank");
+  return rankJSON;
 };
 
 const addLoggingChannel = async (guildID, channelID) => {
