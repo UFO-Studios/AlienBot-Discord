@@ -34,8 +34,10 @@ const deleteBannedWords = async (message, client) => {
 
 const checkLevel = async () => {
 const oldXpNum = await mongo.getXP(message.author.id);
+const OldRankNum = Math.trunc(Math.sqrt(oldXpNum));
 const XPGain = await randomInRange(2, 10);
 const newXpNum = oldXpNum + XPGain;
+const NewRankNum = Math.trunc(Math.sqrt(newXpNum));
 if (Number.isIntege(Math.sqrt(newXpNum)) == True) {
   var rankAlert = "You have leveled up to " + Math.sqrt(newXpNum) + "!";
   await message.reply({

@@ -93,14 +93,13 @@ const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
 const welcomeToggleModel = new mongoose.model("welcomeToggle", welcomeToggleSchema);
 const ignoredChannelModel = new mongoose.model("ignoredChannel", addIgnoredChannelSchema);
 const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
-const rankModule = mongoose.model("rank", rankSchema);
+const rankModule = new mongoose.model("rank", rankSchema);
 //END modules
 
 //Start JSON Management
 const getJsonValue = async (input, valueNeeded) => {
   const string = await JSON.stringify(input);
   const objectValue = await JSON.parse(string);
-  //console.log(objectValue + "is objectvalue")
 
   if (objectValue == null) {
     console.log("JSON is null! Did you format it correctly?");
@@ -108,7 +107,6 @@ const getJsonValue = async (input, valueNeeded) => {
     console.log("JSON is undefined! Did you format it correctly?");
     return null;
   } else {
-    //console.log(objectValue[valueNeeded] + " is being returned");
     return objectValue[valueNeeded];
   }
 };
@@ -141,8 +139,9 @@ const setRank = async (userId, rank) => {
       return false;
   } else {
     return true;
-  };
-});
+    };
+  });
+};
 
 const getRank = async (userId) => {
   if (!connected || !db) {
