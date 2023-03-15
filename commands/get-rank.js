@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const mongo = require("../mongodb.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -6,7 +7,10 @@ module.exports = {
     .setDescription("See your rank in the discord server!"),
   global: true,
   async execute(interaction) {
-    await interaction.reply("WOOF. WOOF WOOF WOOF. WOOFWOOFWOOFBARK");
+    const xp = await mongo.getXP(interaction.user.id);
+    const rank = Math.trunc(Math.sqrt(xp))
+
+    await interaction.reply("Your rank is:" + rank);
   },
 };
-console.log("woof.js run");
+console.log("get-rank.js run");
