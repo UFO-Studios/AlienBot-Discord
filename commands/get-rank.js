@@ -10,7 +10,7 @@ module.exports = {
     const xp = await mongo.getXP(interaction.user.id);
     const rank = Math.trunc(Math.sqrt(xp))
 
-    await interaction.reply("Your rank is:" + rank);
+    await interaction.reply("Your rank is: " + rank);
   },
 };
 console.log("get-rank.js run");
