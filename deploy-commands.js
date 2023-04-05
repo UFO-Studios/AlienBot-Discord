@@ -69,7 +69,7 @@ const registerCommands = () => {
   }
 };
 
-const deleteOld = async () => {
+const deleteOld = () => {
   rest
     .put(Routes.applicationCommands(Config.CLIENT_ID), { body: [] })
     .then(() => {

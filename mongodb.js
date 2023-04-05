@@ -69,29 +69,41 @@ const EconomySchema = new mongoose.Schema({
 });
 
 const loggingChannelSchema = new mongoose.Schema({
-    guildID: Number,
-    channelID: Number,
-    });
+  guildID: Number,
+  channelID: Number,
+});
 
 const rankSchema = new mongoose.Schema({
   userId: Number,
   rank: Number,
-  });
+});
 
 //END (schemas)
 
 //START modules
-const loggingChannelModule = mongoose.model("loggingChannel", loggingChannelSchema);
+const loggingChannelModule = mongoose.model(
+  "loggingChannel",
+  loggingChannelSchema
+);
 const lvl_module = mongoose.model("lvl", LvlSchema);
 const economicModule = mongoose.model("economic", EconomySchema);
 const uptimeModule = mongoose.model("uptime", uptimeSchema);
 const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
 const AWModel = new mongoose.model("warns", AWSchema);
-const loggingToggleModel = new mongoose.model("loggingToggle", loggingToggleSchema);
+const loggingToggleModel = new mongoose.model(
+  "loggingToggle",
+  loggingToggleSchema
+);
 const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
 const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
-const welcomeToggleModel = new mongoose.model("welcomeToggle", welcomeToggleSchema);
-const ignoredChannelModel = new mongoose.model("ignoredChannel", addIgnoredChannelSchema);
+const welcomeToggleModel = new mongoose.model(
+  "welcomeToggle",
+  welcomeToggleSchema
+);
+const ignoredChannelModel = new mongoose.model(
+  "ignoredChannel",
+  addIgnoredChannelSchema
+);
 const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
 const rankModule = new mongoose.model("rank", rankSchema);
 //END modules
@@ -137,16 +149,16 @@ const setRank = async (userId, rank) => {
     if (err) {
       console.error(err);
       return false;
-  } else {
-    return true;
-    };
+    } else {
+      return true;
+    }
   });
 };
 
 const getRank = async (userId) => {
   if (!connected || !db) {
     await connectToDB();
-  };
+  }
 
   const rankJSON = await rankModule.find({ userId });
   getJsonValue(rankJSON, "rank");
@@ -154,19 +166,18 @@ const getRank = async (userId) => {
 };
 
 const addLoggingChannel = async (guildID, channelID) => {
-    if (!connected || !db) {
-        await connectToDB();
+  if (!connected || !db) {
+    await connectToDB();
+  }
+  const loggingChannelNew = loggingChannelModule({ guildID, channelID });
+  loggingChannelNew.save((err) => {
+    if (err) {
+      console.error(err);
+      return false;
     }
-    const loggingChannelNew = loggingChannelModule({ guildID, channelID });
-    loggingChannelNew.save((err) => {
-        if (err) {
-            console.error(err);
-            return false;
-        }
-    });
-    return true;
+  });
+  return true;
 };
-
 
 const checkBW = async (word) => {
   if (!connected || !db) {
@@ -212,12 +223,28 @@ const saveEconomy = async (userId, balance) => {
  *  @example await saveXP("userID", "XP")
  * @returns {Bool} true if saved successfully, false if not.
  **/
-const saveXP = async (userId, xp, level, _id) => {
+const saveXP = async (userId, xp, level) => {
   if (!connected || !db) {
     await connectToDB();
   }
 
-  await lvl_module.findByIdAndUpdate(_id, { userId, xp, level });
+  const oldObj = await lvl_module.findOne({ userId });
+
+  if (!oldObj) {
+    const newModel = lvl_module({ userId, xp, level });
+
+    newModel.save((err) => {
+      if (err) {
+        console.error(err);
+        return false;
+      }
+    });
+
+    console.log("Data updated in DB!");
+    return true;
+  }
+
+  await lvl_module.findOneAndUpdate(userId, { userId, xp, level });
 
   console.log("Data updated in DB!");
   return true;
@@ -236,10 +263,9 @@ const getXP = async (userId) => {
     await connectToDB();
   }
 
-    const userXp = await lvl_module.findOne({ userId });
-    const xpNum = getJsonValue(userXp, "xp")
-    
-    return xpNum;
+  const userRank = await lvl_module.findOne({ userId });
+
+  return userRank;
 };
 
 const getEconomy = async (userId) => {
@@ -296,8 +322,6 @@ const addBW = async (Bword) => {
   });
   console.log("run");
 };
-
-
 
 /**
  *

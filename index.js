@@ -8,12 +8,10 @@ const {
   Partials,
   IntentsBitField,
 } = require("discord.js");
-const Mongodb = require("./mongodb.js");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
 const express = require("express");
-const { config } = require("dotenv");
 
 //express server for uptime robot
 const app = express();
@@ -32,6 +30,7 @@ app.listen(port, () => {
 if (Config.DELETE_OLD == true) {
   deleteOld();
 }
+
 registerCommands();
 
 const Intents = new IntentsBitField([
@@ -70,11 +69,11 @@ player.on("trackStart", (queue, track) => {
   queue.metadata.channel.send({ embeds: [embed] });
 });
 
-client.discordTogether = new DiscordTogether(client);
+client.DT = new DiscordTogether(client);
 client.P = player;
 client.C = Config;
-client.M = Mongodb;
-client.CD = new Collection();
+client.CD = new Collection(); // command cooldown
+client.LCD = new Collection(); // level cooldown
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");

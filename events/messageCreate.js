@@ -1,6 +1,5 @@
 ﻿const mongo = require("../mongodb");
 const { ChannelType, Message, Client } = require("discord.js");
-const { randomInRange } = require("make-random");
 
 /**
  * @param {Message} message
@@ -32,20 +31,40 @@ const deleteBannedWords = async (message, client) => {
   }
 };
 
-const checkLevel = async () => {
-const oldXpNum = await mongo.getXP(message.author.id);
-const OldRankNum = Math.trunc(Math.sqrt(oldXpNum));
-const XPGain = await randomInRange(2, 10);
-const newXpNum = oldXpNum + XPGain;
-const NewRankNum = Math.trunc(Math.sqrt(newXpNum));
-if (Number.isIntege(Math.sqrt(newXpNum)) == True) {
-  var rankAlert = "You have leveled up to " + Math.sqrt(newXpNum) + "!";
-  await message.reply({
-    content: rankAlert,
-    reply: true,
-  });
+function genRan(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+/**
+ *
+ * @param {Message} message
+ * @param {Client} client
+ */
+const checkLevel = async (message, client) => {
+  if (client.LCD.has(message.author.id)) return;
+
+  const oldXpObj = (await mongo.getXP(message.author.id)) || {
+    xp: 0,
+    level: 0,
+    userId: message.author.id,
   };
-  await mongo.saveXP(message.author.id, newXpNum);
+
+  console.log(oldXpObj);
+  const newXp = oldXpObj.xp + genRan(1, 2);
+  const newLevel = Math.floor(0.3 * Math.sqrt(newXp));
+
+  if (newLevel > oldXpObj.level) {
+    message.channel.send(
+      `Ayy! ${message.author.toString()} just advanced to level ${newLevel}! :partying_face:`
+    );
+  }
+
+  await mongo.saveXP(message.author.id, newXp, newLevel);
+  client.LCD.set(message.author.id, Date.now());
+
+  setTimeout(() => {
+    client.LCD.delete(message.author.id);
+  }, client.C.LEVEL_COOLDOWN);
 };
 
 module.exports = {
@@ -56,13 +75,13 @@ module.exports = {
    * @param {Client} client
    */
   async execute(message, client) {
-    if (message.author.bot) return;
+    if (message.author.bot || !message.guild || !message.channel) return;
 
     // banned words
-      await deleteBannedWords(message, client);
+    await deleteBannedWords(message, client);
 
     // adding xp
-    //await mongo.saveXP(message.author.id, newXpNum);
+    await checkLevel(message, client);
   },
 };
 

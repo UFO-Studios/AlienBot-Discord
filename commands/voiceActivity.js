@@ -71,7 +71,7 @@ module.exports = {
       });
     }
 
-    client.discordTogether
+    client.DT
       .createTogetherCode(
         interaction.member.voice.channelId,
         interaction.options.getSubcommand()

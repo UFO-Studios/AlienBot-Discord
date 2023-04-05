@@ -32,7 +32,7 @@ module.exports = {
         if (client.CD.get(`${interaction.commandName}-${interaction.user.id}`))
           return interaction.reply({
             content: `You are on a cooldown! You need to wait ${ms(
-              client.Timeout.get(
+              client.CD.get(
                 `${interaction.commandName}-${interaction.user.id}`
               ) - Date.now(),
               { long: true }
@@ -44,12 +44,12 @@ module.exports = {
 
         client.CD.set(
           `${interaction.commandName}-${interaction.user.id}`,
-          Date.now() + 5000
+          Date.now() + client.C.COMMAND_COOLDOWN
         );
 
-        setInterval(() => {
+        setTimeout(() => {
           client.CD.delete(`${interaction.commandName}-${interaction.user.id}`);
-        }, 4000);
+        }, client.C.COMMAND_COOLDOWN);
       } catch (error) {
         console.error(error);
         if (!interaction.replied) {
