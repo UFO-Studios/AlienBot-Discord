@@ -40,7 +40,7 @@ const Intents = new IntentsBitField([
   IntentsBitField.Flags.GuildMessages,
   IntentsBitField.Flags.GuildMessageReactions,
   IntentsBitField.Flags.GuildEmojisAndStickers,
-  IntentsBitField.Flags.GuildBans,
+  IntentsBitField.Flags.GuildModeration,
   IntentsBitField.Flags.GuildWebhooks,
   IntentsBitField.Flags.MessageContent,
   IntentsBitField.Flags.DirectMessages,
@@ -52,15 +52,19 @@ const client = new Client({
   partials: [Partials.Channel],
 });
 
-const player = new Player(client, { ytdlOptions: { quality: "highestaudio" } });
+const player = Player.singleton(client);
 
-player.on("trackStart", (queue, track) => {
+player.events.on("playerStart", (queue, track) => {
   const embed = new EmbedBuilder()
     .setTitle("Play song")
-    .setDescription(`Now playing **${track.title}**!`)
+    .setDescription(
+      `Now playing **${
+        track.title
+      }** which was requested by **${queue.metadata.user.toString()}**!`
+    )
     .setColor("Green")
-    .setAuthor({ name: client.user.tag })
-    .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
+    .setAuthor({ name: queue.metadata.user.tag })
+    .setThumbnail(queue.metadata.user.displayAvatarURL({ dynamic: true }))
     .setTimestamp()
     .setFooter({
       text: "Music System • Alienbot",
@@ -70,7 +74,6 @@ player.on("trackStart", (queue, track) => {
 });
 
 client.DT = new DiscordTogether(client);
-client.P = player;
 client.C = Config;
 client.CD = new Collection(); // command cooldown
 client.LCD = new Collection(); // level cooldown

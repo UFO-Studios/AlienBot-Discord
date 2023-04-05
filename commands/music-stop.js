@@ -1,3 +1,4 @@
+const { useMasterPlayer } = require("discord-player");
 const {
   SlashCommandBuilder,
   ChatInputCommandInteraction,
@@ -16,28 +17,31 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const queue = client.P.getQueue(interaction.guildId);
-    if (!queue || !queue.playing) {
-      return await interaction.reply({ content: "Music is not being played!" });
-    } else {
-      const currentSong = queue.current;
-      await queue.destroy();
-      const embed = new EmbedBuilder()
-        .setTitle("Stop Music")
-        .setDescription(
-          `Music stopped. \n**Song that was being played**: ${currentSong.title}: ${currentSong.url}`
-        )
-        .setAuthor({ name: interaction.user.tag })
-        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-        .setColor("Green")
-        .setTimestamp()
-        .setFooter({
-          text: "Music System • AlienBot",
-          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
-        });
+    await interaction.deferReply();
+    const player = useMasterPlayer();
 
-      return await interaction.reply({ embeds: [embed] });
+    const queue = player.nodes.get(interaction.guildId);
+    if (!queue || !queue.isPlaying()) {
+      return await interaction.reply({
+        content: "Music is currently not being played!",
+      });
     }
+
+    await player.nodes.delete(interaction.guildId);
+
+    const embed = new EmbedBuilder()
+      .setTitle("Stop Music")
+      .setDescription(`Music stopped.`)
+      .setAuthor({ name: interaction.user.tag })
+      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+      .setColor("Green")
+      .setTimestamp()
+      .setFooter({
+        text: "Music System • AlienBot",
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+      });
+
+    return await interaction.editReply({ embeds: [embed] });
   },
 };
 

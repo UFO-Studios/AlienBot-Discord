@@ -1,6 +1,10 @@
-require("discord-player/smoothVolume");
-const { SlashCommandBuilder } = require("discord.js");
-const { Client, ChatInputCommandInteraction } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  Client,
+  ChatInputCommandInteraction,
+} = require("discord.js");
+const { useMasterPlayer } = require("discord-player");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,13 +24,15 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
-    const songName = interaction.options.get("song-name").value;
+    const player = useMasterPlayer();
+    const songName = interaction.options.getString("song-name", true);
 
-    if (!interaction.member.voice.channelId)
+    if (!interaction.member.voice.channelId) {
       return await interaction.editReply({
         content: "You are not in a voice channel!",
         ephemeral: true,
       });
+    }
 
     if (
       interaction.guild.members.me.voice.channelId &&
@@ -38,37 +44,40 @@ module.exports = {
         ephemeral: true,
       });
 
-    const queue = client.P.createQueue(interaction.guild, {
-      metadata: {
-        channel: interaction.channel,
-      },
-    });
-
     try {
-      if (!queue.connection)
-        await queue.connect(interaction.member.voice.channel);
-    } catch {
-      queue.destroy();
-      return await interaction.editReply({
-        content: "Error joining your voice channel!",
-        ephemeral: true,
+      const { track } = await player.play(
+        interaction.member.voice.channel,
+        songName,
+        {
+          nodeOptions: {
+            metadata: interaction,
+          },
+        }
+      );
+
+      const embed = new EmbedBuilder()
+        .setTitle("Added to the queue!")
+        .setDescription(
+          `**${
+            track.title
+          }** has been added to the queue by **${interaction.user.toString()}**!`
+        )
+        .setColor("Green")
+        .setAuthor({ name: interaction.user.tag })
+        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+        .setTimestamp()
+        .setFooter({
+          text: "Music System • Alienbot",
+          iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+        });
+
+      await interaction.editReply({
+        embeds: [embed],
       });
+    } catch (error) {
+      console.error(error);
+      await interaction.reply(`Something went wrong: ${error}`);
     }
-
-    const song = await client.P.search(songName, {
-      requestedBy: interaction.user,
-    }).then((x) => x.tracks[0]);
-
-    if (!song)
-      return await interaction.editReply({
-        content: `Song ${songName} not found!`,
-        ephemeral: true,
-      });
-
-    queue.addTrack(song);
-    if (!queue.playing) await queue.play();
-
-    return await interaction.editReply({ content: "Added to the queue!" });
   },
 };
 

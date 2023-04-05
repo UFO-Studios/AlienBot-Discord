@@ -1,9 +1,10 @@
-const { SlashCommandBuilder } = require("discord.js");
 const {
   Client,
+  SlashCommandBuilder,
   ChatInputCommandInteraction,
   EmbedBuilder,
 } = require("discord.js");
+const { useMasterPlayer } = require("discord-player");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,20 +18,22 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
+    const player = useMasterPlayer();
 
-    const queue = client.P.getQueue(interaction.guildId);
-    if (!queue || !queue.playing)
+    const queue = player.nodes.get(interaction.guildId);
+    if (!queue || !queue.isPlaying())
       return await interaction.editReply({
-        content: "Music is not being played!",
+        content: "Music is currently not being played!",
       });
 
-    const paused = queue.setPaused(true);
+    const currentSong = queue.currentTrack;
+    const paused = queue.node.setPaused(true);
 
     const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
       .setTitle("Music pause")
-      .setDescription(`Paused ${queue.current.title}`)
+      .setDescription(`Paused **${currentSong}**`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({

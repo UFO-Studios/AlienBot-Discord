@@ -1,3 +1,4 @@
+const { useMasterPlayer } = require("discord-player");
 const { SlashCommandBuilder } = require("discord.js");
 const {
   ChatInputCommandInteraction,
@@ -23,20 +24,22 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
+    const player = useMasterPlayer();
 
-    const queue = client.P.getQueue(interaction.guildId);
-    if (!queue || !queue.playing)
+    const queue = player.nodes.get(interaction.guildId);
+    if (!queue || !queue.isPlaying())
       return await interaction.editReply({
-        content: "Music is not being played!",
+        content: "Music is currently not being played!",
       });
 
-    const volume = await interaction.options.getInteger("volume");
+    const volume = parseInt(await interaction.options.getInteger("volume"));
+
     if (!volume) {
       const embed = new EmbedBuilder()
         .setAuthor({ name: interaction.user.tag })
         .setColor("Green")
         .setTitle("Music volume")
-        .setDescription(`The current volume is **${queue.volume}**%!`)
+        .setDescription(`The current volume is **${queue.node.volume}**%!`)
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
         .setTimestamp()
         .setFooter({
@@ -46,10 +49,11 @@ module.exports = {
 
       return await interaction.editReply({ embeds: [embed] });
     }
+
     if (volume < 0 || volume > 100)
       return await interaction.editReply({ content: "Invalid volume!" });
 
-    const changed = queue.setVolume(volume);
+    const changed = queue.node.setVolume(volume);
 
     const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })

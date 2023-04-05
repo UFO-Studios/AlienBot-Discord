@@ -1,3 +1,4 @@
+const { useMasterPlayer } = require("discord-player");
 const { SlashCommandBuilder } = require("discord.js");
 const {
   Client,
@@ -17,16 +18,16 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
+    const player = useMasterPlayer();
 
-    const queue = client.P.getQueue(interaction.guildId);
-    if (!queue || !queue.playing)
+    const queue = player.nodes.get(interaction.guildId);
+    if (!queue || !queue.isPlaying())
       return await interaction.editReply({
-        content: "Music is not being played!",
+        content: "Music is currently not being played!",
       });
 
-    const currentSong = queue.current;
-
-    const skipped = queue.skip();
+    const currentSong = queue.currentTrack;
+    const skipped = queue.node.skip();
 
     const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
@@ -44,7 +45,7 @@ module.exports = {
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
       .setTitle("Music skip")
-      .setDescription(`Couldn't skip **${queue.current.title}**!`)
+      .setDescription(`Couldn't skip **${currentSong}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({

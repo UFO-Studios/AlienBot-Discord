@@ -1,9 +1,10 @@
-const { SlashCommandBuilder } = require("discord.js");
 const {
+  SlashCommandBuilder,
   Client,
   ChatInputCommandInteraction,
   EmbedBuilder,
 } = require("discord.js");
+const { useMasterPlayer } = require("discord-player");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,19 +18,22 @@ module.exports = {
    */
   async execute(interaction, client) {
     await interaction.deferReply();
+    const player = useMasterPlayer();
 
-    const queue = client.P.getQueue(interaction.guildId);
-    if (!queue || !queue.playing)
+    const queue = player.nodes.get(interaction.guildId);
+    if (!queue || !queue.isPlaying())
       return await interaction.editReply({
-        content: "Music is not being played!",
-        ephemeral: true,
+        content: "Music is currently not being played!",
       });
+
+    const currentSong = queue.currentTrack;
+    const resumed = queue.node.setPaused(false);
 
     const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
       .setTitle("Music resume")
-      .setDescription(`Resumed **${queue.current.title}**!`)
+      .setDescription(`Resumed **${currentSong}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({
@@ -49,7 +53,6 @@ module.exports = {
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
-    const resumed = queue.setPaused(false);
     return await interaction.editReply({
       embeds: resumed ? [successEmbed] : [errorEmbed],
     });
