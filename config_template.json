@@ -1,10 +1,12 @@
 {
-    "TOKEN":"",
-    "CHANNEL_ID":"",
-    "CLIENT_ID":"",
-    "GUILD_ID":"",
-    "APP_ID":"",
-    "ENV":"prod",
-    "WEBHOOK_URL":"",
-    "MONGO_CONFIG": ""
+    "TOKEN":"your bot token",
+    "CHANNEL_ID":"updates channel id",
+    "CLIENT_ID":"your client id",
+    "GUILD_ID":"main guild id",
+    "APP_ID":"your app id",
+    "LEVEL_COOLDOWN": 2000,
+    "COMMAND_COOLDOWN": 3000,
+    "DELETE_OLD": true,
+    "ENV":"dev|prod",
+    "MONGO_CONFIG": "your mongo url"
 }
