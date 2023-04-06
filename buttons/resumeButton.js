@@ -1,19 +1,14 @@
 const { useMasterPlayer } = require("discord-player");
-const { SlashCommandBuilder } = require("discord.js");
 const {
+  MessageComponentInteraction,
   Client,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
+  EmbedBuilder
 } = require("discord.js");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("skip")
-    .setDescription("Skip the song and move towards the next one!"),
-  global: true,
+  name: "resumeButton",
   /**
-   *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {MessageComponentInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
@@ -27,13 +22,13 @@ module.exports = {
       });
 
     const currentSong = queue.currentTrack;
-    const skipped = queue.node.skip();
+    const resumed = queue.node.setPaused(false);
 
     const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
-      .setTitle("Music skip")
-      .setDescription(`Skipped **${currentSong}**!`)
+      .setTitle("Music resume")
+      .setDescription(`Resumed **${currentSong}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({
@@ -44,8 +39,8 @@ module.exports = {
     const errorEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
-      .setTitle("Music skip")
-      .setDescription(`Couldn't skip **${currentSong}**!`)
+      .setTitle("Music resume")
+      .setDescription(`Couldn't resume **${queue.current}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({
@@ -54,9 +49,9 @@ module.exports = {
       });
 
     return await interaction.editReply({
-      embeds: skipped ? [successEmbed] : [errorEmbed],
+      embeds: resumed ? [successEmbed] : [errorEmbed],
     });
   },
 };
 
-console.log("music-skip.js run");
+console.log("resumeButton.js run");

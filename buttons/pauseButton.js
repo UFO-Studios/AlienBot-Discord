@@ -1,19 +1,14 @@
-const {
-  Client,
-  SlashCommandBuilder,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-} = require("discord.js");
 const { useMasterPlayer } = require("discord-player");
+const {
+  MessageComponentInteraction,
+  Client,
+  EmbedBuilder
+} = require("discord.js");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("pause")
-    .setDescription("Pause the current playing stream"),
-  global: true,
+  name: "pauseButton",
   /**
-   *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {MessageComponentInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
@@ -52,10 +47,11 @@ module.exports = {
         text: "Music System • AlienBot",
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
-    return await interaction.editReply({
+
+    return await interaction.followUp({
       embeds: paused ? [successEmbed] : [errorEmbed],
     });
   },
 };
 
-console.log("music-pause.js run");
+console.log("pauseButton.js run");

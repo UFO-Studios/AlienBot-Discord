@@ -49,7 +49,6 @@ const checkLevel = async (message, client) => {
     userId: message.author.id,
   };
 
-  console.log(oldXpObj);
   const newXp = oldXpObj.xp + genRan(1, 2);
   const newLevel = Math.floor(0.3 * Math.sqrt(newXp));
 

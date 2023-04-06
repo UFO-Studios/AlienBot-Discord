@@ -1,19 +1,14 @@
+const { useMasterPlayer } = require("discord-player");
 const {
-  SlashCommandBuilder,
+  MessageComponentInteraction,
   Client,
-  ChatInputCommandInteraction,
   EmbedBuilder,
 } = require("discord.js");
-const { useMasterPlayer } = require("discord-player");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("resume")
-    .setDescription("Resume the current playing stream."),
-  global: true,
+  name: "skipButton",
   /**
-   *
-   * @param {ChatInputCommandInteraction} interaction
+   * @param {MessageComponentInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
@@ -27,13 +22,13 @@ module.exports = {
       });
 
     const currentSong = queue.currentTrack;
-    const resumed = queue.node.setPaused(false);
+    const skipped = queue.node.skip();
 
     const successEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
-      .setTitle("Music resume")
-      .setDescription(`Resumed **${currentSong}**!`)
+      .setTitle("Music skip")
+      .setDescription(`Skipped **${currentSong}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({
@@ -44,8 +39,8 @@ module.exports = {
     const errorEmbed = new EmbedBuilder()
       .setAuthor({ name: interaction.user.tag })
       .setColor("Green")
-      .setTitle("Music resume")
-      .setDescription(`Couldn't resume **${queue.current}**!`)
+      .setTitle("Music skip")
+      .setDescription(`Couldn't skip **${currentSong}**!`)
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setFooter({
@@ -53,10 +48,10 @@ module.exports = {
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
-    return await interaction.editReply({
-      embeds: resumed ? [successEmbed] : [errorEmbed],
+    return await interaction.followUp({
+      embeds: skipped ? [successEmbed] : [errorEmbed],
     });
   },
 };
 
-console.log("music-resume.js run");
+console.log("skipButton.js run");

@@ -43,3 +43,5 @@ module.exports = {
     return await interaction.update({ embeds: [embed], components: [row] });
   },
 };
+
+console.log("memeButton.js run");

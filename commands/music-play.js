@@ -76,7 +76,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
-      await interaction.reply(`Something went wrong: ${error}`);
+      await interaction.editReply(`Something went wrong: ${error}`);
     }
   },
 };

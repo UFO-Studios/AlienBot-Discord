@@ -7,6 +7,10 @@ const {
   EmbedBuilder,
   Partials,
   IntentsBitField,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  Events,
 } = require("discord.js");
 const { Player } = require("discord-player");
 const Config = require("./config.json");
@@ -70,7 +74,31 @@ player.events.on("playerStart", (queue, track) => {
       text: "Music System • Alienbot",
       iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
     });
-  queue.metadata.channel.send({ embeds: [embed] });
+
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("stopButton")
+      .setStyle(ButtonStyle.Primary)
+      .setLabel("Stop"),
+    new ButtonBuilder()
+      .setCustomId("skipButton")
+      .setStyle(ButtonStyle.Primary)
+      .setLabel("Skip"),
+    new ButtonBuilder()
+      .setCustomId("pauseButton")
+      .setStyle(ButtonStyle.Primary)
+      .setLabel("Pause"),
+    new ButtonBuilder()
+      .setCustomId("resumeButton")
+      .setStyle(ButtonStyle.Primary)
+      .setLabel("Resume"),
+    new ButtonBuilder()
+      .setCustomId("lyricButton")
+      .setStyle(ButtonStyle.Primary)
+      .setLabel("Get lyrics")
+  );
+
+  queue.metadata.channel.send({ embeds: [embed], components: [row] });
 });
 
 client.DT = new DiscordTogether(client);
