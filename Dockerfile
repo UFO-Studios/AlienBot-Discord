@@ -1,8 +1,6 @@
-# syntax=docker/dockerfile:1
-FROM node:19.0.0 
-ENV NODE_ENV=production 
-WORKDIR . /app
-COPY ["package.json", "package-lock.json*", "./"] 
-RUN npm install  
-COPY . .
-CMD [ "npm", "run", "start"]
+FROM node:19-alpine3.16 
+COPY . /app 
+WORKDIR /app 
+RUN npm install 
+EXPOSE 3333
+CMD ["npm", "run", "docker:start"]
