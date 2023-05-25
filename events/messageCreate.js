@@ -50,7 +50,9 @@ const checkLevel = async (message, client) => {
   };
 
   const newXp = oldXpObj.xp + genRan(1, 2);
-  const newLevel = Math.floor(0.3 * Math.sqrt(newXp));
+  console.log(newXp + "is newxp")
+  var newLevel = Math.floor(0.3 * Math.sqrt(newXp));
+  console.log(newLevel + "is newlevel")
 
   if (newLevel > oldXpObj.level) {
     message.channel.send(
