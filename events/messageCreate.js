@@ -51,17 +51,17 @@ const checkLevel = async (message, client) => {
 
   const newXp = oldXpObj.xp + genRan(1, 2);
   console.log(newXp + "is newxp")
-  var newLevel = Math.floor(0.3 * Math.sqrt(newXp));
+  var newLevel = Math.floor(0.3 * newXp);
   console.log(newLevel + "is newlevel")
 
-  if (newLevel > oldXpObj.level) {
-    message.channel.send(
-      `Ayy! ${message.author.toString()} just advanced to level ${newLevel}! :partying_face:`
-    );
-  }
+  // if (newLevel > oldXpObj.level) {
+  //   message.channel.send(
+  //     `Ayy! ${message.author.toString()} just advanced to level ${newLevel}! :partying_face:`
+  //   );
+  // }
 
-  await mongo.saveXP(message.author.id, newXp, newLevel);
-  client.LCD.set(message.author.id, Date.now());
+  // await mongo.saveXP(message.author.id, newXp, newLevel);
+  // client.LCD.set(message.author.id, Date.now());
 
   setTimeout(() => {
     client.LCD.delete(message.author.id);
