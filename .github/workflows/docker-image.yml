@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image for ARM64
-      run: npm i && npm run docker:build-arm
+      run: npm i && npm run docker:push-arm
     - name: Build the Docker image for AMD64
-      run: npm i && npm run docker:build-amd
+      run: npm i && npm run docker:push-amd
 
