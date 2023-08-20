@@ -53,10 +53,7 @@ module.exports = {
     .addSubcommand((sc) =>
       sc.setName("askaway").setDescription("Plays askaway")
     )
-    .addSubcommand((sc) => sc.setName("bobble").setDescription("Plays bobble"))
-    .addSubcommand((sc) =>
-      sc.setName("youtubedev").setDescription("Plays youtubedev")
-    ),
+    .addSubcommand((sc) => sc.setName("bobble").setDescription("Plays bobble")),
   global: true,
   /**
    *

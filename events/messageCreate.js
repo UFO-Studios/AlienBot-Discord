@@ -50,9 +50,18 @@ const checkLevel = async (message, client) => {
   };
 
   const newXp = oldXpObj.xp + genRan(1, 2);
-  console.log(newXp + "is newxp")
-  var newLevel = Math.floor(0.3 * newXp);
-  console.log(newLevel + "is newlevel")
+
+  console.log(newXp + "is newxp"); //can you see the error console? yea im seeing that also
+  
+  var newLevel = Math.floor(0.3 * newXp); //how do we fix lol
+  
+  console.log(newLevel + "is newlevel");+
+
+
+
+
+
+  
 
   // if (newLevel > oldXpObj.level) {
   //   message.channel.send(

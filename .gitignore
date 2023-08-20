@@ -15,4 +15,4 @@ mongodb.jsold
 test.*
 .vs
 update.sh
-yarn-error.log
+yarn-error.logdist
