@@ -10,7 +10,8 @@
     "gha": "npm i && node deploy-commands.js",
     "docker:push-arm": "docker build --platform linux/arm64 -t alienbot-d . && docker tag alienbot-d:latest ufostudios/alienbot-discord:arm64 && docker push ghcr.io/ufostudios/alienbot-discord:arm64",
     "docker:push-amd": "docker build --platform linux/amd64-t alienbot-d . && docker tag alienbot-d:latest ufostudios/alienbot-discord:amd64 && docker push ghcr.io/ufostudios/alienbot-discord:amd64",
-    "first": "npm i && node deploy-commands.js && node index.js"
+    "first": "npm i && node deploy-commands.js && node index.js",
+    "build": " npx esbuild index.js --bundle --platform=node --minify --external:./config.json --external:@ffmpeg-installer/ffmpeg --external:@node-ffmpeg/node-ffmpeg-installer --outfile=bundle.js"
   },
   "dependencies": {
     "@discord-player/extractor": "^4.1.2",
