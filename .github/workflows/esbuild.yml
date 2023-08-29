@@ -17,7 +17,7 @@ jobs:
           node-version: 18.x
 
       - name: Install dependencies
-        run: yarn
+        run: yarn && yarn add ffmpeg-binaries
 
       - name: Build artifact
         run:  npx esbuild index.js --bundle --platform=node --minify --external:./config.json --external:@ffmpeg-installer/ffmpeg --external:@node-ffmpeg/node-ffmpeg-installer --outfile=bundle.js
