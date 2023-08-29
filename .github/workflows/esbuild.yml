@@ -3,6 +3,9 @@ name: Build and Release
 on:
   release:
     types: [published]
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -15,9 +18,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 18.x
+    
+      - name: Setup Python 3
+        uses: actions/setup-python@v2
+        with:
+            python-version: 3.x
 
       - name: Install dependencies
-        run: yarn && yarn add ffmpeg-binaries
+        run: yarn install --ignore-optional --frozen-lockfile
 
       - name: Build artifact
         run:  npx esbuild index.js --bundle --platform=node --minify --external:./config.json --external:@ffmpeg-installer/ffmpeg --external:@node-ffmpeg/node-ffmpeg-installer --outfile=bundle.js

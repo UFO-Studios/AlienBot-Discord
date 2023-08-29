@@ -16,3 +16,4 @@ test.*
 .vs
 update.sh
 yarn-error.logdist
+bundle.js
