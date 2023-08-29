@@ -41,5 +41,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ABD
+          name: ABD-${{ github.run_number }}
           path: bundle.js
