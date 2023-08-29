@@ -31,6 +31,18 @@ If you see anything wrong, mis-placed or have a feature request, dont hesitate t
 # AlienBot Discord
 ## A general purpose open source bot developed by the UFO Studios team. <br> This bot is currently in Beta, originally made for The Alien Empire community Discord!
 
+## Features:
+- Moderation
+- Music
+- Logging
+- Memes
+- Welcome Images
+- Discord Together
+- Image Gen Commands
+- Utility Commands
+- and a whole lot more!
+
+
 ### Invite the bot:
 [Click me](https://thealiendoctor.com/AddAlienBot)
 [More info](https://thealiendoctor.com/downloads/alienbot)
