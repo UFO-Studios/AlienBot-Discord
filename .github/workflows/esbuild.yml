@@ -28,10 +28,10 @@ jobs:
         run: yarn install --ignore-optional --frozen-lockfile
 
       - name: Build artifact
-        run:  npx esbuild index.js --bundle --platform=node --minify --external:./config.json --external:@ffmpeg-installer/ffmpeg --external:@node-ffmpeg/node-ffmpeg-installer --outfile=bundle.js
+        run:  yarn run build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: BDL-Server
+          name: ABD
           path: bundle.js
