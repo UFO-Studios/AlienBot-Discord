@@ -12,7 +12,9 @@ module.exports = {
    */
   async execute(interaction) {
     const embed = new EmbedBuilder()
-      .setAuthor({ name: interaction.user.tag })
+    let userWithTag = interaction.user.tag
+    let userWithoutTag = userWithTag.replace("#0", "")
+      .setAuthor({ name: userWithoutTag })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTitle("About AlienBot")
       .setDescription(
