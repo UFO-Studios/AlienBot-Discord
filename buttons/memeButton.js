@@ -1,3 +1,6 @@
+const { getMeme } = require("memes-api");
+
+
 const {
   MessageComponentInteraction,
   Client,
@@ -16,21 +19,18 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const data = await fetch(`https://meme-api.com/gimme`).then((res) =>
-      res.json()
-    );
+    const meme = await getMeme({ sfw: true });
 
     const embed = new EmbedBuilder()
-      .setTitle(data.title)
-      .setURL(data.postLink)
-      .setAuthor({ name: data.author })
-      .setImage(data.url)
+      .setTitle(meme.title)
+      .setURL(meme.postLink)
+      .setAuthor({ name: meme.author })
+      .setImage(meme.url)
       .setTimestamp()
       .setColor("Blue")
       .setFooter({
-        text: `⬆ ${data.ups} • /meme • AlienBot`,
-        iconURL:
-          "https://cdn.discordapp.com/app-icons/800089810525356072/b8b1bd81f906b2c309227c1f72ba8264.png?size=64&quot",
+        text: `⬆ ${meme.upvotes} • /meme • AlienBot`,
+        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
     const row = new ActionRowBuilder().addComponents(

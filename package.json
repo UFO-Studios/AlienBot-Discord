@@ -36,6 +36,7 @@
     "is-youtube-channel": "^1.0.0",
     "libsodium-wrappers": "^0.7.10",
     "make-random": "^3.0.2",
+    "memes-api": "^1.0.4",
     "minecraft-lookup": "^1.1.36",
     "mongodb": "^5.0.0",
     "mongoose": "^6.11.3",

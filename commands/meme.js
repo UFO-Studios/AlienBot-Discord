@@ -8,6 +8,8 @@ const {
   ButtonStyle,
 } = require("discord.js");
 const fetch = require("node-fetch");
+const { getMeme } = require("memes-api");
+
 
 module.exports = {
   data: new SlashCommandBuilder().setName("meme").setDescription("get memes!"),
@@ -20,19 +22,22 @@ module.exports = {
   async execute(interaction, client) {
     await interaction.deferReply();
 
-    const data = await fetch(`https://meme-api.com/gimme`).then((res) =>
-      res.json()
-    );
+    // const data = await fetch(`https://meme-api.com/gimme`).then((res) =>
+    //   res.json()
+    // );
+
+    const meme = await getMeme({ sfw: true });
+
 
     const embed = new EmbedBuilder()
-      .setTitle(data.title)
-      .setURL(data.postLink)
-      .setAuthor({ name: data.author })
-      .setImage(data.url)
+      .setTitle(meme.title)
+      .setURL(meme.postLink)
+      .setAuthor({ name: meme.author })
+      .setImage(meme.url)
       .setTimestamp()
       .setColor("Blue")
       .setFooter({
-        text: `⬆ ${data.ups} • /meme • AlienBot`,
+        text: `⬆ ${meme.upvotes} • /meme • AlienBot`,
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
