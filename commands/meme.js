@@ -27,6 +27,7 @@ module.exports = {
     // );
 
     const meme = await getMeme({ sfw: true });
+    console.log("meme", meme)
 
 
     const embed = new EmbedBuilder()
