@@ -17,12 +17,14 @@ const registerCommands = () => {
   for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath);
+    if (command.data == undefined) { return }
     if (command.global) {
-      globalCommands.push(command.data.toJSON());
-      commands.push(command.data.toJSON());
+      globalCommands.push(JSON.parse(JSON.stringify(command.data)));
+      commands.push(JSON.parse(JSON.stringify(command.data)));
     } else {
-      localCommands.push(command.data.toJSON());
-      commands.push(command.data.toJSON());
+      console.log("test "+command.data)
+      localCommands.push(JSON.parse(JSON.stringify(command.data)));
+      commands.push(JSON.parse(JSON.stringify(command.data)));
     }
   }
 
@@ -35,7 +37,7 @@ const registerCommands = () => {
   for (const file of contextFiles) {
     const filePath = path.join(contextPath, file);
     const command = require(filePath);
-    contextCommands.push(command.data.toJSON());
+    contextCommands.pushJSON.parse(JSON.stringify(command.data));;
   }
 
   const commandsAllGlobal = [...contextCommands, ...globalCommands];

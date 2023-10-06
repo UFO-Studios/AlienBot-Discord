@@ -1,7 +1,7 @@
 const { deleteOld, registerCommands } = require("./deploy-commands.js");
 const fs = require("node:fs");
 const path = require("node:path");
-const {
+const { //hallo! what first? king? lets first combie all image cmds and remove youtube-dev from voice-activity Ok!
   Client,
   Collection,
   EmbedBuilder,
@@ -115,7 +115,7 @@ const commandFiles = fs
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
-  client.commands.set(command.data.name, command);
+  client.commands.set(command.data/*.name*/, command);
 }
 
 client.buttons = new Collection();
