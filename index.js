@@ -16,7 +16,9 @@ const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
 const express = require("express");
 
-//express server for uptime robot
+/**
+ * @description The status server for uptime robot.
+ */
 const app = express();
 const port = 3333;
 
@@ -29,11 +31,6 @@ app.listen(port, () => {
   console.log(`Status server is running on port ${port}`);
 });
 
-// if (Config.DELETE_OLD == true) {
-//   deleteOld();
-// }
-
-//registerCommands();
 
 const Intents = new IntentsBitField([
   IntentsBitField.Flags.Guilds,
@@ -129,6 +126,10 @@ for (const file of buttonFiles) {
 }
 
 const contextPath = path.join(__dirname, "contextMenu");
+/**
+ * An array of JavaScript files in the context path directory.
+ * @type {string[]}
+ */
 const contextFiles = fs
   .readdirSync(contextPath)
   .filter((f) => f.endsWith(".js"));
@@ -140,6 +141,10 @@ for (const file of contextFiles) {
 }
 
 const imagesPath = path.join(__dirname, "./images/welcomeImages");
+/**
+ * Array of file names that end with ".png" in the images directory.
+ * @type {string[]}
+ */
 const imagesFiles = fs
   .readdirSync(imagesPath)
   .filter((f) => f.endsWith(".png"));
@@ -153,6 +158,10 @@ const eventPath = path.join(__dirname, "events");
 const eventFiles = fs.readdirSync(eventPath).filter((f) => f.endsWith(".js"));
 
 for (const file of eventFiles) {
+  /**
+   * The file path of the current event file.
+   * @type {string}
+   */
   const filePath = path.join(eventPath, file);
   const event = require(filePath);
 
@@ -170,6 +179,10 @@ for (const file of eventFiles) {
 
 client.modals = new Collection();
 const modalsPath = path.join(__dirname, "modals");
+/**
+ * An array of filenames of JavaScript files in the `modalsPath` directory.
+ * @type {string[]}
+ */
 const modalFiles = fs
   .readdirSync(modalsPath)
   .filter((file) => file.endsWith(".js"));
@@ -180,6 +193,10 @@ for (const file of modalFiles) {
   client.modals.set(modal.name, modal);
 }
 
+
+/**
+ * @description The handler for commands. 
+ */
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
 
@@ -190,14 +207,14 @@ client.on("interactionCreate", async (interaction) => {
     return;
   }
 
+  if (interaction.deferred) {console.log("Command response processing...")}
+
   try {
     await command.execute(interaction);
   } catch (error) {
     console.error(`Error executing command: ${interaction.commandName}`, error);
-    if (interaction.replied || interaction.deferred) {
-      console.log("Interaction has already been responded to");
-    } else {
-      console.log("Interaction has not been responded to yet");
+    if (!interaction.replied && !interaction.deferred) {
+      await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
     }
   }
 });
