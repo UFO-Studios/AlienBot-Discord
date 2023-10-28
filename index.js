@@ -1,3 +1,4 @@
+const { deleteOld, registerCommands } = require("./deploy-commands.js");
 const fs = require("node:fs");
 const path = require("node:path");
 const {
@@ -16,9 +17,7 @@ const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
 const express = require("express");
 
-/**
- * @description The status server for uptime robot.
- */
+//express server for uptime robot
 const app = express();
 const port = 3333;
 
@@ -30,7 +29,13 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Status server is running on port ${port}`);
 });
+//end
 
+if (Config.DELETE_OLD == true) {
+  deleteOld();
+}
+
+registerCommands();
 
 const Intents = new IntentsBitField([
   IntentsBitField.Flags.Guilds,
@@ -126,10 +131,6 @@ for (const file of buttonFiles) {
 }
 
 const contextPath = path.join(__dirname, "contextMenu");
-/**
- * An array of JavaScript files in the context path directory.
- * @type {string[]}
- */
 const contextFiles = fs
   .readdirSync(contextPath)
   .filter((f) => f.endsWith(".js"));
@@ -141,10 +142,6 @@ for (const file of contextFiles) {
 }
 
 const imagesPath = path.join(__dirname, "./images/welcomeImages");
-/**
- * Array of file names that end with ".png" in the images directory.
- * @type {string[]}
- */
 const imagesFiles = fs
   .readdirSync(imagesPath)
   .filter((f) => f.endsWith(".png"));
@@ -158,10 +155,6 @@ const eventPath = path.join(__dirname, "events");
 const eventFiles = fs.readdirSync(eventPath).filter((f) => f.endsWith(".js"));
 
 for (const file of eventFiles) {
-  /**
-   * The file path of the current event file.
-   * @type {string}
-   */
   const filePath = path.join(eventPath, file);
   const event = require(filePath);
 
@@ -179,10 +172,6 @@ for (const file of eventFiles) {
 
 client.modals = new Collection();
 const modalsPath = path.join(__dirname, "modals");
-/**
- * An array of filenames of JavaScript files in the `modalsPath` directory.
- * @type {string[]}
- */
 const modalFiles = fs
   .readdirSync(modalsPath)
   .filter((file) => file.endsWith(".js"));
@@ -192,31 +181,5 @@ for (const file of modalFiles) {
   const modal = require(filePath);
   client.modals.set(modal.name, modal);
 }
-
-
-/**
- * @description The handler for commands. 
- */
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isCommand()) return;
-
-  const command = client.commands.get(interaction.commandName);
-
-  if (!command) {
-    console.log(`Command not found: ${interaction.commandName}`);
-    return;
-  }
-
-  if (interaction.deferred) {console.log("Command response processing...")}
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.error(`Error executing command: ${interaction.commandName}`, error);
-    if (!interaction.replied && !interaction.deferred) {
-      await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-    }
-  }
-});
 
 client.login(client.C.TOKEN);
