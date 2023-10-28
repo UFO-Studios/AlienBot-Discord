@@ -1,1 +1,0 @@
-//put all the image commands here

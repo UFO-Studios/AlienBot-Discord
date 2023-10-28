@@ -23,6 +23,8 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    console.log("Starting music player...")
+    // return await interaction.reply("This command is currently disabled.");
     await interaction.deferReply();
     const player = useMasterPlayer();
     const songName = interaction.options.getString("song-name", true);

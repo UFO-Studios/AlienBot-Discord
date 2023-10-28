@@ -173,6 +173,9 @@ module.exports = {
         .get(client.C.CHANNEL_ID)
         .send("Bot is running in prod mode!");
       console.log("ready!");
+
     }
-  },
+    //console.log("Loaded the following commands:", [...client.commands.keys()]);
+    //console.log(client.commands);
+    },
 };

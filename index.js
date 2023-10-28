@@ -1,7 +1,6 @@
-const { deleteOld, registerCommands } = require("./deploy-commands.js");
 const fs = require("node:fs");
 const path = require("node:path");
-const { //hallo! what first? king? lets first combie all image cmds and remove youtube-dev from voice-activity Ok!
+const {
   Client,
   Collection,
   EmbedBuilder,
@@ -29,13 +28,12 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Status server is running on port ${port}`);
 });
-//end
 
-if (Config.DELETE_OLD == true) {
-  deleteOld();
-}
+// if (Config.DELETE_OLD == true) {
+//   deleteOld();
+// }
 
-registerCommands();
+//registerCommands();
 
 const Intents = new IntentsBitField([
   IntentsBitField.Flags.Guilds,
@@ -115,7 +113,7 @@ const commandFiles = fs
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
-  client.commands.set(command.data/*.name*/, command);
+  client.commands.set(command.data.name, command);
 }
 
 client.buttons = new Collection();
@@ -181,5 +179,27 @@ for (const file of modalFiles) {
   const modal = require(filePath);
   client.modals.set(modal.name, modal);
 }
+
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isCommand()) return;
+
+  const command = client.commands.get(interaction.commandName);
+
+  if (!command) {
+    console.log(`Command not found: ${interaction.commandName}`);
+    return;
+  }
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(`Error executing command: ${interaction.commandName}`, error);
+    if (interaction.replied || interaction.deferred) {
+      console.log("Interaction has already been responded to");
+    } else {
+      console.log("Interaction has not been responded to yet");
+    }
+  }
+});
 
 client.login(client.C.TOKEN);
