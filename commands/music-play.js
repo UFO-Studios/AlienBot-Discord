@@ -4,7 +4,7 @@ const {
   Client,
   ChatInputCommandInteraction,
 } = require("discord.js");
-const { useMasterPlayer } = require("discord-player");
+const { useMasterPlayer, Player } = require("discord-player");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -26,8 +26,11 @@ module.exports = {
     console.log("Starting music player...")
     // return await interaction.reply("This command is currently disabled.");
     await interaction.deferReply();
-    const player = useMasterPlayer();
+    //const player = useMasterPlayer();
+    const player = new Player(client)
+    await player.extractors.loadDefault();
     const songName = interaction.options.getString("song-name", true);
+    console.log
 
     if (!interaction.member.voice.channelId) {
       return await interaction.editReply({
