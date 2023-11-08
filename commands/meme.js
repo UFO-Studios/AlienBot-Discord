@@ -21,9 +21,13 @@ module.exports = {
   async execute(interaction, client) {
     await interaction.deferReply();
 
-    const meme = await fetch(`https://meme-api.com/gimme`).then((res) =>
-      res.json()
-    );
+    let meme;
+
+    do {
+      meme = await fetch(`https://meme-api.com/gimme`).then((res) =>
+        res.json()
+      );
+    } while (meme.nsfw);
 
     // const meme = await getMeme({ sfw: true });
 

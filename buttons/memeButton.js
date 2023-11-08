@@ -17,9 +17,13 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const meme = await fetch(`https://meme-api.com/gimme`).then((res) =>
-      res.json()
-    );
+    let meme;
+
+    do {
+      meme = await fetch(`https://meme-api.com/gimme`).then((res) =>
+        res.json()
+      );
+    } while (meme.nsfw);
 
     const embed = new EmbedBuilder()
       .setTitle(meme.title)
