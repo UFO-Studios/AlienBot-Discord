@@ -10,7 +10,6 @@ const {
 const fetch = require("node-fetch");
 const { getMeme } = require("memes-api");
 
-
 module.exports = {
   data: new SlashCommandBuilder().setName("meme").setDescription("get memes!"),
   global: true,
@@ -27,8 +26,7 @@ module.exports = {
     // );
 
     const meme = await getMeme({ sfw: true });
-    console.log("meme", meme)
-
+    console.log("meme", meme);
 
     const embed = new EmbedBuilder()
       .setTitle(meme.title)

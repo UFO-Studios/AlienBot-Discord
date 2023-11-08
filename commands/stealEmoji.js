@@ -36,7 +36,7 @@ module.exports = {
         .create({ attachment: url, name: parsedEmoji.name })
         .then((emoji) => {
           return interaction.reply({
-            content: `New Emoji added: \`${url}\`, :${parsedEmoji.name}`,
+            content: `New Emoji added: \`${url}\`, :${parsedEmoji.name}:`,
           });
         });
     } catch (e) {
