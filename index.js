@@ -31,9 +31,7 @@ app.listen(port, () => {
 });
 //end
 
-if (Config.DELETE_OLD == true) {
-  deleteOld();
-}
+if (Config.DELETE_OLD) deleteOld();
 
 registerCommands();
 

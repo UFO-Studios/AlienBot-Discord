@@ -139,6 +139,7 @@ const { Routes, REST } = require("discord.js");
 const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
 
 const registerCommands = () => {
+  console.log("Registering commands");
   const commands = [];
   const globalCommands = [];
   const localCommands = [];
