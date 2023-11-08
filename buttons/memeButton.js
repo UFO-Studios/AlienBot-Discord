@@ -1,6 +1,4 @@
-const { getMeme } = require("memes-api");
-
-
+// const { getMeme } = require("memes-api");
 const {
   MessageComponentInteraction,
   Client,
@@ -19,7 +17,9 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const meme = await getMeme({ sfw: true });
+    const meme = await fetch(`https://meme-api.com/gimme`).then((res) =>
+      res.json()
+    );
 
     const embed = new EmbedBuilder()
       .setTitle(meme.title)
@@ -29,7 +29,7 @@ module.exports = {
       .setTimestamp()
       .setColor("Blue")
       .setFooter({
-        text: `⬆ ${meme.upvotes} • /meme • AlienBot`,
+        text: `⬆ ${meme.ups} • /meme • AlienBot`,
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
