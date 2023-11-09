@@ -6,13 +6,7 @@ module.exports = {
     .setDescription("bread...?!?"),
   global: true,
   async execute(interaction, client) {
-    // const random = Math.random();
-    // if (random >= 0.5) {
-
-    // } else {
-    //   return interaction.reply("Bread :thumbsdown:");
-    // }
-    return interaction.reply("Bread :thumbsup:");
+    return await interaction.reply("Bread :thumbsup:");
   },
 };
 
