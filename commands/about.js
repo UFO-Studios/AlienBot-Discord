@@ -11,14 +11,14 @@ module.exports = {
    * @param {ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
+    const username = interaction.user.username;
     const embed = new EmbedBuilder()
-    let userWithTag = interaction.user.tag
-    let userWithoutTag = userWithTag.replace("#0", "")
-      .setAuthor({ name: userWithoutTag })
+
+      .setAuthor({ name: username })
       .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
       .setTitle("About AlienBot")
       .setDescription(
-        "Hello humans I am AlienBot, the first alien discord bot. I am made by @UFO-STUDIOS and you can find my code at https://github.com/UFO-Studios/AlienBot-Discord. invite me using this link: https://thealiendoctor.com/AddAlienBot"
+        "Hello humans I am AlienBot, the first alien discord bot. I am made by @UFO-STUDIOS and you can find my code [here](https://github.com/UFO-Studios/AlienBot-Discord). invite me using [this link](https://thealiendoctor.com/AddAlienBot)"
       )
       .setColor("Blue")
       .setTimestamp()
@@ -26,7 +26,8 @@ module.exports = {
         text: "/about • AlienBot",
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
-    await interaction.reply({ embeds: [embed] });
+
+    return await interaction.reply({ embeds: [embed] });
   },
 };
 console.log("about.js run");
