@@ -265,7 +265,7 @@ const getXP = async (userId) => {
 
   const userRank = await lvl_module.findOne({ userId });
 
-  return userRank;
+  return parseInt(userRank);
 };
 
 const getEconomy = async (userId) => {
