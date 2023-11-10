@@ -1,5 +1,6 @@
 const { InteractionType, CommandInteraction, Client } = require("discord.js");
 const ms = require("ms");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "interactionCreate",
@@ -95,3 +96,5 @@ module.exports = {
     }
   },
 };
+
+consoleMessage("event/interactionCreate.js run", "botInit")

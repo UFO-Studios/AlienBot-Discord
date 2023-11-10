@@ -7,6 +7,7 @@ const {
 } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 const mongo = require("../mongodb");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "guildMemberAdd",
@@ -108,3 +109,5 @@ module.exports = {
     webhook.send({ content: strULTIMATE, files: [attachment] });
   },
 };
+
+consoleMessage("events/guildMemberAdd.js run", "botInit")

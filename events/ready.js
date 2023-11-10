@@ -1,5 +1,6 @@
 const { Client, ActivityType } = require("discord.js");
 const Config = require("../config.json");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "ready",
@@ -162,17 +163,17 @@ module.exports = {
       client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running tests!");
-      console.log("ready!");
-    } else if (Config.ENV == "dev") {
+        consoleMessage("Bot ready!", "ready");
+      } else if (Config.ENV == "dev") {
       client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running in dev mode!");
-      console.log("ready!");
+      consoleMessage("Bot ready!", "ready");
     } else {
       client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running in prod mode!");
-      console.log("ready!");
+      consoleMessage("Bot ready!", "ready");
 
     }
     //console.log("Loaded the following commands:", [...client.commands.keys()]);

@@ -6,6 +6,7 @@ const {
   ChannelType,
 } = require("discord.js");
 const mongo = require("../mongodb.js");
+const { consoleMessage } = require("../log.js");
 
 module.exports = {
   name: "channelUpdate",
@@ -72,7 +73,7 @@ module.exports = {
         );
 
         await mongo.addLoggingChannel(oldChannel.guild.id, channel.id);
-        console.log(oldChannel.guild.id, channel.id + "for test")
+        //console.log(oldChannel.guild.id, channel.id + "for test")
 
       if (!channel) return;
 
@@ -80,3 +81,5 @@ module.exports = {
     }
   },
 };
+
+consoleMessage("events/channelUpdate.js run", "botInit");

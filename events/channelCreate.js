@@ -1,5 +1,6 @@
 const { EmbedBuilder, GuildChannel, Client } = require("discord.js");
 const mongo = require("../mongodb.js");
+const { consoleMessage } = require("../log.js");
 
 module.exports = {
   name: "channelCreate",
@@ -33,3 +34,5 @@ module.exports = {
     await logChannel.send({ embeds: [embed] });
   },
 };
+
+consoleMessage("events/channelCreate.js run", "botInit")

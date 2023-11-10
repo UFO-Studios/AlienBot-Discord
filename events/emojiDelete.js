@@ -4,6 +4,7 @@ const {
   WebhookClient,
   EmbedBuilder,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "emojiDelete",
@@ -33,3 +34,5 @@ module.exports = {
     channel.send({ embeds: [embed] });
   },
 };
+
+consoleMessage("events/emojiDelete.js run", "botInit")

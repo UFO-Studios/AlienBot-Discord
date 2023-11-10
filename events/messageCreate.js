@@ -1,4 +1,5 @@
-﻿const mongo = require("../mongodb");
+﻿const { consoleMessage } = require("../log");
+const mongo = require("../mongodb");
 const { ChannelType, Message, Client } = require("discord.js");
 
 /**
@@ -51,26 +52,11 @@ const checkLevel = async (message, client) => {
 
   const newXp = oldXpObj.xp + genRan(1, 2);
 
-  console.log(newXp + "is newxp"); //can you see the error console? yea im seeing that also
+  //console.log(newXp + "is newxp"); //can you see the error console? yea im seeing that also
   
   var newLevel = Math.floor(0.3 * newXp); //how do we fix lol
   
-  console.log(newLevel + "is newlevel");+
-
-
-
-
-
-  
-
-  // if (newLevel > oldXpObj.level) {
-  //   message.channel.send(
-  //     `Ayy! ${message.author.toString()} just advanced to level ${newLevel}! :partying_face:`
-  //   );
-  // }
-
-  // await mongo.saveXP(message.author.id, newXp, newLevel);
-  // client.LCD.set(message.author.id, Date.now());
+  //console.log(newLevel + "is newlevel");+
 
   setTimeout(() => {
     client.LCD.delete(message.author.id);
@@ -95,4 +81,4 @@ module.exports = {
   },
 };
 
-console.log("events/messageCreate.js run");
+consoleMessage("events/messageCreate.js run", "botInit");

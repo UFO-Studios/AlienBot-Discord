@@ -5,6 +5,7 @@ const {
   ChannelType,
 } = require("discord.js");
 const mongo = require("../mongodb");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "channelDelete",
@@ -39,3 +40,5 @@ module.exports = {
     await logChannel.send({ embeds: [embed] });
   },
 };
+
+consoleMessage("events/channelDelete.js run", "botInit")
