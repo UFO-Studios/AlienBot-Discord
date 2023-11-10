@@ -4,6 +4,7 @@ const {
   ChatInputCommandInteraction,
   Client,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -46,3 +47,5 @@ module.exports = {
     return await reply.react("❎");
   },
 };
+
+consoleMessage("poll.js run", "botInit")

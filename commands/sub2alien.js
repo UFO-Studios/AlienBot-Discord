@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { EmbedBuilder, ChatInputCommandInteraction } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -55,4 +56,4 @@ module.exports = {
     await interaction.reply({ embeds: [embed] });
   },
 };
-console.log("sub2alien.js run");
+consoleMessage("sub2alien.js run", "botInit");

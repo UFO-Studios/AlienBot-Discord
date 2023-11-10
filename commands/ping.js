@@ -4,6 +4,7 @@ const {
   ChatInputCommandInteraction,
   Client,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,7 +28,8 @@ module.exports = {
         text: "/ping • AlienBot",
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
+    consoleMessage("Bots ping is " + client.ws.ping, "ping");
     return await interaction.reply({ embeds: [embed] });
   },
 };
-console.log("ping.js run");
+consoleMessage("ping.js run", "botInit");

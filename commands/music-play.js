@@ -4,6 +4,7 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 const { useMainPlayer } = require("discord-player");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -80,4 +81,4 @@ module.exports = {
   },
 };
 
-console.log("music-play.js run");
+consoleMessage("music-play.js run", "botInit");

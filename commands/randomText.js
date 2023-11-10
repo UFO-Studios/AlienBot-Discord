@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { sentence, paragraph, article } = require("txtgen/dist/cjs/txtgen.js");
 const { EmbedBuilder } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 const Lucky = async (randomNum) => {
   if (randomNum == 69) {
@@ -79,3 +80,5 @@ module.exports = {
     }
   },
 };
+
+consoleMessage("randomText.js run", "botInit")

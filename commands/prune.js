@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,4 +35,4 @@ module.exports = {
     });
   },
 };
-console.log("prune.js run");
+consoleMessage("prune.js run", "botInit");

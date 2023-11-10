@@ -5,6 +5,7 @@ const {
   PermissionsBitField,
 } = require("discord.js");
 const mongo = require("../mongodb");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -53,4 +54,4 @@ module.exports = {
   },
 };
 
-console.log("setIgnored.js run");
+consoleMessage("setIgnored.js run", "botInit");

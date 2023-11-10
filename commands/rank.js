@@ -4,6 +4,7 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 const mongo = require("../mongodb");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,4 +25,4 @@ module.exports = {
     });
   },
 };
-console.log("rank.js run");
+consoleMessage("rank.js run", "botInit");

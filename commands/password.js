@@ -5,6 +5,7 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 const { default: fetch } = require("node-fetch");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,4 +29,4 @@ module.exports = {
   },
 };
 
-console.log("password.js run");
+consoleMessage("password.js run", "botInit");

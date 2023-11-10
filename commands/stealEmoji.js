@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { PermissionFlagsBits, parseEmoji } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -54,3 +55,5 @@ module.exports = {
     }
   },
 };
+
+consoleMessage("steamEmoji.js run", "botInit")

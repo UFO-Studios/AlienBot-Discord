@@ -5,6 +5,7 @@ const {
   Client,
   EmbedBuilder,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -85,4 +86,4 @@ module.exports = {
   },
 };
 
-console.log("music-volume.js run");
+consoleMessage("music-volume.js run", "botInit");

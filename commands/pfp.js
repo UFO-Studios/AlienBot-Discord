@@ -4,6 +4,7 @@ const {
   ChatInputCommandInteraction,
   Client,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -41,4 +42,4 @@ module.exports = {
     return await interaction.reply({ embeds: [embed] });
   },
 };
-console.log("avatar.js run");
+consoleMessage("pfp.js run", "botInit");

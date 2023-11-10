@@ -1,5 +1,4 @@
 const fs = require('node:fs');
-const chalk = require("chalk")
 
 async function logPath(path, name) {
     if (name == null) {
@@ -37,12 +36,13 @@ async function writeLog(file, data) {
  * @returns 
  */
 async function consoleMessage(message, func, toLogFile) {
+        let date = new Date();
         let time = date.toTimeString().split(' ')[0];
         if (func == null) {var func = "main"}
-        let message = func + "@" + time + ": " + message
-        console.log(chalk.green(message))
+        let messageOut = func + "@" + time + ": " + message
+        console.log(messageOut)
         if (toLogFile) {
-            writeLog(message, logPath())
+            writeLog(messageOut, logPath())
         }
         return
 }
@@ -56,12 +56,13 @@ async function consoleMessage(message, func, toLogFile) {
  * @returns 
  */
 async function consoleError(message, func, toLogFile) {
+    let date = new Date();
     let time = date.toTimeString().split(' ')[0];
     if (func == null) {var func = "main"}
-    let message = "ERROR from " + func + "@" + time + ": " + message
-    console.log(chalk.red(message))
+    let messageOut = "ERROR from " + func + "@" + time + ": " + message
+    console.log(messageOut)
     if (toLogFile) {
-        writeLog(message, logPath())
+        writeLog(messageOut, logPath())
     }
     return
 }
