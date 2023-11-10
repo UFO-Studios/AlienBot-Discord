@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const { default: fetch } = require("node-fetch");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -39,4 +40,4 @@ module.exports = {
   },
 };
 
-console.log("cat.js run");
+consoleMessage("cat.js run", "botInit")

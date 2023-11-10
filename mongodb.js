@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("./config.json");
+const { consoleMessage } = require("./log");
 
 let connected;
 let db;
@@ -114,9 +115,9 @@ const getJsonValue = async (input, valueNeeded) => {
   const objectValue = await JSON.parse(string);
 
   if (objectValue == null) {
-    console.log("JSON is null! Did you format it correctly?");
+    consoleMessage("JSON is null! Did you format it correctly?", "mongoDB");
   } else if (objectValue == undefined) {
-    console.log("JSON is undefined! Did you format it correctly?");
+    consoleMessage("JSON is undefined! Did you format it correctly?", "mongoDB");
     return null;
   } else {
     return objectValue[valueNeeded];
@@ -134,7 +135,7 @@ const connectToDB = async () => {
   db = await mongoose.connection;
 
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
-  console.log("Complete!");
+  consoleMessage("Complete!", "mongoDB");
   return true;
 };
 
@@ -212,7 +213,7 @@ const saveEconomy = async (userId, balance) => {
     }
   });
 
-  console.log("Data added to DB!");
+  //consoleMessage("Data added to DB!", "mongoDB"); //for debugging only
   return true;
 };
 
@@ -240,13 +241,13 @@ const saveXP = async (userId, xp, level) => {
       }
     });
 
-    console.log("Data updated in DB!");
+    //consoleMessage("Data updated in DB!", "mongoDB"); //for dubugging
     return true;
   }
 
   await lvl_module.findOneAndUpdate(userId, { userId, xp, level });
 
-  console.log("Data updated in DB!");
+  //consoleMessage("Data updated in DB!", "mongoDB"); //for debugging
   return true;
 };
 //END (saveXP)
@@ -275,8 +276,8 @@ const getEconomy = async (userId) => {
 
   const userEconomy = await economicModule.findOne({ userId });
 
-  console.log("Data recived from DB!");
-  console.log(userEconomy);
+  //consoleMessage("Data recived from DB!");
+  //consoleMessage(userEconomy);
   return userEconomy;
 };
 
@@ -299,7 +300,7 @@ const startTime = async (startTime) => {
     }
   });
 
-  console.log("Start time logged and written! Bot started at " + startTime);
+  consoleMessage("Start time logged and written! Bot started at " + startTime, "mongoDB");
   return true;
 };
 
@@ -416,7 +417,7 @@ const saveLogToggle = async (guildId, toggle) => {
 const getLogToggle = async (guildId) => {
   if (!connected || !db) {
     await connectToDB();
-    console.log("connected");
+    consoleMessage("Connected to MongoDB", "mongoDB");
   } //connect
   const logToggleJSON = await loggingToggleModel.findOne({ guildId });
   if (logToggleJSON == null) {
@@ -431,7 +432,7 @@ const getLogToggle = async (guildId) => {
 const getBannedWordToggle = async (guildID) => {
   if (!connected || !db) {
     await connectToDB();
-    console.log("connected");
+    consoleMessage("Connected to DB", "mongoDB");
   } //connect
 
   const BWToggleJSON = await BWToggleModel.findOne({ guildID });
@@ -445,7 +446,7 @@ const getBannedWordToggle = async (guildID) => {
 const getWelcomeToggle = async (guildId) => {
   if (!connected || !db) {
     await connectToDB();
-    console.log("connected");
+    consoleMessage("Connected to DB", "mongoDB");
   } //connect
 
   const welcomeToggle = await welcomeToggleModel.findOne({ guildId });
@@ -563,4 +564,4 @@ module.exports = {
   getWelcomeToggle,
 };
 
-console.log("mongodb.js run");
+consoleMessage("mongodb.js run" , "botInit");

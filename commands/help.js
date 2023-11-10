@@ -4,6 +4,7 @@ const {
   Client,
   EmbedBuilder,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,4 +36,4 @@ module.exports = {
   },
 };
 
-console.log("help.js run");
+consoleMessage("help.js run", "botInit");

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -84,4 +85,4 @@ module.exports = {
   },
 };
 
-console.log("kick.js run");
+consoleMessage("kick.js run", "botInit");

@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 let getEmojis = require("get-emojis-from-string");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -73,4 +74,4 @@ module.exports = {
   },
 };
 
-console.log("emojiInfo.js run");
+consoleMessage("emojiInfo.js run", "botInit");

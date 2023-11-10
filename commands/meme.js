@@ -8,6 +8,7 @@ const {
   ButtonStyle,
 } = require("discord.js");
 const fetch = require("node-fetch");
+const { consoleMessage } = require("../log");
 // const { getMeme } = require("memes-api");
 
 module.exports = {
@@ -54,4 +55,4 @@ module.exports = {
   },
 };
 
-console.log("meme.js run");
+consoleMessage("meme.js run", "botInit");

@@ -4,6 +4,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -95,4 +96,4 @@ module.exports = {
   },
 };
 
-console.log("ban.js run");
+consoleMessage("ban.js run", "botInit");

@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
   PermissionsBitField,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -152,4 +153,4 @@ module.exports = {
   },
 };
 
-console.log("embed.js run");
+consoleMessage("embed.js run", "botInit")
