@@ -4,6 +4,7 @@ const {
   WebhookClient,
   EmbedBuilder,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "ufoApply",
@@ -84,4 +85,4 @@ module.exports = {
   },
 };
 
-console.log("modals/ufoApply.js run");
+consoleMessage("modals/ufoApply.js run", "botInit");
