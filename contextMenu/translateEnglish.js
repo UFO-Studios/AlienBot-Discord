@@ -6,6 +6,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const translate = require("@vitalets/google-translate-api");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -52,4 +53,4 @@ module.exports = {
   },
 };
 
-console.log("translateEnglish.js run");
+consoleMessage("translateEnglish.js run", "botInit");

@@ -6,6 +6,7 @@ const {
   ApplicationCommandType,
   EmbedBuilder,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -80,4 +81,4 @@ module.exports = {
   },
 };
 
-console.log("nickname.js run");
+consoleMessage("nickname.js run", "botInit");

@@ -8,6 +8,7 @@ const {
   User,
 } = require("discord.js");
 const mongo = require("../mongodb");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -32,6 +33,7 @@ module.exports = {
 
     if (!user_rank) {
       return await interaction.reply({ content: "You dont have any XP!" });
+    }
 
       const embed = new EmbedBuilder()
         .setAuthor({ name: target.tag })
@@ -46,7 +48,7 @@ module.exports = {
         });
 
       return await interaction.reply({ embeds: [embed] });
-    }
+    
   },
 };
-console.log("rank-check.js run!");
+consoleMessage("rank-check.js run!", "botInit");

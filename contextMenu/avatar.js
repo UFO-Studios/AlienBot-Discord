@@ -5,6 +5,7 @@ const {
   ContextMenuCommandInteraction,
   Client,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -40,4 +41,4 @@ module.exports = {
     return await interaction.reply({ embeds: [embed] });
   },
 };
-console.log("avatar.js run");
+consoleMessage("contextMenu/avatar.js run", "botInit");
