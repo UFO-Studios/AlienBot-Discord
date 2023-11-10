@@ -1,4 +1,5 @@
 const { deleteOld, registerCommands } = require("./deploy-commands.js");
+const { consoleError, consoleMessage } = require("./log.js")
 const fs = require("node:fs");
 const path = require("node:path");
 const {
@@ -23,11 +24,11 @@ const port = 3333;
 
 app.get("/", (req, res) => {
   res.send("Bot is online!");
-  console.log("status page visited");
+  consoleMessage("status page visited", "index.express");
 });
 
 app.listen(port, () => {
-  console.log(`Status server is running on port ${port}`);
+  consoleMessage(`Status server is running on port ${port}`, "index.express");
 });
 //end
 
@@ -159,7 +160,7 @@ for (const file of eventFiles) {
   if (event.once) {
     client.once(event.name, () => {
       event.execute(client);
-      console.log(`Event ${event.name} loaded!`);
+      consoleMessage(`Event ${event.name} loaded!`, "index");
     });
   } else {
     client.on(event.name, (...args) => {
