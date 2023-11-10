@@ -6,6 +6,7 @@ const {
   SlashCommandBuilder,
 } = require("discord.js");
 const prettyMilliseconds = require("pretty-ms");
+const { consoleMessage } = require("../log");
 
 const durations = [
   { name: "60 seconds", value: 60 * 1000 },
@@ -122,4 +123,4 @@ module.exports = {
   },
 };
 
-console.log("timeout.js run");
+consoleMessage("timeout.js run", "botInit");

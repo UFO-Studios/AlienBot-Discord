@@ -7,6 +7,7 @@ const {
   ActionRowBuilder,
   TextInputBuilder,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -91,4 +92,4 @@ module.exports = {
   },
 };
 
-console.log("ufoApply .js run");
+consoleMessage("ufoApply .js run", "botInit");

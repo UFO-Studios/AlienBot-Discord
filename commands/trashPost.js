@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const fetch = require("node-fetch");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,4 +36,4 @@ module.exports = {
   },
 };
 
-console.log("trashPost.js run");
+consoleMessage("trashPost.js run", "botInit");

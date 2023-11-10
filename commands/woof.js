@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,4 +10,4 @@ module.exports = {
     await interaction.reply("WOOF. WOOF WOOF WOOF. WOOFWOOFWOOFBARK");
   },
 };
-console.log("woof.js run");
+consoleMessage("woof.js run", "botInit");

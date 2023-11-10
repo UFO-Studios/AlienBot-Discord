@@ -4,6 +4,7 @@ const {
   ChatInputCommandInteraction,
   Client,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -79,4 +80,4 @@ module.exports = {
   },
 };
 
-console.log("voiceActivity.js run");
+consoleMessage("voiceActivity.js run", "botInit");

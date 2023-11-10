@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const fetch = require("node-fetch");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -56,4 +57,4 @@ module.exports = {
   },
 };
 
-console.log("webScreenShot.js run");
+consoleMessage("webScreenShot.js run", "botInit");

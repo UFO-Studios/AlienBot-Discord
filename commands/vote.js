@@ -7,6 +7,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -57,3 +58,5 @@ module.exports = {
     interaction.reply({ embeds: [embed], components: [row] });
   },
 };
+
+consoleMessage("vote.js run", "botInit")
