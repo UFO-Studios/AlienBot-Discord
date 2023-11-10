@@ -4,6 +4,7 @@ const {
   Client,
   EmbedBuilder,
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "skipButton",
@@ -54,4 +55,4 @@ module.exports = {
   },
 };
 
-console.log("skipButton.js run");
+consoleMessage("skipButton.js run", "botInit");

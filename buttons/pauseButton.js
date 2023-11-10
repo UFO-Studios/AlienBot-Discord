@@ -4,6 +4,7 @@ const {
   Client,
   EmbedBuilder
 } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "pauseButton",
@@ -54,4 +55,4 @@ module.exports = {
   },
 };
 
-console.log("pauseButton.js run");
+consoleMessage("pauseButton.js run", "botInit");

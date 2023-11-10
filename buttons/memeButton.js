@@ -8,6 +8,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const fetch = require("node-fetch");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "memeButton",
@@ -48,4 +49,4 @@ module.exports = {
   },
 };
 
-console.log("memeButton.js run");
+consoleMessage("memeButton.js run", "botInit");
