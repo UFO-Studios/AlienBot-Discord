@@ -16,11 +16,10 @@ module.exports = {
    */
   async execute(interaction, client) {
     const xpObj = await mongo.getXP(interaction.user.id);
-    console.log(xpObj);
-    if (xpObj == undefined) {
+    if (xpObj == undefined || !xpObj) {
       await mongo.setRank(interaction.user.id, 1);
       return await interaction.reply({
-        content: "You have no XP!",
+        content: "You have no XP! Or its broken! Probably broken... :/",
       });
     }
     await interaction.reply({

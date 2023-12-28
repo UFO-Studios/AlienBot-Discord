@@ -140,6 +140,7 @@ const connectToDB = async () => {
 };
 
 const setRank = async (userId, rank) => {
+  consoleMessage("setRank run", "mongoDB");
   if (!connected || !db) {
     await connectToDB();
   }
