@@ -562,6 +562,7 @@ module.exports = {
   saveWelcomeToggle,
   checkBW,
   getWelcomeToggle,
+  setRank,
 };
 
 consoleMessage("mongodb.js run" , "botInit");
