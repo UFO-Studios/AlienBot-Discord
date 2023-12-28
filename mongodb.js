@@ -450,7 +450,7 @@ const getWelcomeToggle = async (guildId) => {
   } //connect
 
   const welcomeToggle = await welcomeToggleModel.findOne({ guildId });
-  console.log(welcomeToggle);
+  //console.log(welcomeToggle);
   if (!welcomeToggle) {
     return { toggle: false };
   } else {
@@ -534,7 +534,7 @@ const checkIgnoredChannel = async (guildId, channelId) => {
     guildId,
     channelId,
   });
-  console.log(ignoredChannelJSON);
+  //console.log(ignoredChannelJSON);
   if (ignoredChannelJSON == null) {
     return false;
   } else {
