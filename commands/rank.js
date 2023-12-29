@@ -16,7 +16,6 @@ module.exports = {
    */
   async execute(interaction, client) {
     const xpObj = await mongo.getXP(interaction.user.id);
-    consoleMessage(xpObj, "rank")
     if (xpObj == undefined || !xpObj) {
       await mongo.setRank(interaction.user.id, 1);
       return await interaction.reply({

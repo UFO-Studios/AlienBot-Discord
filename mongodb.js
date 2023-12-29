@@ -264,10 +264,8 @@ const getXP = async (userId) => {
   if (!connected || !db) {
     await connectToDB();
   }
-
   const userRank = await lvl_module.findOne({ userId });
-  console.log(userRank?._doc)
-  console.log(userRank?._doc?.xp)
+  consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP")
   return parseInt(userRank?._doc?.xp);
 };
 

@@ -49,9 +49,7 @@ const checkLevel = async (message, client) => {
 		level: 0,
 		userId: message.author.id,
 	};
-  console.log(oldXpObj)
 	var newXp = oldXpObj + genRan(1, 2);
-  console.log(newXp)
   await mongo.saveXP(message.author.id, newXp, 0);
 	setTimeout(() => {
 		client.LCD.delete(message.author.id);
