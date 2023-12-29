@@ -135,23 +135,24 @@ const connectToDB = async () => {
   db = await mongoose.connection;
 
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
-  consoleMessage("Complete!", "mongoDB");
+  consoleMessage("Connection complete!", "mongoDB");
   return true;
 };
 
 const setRank = async (userId, rank) => {
-  consoleMessage("setRank run", "mongoDB");
+  consoleMessage(`setRank run with params userID: ${userId} and rank ${rank}`, "mongoDB");
   if (!connected || !db) {
     await connectToDB();
   }
 
-  const rankNew = rankModule({ userId, rank });
+  const rankNew = lvl_module({ userId, rank, rank });
 
   rankNew.save((err) => {
     if (err) {
       console.error(err);
       return false;
     } else {
+      consoleMessage("Complete! Returning...", "mongoDB");
       return true;
     }
   });
@@ -246,8 +247,7 @@ const saveXP = async (userId, xp, level) => {
     return true;
   }
 
-  await lvl_module.findOneAndUpdate(userId, { userId, xp, level });
-
+  await lvl_module.findOneAndUpdate({ userId: userId }, { userId, xp, level });
   //consoleMessage("Data updated in DB!", "mongoDB"); //for debugging
   return true;
 };
@@ -266,8 +266,9 @@ const getXP = async (userId) => {
   }
 
   const userRank = await lvl_module.findOne({ userId });
-
-  return parseInt(userRank);
+  console.log(userRank?._doc)
+  console.log(userRank?._doc?.xp)
+  return parseInt(userRank?._doc?.xp);
 };
 
 const getEconomy = async (userId) => {
@@ -564,6 +565,7 @@ module.exports = {
   checkBW,
   getWelcomeToggle,
   setRank,
+  getRank,
 };
 
 consoleMessage("mongodb.js run" , "botInit");

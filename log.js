@@ -53,9 +53,10 @@ async function consoleMessage(message, func, toLogFile) {
  * @param {string} message The message to be logged
  * @param {string} func The name of the function that called this
  * @param {boolean} toLogFile Weather to log it to a file or not
+ * @param {boolean} fatal Weather to exit the program or not
  * @returns 
  */
-async function consoleError(message, func, toLogFile) {
+async function consoleError(message, func, toLogFile, fatal=false) {
     let date = new Date();
     let time = date.toTimeString().split(' ')[0];
     if (func == null) {var func = "main"}

@@ -16,18 +16,18 @@ module.exports = {
    */
   async execute(interaction, client) {
     const xpObj = await mongo.getXP(interaction.user.id);
+    consoleMessage(xpObj, "rank")
     if (xpObj == undefined || !xpObj) {
       await mongo.setRank(interaction.user.id, 1);
       return await interaction.reply({
         content: "You have no XP! Or its broken! Probably broken... :/",
       });
-    }
-    await interaction.reply({
-      content: `
-        Level: ${xpObj.level},
-        XP: ${xpObj.xp}
-      `,
+    } else {
+      let rank = Math.trunc(xpObj / 100);
+    return await interaction.reply({
+      content: `You have ${xpObj} XP, and are at rank ${rank}!`,
     });
+  }
   },
 };
 consoleMessage("rank.js run", "botInit");
