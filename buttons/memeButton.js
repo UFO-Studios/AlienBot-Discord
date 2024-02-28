@@ -18,6 +18,11 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+
+    if (interaction.user.id !== interaction.message.interaction.user.id) {
+      return interaction.reply({ content: 'Uh-Oh! You didn`t request this message. Run /meme!', ephemeral: true });
+    }
+    
     let meme;
 
     do {
@@ -44,7 +49,8 @@ module.exports = {
         .setLabel("Next Meme")
         .setStyle(ButtonStyle.Primary)
     );
-
+    
+    consoleMessage("Meme Button Clicked", "memeUpdate");
     return await interaction.update({ embeds: [embed], components: [row] });
   },
 };
