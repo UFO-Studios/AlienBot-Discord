@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "FNxIaXjC/ESxjYQtqALJQu/NtnPWHTQno285lLyjjrIpPVKZIp47huImkUPF5NS8NbQ17BZIhUfDWukWeJqRww==",
+  "success": true,
+  "projectFilePath": "/root/code/ufo-studios/AlienBot-Discord-Rewrite/AlienBot-Discord.csproj",
+  "expectedPackageFiles": [
+    "/root/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
