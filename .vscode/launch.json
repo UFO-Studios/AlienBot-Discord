@@ -9,6 +9,7 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/AlienBot-Discord.csproj"
+            
         }
 
     ]
