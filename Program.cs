@@ -8,13 +8,14 @@
     using Newtonsoft.Json.Linq;
 
     using AlienBot.Events;
+    using System.Net;
 
     public class Primary
     {
         static string API_VERSION = "10";
         static string BOT_VERSION = "3.0";
         static string GATEWAY_URI = "wss://gateway.discord.gg/?v=" + API_VERSION + "&encoding=json";
-        static string BOT_TOKEN = "";
+        static string BOT_TOKEN = File.ReadAllText("token.txt");
 
 
         public static async Task Main()
@@ -33,6 +34,7 @@
             Uri GURI = new Uri(GATEWAY_URI);
             using (ClientWebSocket client = new ClientWebSocket())
             {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 await client.ConnectAsync(GURI, CancellationToken.None);
                 Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + "!");
 
@@ -47,9 +49,28 @@
                         properties = new
                         {
                             os = "linux",
-                            browser = "UFOST-ABDC", //UFO Studios AlienBot Discord Client
-                            device = "UFOST-ABDC"
+                            browser = /*"UFOST-ABDC"*/"disco", //UFO Studios AlienBot Discord Client
+                            device = /*"UFOST-ABDC"*/ "disco"
                         }
+                    }
+                };
+
+                var statusPayload = new
+                {
+                    op = 3,
+                    d = new
+                    {
+                        since = DateTime.Now,
+                        activities = new object[]
+                        {
+                            new
+                                {
+                                name = "Now in C-Sharp!",
+                                type = 0
+                                }
+                        },
+                        status = "online",
+                        afk = false
                     }
                 };
                 string jsonString = JsonConvert.SerializeObject(identifyPayload);
@@ -59,6 +80,8 @@
                 byte[] receiveBuffer = new byte[1024];
 
                 bool FirstRun = false;
+
+                await client.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(statusPayload))), WebSocketMessageType.Text, true, CancellationToken.None);
 
 
                 while (true)
@@ -74,10 +97,9 @@
                         // Parse the JSON message
                         JObject jsonMessage = JObject.Parse(message);
 
-                        // Get heartbeat data
-                        string heartbeat_d = jsonMessage["d"].ToString();
-                        Console.WriteLine("Heartbeat data: {0}", heartbeat_d);
-                        Heartbeat.DValue = heartbeat_d;
+                        string heartbeatNumber = (string)jsonMessage["s"];
+                        if (/*heartbeatNumber != null || */heartbeatNumber == "") { Heartbeat.LastSequenceNumber = int.Parse(heartbeatNumber); Console.WriteLine("Heartbeat number: " + Heartbeat.LastSequenceNumber);}
+                        
 
                         // If its the first run of the loop, find the heartbeat interval
                         if (!FirstRun)
@@ -101,6 +123,7 @@
                                 // Start the heartbeat
                                 Heartbeat.StartHeartbeat(client, heartbeatInterval);
                             }
+
                         }
                     }
                     else if (result.MessageType == WebSocketMessageType.Close)
