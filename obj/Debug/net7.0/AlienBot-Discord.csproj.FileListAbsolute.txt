@@ -15,3 +15,8 @@
 /root/code/ufo-studios/AlienBot-Discord-Rewrite/obj/Debug/net7.0/ref/AlienBot-Discord.dll
 /root/code/ufo-studios/AlienBot-Discord-Rewrite/bin/Debug/net7.0/Newtonsoft.Json.dll
 /root/code/ufo-studios/AlienBot-Discord-Rewrite/obj/Debug/net7.0/AlienBot-Discord.csproj.CopyComplete
+/root/code/ufo-studios/AlienBot-Discord-Rewrite/bin/Debug/net7.0/DSharpPlus.dll
+/root/code/ufo-studios/AlienBot-Discord-Rewrite/bin/Debug/net7.0/DSharpPlus.SlashCommands.dll
+/root/code/ufo-studios/AlienBot-Discord-Rewrite/bin/Debug/net7.0/Microsoft.Extensions.DependencyInjection.dll
+/root/code/ufo-studios/AlienBot-Discord-Rewrite/bin/Debug/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/root/code/ufo-studios/AlienBot-Discord-Rewrite/bin/Debug/net7.0/Microsoft.Extensions.Logging.Abstractions.dll
