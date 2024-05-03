@@ -3,6 +3,8 @@
     using System;
 
     using DSharpPlus;
+
+    using AlienBot.Events;
     public class Primary
     {
         static string API_VERSION = "10";
@@ -20,7 +22,12 @@
             Console.WriteLine("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
             Console.WriteLine("AlienBot Discord V" + BOT_VERSION + "  Made with 👽 & 💖 by UFO Studios.");
 
-            //WEBSOCKET CONNECTION ############################################
+            //LOAD OTHER LIBS ################################################
+
+            await MessageCreate.BadWordsFilter();
+
+
+            //DISCORD CONNECTION ############################################
             Console.WriteLine("Connecting to Discord Gateway V" + API_VERSION + "...");
 
             var discord = new DiscordClient(new DiscordConfiguration()
@@ -30,11 +37,8 @@
                 Intents = DiscordIntents.All
             });
 
-            discord.MessageCreated += async (s, e) =>
-            {
-                if (e.Message.Content.ToLower().StartsWith("ping"))
-                    await e.Message.RespondAsync("pong!");
-            };
+            //EVENT HANDLERS #################################################
+            discord.MessageCreated += MessageCreate.Handler;
 
             await discord.ConnectAsync();
             await Task.Delay(-1);

@@ -37,6 +37,7 @@ namespace AlienBot.Events
                     }
                 }
             }
+            return;
         }
 
         public static async Task Handler(DiscordClient client, MessageCreateEventArgs e)
