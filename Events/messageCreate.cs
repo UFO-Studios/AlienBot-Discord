@@ -7,7 +7,7 @@ namespace AlienBot.Events
 
     public class MessageCreate
     {
-        public static string[] badWords;
+        public static string[]? badWords; //type: ignore
 
         public static async Task BadWordsFilter()
         {
@@ -47,7 +47,7 @@ namespace AlienBot.Events
                 return;
             }
             var message = e.Message.ToString();
-            for (int i = 0; i < badWords.Length; i++)
+            for (int i = 0; i < badWords?.Length; i++)
             {
                 if (message.Contains(badWords[i]))
                 {
