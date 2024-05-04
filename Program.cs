@@ -13,7 +13,7 @@
         static string BOT_VERSION = "3.0";
         static string BOT_TOKEN = File.ReadAllText("token.txt");
 
-
+        [Obsolete]//Error remover thingy. Idk
         public static async Task Main()
         {
             //STARTUP BANNER ################################################
