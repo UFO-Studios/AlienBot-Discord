@@ -1,14 +1,15 @@
+using DSharpPlus.Entities;
+using DSharpPlus.SlashCommands;
+
 namespace AlienBot.Commands
 {
-    using DSharpPlus;
-    using DSharpPlus.Entities;
-    using DSharpPlus.SlashCommands;
-    public class PingCommand
+    public class SlashCommands : ApplicationCommandModule
     {
         [SlashCommand("ping", "Replies with pong!")]
-        public async Task PingCommandMethod(InteractionContext ctx)
+        public async Task PingCommand(InteractionContext ctx)
         {
-            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Pong!"));
+            await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Pong!").AsEphemeral(false));
         }
     }
+
 }

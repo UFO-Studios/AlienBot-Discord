@@ -6,6 +6,7 @@
     using DSharpPlus.SlashCommands;
 
     using AlienBot.Events;
+    using AlienBot.Commands;
     public class Primary
     {
         static string API_VERSION = "10";
@@ -38,6 +39,10 @@
                 Intents = DiscordIntents.All
             });
 
+            var slash = discord.UseSlashCommands();
+
+            slash.RegisterCommands<SlashCommands>();
+
             //EVENT HANDLERS #################################################
             discord.MessageCreated += MessageCreate.Handler;
 
@@ -45,6 +50,7 @@
            
 
             await discord.ConnectAsync();
+            Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + "!");
             await Task.Delay(-1);
 
 
