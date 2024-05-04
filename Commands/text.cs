@@ -3,7 +3,7 @@ using DSharpPlus.SlashCommands;
 
 namespace AlienBot.Commands
 {
-    public class SlashCommands : ApplicationCommandModule
+    public class Ping : ApplicationCommandModule
     {
         [SlashCommand("ping", "Replies with pong!")]
         public async Task PingCommand(InteractionContext ctx)
