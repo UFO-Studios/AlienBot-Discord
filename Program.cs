@@ -3,6 +3,7 @@
     using System;
 
     using DSharpPlus;
+    using DSharpPlus.SlashCommands;
 
     using AlienBot.Events;
     public class Primary
@@ -39,6 +40,9 @@
 
             //EVENT HANDLERS #################################################
             discord.MessageCreated += MessageCreate.Handler;
+
+            //COMMANDS #######################################################
+           
 
             await discord.ConnectAsync();
             await Task.Delay(-1);

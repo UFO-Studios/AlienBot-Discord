@@ -17,14 +17,14 @@
           "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -35,16 +35,20 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[4.4.6, )"
+              "version": "[5.0.0-nightly-02230, )"
+            },
+            "DSharpPlus.Commands": {
+              "target": "Package",
+              "version": "[5.0.0-nightly-02230, )"
             },
             "DSharpPlus.SlashCommands": {
               "target": "Package",
-              "version": "[4.4.6, )"
+              "version": "[5.0.0-nightly-02230, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -67,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.117/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
