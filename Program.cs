@@ -11,9 +11,27 @@
     {
         static string API_VERSION = "10";
         static string BOT_VERSION = "3.0";
-        static string BOT_TOKEN = File.ReadAllText("token.txt");
+        static string BOT_TOKEN = "";
+        static string MONGO_URI = "";
 
-        [Obsolete]//Error remover thingy. Idk
+
+
+        public static Task LoadConfig()
+        {
+            var configFile = "config.txt";
+            if (File.Exists(configFile))
+            {
+                var config = File.ReadAllLines(configFile);
+                BOT_TOKEN = config[0];
+                MONGO_URI = config[1];
+                return Task.CompletedTask;
+            } else {
+                Console.WriteLine("No config file found! Is it in the same directory as the bot?");
+                Exception e = new FileNotFoundException();
+                return Task.FromException(e);
+            }
+        }
+
         public static async Task Main()
         {
             //STARTUP BANNER ################################################
@@ -26,6 +44,7 @@
 
             //LOAD OTHER LIBS ################################################
 
+            _ = LoadConfig();
             await MessageCreate.BadWordsFilter();
 
 
@@ -53,9 +72,6 @@
             await discord.ConnectAsync();
             Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + "!");
             await Task.Delay(-1);
-
-
-
         }
     }
 }
