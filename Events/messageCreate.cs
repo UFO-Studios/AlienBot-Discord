@@ -1,7 +1,5 @@
 namespace AlienBot.Events
 {
-    using System.Net;
-    using System.Text.RegularExpressions;
     using DSharpPlus;
     using DSharpPlus.EventArgs;
     using AlienBot.Database;
