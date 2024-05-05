@@ -46,6 +46,8 @@
 
             _ = LoadConfig();
             await MessageCreate.BadWordsFilter();
+            Console.WriteLine("Connecting to MongoDB...");
+            Database.Connect.ConnectToDB(MONGO_URI);
 
 
             //DISCORD CONNECTION ############################################
