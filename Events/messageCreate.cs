@@ -4,10 +4,13 @@ namespace AlienBot.Events
     using System.Text.RegularExpressions;
     using DSharpPlus;
     using DSharpPlus.EventArgs;
+    using AlienBot.Database;
 
     public class MessageCreate
     {
         public static string[]? badWords; //type: ignore
+
+        public static Users usersInstance = new Users();
 
         public static async Task BadWordsFilter()
         {
@@ -55,6 +58,8 @@ namespace AlienBot.Events
                     await e.Message.RespondAsync("You can't use that word! (WARN)");
                 }
             }
+            Random random = new Random();
+            await usersInstance.AddXP(e.Author.Id.ToString(), random.Next(1, 11));
 
         }
     }
