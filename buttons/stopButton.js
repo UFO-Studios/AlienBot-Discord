@@ -1,4 +1,4 @@
-const { useMasterPlayer } = require("discord-player");
+// const { useMasterPlayer } = require("discord-player");
 const {
   MessageComponentInteraction,
   Client,

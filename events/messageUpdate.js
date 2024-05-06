@@ -41,6 +41,7 @@ module.exports = {
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
 
+    if (oldMessage == undefined || newMessage == undefined) return;
     await oldMessage.guild.channels.fetch();
     return await oldMessage.guild.channels.cache
       .find((channel) => channel.name == "alien-logs")
