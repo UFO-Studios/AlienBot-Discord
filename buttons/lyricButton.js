@@ -1,5 +1,5 @@
-const { useMasterPlayer } = require("discord-player");
-const { lyricsExtractor } = require("@discord-player/extractor");
+// const { useMasterPlayer } = require("discord-player");
+// const { lyricsExtractor } = require("@discord-player/extractor");
 const {
   MessageComponentInteraction,
   Client,
@@ -14,6 +14,8 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    await interaction.reply("Temporarily disabled! Sorry")
+    return;
     await interaction.deferReply();
     const player = useMasterPlayer();
     const search = lyricsExtractor();

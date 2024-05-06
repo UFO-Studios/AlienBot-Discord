@@ -71,7 +71,7 @@ module.exports = {
 		await deleteBannedWords(message, client);
 
 		// adding xp
-		await checkLevel(message, client);
+		// await checkLevel(message, client);
 	},
 };
 

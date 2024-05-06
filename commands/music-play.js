@@ -3,7 +3,7 @@ const {
   EmbedBuilder,
   ChatInputCommandInteraction,
 } = require("discord.js");
-const { useMainPlayer } = require("discord-player");
+// const { useMainPlayer } = require("discord-player");
 const { consoleMessage } = require("../log");
 
 module.exports = {
@@ -21,6 +21,8 @@ module.exports = {
    * @param {ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
+    await interaction.reply("Temporarily disabled! Sorry")
+    return;
     await interaction.deferReply();
     const player = useMainPlayer();
     await player.extractors.loadDefault();

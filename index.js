@@ -13,7 +13,7 @@ const {
   ButtonStyle,
   Events,
 } = require("discord.js");
-const { Player } = require("discord-player");
+// const { Player } = require("discord-player");
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
 const express = require("express");
@@ -55,50 +55,50 @@ const client = new Client({
   partials: [Partials.Channel],
 });
 
-const player = Player.singleton(client);
+// const player = Player.singleton(client);
 
-player.events.on("playerStart", (queue, track) => {
-  const embed = new EmbedBuilder()
-    .setTitle("Play song")
-    .setDescription(
-      `Now playing **${
-        track.title
-      }** which was requested by **${queue.metadata.user.toString()}**!`
-    )
-    .setColor("Green")
-    .setAuthor({ name: queue.metadata.user.tag })
-    .setThumbnail(queue.metadata.user.displayAvatarURL({ dynamic: true }))
-    .setTimestamp()
-    .setFooter({
-      text: "Music System • Alienbot",
-      iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
-    });
+// player.events.on("playerStart", (queue, track) => {
+//   const embed = new EmbedBuilder()
+//     .setTitle("Play song")
+//     .setDescription(
+//       `Now playing **${
+//         track.title
+//       }** which was requested by **${queue.metadata.user.toString()}**!`
+//     )
+//     .setColor("Green")
+//     .setAuthor({ name: queue.metadata.user.tag })
+//     .setThumbnail(queue.metadata.user.displayAvatarURL({ dynamic: true }))
+//     .setTimestamp()
+//     .setFooter({
+//       text: "Music System • Alienbot",
+//       iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
+//     });
 
-  const row = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("stopButton")
-      .setStyle(ButtonStyle.Primary)
-      .setLabel("Stop"),
-    new ButtonBuilder()
-      .setCustomId("skipButton")
-      .setStyle(ButtonStyle.Primary)
-      .setLabel("Skip"),
-    new ButtonBuilder()
-      .setCustomId("pauseButton")
-      .setStyle(ButtonStyle.Primary)
-      .setLabel("Pause"),
-    new ButtonBuilder()
-      .setCustomId("resumeButton")
-      .setStyle(ButtonStyle.Primary)
-      .setLabel("Resume"),
-    new ButtonBuilder()
-      .setCustomId("lyricButton")
-      .setStyle(ButtonStyle.Primary)
-      .setLabel("Get lyrics")
-  );
+//   const row = new ActionRowBuilder().addComponents(
+//     new ButtonBuilder()
+//       .setCustomId("stopButton")
+//       .setStyle(ButtonStyle.Primary)
+//       .setLabel("Stop"),
+//     new ButtonBuilder()
+//       .setCustomId("skipButton")
+//       .setStyle(ButtonStyle.Primary)
+//       .setLabel("Skip"),
+//     new ButtonBuilder()
+//       .setCustomId("pauseButton")
+//       .setStyle(ButtonStyle.Primary)
+//       .setLabel("Pause"),
+//     new ButtonBuilder()
+//       .setCustomId("resumeButton")
+//       .setStyle(ButtonStyle.Primary)
+//       .setLabel("Resume"),
+//     new ButtonBuilder()
+//       .setCustomId("lyricButton")
+//       .setStyle(ButtonStyle.Primary)
+//       .setLabel("Get lyrics")
+//   );
 
-  queue.metadata.channel.send({ embeds: [embed], components: [row] });
-});
+//   queue.metadata.channel.send({ embeds: [embed], components: [row] });
+// });
 
 client.DT = new DiscordTogether(client);
 client.C = Config;

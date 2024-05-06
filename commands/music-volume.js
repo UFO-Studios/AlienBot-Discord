@@ -1,4 +1,4 @@
-const { useMasterPlayer } = require("discord-player");
+// const { useMasterPlayer } = require("discord-player");
 const { SlashCommandBuilder } = require("discord.js");
 const {
   ChatInputCommandInteraction,
@@ -24,6 +24,8 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    await interaction.reply("Temporarily disabled! Sorry")
+    return;
     await interaction.deferReply();
     const player = useMasterPlayer();
 
