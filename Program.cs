@@ -72,7 +72,8 @@
            
 
             await discord.ConnectAsync();
-            Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + "!");
+            
+            Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + " as" + discord.CurrentUser.ToString().Split(";")[1] + "!");
             await Task.Delay(-1);
         }
     }
