@@ -26,6 +26,8 @@ namespace AlienBot.Database
             Users.users = db.GetCollection<BsonDocument>("users");
             Guilds.guilds = db.GetCollection<BsonDocument>("guilds");
             Console.WriteLine("Connected to MongoDB!");
+            Users.users.Indexes.CreateOne(new CreateIndexModel<BsonDocument>(Builders<BsonDocument>.IndexKeys.Ascending("xp"))); //sorted by XP, because more active users have more XP
+            Guilds.guilds.Indexes.CreateOne(new CreateIndexModel<BsonDocument>(Builders<BsonDocument>.IndexKeys.Ascending("GuildID")));
         }
     }
 

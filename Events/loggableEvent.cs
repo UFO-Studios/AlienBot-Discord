@@ -23,6 +23,7 @@ namespace AlienBot.Events
                 LatestGuild = GuildID;
                 var guild = await Guilds.guilds.Find(Builders<BsonDocument>.Filter.Eq("GuildID", GuildID)).FirstOrDefaultAsync();
                 var channel = guild.GetValue("LChannel").AsString;
+                if (channel == "none") { return; }
                 LatestChannel = channel;
                 var channelObj = await client.GetChannelAsync(ulong.Parse(channel));
                 await channelObj.SendMessageAsync(Event);

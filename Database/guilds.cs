@@ -15,7 +15,17 @@ namespace AlienBot.Database
                 { "LChannel", "none" },
                 { "NSFW", "false" }
             };
-            await guilds.InsertOneAsync(guildDocument);
+            //does it already exist?
+            var filter = Builders<BsonDocument>.Filter.Eq("GuildID", GuildID);
+            var guild = await guilds.Find(filter).FirstOrDefaultAsync();
+            if (guild != null)
+            {
+                return;
+            }
+            else
+            {
+                await guilds.InsertOneAsync(guildDocument);
+            }
         }
         public static async Task SetLoggingChannel(string GuildID, string ChannelID)
         {

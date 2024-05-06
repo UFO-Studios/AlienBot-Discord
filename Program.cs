@@ -7,6 +7,8 @@
 
     using AlienBot.Events;
     using AlienBot.Commands;
+    using DSharpPlus.Entities;
+
     public class Primary
     {
         static string API_VERSION = "10";
@@ -25,7 +27,9 @@
                 BOT_TOKEN = config[0];
                 MONGO_URI = config[1];
                 return Task.CompletedTask;
-            } else {
+            }
+            else
+            {
                 Console.WriteLine("No config file found! Is it in the same directory as the bot?");
                 Exception e = new FileNotFoundException();
                 return Task.FromException(e);
@@ -69,10 +73,20 @@
             discord.MessageCreated += MessageCreate.Handler;
 
             //COMMANDS #######################################################
-           
+
 
             await discord.ConnectAsync();
-            
+            Console.WriteLine("Retriving all guilds...");
+            var allGuilds = new List<DiscordGuild>();
+            var i = 0;
+            await foreach (var guild in discord.GetGuildsAsync())
+            {
+                i++;
+                allGuilds.Add(guild);
+                await Database.Guilds.NewGuild(guild.Id.ToString());
+                Console.WriteLine("New guild added to database. (" + i + "/" + allGuilds.Count + ")");
+
+            }
             Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + " as" + discord.CurrentUser.ToString().Split(";")[1] + "!");
             await Task.Delay(-1);
         }
