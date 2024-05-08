@@ -29,5 +29,22 @@ namespace AlienBot.Events
                 await channelObj.SendMessageAsync(Event);
             }
         }
+
+        public async Task setLogChannel(string GuildID, string ChannelID)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("GuildID", GuildID);
+            var update = Builders<BsonDocument>.Update.Set("LChannel", ChannelID);
+            await Guilds.guilds.UpdateOneAsync(filter, update);
+        }
+
+        public async Task<bool> UpgradeLogChannel(string guildID, DiscordClient client)
+        {
+            //looking for a "alien-logs" channel from the djs version
+            var guild = await Guilds.guilds.Find(Builders<BsonDocument>.Filter.Eq("GuildID", guildID)).FirstOrDefaultAsync();
+            var channel = guild.GetValue("alien-logs").AsString;
+            if (channel == "none") { return false; }
+            await setLogChannel(guildID, channel);
+            return true;
+        }
     }
 }
