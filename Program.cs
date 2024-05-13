@@ -66,11 +66,12 @@
 
             var slash = discord.UseSlashCommands();
 
-            slash.RegisterCommands<Ping>();
-            slash.RegisterCommands<Bread>();
+            slash.RegisterCommands<Text>();
+            slash.RegisterCommands<Mod>();
 
             //EVENT HANDLERS #################################################
             discord.MessageCreated += MessageCreate.Handler;
+            
 
             //COMMANDS #######################################################
 
