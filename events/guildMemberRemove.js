@@ -100,6 +100,7 @@ module.exports = {
       name: "leavePicture.png",
     });
 
+    if (!webhookUrl) {return}
     const webhook = new WebhookClient({ url: data.webhookUrl });
     await webhook.send({ content: strULTIMATE, files: [attachment] });
   },

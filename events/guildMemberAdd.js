@@ -105,7 +105,8 @@ module.exports = {
     const webhook = new WebhookClient({
       url: data.webhookUrl,
     });
-
+    
+    if (!webhookUrl) {return}
     webhook.send({ content: strULTIMATE, files: [attachment] });
   },
 };

@@ -28,6 +28,7 @@ module.exports = {
       });
 
     await message.guild.channels.fetch();
+    if (message == undefined) return;
     return await message.guild.channels.cache
       .find((channel) => channel.name == "alien-logs")
       .send({ embeds: [embed] });
