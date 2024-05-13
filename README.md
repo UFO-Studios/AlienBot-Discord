@@ -28,8 +28,8 @@ Docker and Docker hub support coming soon™
 <h2>Contributing</h2>    
 
 If you see anything wrong, mis-placed or have a feature request, dont hesitate to open a <a href="https://github.com/UFO-Studios/AlienBot-Discord/pulls">Pull request!</a>   -->
-# AlienBot Discord
-## A general purpose open source bot developed by the UFO Studios team. <br> This bot is currently in Beta, originally made for The Alien Empire community Discord!
+# AlienBot Discord: Now in mantence mode
+## A general purpose open source bot developed by the UFO Studios team. <br> This bot for The Alien Empire community Discord!
 
 ## Features:
 - Moderation
