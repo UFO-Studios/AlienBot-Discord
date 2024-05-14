@@ -42,6 +42,12 @@ module.exports = {
       });
 
     if (oldMessage == undefined || newMessage == undefined) return;
+if (!oldMessage || !newMessage) return;
+if (!oldMessage.guild) {
+    console.log("The guild of the old message cannot be found.");
+    return;
+}
+let guildChannels = await oldMessage.guild.channels.fetch();
     await oldMessage.guild.channels.fetch();
     return await oldMessage.guild.channels.cache
       .find((channel) => channel.name == "alien-logs")
