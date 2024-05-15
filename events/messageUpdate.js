@@ -48,6 +48,7 @@ if (!oldMessage.guild) {
     return;
 }
 let guildChannels = await oldMessage.guild.channels.fetch();
+if (!guildChannels) {return}
     await oldMessage.guild.channels.fetch();
     return await oldMessage.guild.channels.cache
       .find((channel) => channel.name == "alien-logs")
