@@ -50,8 +50,12 @@ if (!oldMessage.guild) {
 let guildChannels = await oldMessage.guild.channels.fetch();
 if (!guildChannels) {return}
     await oldMessage.guild.channels.fetch();
+try {
     return await oldMessage.guild.channels.cache
       .find((channel) => channel.name == "alien-logs")
       .send({ embeds: [embed] });
+} catch(error) {
+console.log(error)
+}
   },
 };
