@@ -231,6 +231,8 @@ const saveXP = async (userId, xp, level) => {
     await connectToDB();
   }
 
+  xp = xp.toString().split("[object Object]")[1];
+
   const oldObj = await lvl_module.findOne({ userId });
 
   if (!oldObj) {
