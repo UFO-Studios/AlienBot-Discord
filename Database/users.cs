@@ -48,7 +48,20 @@ namespace AlienBot.Database
                 var update = Builders<BsonDocument>.Update.Set("warns", newXP);
                 await users.UpdateOneAsync(filter, update);
             }
-
+        }
+        public async Task<int> GetXP(string UserID)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("UserID", UserID);
+            var user = await users.Find(filter).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                await NewUser(UserID, 0);
+                return 0;
+            }
+            else
+            {
+                return user["xp"].AsInt32;
+            }
         }
     }
 }

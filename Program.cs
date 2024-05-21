@@ -17,7 +17,6 @@
         static string MONGO_URI = "";
 
 
-
         public static Task LoadConfig()
         {
             var configFile = "config.txt";
@@ -36,7 +35,7 @@
             }
         }
 
-        public static async Task Main()
+        public static async Task Main(string[] args)
         {
             //STARTUP BANNER ################################################
             Console.WriteLine("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
@@ -71,22 +70,26 @@
 
             //EVENT HANDLERS #################################################
             discord.MessageCreated += MessageCreate.Handler;
-            
+
 
             //COMMANDS #######################################################
 
 
             await discord.ConnectAsync();
-            Console.WriteLine("Retriving all guilds...");
-            var allGuilds = new List<DiscordGuild>();
-            var i = 0;
-            await foreach (var guild in discord.GetGuildsAsync())
+            if (args[0] == "migrate")
             {
-                i++;
-                allGuilds.Add(guild);
-                await Database.Guilds.NewGuild(guild.Id.ToString());
-                Console.WriteLine("New guild added to database. (" + i + "/" + allGuilds.Count + ")");
+                Console.WriteLine("Migrating database...");
+                Console.WriteLine("Retriving all guilds...");
+                var allGuilds = new List<DiscordGuild>();
+                var i = 0;
+                await foreach (var guild in discord.GetGuildsAsync())
+                {
+                    i++;
+                    allGuilds.Add(guild);
+                    await Database.Guilds.NewGuild(guild.Id.ToString());
+                    Console.WriteLine("New guild added to database. (" + i + ")");
 
+                }
             }
             Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + " as" + discord.CurrentUser.ToString().Split(";")[1] + "!");
             await Task.Delay(-1);
