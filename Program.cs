@@ -67,15 +67,19 @@
 
             slash.RegisterCommands<Text>();
             slash.RegisterCommands<Mod>();
+            slash.RegisterCommands<Admin>();
 
             //EVENT HANDLERS #################################################
             discord.MessageCreated += MessageCreate.Handler;
+            discord.MessageUpdated += MessageEdit.Handler;
 
 
             //COMMANDS #######################################################
 
 
             await discord.ConnectAsync();
+            if (args.Length > 0)
+            {
             if (args[0] == "migrate")
             {
                 Console.WriteLine("Migrating database...");
@@ -90,6 +94,7 @@
                     Console.WriteLine("New guild added to database. (" + i + ")");
 
                 }
+            }
             }
             Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + " as" + discord.CurrentUser.ToString().Split(";")[1] + "!");
             await Task.Delay(-1);

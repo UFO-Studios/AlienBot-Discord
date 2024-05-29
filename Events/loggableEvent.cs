@@ -12,6 +12,9 @@ namespace AlienBot.Events
         public static string LatestGuild = "";
         public async Task SendEventLog(string GuildID, DiscordClient client, string Event)
         {
+            Console.WriteLine(GuildID + " " + LatestGuild + " " + LatestChannel);
+            try 
+            {
             if (LatestGuild == GuildID)
             {
                 var channelObj = await client.GetChannelAsync(ulong.Parse(LatestChannel));
@@ -20,13 +23,26 @@ namespace AlienBot.Events
             }
             else
             {
-                LatestGuild = GuildID;
+
                 var guild = await Guilds.guilds.Find(Builders<BsonDocument>.Filter.Eq("GuildID", GuildID)).FirstOrDefaultAsync();
                 var channel = guild.GetValue("LChannel").AsString;
-                if (channel == "none") { return; }
-                LatestChannel = channel;
+                if (channel != "none")
+                {
+                    LatestChannel = channel;
+                    LatestGuild = GuildID;
+                } else {
+                    var channel2 = guild.GetValue("alien-logs").AsString;
+                    var channelObj2 = await client.GetChannelAsync(ulong.Parse(channel2));
+                    await channelObj2.SendMessageAsync(Event);
+
+                }
                 var channelObj = await client.GetChannelAsync(ulong.Parse(channel));
                 await channelObj.SendMessageAsync(Event);
+            }
+            } catch (Exception e)
+            {
+                // Console.WriteLine(e);
+                
             }
         }
 
@@ -37,6 +53,12 @@ namespace AlienBot.Events
             await Guilds.guilds.UpdateOneAsync(filter, update);
         }
 
+
+        public async Task<string> getLogChannel(string GuildID)
+        {
+            var guild = await Guilds.guilds.Find(Builders<BsonDocument>.Filter.Eq("GuildID", GuildID)).FirstOrDefaultAsync();
+            return guild.GetValue("LChannel").AsString;
+        }
         public async Task<bool> UpgradeLogChannel(string guildID, DiscordClient client)
         {
             //looking for a "alien-logs" channel from the djs version

@@ -16,7 +16,7 @@ namespace AlienBot.Commands
             var user = ctx.User;
             Users luser = new();
             var xp = await luser.GetXP(user.Id.ToString());
-            await Reply(ctx, true, "Your rank is: " + xp.ToString());
+            await Reply(ctx, false, "Your rank is: " + xp.ToString());
         }
     }
 }

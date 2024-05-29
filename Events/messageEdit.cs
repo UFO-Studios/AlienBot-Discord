@@ -5,12 +5,11 @@ namespace AlienBot.Events
     using AlienBot.Database;
     using AlienBot.Events;
 
-    public class MessageCreate
+    public class MessageEdit
     {
-        public static string[]? badWords; //type: ignore
+        public static string[]? badWords;
         public static Users usersInstance = new Users();
         public static LogChannel logChannelInstance = new LogChannel();
-
         public static async Task BadWordsFilter()
         {
             if (File.Exists("badwords.txt"))
@@ -41,13 +40,13 @@ namespace AlienBot.Events
             }
             return;
         }
-
-        public static async Task Handler(DiscordClient client, MessageCreateEventArgs e)
+        public static async Task Handler(DiscordClient client, MessageUpdateEventArgs e)
         {
             if (e.Author.IsBot)
             {
                 return;
             }
+            Console.WriteLine("test");
             var message = e.Message.ToString();
             for (int i = 0; i < badWords?.Length; i++)
             {
@@ -59,9 +58,8 @@ namespace AlienBot.Events
                     await logChannelInstance.SendEventLog(e.Guild.Id.ToString(), client, "User " + e.Author.Username + " sent a banned word");
                 }
             }
-            Random random = new Random();
-            await usersInstance.AddXP(e.Author.Id.ToString(), random.Next(1, 11));
-
+            await logChannelInstance.SendEventLog(e.Guild.Id.ToString(), client, "User " + e.Author.Username + " edited a message. \n Was `" + e.MessageBefore.Content + "`, now `" + e.Message.Content + "`");
         }
+
     }
 }
