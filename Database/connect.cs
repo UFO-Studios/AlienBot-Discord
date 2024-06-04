@@ -3,7 +3,6 @@ namespace AlienBot.Database
     using MongoDB.Driver;
     using MongoDB.Bson;
 
-
     //DATABASE STRUCTURE: 
     // AlienBot
     //  - Users

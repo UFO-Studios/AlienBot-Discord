@@ -46,7 +46,6 @@ namespace AlienBot.Events
             {
                 return;
             }
-            Console.WriteLine("test");
             var message = e.Message.ToString();
             for (int i = 0; i < badWords?.Length; i++)
             {

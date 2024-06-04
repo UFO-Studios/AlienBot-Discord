@@ -12,7 +12,6 @@ namespace AlienBot.Events
         public static string LatestGuild = "";
         public async Task SendEventLog(string GuildID, DiscordClient client, string Event)
         {
-            Console.WriteLine(GuildID + " " + LatestGuild + " " + LatestChannel);
             try 
             {
             if (LatestGuild == GuildID)
