@@ -8,6 +8,7 @@
     using AlienBot.Events;
     using AlienBot.Commands;
     using DSharpPlus.Entities;
+    using System.Diagnostics;
 
     public class Primary
     {
@@ -32,6 +33,18 @@
                 Console.WriteLine("No config file found! Is it in the same directory as the bot?");
                 Exception e = new FileNotFoundException();
                 return Task.FromException(e);
+            }
+        }
+
+        public async static Task UpdateStatus(DiscordClient client)
+        {
+            while (true)
+            {
+            string[] statuses = { "Sub2Alien", "Now in C#!", "The only bot from outer space!", "github.com/ufo-studios", "Not broken! Yet", "mhmm. yes" };
+            var random = new Random();
+            var status = statuses[random.Next(0, statuses.Length)];
+            await client.UpdateStatusAsync(new DiscordActivity(status));
+            await Task.Delay(60*1000*5);
             }
         }
 
@@ -78,7 +91,10 @@
             //COMMANDS #######################################################
 
 
-            await discord.ConnectAsync();
+            // var Dactivity = new DiscordUserStatus("with code");
+            await discord.ConnectAsync(new DiscordActivity("hello"));
+            _ = UpdateStatus(discord);
+
             if (args.Length > 0)
             {
             if (args[0] == "migrate")
