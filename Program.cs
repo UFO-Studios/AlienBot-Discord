@@ -68,6 +68,7 @@
             slash.RegisterCommands<Text>();
             slash.RegisterCommands<Mod>();
             slash.RegisterCommands<Admin>();
+            slash.RegisterCommands<rankCommands>();
 
             //EVENT HANDLERS #################################################
             discord.MessageCreated += MessageCreate.Handler;

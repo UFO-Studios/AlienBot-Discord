@@ -45,13 +45,16 @@ namespace AlienBot.Commands
             }
             var emojiID = message.Split(":")[2].Split(">")[0];
             var emojiURL = $"https://cdn.discordapp.com/emojis/{emojiID}.png";
-            var emojiName = message.Split(":")[1];;
+            var emojiName = message.Split(":")[1];
             var emojiImage = await new HttpClient().GetStreamAsync(emojiURL);
             var memoryStream = new MemoryStream();
             await emojiImage.CopyToAsync(memoryStream);
             memoryStream.Position = 0; // Reset the position to the beginning of the stream
             await ctx.Guild.CreateEmojiAsync(emojiName, memoryStream);
             await Reply(ctx, false, $"Emoji {emojiName} added! ({emojiURL})");
+            var logChannelInstance = new LogChannel();
+            await logChannelInstance.SendEventLog(ctx.Guild.Id.ToString(), ctx.Client, $"Emoji {emojiName} added by {ctx.Member.Username}");
+            return;
         }
     }
 

@@ -4,7 +4,7 @@ namespace AlienBot.Commands
     using DSharpPlus.Entities;
     using DSharpPlus.SlashCommands;
 
-    public class rankCommands
+    public class rankCommands : ApplicationCommandModule
     {
         public async Task Reply(InteractionContext ctx, bool isPrivate, string message)
         {
@@ -16,7 +16,19 @@ namespace AlienBot.Commands
             var user = ctx.User;
             Users luser = new();
             var xp = await luser.GetXP(user.Id.ToString());
-            await Reply(ctx, false, "Your rank is: " + xp.ToString());
+            var rank = xp / 100;
+            var progressBar = "";
+            var progress = xp % 100 / 10; // Calculate how many "##" should be added
+
+            for (int i = 0; i < progress; i++)
+            {
+                progressBar += "##";
+            }
+            while (progressBar.Length < 20) // 20 because "##" is 2 characters and we want a total of 10 "##" or "--"
+            {
+                progressBar += "--";
+            }
+            await Reply(ctx, false, "Your rank is: " + rank.ToString() + "!\n" + progressBar + " (" + (progress - 100).ToString() + " xp to go)");
         }
     }
 }
