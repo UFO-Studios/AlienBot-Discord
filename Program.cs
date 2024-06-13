@@ -3,12 +3,15 @@
     using System;
 
     using DSharpPlus;
-    using DSharpPlus.SlashCommands;
+
+    using Serilog;
+    using Microsoft.Extensions.Logging;
+
 
     using AlienBot.Events;
     using AlienBot.Commands;
     using DSharpPlus.Entities;
-    using System.Diagnostics;
+    using DSharpPlus.Commands;
 
     public class Primary
     {
@@ -30,7 +33,7 @@
             }
             else
             {
-                Console.WriteLine("No config file found! Is it in the same directory as the bot?");
+                Log.Fatal("No config file found! Is it in the same directory as the bot?");
                 Exception e = new FileNotFoundException();
                 return Task.FromException(e);
             }
@@ -40,50 +43,68 @@
         {
             while (true)
             {
-            string[] statuses = { "Sub2Alien", "Now in C#!", "The only bot from outer space!", "github.com/ufo-studios", "Not broken! Yet", "mhmm. yes" };
-            var random = new Random();
-            var status = statuses[random.Next(0, statuses.Length)];
-            await client.UpdateStatusAsync(new DiscordActivity(status));
-            await Task.Delay(60*1000*5);
+                string[] statuses = { "Sub2Alien", "Now in C#!", "The only bot from outer space!", "github.com/ufo-studios", "Not broken! Yet", "mhmm. yes" };
+                var random = new Random();
+                var status = statuses[random.Next(0, statuses.Length)];
+                await client.UpdateStatusAsync(new DiscordActivity(status));
+                await Task.Delay(60 * 1000 * 5);
             }
         }
 
         public static async Task Main(string[] args)
         {
+
+            //LOGGING #######################################################
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .CreateLogger();
             //STARTUP BANNER ################################################
-            Console.WriteLine("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
-            Console.WriteLine("█ ▄▄▀██ ████▄ ▄██ ▄▄▄██ ▀██ ██ ▄▄▀██ ▄▄▄ █▄▄ ▄▄███ ▄▄ ████ ▄▄ █");
-            Console.WriteLine("█ ▀▀ ██ █████ ███ ▄▄▄██ █ █ ██ ▄▄▀██ ███ ███ ███████▄▀█▀▀█ ▀▄ █");
-            Console.WriteLine("█ ██ ██ ▀▀██▀ ▀██ ▀▀▀██ ██▄ ██ ▀▀ ██ ▀▀▀ ███ █████ ▀▀ █▄▄█ ▀▀ █");
-            Console.WriteLine("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
-            Console.WriteLine("AlienBot Discord V" + BOT_VERSION + "  Made with 👽 & 💖 by UFO Studios.");
+            Log.Information("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            Log.Information("█ ▄▄▀██ ████▄ ▄██ ▄▄▄██ ▀██ ██ ▄▄▀██ ▄▄▄ █▄▄ ▄▄███ ▄▄ ████ ▄▄ █");
+            Log.Information("█ ▀▀ ██ █████ ███ ▄▄▄██ █ █ ██ ▄▄▀██ ███ ███ ███████▄▀█▀▀█ ▀▄ █");
+            Log.Information("█ ██ ██ ▀▀██▀ ▀██ ▀▀▀██ ██▄ ██ ▀▀ ██ ▀▀▀ ███ █████ ▀▀ █▄▄█ ▀▀ █");
+            Log.Information("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
+            Log.Information("AlienBot Discord V" + BOT_VERSION + "  Made with 👽 & 💖 by UFO Studios.");
 
-            //LOAD OTHER LIBS ################################################
-
+            //LOAD OTHER LIBS ###############################################
             _ = LoadConfig();
+
+
             await MessageCreate.BadWordsFilter();
-            Console.WriteLine("Connecting to MongoDB...");
+            if (MessageCreate.badWords == null)
+            {
+                Log.Fatal("Bad words list not loaded! Exiting...");
+                return;
+            }
+
+
+            Log.Information("Connecting to MongoDB...");
             Database.Connect.ConnectToDB(MONGO_URI);
 
-
             //DISCORD CONNECTION ############################################
-            Console.WriteLine("Connecting to Discord Gateway V" + API_VERSION + "...");
+            Log.Information("Connecting to Discord Gateway V" + API_VERSION + "...");
 
             var discord = new DiscordClient(new DiscordConfiguration()
             {
                 Token = BOT_TOKEN,
                 TokenType = TokenType.Bot,
-                Intents = DiscordIntents.All
+                Intents = DiscordIntents.All,
+                AutoReconnect = true,
+                GatewayCompressionLevel = GatewayCompressionLevel.Stream,
+                LoggerFactory = new LoggerFactory().AddSerilog() // Use Serilog
             });
 
-            var slash = discord.UseSlashCommands();
+            var slash = discord.UseCommands();
 
-            slash.RegisterCommands<Text>();
-            slash.RegisterCommands<Mod>();
-            slash.RegisterCommands<Admin>();
-            slash.RegisterCommands<rankCommands>();
+
+            Log.Debug("Adding commands");
+            slash.AddCommands<Text>();
+            slash.AddCommands<Mod>();
+            slash.AddCommands<Admin>();
+            slash.AddCommands<rankCommands>();
 
             //EVENT HANDLERS #################################################
+            Log.Debug("Adding event handlers");
             discord.MessageCreated += MessageCreate.Handler;
             discord.MessageUpdated += MessageEdit.Handler;
 
@@ -95,23 +116,23 @@
 
             if (args.Length > 0)
             {
-            if (args[0] == "migrate")
-            {
-                Console.WriteLine("Migrating database...");
-                Console.WriteLine("Retriving all guilds...");
-                var allGuilds = new List<DiscordGuild>();
-                var i = 0;
-                await foreach (var guild in discord.GetGuildsAsync())
+                if (args[0] == "migrate")
                 {
-                    i++;
-                    allGuilds.Add(guild);
-                    await Database.Guilds.NewGuild(guild.Id.ToString());
-                    Console.WriteLine("New guild added to database. (" + i + ")");
+                    Log.Information("Migrating database...");
+                    Log.Information("Retriving all guilds...");
+                    var allGuilds = new List<DiscordGuild>();
+                    var i = 0;
+                    await foreach (var guild in discord.GetGuildsAsync())
+                    {
+                        i++;
+                        allGuilds.Add(guild);
+                        await Database.Guilds.NewGuild(guild.Id.ToString());
+                        Log.Information("New guild added to database. (" + i + ")");
 
+                    }
                 }
             }
-            }
-            Console.WriteLine("Connected to Discord Gateway V" + API_VERSION + " as" + discord.CurrentUser.ToString().Split(";")[1] + "!");
+            Log.Information("Connected to Discord Gateway V" + API_VERSION + " as" + discord.CurrentUser.ToString().Split(";")[1] + "!");
             await Task.Delay(-1);
         }
     }

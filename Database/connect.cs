@@ -2,6 +2,7 @@ namespace AlienBot.Database
 {
     using MongoDB.Driver;
     using MongoDB.Bson;
+    using Serilog;
 
     //DATABASE STRUCTURE: 
     // AlienBot
@@ -24,7 +25,7 @@ namespace AlienBot.Database
             db = client.GetDatabase("AlienBot");
             Users.users = db.GetCollection<BsonDocument>("users");
             Guilds.guilds = db.GetCollection<BsonDocument>("guilds");
-            Console.WriteLine("Connected to MongoDB!");
+            Log.Information("Connected to MongoDB!");
             Users.users.Indexes.CreateOne(new CreateIndexModel<BsonDocument>(Builders<BsonDocument>.IndexKeys.Ascending("xp"))); //sorted by XP, because more active users have more XP
             Guilds.guilds.Indexes.CreateOne(new CreateIndexModel<BsonDocument>(Builders<BsonDocument>.IndexKeys.Ascending("GuildID")));
         }

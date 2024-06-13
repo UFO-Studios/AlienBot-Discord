@@ -3,7 +3,7 @@ namespace AlienBot.Events
     using DSharpPlus;
     using DSharpPlus.EventArgs;
     using AlienBot.Database;
-    using AlienBot.Events;
+    using Serilog;
 
     public class MessageEdit
     {
@@ -15,11 +15,11 @@ namespace AlienBot.Events
             if (File.Exists("badwords.txt"))
             {
                 badWords = File.ReadAllLines("badwords.txt");
-                Console.WriteLine("Bad words list loaded.");
+                Log.Information("Bad words list loaded.");
             }
             else
             {
-                Console.WriteLine("Downloading bad words list...");
+                Log.Information("Downloading bad words list...");
                 var badWordsListURL = "http://www.bannedwordlist.com/lists/swearWords.txt";
                 using (var client = new HttpClient())
                 {
@@ -30,11 +30,11 @@ namespace AlienBot.Events
                         var badWordsData = await response.Content.ReadAsStringAsync();
                         File.WriteAllText("badwords.txt", badWordsData);
                         badWords = File.ReadAllLines("badwords.txt");
-                        Console.WriteLine("Bad words list downloaded and saved.");
+                        Log.Information("Bad words list downloaded and saved.");
                     }
                     else
                     {
-                        Console.WriteLine("Failed to download bad words list. Continuing without bad words filter.");
+                        Log.Information("Failed to download bad words list. Continuing without bad words filter.");
                     }
                 }
             }
