@@ -3,7 +3,6 @@ namespace AlienBot.Events
     using DSharpPlus;
     using DSharpPlus.EventArgs;
     using AlienBot.Database;
-    using AlienBot.Events;
 
     public class MessageCreate
     {
@@ -48,20 +47,24 @@ namespace AlienBot.Events
             {
                 return;
             }
+            var Lguilds = new Guilds();
             var message = e.Message.ToString();
             for (int i = 0; i < badWords?.Length; i++)
             {
-                if (message.Contains(badWords[i]))
+                if (!await Lguilds.GetNSFWDelete(e.Guild.Id.ToString())) //if it is set to delete
                 {
-                    await e.Message.DeleteAsync("Bad word! :(");
-                    await e.Message.RespondAsync("You can't use that word! (WARN)");
-                    await usersInstance.AddWarn(e.Author.Id.ToString());
-                    await logChannelInstance.SendEventLog(e.Guild.Id.ToString(), client, "User " + e.Author.Username + " sent a banned word");
+                    if (message.Contains(badWords[i]))
+                    {
+                        await e.Message.DeleteAsync("Bad word! :(");
+                        await e.Message.RespondAsync("You can't use that word! (WARN)");
+                        await usersInstance.AddWarn(e.Author.Id.ToString());
+                        var logMessage = "User " + e.Author.Username + " sent a banned word! Message: " + message.Replace(badWords[i], "****");
+                        await logChannelInstance.SendEventLog(e.Guild.Id.ToString(), client, logMessage);
+                    }
                 }
             }
-            Random random = new Random();
+            Random random = new();
             await usersInstance.AddXP(e.Author.Id.ToString(), random.Next(1, 11));
-
         }
     }
 }

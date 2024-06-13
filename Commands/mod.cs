@@ -1,5 +1,6 @@
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using AlienBot.Events;
 
 namespace AlienBot.Commands
 {
@@ -30,8 +31,22 @@ namespace AlienBot.Commands
         public async Task LockdownCommand(InteractionContext ctx)
         {
             var channel = ctx.Channel;
-            // await channel.AddOverwriteAsync(DiscordMember member, [DiscordPermissions allow = DiscordPermissions.None], [DiscordPermissions deny = DiscordPermissions.None], [string? reason = null]);
+            await channel.AddOverwriteAsync(ctx.Guild.EveryoneRole, deny: DiscordPermissions.SendMessages);
             await Reply(ctx, false, "Channel locked down");
+        }
+        [SlashCommand("unlock", "Unlocks the current channel")]
+        public async Task UnlockCommand(InteractionContext ctx)
+        {
+            var channel = ctx.Channel;
+            await channel.AddOverwriteAsync(ctx.Guild.EveryoneRole, allow: DiscordPermissions.SendMessages);
+            await Reply(ctx, false, "Channel unlocked");
+        }
+        [SlashCommand("toggleSwearFilter", "Toggles the swear filter")]
+        public async Task ToggleSwearFilterCommand(InteractionContext ctx)
+        {
+            var guild = ctx.Guild;
+            var badWordFilter = MessageCreate.badWords;
+
         }
     }
 }

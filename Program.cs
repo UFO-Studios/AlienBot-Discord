@@ -91,9 +91,7 @@
             //COMMANDS #######################################################
 
 
-            // var Dactivity = new DiscordUserStatus("with code");
-            await discord.ConnectAsync(new DiscordActivity("hello"));
-            _ = UpdateStatus(discord);
+            await discord.ConnectAsync();
 
             if (args.Length > 0)
             {
