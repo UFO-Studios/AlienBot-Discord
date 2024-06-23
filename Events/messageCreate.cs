@@ -8,8 +8,8 @@ namespace AlienBot.Events
     public class MessageCreate
     {
         public static string[]? badWords; //type: ignore
-        public static Users usersInstance = new Users();
-        public static LogChannel logChannelInstance = new LogChannel();
+        public static Users usersInstance = new();
+        public static LogChannel logChannelInstance = new();
 
         public static async Task BadWordsFilter()
         {

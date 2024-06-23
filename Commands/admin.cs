@@ -23,7 +23,7 @@ namespace AlienBot.Commands
         {
             var channel = ctx.Channel.Id.ToString();
             var guild = ctx.Guild.Id.ToString();
-            LogChannel logChannelInstance = new LogChannel();
+            LogChannel logChannelInstance = new();
             await logChannelInstance.setLogChannel(guild, channel);
             await Reply(ctx, false, "Log channel set to this channel!");
         }

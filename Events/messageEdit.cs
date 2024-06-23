@@ -8,8 +8,8 @@ namespace AlienBot.Events
     public class MessageEdit
     {
         public static string[]? badWords;
-        public static Users usersInstance = new Users();
-        public static LogChannel logChannelInstance = new LogChannel();
+        public static Users usersInstance = new();
+        public static LogChannel logChannelInstance = new();
         public static async Task BadWordsFilter()
         {
             if (File.Exists("badwords.txt"))

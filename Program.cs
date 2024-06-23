@@ -3,6 +3,8 @@
     using System;
 
     using DSharpPlus;
+    using DSharpPlus.Entities;
+    using DSharpPlus.Commands;
 
     using Serilog;
     using Microsoft.Extensions.Logging;
@@ -10,15 +12,17 @@
 
     using AlienBot.Events;
     using AlienBot.Commands;
-    using DSharpPlus.Entities;
-    using DSharpPlus.Commands;
+
 
     public class Primary
     {
         static string API_VERSION = "10";
         static string BOT_VERSION = "3.0";
         static string BOT_TOKEN = "";
-        static string MONGO_URI = "";
+        static string MONGO_URI = "";/*
+        public static string TWITCH_CLIENT_ID = "";
+        public static string TWITCH_CLIENT_SECRET = "";
+        public static string TWITCH_REDIRECT_URI = "";*/
 
 
         public static Task LoadConfig()
@@ -28,7 +32,10 @@
             {
                 var config = File.ReadAllLines(configFile);
                 BOT_TOKEN = config[0];
-                MONGO_URI = config[1];
+                MONGO_URI = config[1];/*
+                TWITCH_CLIENT_ID = config[2];
+                TWITCH_CLIENT_SECRET = config[3];
+                TWITCH_REDIRECT_URI = config[4];*/
                 return Task.CompletedTask;
             }
             else
@@ -81,6 +88,9 @@
             Log.Information("Connecting to MongoDB...");
             Database.Connect.ConnectToDB(MONGO_URI);
 
+            Log.Information("Starting web server...");
+            // Server.Start();
+
             //DISCORD CONNECTION ############################################
             Log.Information("Connecting to Discord Gateway V" + API_VERSION + "...");
 
@@ -98,7 +108,7 @@
 
 
             Log.Debug("Adding commands");
-            slash.AddCommands<Text>();
+            slash.AddCommands<Text>(/*Log*/);
             slash.AddCommands<Mod>();
             slash.AddCommands<Admin>();
             slash.AddCommands<rankCommands>();
