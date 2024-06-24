@@ -1,4 +1,12 @@
-﻿namespace AlienBot
+﻿/*
+* ALienBot Discord, V3.0
+* Made with 👽 & 💖 by UFO Studios.
+* Copyright 2024+ UFO Studios, made by Niceygy.
+* This is the main entrypoint for the bot. Best viewed in vs code.
+* CONSISTENCY!
+*/
+
+namespace AlienBot
 {
     using System;
 
@@ -12,16 +20,19 @@
 
     using AlienBot.Events;
     using AlienBot.Commands;
-
+    using AlienBot.Web;
+    using Microsoft.VisualBasic;
 
     public class Primary
-    {
-        static string API_VERSION = "10";
-        static string BOT_VERSION = "3.0";
-        static string BOT_TOKEN = "";
-        static string MONGO_URI = "";/*
+    {//Public so they can be reached in web/data.cs
+        public static string API_VERSION = "10";
+        public static string BOT_VERSION = "3.0";
+        public static string BOT_TOKEN = "";
+        public static string MONGO_URI = "";
+        public static string WEB_UI_ADDRESS = "";
+        public static DiscordClient discord;/*
         public static string TWITCH_CLIENT_ID = "";
-        public static string TWITCH_CLIENT_SECRET = "";
+        public static string TWITCH_CLIENT_SECRET = ""; IGNORE THESE!
         public static string TWITCH_REDIRECT_URI = "";*/
 
 
@@ -32,8 +43,9 @@
             {
                 var config = File.ReadAllLines(configFile);
                 BOT_TOKEN = config[0];
-                MONGO_URI = config[1];/*
-                TWITCH_CLIENT_ID = config[2];
+                MONGO_URI = config[1];
+                WEB_UI_ADDRESS = config[2];
+                /*TWITCH_CLIENT_ID = config[2];
                 TWITCH_CLIENT_SECRET = config[3];
                 TWITCH_REDIRECT_URI = config[4];*/
                 return Task.CompletedTask;
@@ -89,12 +101,12 @@
             Database.Connect.ConnectToDB(MONGO_URI);
 
             Log.Information("Starting web server...");
-            // Server.Start();
+            _ = Server.Start([WEB_UI_ADDRESS + "/"]);
 
             //DISCORD CONNECTION ############################################
             Log.Information("Connecting to Discord Gateway V" + API_VERSION + "...");
 
-            var discord = new DiscordClient(new DiscordConfiguration()
+            discord = new DiscordClient(new DiscordConfiguration()
             {
                 Token = BOT_TOKEN,
                 TokenType = TokenType.Bot,
