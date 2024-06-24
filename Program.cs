@@ -76,7 +76,10 @@ namespace AlienBot
             //LOGGING #######################################################
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
+                .WriteTo.InMemorySink()
                 .CreateLogger();
+
+            
             //STARTUP BANNER ################################################
             Log.Information("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
             Log.Information("█ ▄▄▀██ ████▄ ▄██ ▄▄▄██ ▀██ ██ ▄▄▀██ ▄▄▄ █▄▄ ▄▄███ ▄▄ ████ ▄▄ █");
@@ -118,7 +121,7 @@ namespace AlienBot
 
             var slash = discord.UseCommands();
 
-
+            //COMMANDS #######################################################
             Log.Debug("Adding commands");
             slash.AddCommands<Text>(/*Log*/);
             slash.AddCommands<Mod>();
@@ -155,6 +158,8 @@ namespace AlienBot
                 }
             }
             Log.Information("Connected to Discord Gateway V" + API_VERSION + " as" + discord.CurrentUser.ToString().Split(";")[1] + "!");
+            Log.Information("STARTUP COMPLETE! AlienBot is now online.");
+            Log.Information("###################################################################################################");
             await Task.Delay(-1);
         }
     }
