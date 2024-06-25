@@ -91,7 +91,7 @@ namespace AlienBot.Web
             <section class='container'>
             <div class='one'>
             <h2>Bot Statistics</h2>
-            <p>Memory Usage: {memory} bytes</p>
+            <p>Memory Usage: {memory} MB</p>
             <p>CPU Usage: {cpu} seconds</p>
             <p>Connected Guilds: {guilds}</p>
             </div>

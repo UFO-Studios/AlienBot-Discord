@@ -17,6 +17,7 @@ namespace AlienBot.Web
         public static string GetMemoryUsage()
         {
             var memory = GC.GetTotalMemory(true);
+            memory = memory / 1024 / 1024; // Convert to MB
             // Log.Information("Memory usage: {0}", memory);
             return memory.ToString();
         }
