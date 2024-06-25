@@ -81,11 +81,12 @@ namespace AlienBot.Events
     public class InMemorySink(IFormatProvider formatProvider) : ILogEventSink
     {
         private readonly IFormatProvider _formatProvider = formatProvider;
-        public static ConcurrentBag<LogEvent> Events = [];
+        public static ConcurrentBag<string> Events = new ConcurrentBag<string>();
 
         public void Emit(LogEvent logEvent)
         {
-            Events.Add(logEvent);
+            // Console.WriteLine(logEvent.RenderMessage(_formatProvider));
+            Events.Add(logEvent.RenderMessage(_formatProvider)); //renders only the text of the log message, not metatdata
             //limit logs to 20
             if (Events.Count > 20)
             {

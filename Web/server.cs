@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using Serilog;
-using AlienBot;
+using System.Linq;
 using AlienBot.Events;
+using System.Collections.Concurrent;
 
 namespace AlienBot.Web
 {
@@ -52,13 +53,13 @@ namespace AlienBot.Web
         //
         public static string CreateHTMLResponse(string memory, string cpu, string guilds, string mdbv)
         {
-            List<Serilog.Events.LogEvent> eventMessages = InMemorySink.Events.ToList();
+            ConcurrentBag<string> eventMessages = InMemorySink.Events;
             /*Log.Information("EventMessages: {0}", eventMessages.Count);
-            Log.Information(eventMessages[0].Properties.ToString() + "Properties");
-            string LM1 = eventMessages[0].Properties.ContainsKey("Message") ? eventMessages[0].Properties["Message"].ToString() : "No message";
-            string LM2 = eventMessages[1].Properties.ContainsKey("Message") ? eventMessages[1].Properties["Message"].ToString() : "No message";
-            string LM3 = eventMessages[2].Properties.ContainsKey("Message") ? eventMessages[2].Properties["Message"].ToString() : "No message";
-            string LM4 = eventMessages[3].Properties.ContainsKey("Message") ? eventMessages[3].Properties["Message"].ToString() : "No message";*/
+            Log.Information(eventMessages[0].Properties.ToString() + "Properties");*/
+            string LM1 = eventMessages.ElementAtOrDefault(0);
+            string LM2 = eventMessages.ElementAtOrDefault(1);
+            string LM3 = eventMessages.ElementAtOrDefault(2);
+            string LM4 = eventMessages.ElementAtOrDefault(3);
             return @$"
             <html>
             <head>
@@ -98,18 +99,19 @@ namespace AlienBot.Web
             <h2>Database Statistics</h2>
             <p>MongoDB Version: {mdbv}</p>
             </div>
-            <br>
-            </section>
-            </body>
-            </html>
-                ";
-            /*
             <h3 style='text-align: center;'>Latest Log messages:</h3>
             <p style='text-align: center;'>[LOGS]</p>" + @$"
             <p style='text-align: center;'>{LM1}</p>
             <p style='text-align: center;'>{LM2}</p>
             <p style='text-align: center;'>{LM3}</p>
             <p style='text-align: center;'>{LM4}</p>
+            <br>
+            </section>
+            </body>
+            </html>
+                ";
+            /*
+
             */
         }
     }

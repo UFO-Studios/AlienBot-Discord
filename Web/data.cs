@@ -17,13 +17,13 @@ namespace AlienBot.Web
         public static string GetMemoryUsage()
         {
             var memory = GC.GetTotalMemory(true);
-            Log.Information("Memory usage: {0}", memory);
+            // Log.Information("Memory usage: {0}", memory);
             return memory.ToString();
         }
         public static string GetCpuUsage()
         {
             var cpu = System.Diagnostics.Process.GetCurrentProcess().TotalProcessorTime.TotalSeconds;
-            Log.Information("CPU time used: {0}", cpu);
+            // Log.Information("CPU time used: {0}", cpu);
             return cpu.ToString();
         }
 
@@ -37,7 +37,7 @@ namespace AlienBot.Web
             var buildInfoResult = await db.RunCommandAsync<BsonDocument>(buildInfoCommand);
             var mongoDbVersion = buildInfoResult["version"].AsString;
 
-            Log.Information("MongoDB version: {0}", mongoDbVersion);
+            // Log.Information("MongoDB version: {0}", mongoDbVersion);
             return mongoDbVersion.ToString();
         }
         public static string GetBotGuilds(DiscordClient client)
