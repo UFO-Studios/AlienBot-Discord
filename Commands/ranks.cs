@@ -6,7 +6,7 @@ namespace AlienBot.Commands
 
     public class rankCommands : ApplicationCommandModule
     {
-        public async Task Reply(InteractionContext ctx, bool isPrivate, string message)
+        public static async Task Reply(InteractionContext ctx, bool isPrivate, string message)
         {
             await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent(message).AsEphemeral(isPrivate));
         }

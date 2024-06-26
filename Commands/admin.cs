@@ -14,7 +14,7 @@ namespace AlienBot.Commands
         /// <param name="isPrivate">A boolean indicating whether the reply should be sent privately.</param>
         /// <param name="message">The message content.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task Reply(InteractionContext ctx, bool isPrivate, string message)
+        public static async Task Reply(InteractionContext ctx, bool isPrivate, string message)
         {
             await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent(message).AsEphemeral(isPrivate));
         }
@@ -24,7 +24,7 @@ namespace AlienBot.Commands
             var channel = ctx.Channel.Id.ToString();
             var guild = ctx.Guild.Id.ToString();
             LogChannel logChannelInstance = new();
-            await logChannelInstance.setLogChannel(guild, channel);
+            await LogChannel.setLogChannel(guild, channel);
             await Reply(ctx, false, "Log channel set to this channel!");
         }
         [SlashCommand("steal-emoji", "Steals an emoji from another server.")]
@@ -53,7 +53,7 @@ namespace AlienBot.Commands
             await ctx.Guild.CreateEmojiAsync(emojiName, memoryStream);
             await Reply(ctx, false, $"Emoji {emojiName} added! ({emojiURL})");
             var logChannelInstance = new LogChannel();
-            await logChannelInstance.SendEventLog(ctx.Guild.Id.ToString(), ctx.Client, $"Emoji {emojiName} added by {ctx.Member.Username}");
+            await LogChannel.SendEventLog(ctx.Guild.Id.ToString(), ctx.Client, $"Emoji {emojiName} added by {ctx.Member.Username}");
             return;
         }
     }

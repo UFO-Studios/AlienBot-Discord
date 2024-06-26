@@ -33,7 +33,7 @@ namespace AlienBot.Database
             var update = Builders<BsonDocument>.Update.Set("LChannel", ChannelID);
             await guilds.UpdateOneAsync(filter, update);
         }
-        public async Task<string> GetLoggingChannel(string GuildID)
+        public static async Task<string> GetLoggingChannel(string GuildID)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("GuildID", GuildID);
             if (filter == null)
@@ -53,7 +53,7 @@ namespace AlienBot.Database
             var update = Builders<BsonDocument>.Update.Set("NSFW", ChannelID);
             await guilds.UpdateOneAsync(filter, update);
         }
-        public async Task<bool> GetNSFWDelete(string GuildID)
+        public static async Task<bool> GetNSFWDelete(string GuildID)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("GuildID", GuildID);
             if (filter == null)

@@ -7,7 +7,7 @@ namespace AlienBot.Database
     {
         public static IMongoCollection<BsonDocument> users;
 
-        public async Task NewUser(string UserID, int xp = 0, int warns = 0)
+        public static async Task NewUser(string UserID, int xp = 0, int warns = 0)
         {
             var usrDocument = new BsonDocument
             {

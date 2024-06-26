@@ -15,7 +15,7 @@ namespace AlienBot.Events
         //These are so that if a guild mass-deletes messages (or does any event in quick sucsession) we don't have to keep spamming the DB.
         public static string LatestChannel = "";
         public static string LatestGuild = "";
-        public async Task SendEventLog(string GuildID, DiscordClient client, string Event)
+        public static async Task SendEventLog(string GuildID, DiscordClient client, string Event)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace AlienBot.Events
             }
         }
 
-        public async Task setLogChannel(string GuildID, string ChannelID)
+        public static async Task setLogChannel(string GuildID, string ChannelID)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("GuildID", GuildID);
             var update = Builders<BsonDocument>.Update.Set("LChannel", ChannelID);
@@ -61,7 +61,7 @@ namespace AlienBot.Events
         }
 
 
-        public async Task<string> getLogChannel(string GuildID)
+        public static async Task<string> getLogChannel(string GuildID)
         {
             var guild = await Guilds.guilds.Find(Builders<BsonDocument>.Filter.Eq("GuildID", GuildID)).FirstOrDefaultAsync();
             return guild.GetValue("LChannel").AsString;
