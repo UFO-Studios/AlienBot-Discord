@@ -1,6 +1,7 @@
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
 using AlienBot.Events;
+using AlienBot.Database;
 
 namespace AlienBot.Commands
 {
@@ -41,12 +42,21 @@ namespace AlienBot.Commands
             await channel.AddOverwriteAsync(ctx.Guild.EveryoneRole, allow: DiscordPermissions.SendMessages);
             await Reply(ctx, false, "Channel unlocked");
         }
-        [SlashCommand("toggleSwearFilter", "Toggles the swear filter")]
-        public async Task ToggleSwearFilterCommand(InteractionContext ctx)
+        // [SlashCommand("toggleSwearFilter", "Toggles the swear filter")]
+        // public async Task ToggleSwearFilterCommand(InteractionContext ctx)
+        // {
+        //     var guild = ctx.Guild;
+        //     var badWordFilter = MessageCreate.badWords;
+
+        // }
+        [SlashCommand("warn", "Warn a user")]
+        public async Task WarnCommand(InteractionContext ctx, [Option("user", "The user to warn")] DiscordUser user, [Option("reason", "The reason for the warning")] string reason)
         {
             var guild = ctx.Guild;
-            var badWordFilter = MessageCreate.badWords;
-
+            var member = await guild.GetMemberAsync(user.Id);
+            var users = new Users();
+            await users.AddWarn(user.Id.ToString());
+            await Reply(ctx, false, $"Warned {user.Username} for {reason}");
         }
     }
 }
