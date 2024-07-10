@@ -1,6 +1,5 @@
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
-using AlienBot.Events;
 using AlienBot.Database;
 
 namespace AlienBot.Commands

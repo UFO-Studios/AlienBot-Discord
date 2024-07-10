@@ -17,11 +17,9 @@ namespace AlienBot
     using Serilog;
     using Microsoft.Extensions.Logging;
 
-
     using AlienBot.Events;
     using AlienBot.Commands;
     using AlienBot.Web;
-    using Microsoft.VisualBasic;
 
     public class Primary
     {//Public so they can be reached in web/data.cs
@@ -122,11 +120,13 @@ namespace AlienBot
             var slash = discord.UseCommands();
 
             //COMMANDS #######################################################
-            Log.Debug("Adding commands");
+            Log.Information("Adding commands");
             slash.AddCommands<Text>(/*Log*/);
             slash.AddCommands<Mod>();
             slash.AddCommands<Admin>();
             slash.AddCommands<rankCommands>();
+
+            
 
             //EVENT HANDLERS #################################################
             Log.Debug("Adding event handlers");
