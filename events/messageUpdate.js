@@ -1,61 +1,54 @@
 const { Message, EmbedBuilder, Client } = require("discord.js");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "messageUpdate",
   once: false,
-  // intelliSense
   /**
-   * @param {Message} oldMessage
-   * @param {Message} newMessage
-   * @param {Client} client
+   * Handles the message update event.
+   * @param {Message} oldMessage The original message before the update.
+   * @param {Message} newMessage The updated message.
+   * @param {Client} client The Discord client.
    */
   async execute(oldMessage, newMessage, client) {
-    //checks
-    if (oldMessage.author.bot) return;
-    if (oldMessage.content == newMessage.content) return;
-    if (oldMessage.channelId == 853344307015581726) return;
+    // Ignore bot messages, unchanged content, and messages from a specific channel
+    if (oldMessage.author.bot || oldMessage.content === newMessage.content || oldMessage.channelId === "853344307015581726") {
+      return;
+    }
 
-    const count = 1950; // because of embed description size
+    // Truncate content to fit within embed limits
+    const maxContentLength = 1950;
+    const truncateContent = (content) => content.slice(0, maxContentLength) + (content.length > maxContentLength ? " ..." : "");
 
-    const original =
-      oldMessage.content.slice(0, count) +
-      (oldMessage.content.length > count ? " ..." : "");
+    const originalContent = truncateContent(oldMessage.content);
+    const editedContent = truncateContent(newMessage.content);
 
-    const edited =
-      newMessage.content.slice(0, count) +
-      (newMessage.content.length > count ? " ..." : "");
-
+    // Construct the embed message
     const embed = new EmbedBuilder()
-      .setTitle(
-        `${oldMessage.author.tag} edited a message in #${oldMessage.channel.name}`
-      )
-      .setDescription(
-        `Before: \`\`\`${original}\`\`\` \nAfter: \`\`\`${edited}\`\`\``
-      )
-      .setAuthor({ name: oldMessage.author.tag })
+      .setTitle(`${oldMessage.author.tag} edited a message in #${oldMessage.channel.name}`)
+      .setDescription(`Before: \`\`\`${originalContent}\`\`\` \nAfter: \`\`\`${editedContent}\`\`\``)
+      .setAuthor({ name: oldMessage.author.tag, iconURL: oldMessage.author.displayAvatarURL({ dynamic: true }) })
       .setColor("Purple")
       .setThumbnail(oldMessage.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
-      .setFooter({
-        text: "Message Edited • AlienBot",
-        iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
-      });
+      .setFooter({ text: "Message Edited • AlienBot", iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png" });
 
-    if (oldMessage == undefined || newMessage == undefined) return;
-if (!oldMessage || !newMessage) return;
-if (!oldMessage.guild) {
-    console.log("The guild of the old message cannot be found.");
-    return;
-}
-let guildChannels = await oldMessage.guild.channels.fetch();
-if (!guildChannels) {return}
-    await oldMessage.guild.channels.fetch();
-try {
-    return await oldMessage.guild.channels.cache
-      .find((channel) => channel.name == "alien-logs")
-      .send({ embeds: [embed] });
-} catch(error) {
-console.log(error)
-}
+    // Ensure both messages and the guild are defined
+    if (!oldMessage || !newMessage || !oldMessage.guild) {
+      consoleMessage("A message or the guild is undefined.", "error");
+      return;
+    }
+
+    // Attempt to send the embed to the "alien-logs" channel
+    try {
+      const logChannel = oldMessage.guild.channels.cache.find(channel => channel.name === "alien-logs");
+      if (!logChannel) {
+        console.log("Log channel not found.");
+        return;
+      }
+      await logChannel.send({ embeds: [embed] });
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
