@@ -24,7 +24,7 @@ module.exports = {
     } else {
       let rank = Math.trunc(xpObj / 100);
     return await interaction.reply({
-      content: `You have ${xpObj} XP, and are at rank ${rank}!`,
+      content: `You have ${xpObj} XP!`/*, and are at rank ${rank}!`*/, //to be implemented
     });
   }
   },
