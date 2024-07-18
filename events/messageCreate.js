@@ -55,7 +55,8 @@ const checkLevel = async (message, client) => {
 
   const oldXP = (await mongo.getXP(message.author.id)) || 0;
   var newXP = oldXP + genRan(1, 2);
-//   console.log(newXP + "(was: " + oldXP + ")");
+  
+  console.log(newXP + "(was: " + oldXP + ")");
 
   await mongo.saveXP(message.author.id, newXP, 0);
 
