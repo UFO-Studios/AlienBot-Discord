@@ -42,7 +42,7 @@ function genRan(min, max) {
  * @param {Client} client
  */
 const checkLevel = async (message, client) => {
-	if (client.LCD.has(message.author.id)) return;
+	if (client.LCD.has(message.author.id)) { console.log("test"); return; }
 
 	const oldXpObj = (await mongo.getXP(message.author.id)) || {
 		xp: 0,
