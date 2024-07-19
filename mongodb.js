@@ -196,28 +196,6 @@ const checkBW = async (word) => {
   }
 };
 
-/**
- *
- * @param {Number} userId
- * @param {Number} balance
- */
-const saveEconomy = async (userId, balance) => {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-
-  const economyNew = economicModule({ userId, balance });
-
-  economyNew.save((err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-  });
-
-  //consoleMessage("Data added to DB!", "mongoDB"); //for debugging only
-  return true;
-};
 
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
@@ -270,18 +248,6 @@ const getXP = async (userId) => {
   const userRank = await lvl_module.findOne({ userId });
   consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP")
   return userRank.xp ?? 0;
-};
-
-const getEconomy = async (userId) => {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-
-  const userEconomy = await economicModule.findOne({ userId });
-
-  //consoleMessage("Data recived from DB!");
-  //consoleMessage(userEconomy);
-  return userEconomy;
 };
 
 /**
@@ -561,7 +527,6 @@ module.exports = {
   addIgnoredChannel,
   checkIgnoredChannel,
   saveEconomy,
-  getEconomy,
   saveWelcomeToggle,
   checkBW,
   getWelcomeToggle,
