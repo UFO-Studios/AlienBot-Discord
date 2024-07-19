@@ -269,7 +269,7 @@ const getXP = async (userId) => {
   }
   const userRank = await lvl_module.findOne({ userId });
   consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP")
-  return userRank.xp;
+  return userRank.xp ?? 0;
 };
 
 const getEconomy = async (userId) => {
