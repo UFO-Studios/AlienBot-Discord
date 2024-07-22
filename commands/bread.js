@@ -7,7 +7,7 @@ module.exports = {
     .setDescription("bread...?!?"),
   global: true,
   async execute(interaction, client) {
-    var likeBread = math.random();
+    var likeBread = Math.random();
     if (likeBread < 0.5) {
       return await interaction.reply("Bread :thumbsdown:");
     } else {
