@@ -6,8 +6,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
-const mongo = require("../mongodb");
-const { consoleMessage } = require("../log");
+const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "guildMemberAdd",

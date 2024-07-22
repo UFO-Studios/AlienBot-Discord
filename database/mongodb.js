@@ -1,102 +1,23 @@
 const mongoose = require("mongoose");
-const config = require("./config.json");
-const { consoleMessage } = require("./log");
-
+const config = require("../config.json");
+const { consoleMessage } = require("../log");
+const schemas = require("./schema");
 let connected;
 let db;
 
 //silece mongoose warnings
 mongoose.set("strictQuery", true);
 
-//START schemas
-const LvlSchema = new mongoose.Schema({
-  userId: Number,
-  xp: Number,
-  level: Number,
-});
-
-const uptimeSchema = new mongoose.Schema({
-  time: Number,
-});
-
-const AWSchema = new mongoose.Schema({
-  guildId: Number,
-  userId: Number,
-  warns: Number,
-});
-
-const bannedWordsSchema = new mongoose.Schema({
-  word: String,
-});
-
-const loggingURLSchema = new mongoose.Schema({
-  guildID: Number,
-  URL: String,
-});
-
-const loggingToggleSchema = new mongoose.Schema({
-  guildId: Number,
-  toggle: Boolean,
-});
-
-const BWToggleSchema = new mongoose.Schema({
-  guildID: Number,
-  toggle: Boolean,
-});
-
-const welcomeToggleSchema = new mongoose.Schema({
-  guildId: Number,
-  toggle: Boolean,
-  webhookUrl: String,
-  welcomeMsg: String,
-  leaveMsg: String,
-});
-
-const addIgnoredChannelSchema = new mongoose.Schema({
-  guildID: Number,
-  channelID: Number,
-});
-
-const setWelcomeSchema = new mongoose.Schema({
-  guildID: Number,
-  message: String,
-  webhookURL: String,
-  leaveMessage: String,
-});
-
-const EconomySchema = new mongoose.Schema({
-  userId: Number,
-  balance: Number,
-});
-
-const loggingChannelSchema = new mongoose.Schema({
-  guildID: Number,
-  channelID: Number,
-});
-
-const rankSchema = new mongoose.Schema({
-  userId: Number,
-  rank: Number,
-});
-
-//END (schemas)
-
 //START modules
-const loggingChannelModule = mongoose.model(
-  "loggingChannel",
-  loggingChannelSchema
-);
-const lvl_module = mongoose.model("lvl", LvlSchema);
-const economicModule = mongoose.model("economic", EconomySchema);
-const uptimeModule = mongoose.model("uptime", uptimeSchema);
-const bannedWordsModule = mongoose.model("bannedWords", bannedWordsSchema);
-const AWModel = new mongoose.model("warns", AWSchema);
+
+const lvl_module = mongoose.model("lvl", schemas.LvlSchema);
+const bannedWordsModule = mongoose.model("bannedWords", schemas.bannedWordsSchema);
+const AWModel = new mongoose.model("warns",schemas.AWSchema);
 const loggingToggleModel = new mongoose.model(
   "loggingToggle",
   loggingToggleSchema
 );
-const loggingURLModel = new mongoose.model("loggingURL", loggingURLSchema);
-const BWToggleModel = new mongoose.model("BWToggle", BWToggleSchema);
+const BWToggleModel = new mongoose.model("BWToggle",schemas. BWToggleSchema);
 const welcomeToggleModel = new mongoose.model(
   "welcomeToggle",
   welcomeToggleSchema
@@ -105,84 +26,25 @@ const ignoredChannelModel = new mongoose.model(
   "ignoredChannel",
   addIgnoredChannelSchema
 );
-const setWelcomeModel = new mongoose.model("setWelcome", setWelcomeSchema);
-const rankModule = new mongoose.model("rank", rankSchema);
 //END modules
 
-//Start JSON Management
-const getJsonValue = async (input, valueNeeded) => {
-  const string = await JSON.stringify(input);
-  const objectValue = await JSON.parse(string);
-
-  if (objectValue == null) {
-    consoleMessage("JSON is null! Did you format it correctly?", "mongoDB");
-  } else if (objectValue == undefined) {
-    consoleMessage("JSON is undefined! Did you format it correctly?", "mongoDB");
-    return null;
-  } else {
-    return objectValue[valueNeeded];
-  }
-};
-//End JSON Management
 /**
  *  @example await connectToDB
  * @returns {Boolean} true if connected sccessfully, false if not.
  **/
-const connectToDB = async () => {
+async function connectToDB() {
   await mongoose.connect(config.MONGO_CONFIG);
   connected = true;
   console.log("MongoDB is loaded!");
-  db = await mongoose.connection;
+  db = mongoose.connection;
 
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
   consoleMessage("Connection complete!", "mongoDB");
   return true;
-};
+}
 
-const setRank = async (userId, rank) => {
-  consoleMessage(`setRank run with params userID: ${userId} and rank ${rank}`, "mongoDB");
-  if (!connected || !db) {
-    await connectToDB();
-  }
 
-  const rankNew = lvl_module({ userId, rank, rank });
-
-  rankNew.save((err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    } else {
-      consoleMessage("Complete! Returning...", "mongoDB");
-      return true;
-    }
-  });
-};
-
-const getRank = async (userId) => {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-
-  const rankJSON = await rankModule.find({ userId });
-  getJsonValue(rankJSON, "rank");
-  return rankJSON;
-};
-
-const addLoggingChannel = async (guildID, channelID) => {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-  const loggingChannelNew = loggingChannelModule({ guildID, channelID });
-  loggingChannelNew.save((err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-  });
-  return true;
-};
-
-const checkBW = async (word) => {
+async function checkBW(word) {
   if (!connected || !db) {
     await connectToDB();
   }
@@ -194,43 +56,8 @@ const checkBW = async (word) => {
   } else {
     return true;
   }
-};
+}
 
-
-/**
- *
- * @param {Number} userId
- * @param {Number} balance
- */
-const saveEconomy = async (userId, balance) => {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-
-  const economyNew = economicModule({ userId, balance });
-
-  economyNew.save((err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-  });
-
-  //consoleMessage("Data added to DB!", "mongoDB"); //for debugging only
-  return true;
-};
-
-const getEconomy = async (userId) => {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-
-  const userEconomy = await economicModule.findOne({ userId });
-
-  //consoleMessage("Data recived from DB!");
-  //consoleMessage(userEconomy);
-  return userEconomy;
-};
 
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
@@ -259,12 +86,10 @@ const saveXP = async (userId, xp, level) => {
       }
     });
 
-    //consoleMessage("Data updated in DB!", "mongoDB"); //for dubugging
     return true;
   }
 
   await lvl_module.findOneAndUpdate({ userId: userId }, { userId, xp, level });
-  //consoleMessage("Data updated in DB!", "mongoDB"); //for debugging
   return true;
 };
 //END (saveXP)
@@ -285,28 +110,6 @@ const getXP = async (userId) => {
   if (userRank != null) {return userRank.xp ?? 0;} else {return 0;}
 };
 
-/**
- *  @param {Number} startTime Start time of the bot
- *  @example await startTime("time")
- * @returns {Bool} true if saved sccessfully, false if not.
- **/
-const startTime = async (startTime) => {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-
-  const UPMN = uptimeModule({ time: startTime }); //create a new "lvlNew" object (data)
-  //UPMN is UpTime Module New
-  await UPMN.save((err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-  });
-
-  consoleMessage("Start time logged and written! Bot started at " + startTime, "mongoDB");
-  return true;
-};
 
 /**
  *
@@ -529,7 +332,7 @@ const addIgnoredChannel = async (guildID, channelID) => {
   });
 };
 
-const checkIgnoredChannel = async (guildId, channelId) => {
+async function checkIgnoredChannel(guildId, channelId) {
   if (!connected || !db) {
     await connectToDB();
   }
@@ -538,20 +341,18 @@ const checkIgnoredChannel = async (guildId, channelId) => {
     guildId,
     channelId,
   });
-  //console.log(ignoredChannelJSON);
   if (ignoredChannelJSON == null) {
     return false;
   } else {
     return true;
   }
-};
+}
 
 module.exports = {
   saveXP,
   getXP,
   startTime,
   connectToDB,
-  getJsonValue,
   addWarn,
   getWarns,
   clearWarns,
@@ -561,12 +362,9 @@ module.exports = {
   saveBannedWordToggle,
   addIgnoredChannel,
   checkIgnoredChannel,
-  saveEconomy,
   saveWelcomeToggle,
   checkBW,
-  getWelcomeToggle,
-  setRank,
-  getRank,
+  getWelcomeToggle
 };
 
 consoleMessage("mongodb.js run" , "botInit");

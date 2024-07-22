@@ -4,8 +4,7 @@ const {
   Client,
   ApplicationCommandType,
 } = require("discord.js");
-const mongo = require("../mongodb");
-const { consoleMessage } = require("../log");
+const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()

@@ -1,6 +1,5 @@
 ﻿const { consoleMessage } = require("../log");
-const mongo = require("../mongodb");
-const { ChannelType, Message, Client } = require("discord.js");
+const mongo = require("../database/mongodb");const { ChannelType, Message, Client } = require("discord.js");
 
 /**
  * @param {Message} message

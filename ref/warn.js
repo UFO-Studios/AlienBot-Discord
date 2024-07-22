@@ -5,8 +5,7 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
-const mongo = require("../mongodb");
-
+const mongo = require("../database/mongodb");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("warn")
