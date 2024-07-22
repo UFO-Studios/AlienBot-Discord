@@ -1,30 +1,36 @@
 const mongoose = require("mongoose");
 const config = require("../config.json");
 const { consoleMessage } = require("../log");
+const fs = require("fs");
 const schemas = require("./schema");
+const fetch = require("node-fetch");
 let connected;
 let db;
+let BannedWordsArray;
 
 //silece mongoose warnings
 mongoose.set("strictQuery", true);
 
 //START modules
 
-const lvl_module = mongoose.model("lvl", schemas.LvlSchema);
-const bannedWordsModule = mongoose.model("bannedWords", schemas.bannedWordsSchema);
-const AWModel = new mongoose.model("warns",schemas.AWSchema);
+const XPModule = mongoose.model("XP", schemas.LvlSchema);
+const bannedWordsModule = mongoose.model(
+  "bannedWords",
+  schemas.bannedWordsSchema
+);
+const AWModel = new mongoose.model("warns", schemas.AWSchema);
 const loggingToggleModel = new mongoose.model(
   "loggingToggle",
-  loggingToggleSchema
+  schemas.loggingToggleSchema
 );
-const BWToggleModel = new mongoose.model("BWToggle",schemas. BWToggleSchema);
+const BWToggleModel = new mongoose.model("BWToggle", schemas.BWToggleSchema);
 const welcomeToggleModel = new mongoose.model(
   "welcomeToggle",
-  welcomeToggleSchema
+  schemas.welcomeToggleSchema
 );
 const ignoredChannelModel = new mongoose.model(
   "ignoredChannel",
-  addIgnoredChannelSchema
+  schemas.addIgnoredChannelSchema
 );
 //END modules
 
@@ -43,21 +49,23 @@ async function connectToDB() {
   return true;
 }
 
-
 async function checkBW(word) {
-  if (!connected || !db) {
-    await connectToDB();
+  console.log("t " + BannedWordsArray)
+  if (BannedWordsArray == null || BannedWordsArray == undefined) {
+    let response = await fetch(
+      "http://www.bannedwordlist.com/lists/swearWords.txt"
+    );
+    let BannedWordsText = await response.text(); 
+    BannedWordsArray = await BannedWordsText.split("\n");
   }
-
-  const checkWord = await bannedWordsModule.find({ word });
-
-  if (!checkWord[0]) {
-    return false;
-  } else {
-    return true;
+  for (let element of BannedWordsArray) {
+    if (word.includes(element)) {
+      console.log("u")
+      return true; 
+    }
   }
+  return false; 
 }
-
 
 /**
  *  @param {Number} UserID ID of the user who`s level you need to save.
@@ -73,11 +81,11 @@ const saveXP = async (userId, xp, level) => {
 
   // xp = xp.toString().split("[object Object]")[1];
 
-    console.log("XP: " + xp + " Level: " + level + " UserID: " + userId);
-  const oldObj = await lvl_module.findOne({ userId });
+  console.log("XP: " + xp + " Level: " + level + " UserID: " + userId);
+  const oldObj = await XPModule.findOne({ userId });
 
   if (!oldObj) {
-    const newModel = lvl_module({ userId, xp, level });
+    const newModel = XPModule({ userId, xp, level });
 
     newModel.save((err) => {
       if (err) {
@@ -89,7 +97,7 @@ const saveXP = async (userId, xp, level) => {
     return true;
   }
 
-  await lvl_module.findOneAndUpdate({ userId: userId }, { userId, xp, level });
+  await XPModule.findOneAndUpdate({ userId: userId }, { userId, xp, level });
   return true;
 };
 //END (saveXP)
@@ -105,30 +113,13 @@ const getXP = async (userId) => {
   if (!connected || !db) {
     await connectToDB();
   }
-  const userRank = await lvl_module.findOne({ userId });
-  consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP")
-  if (userRank != null) {return userRank.xp ?? 0;} else {return 0;}
-};
-
-
-/**
- *
- * @param {string} word
- * @returns boolean
- */
-const addBW = async (Bword) => {
-  //only to be used manually!
-  if (!connected || !db) {
-    await connectToDB();
+  const userRank = await XPModule.findOne({ userId });
+  consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP");
+  if (userRank != null) {
+    return userRank.xp ?? 0;
+  } else {
+    return 0;
   }
-  const newBW = await bannedWordsModule({ word: Bword });
-  await newBW.save((err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-  });
-  console.log("run");
 };
 
 /**
@@ -351,7 +342,6 @@ async function checkIgnoredChannel(guildId, channelId) {
 module.exports = {
   saveXP,
   getXP,
-  startTime,
   connectToDB,
   addWarn,
   getWarns,
@@ -364,7 +354,7 @@ module.exports = {
   checkIgnoredChannel,
   saveWelcomeToggle,
   checkBW,
-  getWelcomeToggle
+  getWelcomeToggle,
 };
 
-consoleMessage("mongodb.js run" , "botInit");
+consoleMessage("mongodb.js run", "botInit");
