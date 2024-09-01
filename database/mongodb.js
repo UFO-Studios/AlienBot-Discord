@@ -28,10 +28,6 @@ const welcomeToggleModel = new mongoose.model(
   "welcomeToggle",
   schemas.welcomeToggleSchema
 );
-const ignoredChannelModel = new mongoose.model(
-  "ignoredChannel",
-  schemas.addIgnoredChannelSchema
-);
 //END modules
 
 /**
@@ -305,39 +301,6 @@ const saveBannedWordToggle = async (guildID, BWToggle) => {
   });
 };
 
-const addIgnoredChannel = async (guildID, channelID) => {
-  if (!connected || !db) {
-    await connectToDB();
-  } //connect
-  const newIgnoredChannel = await ignoredChannelModel({
-    guildID: guildID,
-    channelID: channelID,
-  });
-  await newIgnoredChannel.save((err) => {
-    if (err) {
-      console.error(err);
-      console.log("error!");
-      return false;
-    }
-    return true;
-  });
-};
-
-async function checkIgnoredChannel(guildId, channelId) {
-  if (!connected || !db) {
-    await connectToDB();
-  }
-
-  const ignoredChannelJSON = await ignoredChannelModel.findOne({
-    guildId,
-    channelId,
-  });
-  if (ignoredChannelJSON == null) {
-    return false;
-  } else {
-    return true;
-  }
-}
 
 module.exports = {
   saveXP,
@@ -350,8 +313,6 @@ module.exports = {
   getLogToggle,
   getBannedWordToggle,
   saveBannedWordToggle,
-  addIgnoredChannel,
-  checkIgnoredChannel,
   saveWelcomeToggle,
   checkBW,
   getWelcomeToggle,
