@@ -85,7 +85,6 @@ namespace AlienBot.Events
 
         public void Emit(LogEvent logEvent)
         {
-            // Console.WriteLine(logEvent.RenderMessage(_formatProvider));
             Events.Add(logEvent.RenderMessage(_formatProvider)); //renders only the text of the log message, not metatdata
             //limit logs to 20
             if (Events.Count > 20)

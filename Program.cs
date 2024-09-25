@@ -132,6 +132,8 @@ namespace AlienBot
             Log.Debug("Adding event handlers");
             discord.MessageCreated += MessageCreate.Handler;
             discord.MessageUpdated += MessageEdit.Handler;
+            discord.ChannelCreated += ChannelEvents.OnCreate;
+            
 
 
             //COMMANDS #######################################################
