@@ -13,6 +13,12 @@ namespace AlienBot.Commands
             await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Pong!").AsEphemeral(false));
         }
 
+        [SlashCommand("meme", "Meme command!")]
+        public static async Task MemeCommand(InteractionContext ctx)
+        {
+            await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Not added yet! Sorry :(").AsEphemeral(false));
+        }
+
         [SlashCommand("bread", "Bread good or bread bad?")]
         public static async Task BreadCommand(InteractionContext ctx)
         {
