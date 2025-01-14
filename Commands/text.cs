@@ -13,12 +13,6 @@ namespace AlienBot.Commands
             await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Pong!").AsEphemeral(false));
         }
 
-        [SlashCommand("meme", "Meme command!")]
-        public static async Task MemeCommand(InteractionContext ctx)
-        {
-            await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Not added yet! Sorry :(").AsEphemeral(false));
-        }
-
         [SlashCommand("bread", "Bread good or bread bad?")]
         public static async Task BreadCommand(InteractionContext ctx)
         {
@@ -39,6 +33,11 @@ namespace AlienBot.Commands
         public static async Task MemeCommand(InteractionContext ctx)
         {
             var memeResponse = await new HttpClient().GetStringAsync("https://meme-api.com/gimme");
+            if (memeResponse == null)
+            {
+                await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Huh, it seems that the bot does not want to meme today.\nSorry for that :(\n*Error code: UNLIKELY*").AsEphemeral(false));
+                return;
+            }
             var meme = JObject.Parse(memeResponse);
             var memeUrl = meme["url"].ToString();
             var memeTitle = meme["title"].ToString();
