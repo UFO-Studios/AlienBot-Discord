@@ -49,22 +49,27 @@ async function connectToDB() {
   return true;
 }
 
+/**
+ * Checks if a word is bad
+ * @param {string} word 
+ * @returns {bool} true if the word is bad, false if not
+ */
 async function checkBW(word) {
-  console.log("t " + BannedWordsArray)
+  console.log("t " + BannedWordsArray);
   if (BannedWordsArray == null || BannedWordsArray == undefined) {
     let response = await fetch(
       "http://www.bannedwordlist.com/lists/swearWords.txt"
     );
-    let BannedWordsText = await response.text(); 
+    let BannedWordsText = await response.text();
     BannedWordsArray = await BannedWordsText.split("\n");
   }
   for (let element of BannedWordsArray) {
-    if (word.includes(element)) {
-      console.log("u")
-      return true; 
+    if (word.includes(element.trim())) {
+      console.log("u");
+      return true;
     }
   }
-  return false; 
+  return false;
 }
 
 /**
