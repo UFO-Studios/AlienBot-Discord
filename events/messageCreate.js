@@ -72,6 +72,13 @@ module.exports = {
    * @param {Client} client
    */
   async execute(message, client) {
+    if (message.content == "https://tenor.com/view/crazy-eyes-kid-pork-and-beans-beans-gif-19099849") {
+    await message.reply({
+          content: "BEANSSSS",
+          reply: false,
+        });
+     }
+
     if (message.author.bot || !message.guild || !message.channel) return;
 
     // banned words

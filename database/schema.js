@@ -1,33 +1,33 @@
 const mongoose = require("mongoose");
 
 
-export const LvlSchema = new mongoose.Schema({
+const LvlSchema = new mongoose.Schema({
   userId: Number,
   xp: Number,
   level: Number,
 });
 
-export const AWSchema = new mongoose.Schema({
+const AWSchema = new mongoose.Schema({
   guildId: Number,
   userId: Number,
   warns: Number,
 });
 
-export const bannedWordsSchema = new mongoose.Schema({
+const bannedWordsSchema = new mongoose.Schema({
   word: String,
 });
 
-export const loggingToggleSchema = new mongoose.Schema({
+const loggingToggleSchema = new mongoose.Schema({
   guildId: Number,
   toggle: Boolean,
 });
 
-export const BWToggleSchema = new mongoose.Schema({
+ BWToggleSchema = new mongoose.Schema({
   guildID: Number,
   toggle: Boolean,
 });
 
-export const welcomeToggleSchema = new mongoose.Schema({
+const welcomeToggleSchema = new mongoose.Schema({
   guildId: Number,
   toggle: Boolean,
   webhookUrl: String,
@@ -35,7 +35,16 @@ export const welcomeToggleSchema = new mongoose.Schema({
   leaveMsg: String,
 });
 
-export const addIgnoredChannelSchema = new mongoose.Schema({
+const addIgnoredChannelSchema = new mongoose.Schema({
   guildID: Number,
   channelID: Number,
 });
+
+module.exports = {
+  LvlSchema,
+  AWSchema,
+  bannedWordsSchema,
+  loggingToggleSchema,
+  BWToggleSchema,
+  welcomeToggleSchema,
+};
