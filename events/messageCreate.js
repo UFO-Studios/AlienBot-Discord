@@ -1,5 +1,6 @@
 ﻿const { consoleMessage } = require("../log");
-const mongo = require("../database/mongodb");const { ChannelType, Message, Client } = require("discord.js");
+const mongo = require("../database/mongodb");
+const { ChannelType, Message, Client } = require("discord.js");
 
 /**
  * @param {Message} message
@@ -33,9 +34,9 @@ const deleteBannedWords = async (message, client) => {
 
 /**
  * Random number generator
- * @param {number} min max of range 
+ * @param {number} min max of range
  * @param {number} max min of range
- * @returns 
+ * @returns
  */
 function genRan(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -48,14 +49,14 @@ function genRan(min, max) {
  */
 const checkLevel = async (message, client) => {
   if (client.LCD.has(message.author.id)) {
-    console.log("test");
+    // console.log("test");
     return;
   }
 
   const oldXP = (await mongo.getXP(message.author.id)) || 0;
   var newXP = oldXP + genRan(1, 2);
-  
-  console.log(newXP + "(was: " + oldXP + ")");
+
+  // console.log(newXP + "(was: " + oldXP + ")");
 
   await mongo.saveXP(message.author.id, newXP, 0);
 
@@ -72,12 +73,15 @@ module.exports = {
    * @param {Client} client
    */
   async execute(message, client) {
-    if (message.content == "https://tenor.com/view/crazy-eyes-kid-pork-and-beans-beans-gif-19099849") {
-    await message.reply({
-          content: "BEANSSSS",
-          reply: false,
-        });
-     }
+    if (
+      message.content ==
+      "https://tenor.com/view/crazy-eyes-kid-pork-and-beans-beans-gif-19099849"
+    ) {
+      await message.reply({
+        content: "BEANSSSS",
+        reply: false,
+      });
+    }
 
     if (message.author.bot || !message.guild || !message.channel) return;
 
