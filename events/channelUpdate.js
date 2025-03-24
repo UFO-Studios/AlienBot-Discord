@@ -18,16 +18,17 @@ module.exports = {
   async execute(oldChannel, NewChannel, client) {
     if (
       oldChannel.type === ChannelType.GroupDM ||
-      oldChannel.type === ChannelType.DM
+      oldChannel.type === ChannelType.DM ||
+      oldChannel.type === ChannelType.GuildMedia
     ) {
       return;
     }
 
-    if (
+    /*if (
       !(await mongo.checkIgnoredChannel(oldChannel.guild.id, oldChannel.id))
     ) {
       return;
-    }
+    }*/
 
     if (oldChannel.name !== NewChannel.name) {
       const embed = new EmbedBuilder()

@@ -5,7 +5,7 @@ const {
   AttachmentBuilder,
   EmbedBuilder,
 } = require("discord.js");
-const Canvas = require("@napi-rs/canvas");
+//const Canvas = require("@napi-rs/canvas");
 const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
 
 module.exports = {
@@ -40,7 +40,7 @@ module.exports = {
     }
 
     // Welcome image
-    const data = await mongo.getWelcomeToggle(member.guild.id);
+    /*const data = await mongo.getWelcomeToggle(member.guild.id);
 
     console.log(data);
     if (!data.toggle) return;
@@ -106,7 +106,7 @@ module.exports = {
     });
     
     if (!webhookUrl) {return}
-    webhook.send({ content: strULTIMATE, files: [attachment] });
+    webhook.send({ content: strULTIMATE, files: [attachment] });*/
   },
 };
 
