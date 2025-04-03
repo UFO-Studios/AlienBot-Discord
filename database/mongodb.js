@@ -67,7 +67,7 @@ const saveXP = async (userId, xp, level) => {
 
   // xp = xp.toString().split("[object Object]")[1];
 
-  console.log("XP: " + xp + " Level: " + level + " UserID: " + userId);
+  // console.log("XP: " + xp + " Level: " + level + " UserID: " + userId);
   const oldObj = await XPModule.findOne({ userId });
 
   if (!oldObj) {
