@@ -47,6 +47,7 @@
     "rss-parser": "^3.13.0",
     "soundcloud-scraper": "^5.0.3",
     "spotify-url-info": "^3.2.18",
+    "swearjar": "^0.2.0",
     "txtgen": "^3.0.7",
     "youtube-sr": "^4.3.11",
     "ytdl-core": "^4.11.5"

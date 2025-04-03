@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const config = require("../config.json");
 const { consoleMessage } = require("../log");
-const fs = require("fs");
 const schemas = require("./schema");
-const fetch = require("node-fetch");
 let connected;
 let db;
-let BannedWordsArray;
+const swearjar = require('swearjar');
+
 
 //silece mongoose warnings
 mongoose.set("strictQuery", true);
@@ -51,21 +50,7 @@ async function connectToDB() {
  * @returns {bool} true if the word is bad, false if not
  */
 async function checkBW(word) {
-  console.log("t " + BannedWordsArray);
-  if (BannedWordsArray == null || BannedWordsArray == undefined) {
-    let response = await fetch(
-      "http://www.bannedwordlist.com/lists/swearWords.txt"
-    );
-    let BannedWordsText = await response.text();
-    BannedWordsArray = await BannedWordsText.split("\n");
-  }
-  for (let element of BannedWordsArray) {
-    if (word.includes(element.trim())) {
-      console.log("u");
-      return true;
-    }
-  }
-  return false;
+  return swearjar.profane(word); 
 }
 
 /**
@@ -115,7 +100,7 @@ const getXP = async (userId) => {
     await connectToDB();
   }
   const userRank = await XPModule.findOne({ userId });
-  consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP");
+  // consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP");
   if (userRank != null) {
     return userRank.xp ?? 0;
   } else {

@@ -77,8 +77,13 @@ module.exports = {
       message.content ==
       "https://tenor.com/view/crazy-eyes-kid-pork-and-beans-beans-gif-19099849"
     ) {
+      beans_message = "BEAN"
+      beans_length = Math.floor(Math.random() * 10) + 1;
+      for (let index = 0; index < beans_length; index++) {
+                beans_message = `${beans_message}S`
+      }
       await message.reply({
-        content: "BEANSSSS",
+        content: beans_message,
         reply: false,
       });
     }
