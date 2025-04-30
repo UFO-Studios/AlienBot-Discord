@@ -5,6 +5,7 @@ const schemas = require("./schema");
 let connected;
 let db;
 const swearjar = require('swearjar');
+swearjar.loadBadWords("../SwearJar.json")
 
 
 //silece mongoose warnings

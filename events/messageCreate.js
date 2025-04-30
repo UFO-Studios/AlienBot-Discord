@@ -78,6 +78,9 @@ module.exports = {
       "https://tenor.com/view/crazy-eyes-kid-pork-and-beans-beans-gif-19099849"
     ) {
       beans_message = "BEAN"
+      if (genRan(0, 100) == 2) {
+        beans_message = "BAKED BEAN"
+      }
       beans_length = Math.floor(Math.random() * 10) + 1;
       for (let index = 0; index < beans_length; index++) {
                 beans_message = `${beans_message}S`

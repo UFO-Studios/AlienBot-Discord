@@ -1,5 +1,5 @@
 const { Message, EmbedBuilder, WebhookClient } = require("discord.js");
-const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
+const { consoleMessage } = require("../log");
 
 module.exports = {
   name: "messageDelete",
@@ -13,9 +13,7 @@ module.exports = {
     if (message.author.bot) return;
 
     const embed = new EmbedBuilder()
-      .setTitle(
-        `${message.author.tag} deleted a message in #${message.channel.name}`
-      )
+      .setTitle(`${message.author.tag} deleted a message in #${message.channel.name}`)
       .setDescription(`Message Content: \`\`\`${message.content}\`\`\``)
       .setAuthor({ name: message.author.tag })
       .setColor("Purple")
@@ -29,13 +27,11 @@ module.exports = {
     await message.guild.channels.fetch();
     if (message == undefined) return;
     try {
-    return await message.guild.channels.cache
-      .find((channel) => channel.name == "alien-logs")
-      .send({ embeds: [embed] });
-} catch(error) {
-console.log(error)
-}
+      return await message.guild.channels.cache.find((channel) => channel.name == "alien-logs").send({ embeds: [embed] });
+    } catch (error) {
+      // console.log(error);
+    }
   },
 };
 
-consoleMessage("events/MessageDelete.js run", "botInit")
+consoleMessage("events/MessageDelete.js run", "botInit");
