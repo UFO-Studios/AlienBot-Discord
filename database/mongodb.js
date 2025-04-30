@@ -4,9 +4,6 @@ const { consoleMessage } = require("../log");
 const schemas = require("./schema");
 let connected;
 let db;
-const swearjar = require('swearjar');
-swearjar.loadBadWords("../SwearJar.json")
-
 
 //silece mongoose warnings
 mongoose.set("strictQuery", true);
@@ -30,6 +27,8 @@ const welcomeToggleModel = new mongoose.model(
 );
 //END modules
 
+const BADWORDS = (await fetch('https://niceygy.net/badwords.txt').then(res => res.text())).split('\n');
+
 /**
  *  @example await connectToDB
  * @returns {Boolean} true if connected sccessfully, false if not.
@@ -51,7 +50,7 @@ async function connectToDB() {
  * @returns {bool} true if the word is bad, false if not
  */
 async function checkBW(word) {
-  return swearjar.profane(word); 
+  return word in BADWORDS; 
 }
 
 /**
