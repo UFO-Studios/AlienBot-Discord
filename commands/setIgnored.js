@@ -4,7 +4,7 @@ const {
   Client,
   PermissionsBitField,
 } = require("discord.js");
-const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
+const mongo = await require("../database/mongodb");const { consoleMessage } = require("../log");
 
 module.exports = {
   data: new SlashCommandBuilder()

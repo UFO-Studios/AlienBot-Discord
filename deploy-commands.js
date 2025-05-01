@@ -138,7 +138,7 @@ const { Routes, REST } = require("discord.js");
 
 const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
 
-const registerCommands = () => {
+const registerCommands = async () => {
   console.log("Registering commands");
   const commands = [];
   const globalCommands = [];
@@ -150,7 +150,7 @@ const registerCommands = () => {
 
   for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
+    const command = await require(filePath);
     if (command.global) {
       globalCommands.push(command.data.toJSON());
       commands.push(command.data.toJSON());

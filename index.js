@@ -113,8 +113,10 @@ const commandFiles = fs
 
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
-  const command = require(filePath);
-  client.commands.set(command.data.name, command);
+  const command = await require(filePath);
+  if (command.data && command.data.name) {
+    client.commands.set(command.data.name, command);
+  }
 }
 
 client.buttons = new Collection();
