@@ -1,11 +1,6 @@
-using System;
-using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using Serilog;
-using System.Linq;
 using AlienBot.Events;
 using System.Collections.Concurrent;
 

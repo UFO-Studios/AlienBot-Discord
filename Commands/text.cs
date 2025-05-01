@@ -33,6 +33,11 @@ namespace AlienBot.Commands
         public static async Task MemeCommand(InteractionContext ctx)
         {
             var memeResponse = await new HttpClient().GetStringAsync("https://meme-api.com/gimme");
+            if (memeResponse == null)
+            {
+                await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Huh, it seems that the bot does not want to meme today.\nSorry for that :(\n*Error code: UNLIKELY*").AsEphemeral(false));
+                return;
+            }
             var meme = JObject.Parse(memeResponse);
             var memeUrl = meme["url"].ToString();
             var memeTitle = meme["title"].ToString();

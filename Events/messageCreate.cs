@@ -59,7 +59,7 @@ namespace AlienBot.Events
                         await e.Message.DeleteAsync("Bad word! :(");
                         await e.Message.RespondAsync("You can't use that word! (WARN)");
                         await usersInstance.AddWarn(e.Author.Id.ToString());
-                        var logMessage = "User " + e.Author.Username + " sent a banned word! Message: " + message.Replace(badWords[i], "****");
+                        var logMessage = "User " + e.Author.Username + " sent a banned word! Message: " + message;
                         await LogChannel.SendEventLog(e.Guild.Id.ToString(), client, logMessage);
                     }
                 }
