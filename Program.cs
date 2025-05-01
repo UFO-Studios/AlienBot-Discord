@@ -121,7 +121,7 @@ namespace AlienBot
 
             //COMMANDS #######################################################
             Log.Information("Adding commands");
-            slash.AddCommands<Text>(/*Log*/);
+            await slash.AddCommands<Text>(Text.PingCommand);
             slash.AddCommands<Mod>();
             slash.AddCommands<Admin>();
             slash.AddCommands<rankCommands>();
