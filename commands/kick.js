@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("discord.js");
 const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("kick")
     .setDescription("This command kicks a member!")

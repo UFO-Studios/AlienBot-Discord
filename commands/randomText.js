@@ -20,7 +20,7 @@ const Lucky = async (randomNum) => {
   }
 };
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("random-text-generator")
     .setDescription("Generate random text.")

@@ -7,7 +7,7 @@ const {
 } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("volume")
     .setDescription("Gives the current volume or changes the current volume.")

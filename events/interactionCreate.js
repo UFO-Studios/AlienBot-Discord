@@ -2,7 +2,7 @@ const { InteractionType, CommandInteraction, Client } = require("discord.js");
 const ms = require("ms");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   name: "interactionCreate",
   once: false,
   /**

@@ -13,7 +13,7 @@ const getMemberAndBots = async (interaction) => {
   ).size}`;
 };
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("server-info")
     .setDescription("Display info about this server."),

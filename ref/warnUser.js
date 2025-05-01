@@ -6,7 +6,7 @@ const {
   Client,
 } = require("discord.js");
 
-module.exports = {
+export default {
   data: new ContextMenuCommandBuilder()
     .setName("warnUser")
     .setType(ApplicationCommandType.User),

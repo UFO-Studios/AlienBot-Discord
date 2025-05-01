@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("queue")
     .setDescription("Gets the music queue"),

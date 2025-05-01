@@ -113,7 +113,7 @@ const commandFiles = fs
 
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
-  const command = await require(filePath);
+  const command = await import(filePath); 
   if (command.data && command.data.name) {
     client.commands.set(command.data.name, command);
   }

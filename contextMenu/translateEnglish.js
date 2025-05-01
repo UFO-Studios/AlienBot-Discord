@@ -8,7 +8,7 @@ const {
 const translate = require("@vitalets/google-translate-api");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new ContextMenuCommandBuilder()
     .setName("translate-to-english")
     .setType(ApplicationCommandType.Message),

@@ -5,7 +5,7 @@ const {
 } = require("discord.js");
 const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("rank")
     .setDescription("Get your rank!"),

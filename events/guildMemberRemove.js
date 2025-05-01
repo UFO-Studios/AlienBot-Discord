@@ -9,7 +9,7 @@ const {
 //const mongo = require("../database/mongodb");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   name: "guildMemberRemove",
   /**
    *

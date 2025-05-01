@@ -77,7 +77,7 @@ const deleteData = async (collectionName, docName) => {
   }
 };
 
-module.exports = {
+export default {
   addData,
   getData,
   deleteData,

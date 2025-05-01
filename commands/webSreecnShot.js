@@ -7,7 +7,7 @@ const {
 const fetch = require("node-fetch");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("web-screenshot")
     .setDescription("Gets a screenshot of a website")

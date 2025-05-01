@@ -8,7 +8,7 @@ const {
 } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new ContextMenuCommandBuilder()
     .setName("UserInfo")
     .setType(ApplicationCommandType.User),

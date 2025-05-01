@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("discord.js");
 const { PermissionFlagsBits, parseEmoji } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("steal-emoji")
     .setDescription("Adds the given emoji to the server")

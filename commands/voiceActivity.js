@@ -6,7 +6,7 @@ const {
 } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("voice-activity")
     .setDescription("Play Games, Watch youtube All together with your friends!")

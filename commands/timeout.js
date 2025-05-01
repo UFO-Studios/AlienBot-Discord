@@ -18,7 +18,7 @@ const durations = [
   { name: "1 week", value: 7 * 24 * 60 * 60 * 1000 },
 ];
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("timeout")
     .setDescription("This command times out a member!")

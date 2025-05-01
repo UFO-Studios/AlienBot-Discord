@@ -6,7 +6,7 @@ const {
 } = require("discord.js");
 const mongo = await require("../database/mongodb");const { consoleMessage } = require("../log");
 
-module.exports = {
+export default  {
   data: new SlashCommandBuilder()
     .setName("ignore-channel")
     .setDescription(

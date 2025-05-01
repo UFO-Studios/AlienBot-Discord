@@ -6,7 +6,7 @@ const {
   ChannelType,
 } = require("discord.js");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("mod-mail")
     .setDescription("enables modmail system for your server"),

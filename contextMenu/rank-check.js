@@ -9,7 +9,7 @@ const {
 } = require("discord.js");
 const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new ContextMenuCommandBuilder()
     .setName("check rank")
     .setType(ApplicationCommandType.User),

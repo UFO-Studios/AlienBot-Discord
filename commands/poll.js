@@ -6,7 +6,7 @@ const {
 } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("poll")
     .setDescription("Start a poll for voting!")

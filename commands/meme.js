@@ -11,7 +11,7 @@ const fetch = require("node-fetch");
 const { consoleMessage } = require("../log");
 // const { getMeme } = require("memes-api");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder().setName("meme").setDescription("get memes!"),
   global: true,
   /**

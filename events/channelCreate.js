@@ -2,7 +2,7 @@ const { EmbedBuilder, GuildChannel, Client } = require("discord.js");
 const mongo = require("../database/mongodb.js");
 const { consoleMessage } = require("../log.js");
 
-module.exports = {
+export default {
   name: "channelCreate",
 
   /**

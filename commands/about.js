@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("discord.js");
 const { EmbedBuilder, ChatInputCommandInteraction } = require("discord.js");
 const { consoleMessage } = require("../log.js");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("about")
     .setDescription("About AlienBot!"),

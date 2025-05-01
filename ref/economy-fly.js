@@ -31,7 +31,7 @@ const earnMessage = async (num) => {
   return `You earned $${num} for flying ${randomArray[randomNum]}.`;
 };
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("fly")
     .setDescription("Fly to the outer space and maybe even earn money!"),

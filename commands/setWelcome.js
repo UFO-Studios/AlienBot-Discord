@@ -7,7 +7,7 @@ const {
 const mongo = await import("../database/mongodb");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("set-welcome")
     .setDescription("Set a welcome channel for your server.")

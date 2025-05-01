@@ -7,7 +7,7 @@ const {
 const { default: fetch } = require("node-fetch");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("github-info")
     .setDescription("get a person's github account info")

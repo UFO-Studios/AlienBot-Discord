@@ -10,7 +10,7 @@ const {
 const fetch = require("node-fetch");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   name: "memeButton",
   /**
    *

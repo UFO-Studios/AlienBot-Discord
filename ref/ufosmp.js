@@ -5,7 +5,7 @@ const {
   Client,
 } = require("discord.js");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("ufosmp")
     .setDescription("Info about the UFO SMP"),

@@ -6,7 +6,7 @@ const {
 } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("unban")
     .setDescription("Unban a user by giving their id.")

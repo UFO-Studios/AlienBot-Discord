@@ -7,7 +7,7 @@ const {
 const { default: fetch } = require("node-fetch");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("password")
     .setDescription("Generates a random password for you."),

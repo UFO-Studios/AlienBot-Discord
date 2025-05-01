@@ -65,7 +65,7 @@ const checkLevel = async (message, client) => {
   }, client.C.LEVEL_COOLDOWN);
 };
 
-module.exports = {
+export default {
   name: "messageCreate",
   once: false,
   /**

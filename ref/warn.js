@@ -6,7 +6,7 @@ const {
   PermissionFlagsBits,
 } = require("discord.js");
 const mongo = require("../database/mongodb");
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("warn")
     .setDescription("Warn commands for a member.")

@@ -292,7 +292,7 @@ const saveBannedWordToggle = async (guildID, BWToggle) => {
 };
 
 
-module.exports = {
+export default {
   saveXP,
   getXP,
   connectToDB,

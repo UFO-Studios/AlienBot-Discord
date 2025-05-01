@@ -1,7 +1,7 @@
 const { Message, EmbedBuilder, WebhookClient } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   name: "messageDelete",
   once: false,
   // intelliSense

@@ -3,7 +3,7 @@ const Parser = require("rss-parser");
 const parser = new Parser();
 var isChannel = require("is-youtube-channel");
 
-module.exports = {
+export default {
   name: "checkYT",
   /**
    * @param {String} guildId

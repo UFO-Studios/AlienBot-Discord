@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("balance")
     .setDescription("Check your bank balance!"),

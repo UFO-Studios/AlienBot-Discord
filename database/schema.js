@@ -40,7 +40,7 @@ const addIgnoredChannelSchema = new mongoose.Schema({
   channelID: Number,
 });
 
-module.exports = {
+export default {
   LvlSchema,
   AWSchema,
   bannedWordsSchema,

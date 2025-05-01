@@ -68,7 +68,7 @@ async function consoleError(message, func, toLogFile, fatal=false) {
     return
 }
 
-module.exports = {
+export default {
     consoleError,
     consoleMessage
 }

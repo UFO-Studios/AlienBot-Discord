@@ -6,7 +6,7 @@ const {
 } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   name: "stopButton",
   /**
    * @param {MessageComponentInteraction} interaction

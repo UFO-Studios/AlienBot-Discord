@@ -7,7 +7,7 @@ const {
 } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("embed")
     .setDescription("send an embed to the given channel")

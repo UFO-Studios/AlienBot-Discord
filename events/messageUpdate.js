@@ -1,7 +1,7 @@
 const { Message, EmbedBuilder, Client } = require("discord.js");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   name: "messageUpdate",
   once: false,
   /**

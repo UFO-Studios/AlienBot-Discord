@@ -2,7 +2,7 @@ const { Client, ActivityType } = require("discord.js");
 const Config = require("../config.json");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   name: "ready",
   once: true,
   /**

@@ -7,7 +7,7 @@ const {
 let getEmojis = require("get-emojis-from-string");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("emoji-info")
     .setDescription("get info about an emoji.")

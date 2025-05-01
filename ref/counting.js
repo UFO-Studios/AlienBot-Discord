@@ -4,7 +4,7 @@ const db = require("easy-db-json");
 
 db.setFile("./db.json");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("set-counting")
     .setDescription("set counting channel")

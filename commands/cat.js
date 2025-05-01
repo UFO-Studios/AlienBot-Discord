@@ -7,7 +7,7 @@ const {
 const { default: fetch } = require("node-fetch");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("cat")
     .setDescription("Get random pics of cats"),

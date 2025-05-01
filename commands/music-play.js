@@ -6,7 +6,7 @@ const {
 // const { useMainPlayer } = require("discord-player");
 const { consoleMessage } = require("../log");
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("play")
     .setDescription("Play a song with its name!")
