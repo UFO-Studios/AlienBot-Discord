@@ -53,4 +53,4 @@ export default {
   },
 };
 
-consoleMessage("translateEnglish.js run", "botInit");
+//consoleMessage("translateEnglish.js run", "botInit");

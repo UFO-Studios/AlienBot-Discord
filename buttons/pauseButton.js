@@ -57,4 +57,4 @@ export default {
   },
 };
 
-consoleMessage("pauseButton.js run", "botInit");
+//consoleMessage("pauseButton.js run", "botInit");

@@ -153,4 +153,4 @@ export default {
   },
 };
 
-consoleMessage("embed.js run", "botInit")
+//consoleMessage("embed.js run", "botInit")

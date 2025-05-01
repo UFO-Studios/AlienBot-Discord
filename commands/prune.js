@@ -35,4 +35,4 @@ export default {
     });
   },
 };
-consoleMessage("prune.js run", "botInit");
+//consoleMessage("prune.js run", "botInit");

@@ -85,4 +85,4 @@ export default {
   },
 };
 
-consoleMessage("modals/ufoApply.js run", "botInit");
+//consoleMessage("modals/ufoApply.js run", "botInit");

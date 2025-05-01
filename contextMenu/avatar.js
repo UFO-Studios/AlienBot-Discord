@@ -41,4 +41,4 @@ export default {
     return await interaction.reply({ embeds: [embed] });
   },
 };
-consoleMessage("contextMenu/avatar.js run", "botInit");
+//consoleMessage("contextMenu/avatar.js run", "botInit");

@@ -106,4 +106,4 @@ export default {
   },
 };
 
-consoleMessage("event/GuildMemberRemove.js run", "botInit")
+//consoleMessage("event/GuildMemberRemove.js run", "botInit")

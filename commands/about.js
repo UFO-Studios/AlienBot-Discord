@@ -31,4 +31,4 @@ export default {
     return await interaction.reply({ embeds: [embed] });
   },
 };
-consoleMessage("about.js run", "botInit");
+//consoleMessage("about.js run", "botInit");

@@ -17,12 +17,14 @@ async function registerCommands() {
     try {
       const filePath = path.join(commandsPath, file);
       const command = await import(filePath); // Changed from require() to import()
-      if (command.global) {
-        globalCommands.push(command.data.toJSON());
-        commands.push(command.data.toJSON());
-      } else {
-        localCommands.push(command.data.toJSON());
-        commands.push(command.data.toJSON());
+      if (command.data && typeof command.data.toJSON === "function") {
+        if (command.global) {
+          globalCommands.push(command.data.toJSON());
+          commands.push(command.data.toJSON());
+        } else {
+          localCommands.push(command.data.toJSON());
+          commands.push(command.data.toJSON());
+        }
       }
     } catch (e) {}
   }

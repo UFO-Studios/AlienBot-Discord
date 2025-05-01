@@ -83,4 +83,4 @@ export default {
   },
 };
 
-consoleMessage("music-play.js run", "botInit");
+//consoleMessage("music-play.js run", "botInit");

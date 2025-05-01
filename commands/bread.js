@@ -16,4 +16,4 @@ export default {
   },
 };
 
-consoleMessage("bread.js run", "botInit");
+//consoleMessage("bread.js run", "botInit");

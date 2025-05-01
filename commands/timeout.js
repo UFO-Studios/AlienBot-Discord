@@ -123,4 +123,4 @@ export default {
   },
 };
 
-consoleMessage("timeout.js run", "botInit");
+//consoleMessage("timeout.js run", "botInit");

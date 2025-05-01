@@ -36,4 +36,4 @@ export default {
   },
 };
 
-consoleMessage("help.js run", "botInit");
+//consoleMessage("help.js run", "botInit");

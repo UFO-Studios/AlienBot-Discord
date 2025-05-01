@@ -88,4 +88,4 @@ export default {
   },
 };
 
-consoleMessage("music-volume.js run", "botInit");
+//consoleMessage("music-volume.js run", "botInit");

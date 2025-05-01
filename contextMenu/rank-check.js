@@ -50,4 +50,4 @@ export default {
     
   },
 };
-consoleMessage("rank-check.js run!", "botInit");
+//consoleMessage("rank-check.js run!", "botInit");

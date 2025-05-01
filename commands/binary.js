@@ -112,4 +112,4 @@ export default {
   },
 };
 
-consoleMessage("binary.js run", "botInit")
+//consoleMessage("binary.js run", "botInit")

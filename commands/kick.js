@@ -85,4 +85,4 @@ export default {
   },
 };
 
-consoleMessage("kick.js run", "botInit");
+//consoleMessage("kick.js run", "botInit");

@@ -110,4 +110,4 @@ export default {
   },
 };
 
-consoleMessage("events/guildMemberAdd.js run", "botInit")
+//consoleMessage("events/guildMemberAdd.js run", "botInit")

@@ -74,4 +74,4 @@ export default {
   },
 };
 
-consoleMessage("emojiInfo.js run", "botInit");
+//consoleMessage("emojiInfo.js run", "botInit");

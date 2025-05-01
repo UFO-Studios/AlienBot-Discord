@@ -34,4 +34,4 @@ export default {
   },
 };
 
-consoleMessage("events/emojiCreate.js run", "botInit")
+//consoleMessage("events/emojiCreate.js run", "botInit")

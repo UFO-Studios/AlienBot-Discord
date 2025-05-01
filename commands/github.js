@@ -122,4 +122,4 @@ export default {
   },
 };
 
-consoleMessage("github.js run", "botInit");
+//consoleMessage("github.js run", "botInit");

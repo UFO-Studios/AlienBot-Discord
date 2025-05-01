@@ -76,4 +76,4 @@ export default {
     return await interaction.reply({ embeds: [embed] });
   },
 };
-consoleMessage("user-info.js run", "botInit");
+//consoleMessage("user-info.js run", "botInit");

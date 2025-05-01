@@ -80,4 +80,4 @@ export default {
   },
 };
 
-consoleMessage("voiceActivity.js run", "botInit");
+//consoleMessage("voiceActivity.js run", "botInit");

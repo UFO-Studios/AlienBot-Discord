@@ -35,7 +35,7 @@ export default {
 
     // Ensure both messages and the guild are defined
     if (!oldMessage || !newMessage || !oldMessage.guild) {
-      consoleMessage("A message or the guild is undefined.", "error");
+      //consoleMessage("A message or the guild is undefined.", "error");
       return;
     }
 

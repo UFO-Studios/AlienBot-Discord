@@ -57,4 +57,4 @@ export default {
   },
 };
 
-consoleMessage("skipButton.js run", "botInit");
+//consoleMessage("skipButton.js run", "botInit");

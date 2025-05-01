@@ -42,4 +42,4 @@ export default {
     return await interaction.reply({ embeds: [embed] });
   },
 };
-consoleMessage("pfp.js run", "botInit");
+//consoleMessage("pfp.js run", "botInit");

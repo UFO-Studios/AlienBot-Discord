@@ -50,9 +50,9 @@ export default {
         .setStyle(ButtonStyle.Primary)
     );
     
-    consoleMessage("Meme Button Clicked", "memeUpdate");
+    //consoleMessage("Meme Button Clicked", "memeUpdate");
     return await interaction.update({ embeds: [embed], components: [row] });
   },
 };
 
-consoleMessage("memeButton.js run", "botInit");
+//consoleMessage("memeButton.js run", "botInit");

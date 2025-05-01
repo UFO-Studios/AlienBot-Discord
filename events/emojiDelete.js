@@ -35,4 +35,4 @@ export default {
   },
 };
 
-consoleMessage("events/emojiDelete.js run", "botInit")
+//consoleMessage("events/emojiDelete.js run", "botInit")

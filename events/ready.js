@@ -163,17 +163,17 @@ export default {
       client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running tests!");
-        consoleMessage("Bot ready!", "ready");
+        //consoleMessage("Bot ready!", "ready");
       } else if (Config.ENV == "dev") {
       // client.channels.cache
       //   .get(client.C.CHANNEL_ID)
       //   .send("Bot is running in dev mode!");
-      consoleMessage("Bot ready!", "ready");
+      //consoleMessage("Bot ready!", "ready");
     } else {
       client.channels.cache
         .get(client.C.CHANNEL_ID)
         .send("Bot is running in prod mode!");
-      consoleMessage("Bot ready!", "ready");
+      //consoleMessage("Bot ready!", "ready");
 
     }
     //console.log("Loaded the following commands:", [...client.commands.keys()]);

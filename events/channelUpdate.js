@@ -83,4 +83,4 @@ export default {
   },
 };
 
-consoleMessage("events/channelUpdate.js run", "botInit");
+//consoleMessage("events/channelUpdate.js run", "botInit");

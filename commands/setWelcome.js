@@ -76,4 +76,4 @@ export default {
   },
 };
 
-consoleMessage("setWelcome.js run", "botInit");
+//consoleMessage("setWelcome.js run", "botInit");

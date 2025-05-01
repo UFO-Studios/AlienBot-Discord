@@ -40,4 +40,4 @@ export default {
   },
 };
 
-consoleMessage("events/channelDelete.js run", "botInit")
+//consoleMessage("events/channelDelete.js run", "botInit")

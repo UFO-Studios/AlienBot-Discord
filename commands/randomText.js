@@ -81,4 +81,4 @@ export default {
   },
 };
 
-consoleMessage("randomText.js run", "botInit")
+//consoleMessage("randomText.js run", "botInit")

@@ -101,4 +101,4 @@ export default {
   },
 };
 
-consoleMessage("events/messageCreate.js run", "botInit");
+//consoleMessage("events/messageCreate.js run", "botInit");

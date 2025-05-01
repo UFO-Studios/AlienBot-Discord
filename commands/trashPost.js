@@ -36,4 +36,4 @@ export default {
   },
 };
 
-consoleMessage("trashPost.js run", "botInit");
+//consoleMessage("trashPost.js run", "botInit");

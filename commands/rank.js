@@ -28,4 +28,4 @@ export default {
   }
   },
 };
-consoleMessage("rank.js run", "botInit");
+//consoleMessage("rank.js run", "botInit");

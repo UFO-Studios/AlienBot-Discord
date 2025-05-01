@@ -57,4 +57,4 @@ export default {
   },
 };
 
-consoleMessage("webScreenShot.js run", "botInit");
+//consoleMessage("webScreenShot.js run", "botInit");

@@ -81,4 +81,4 @@ export default {
   },
 };
 
-consoleMessage("nickname.js run", "botInit");
+//consoleMessage("nickname.js run", "botInit");

@@ -10,4 +10,4 @@ export default {
     await interaction.reply("WOOF. WOOF WOOF WOOF. WOOFWOOFWOOFBARK");
   },
 };
-consoleMessage("woof.js run", "botInit");
+//consoleMessage("woof.js run", "botInit");

@@ -29,4 +29,4 @@ export default {
   },
 };
 
-consoleMessage("password.js run", "botInit");
+//consoleMessage("password.js run", "botInit");

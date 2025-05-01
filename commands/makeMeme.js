@@ -114,4 +114,4 @@ export default {
   },
 };
 
-consoleMessage("makeMeme.js run", "botInit")
+//consoleMessage("makeMeme.js run", "botInit")

@@ -59,4 +59,4 @@ export default {
   },
 };
 
-consoleMessage("vote.js run", "botInit")
+//consoleMessage("vote.js run", "botInit")

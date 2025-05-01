@@ -19,4 +19,4 @@ export default {
   },
 };
 
-consoleMessage("toggleBanned.js run", "botInit");
+//consoleMessage("toggleBanned.js run", "botInit");

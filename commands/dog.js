@@ -40,4 +40,4 @@ export default {
   },
 };
 
-consoleMessage("dog.js run", "botInit")
+//consoleMessage("dog.js run", "botInit")

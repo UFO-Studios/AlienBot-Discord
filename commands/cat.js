@@ -40,4 +40,4 @@ export default {
   },
 };
 
-consoleMessage("cat.js run", "botInit")
+//consoleMessage("cat.js run", "botInit")

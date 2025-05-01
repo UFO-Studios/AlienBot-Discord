@@ -48,4 +48,4 @@ export default {
   },
 };
 
-consoleMessage("poll.js run", "botInit")
+//consoleMessage("poll.js run", "botInit")

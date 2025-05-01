@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 
-async function logPath(path, name) {
+function logPath(path, name) {
     if (name == null) {
         var date = new Date();
         var name = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + ".log";
@@ -17,9 +17,9 @@ async function logPath(path, name) {
     return file
 }
 
-async function writeLog(file, data) {
+function writeLog(file, data) {
     if (!fs.existsSync(file)){
-        await logPath(path, name);
+        logPath(path, name);
     }
     fs.appendFile(file, data, function (err) {
         if (err) throw err;
@@ -35,7 +35,7 @@ async function writeLog(file, data) {
  * @param {boolean} toLogFile Weather to log it to a file or not
  * @returns 
  */
-async function consoleMessage(message, func, toLogFile) {
+function consoleMessage(message, func, toLogFile) {
         let date = new Date();
         let time = date.toTimeString().split(' ')[0];
         if (func == null) {var func = "main"}
@@ -56,7 +56,7 @@ async function consoleMessage(message, func, toLogFile) {
  * @param {boolean} fatal Weather to exit the program or not
  * @returns 
  */
-async function consoleError(message, func, toLogFile, fatal=false) {
+function consoleError(message, func, toLogFile, fatal=false) {
     let date = new Date();
     let time = date.toTimeString().split(' ')[0];
     if (func == null) {var func = "main"}

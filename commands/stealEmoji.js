@@ -56,4 +56,4 @@ export default {
   },
 };
 
-consoleMessage("steamEmoji.js run", "botInit")
+//consoleMessage("steamEmoji.js run", "botInit")

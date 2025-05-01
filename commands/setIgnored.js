@@ -53,4 +53,4 @@ export default  {
   },
 };
 
-consoleMessage("setIgnored.js run", "botInit");
+//consoleMessage("setIgnored.js run", "botInit");

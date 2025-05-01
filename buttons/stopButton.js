@@ -42,4 +42,4 @@ export default {
   },
 };
 
-consoleMessage("stopButton.js run", "botInit");
+//consoleMessage("stopButton.js run", "botInit");

@@ -40,7 +40,7 @@ async function connectToDB() {
   db = mongoose.connection;
 
   db.on("error", console.error.bind(console, "MongoDB connection error:")); //tells us if there is an error
-  consoleMessage("Connection complete!", "mongoDB");
+  //consoleMessage("Connection complete!", "mongoDB");
   return true;
 }
 
@@ -100,7 +100,7 @@ const getXP = async (userId) => {
     await connectToDB();
   }
   const userRank = await XPModule.findOne({ userId });
-  // consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP");
+  // //consoleMessage("XP retreived sucsessfully! Returning...", "mongoDB/getXP");
   if (userRank != null) {
     return userRank.xp ?? 0;
   } else {
@@ -201,7 +201,7 @@ const saveLogToggle = async (guildId, toggle) => {
 const getLogToggle = async (guildId) => {
   if (!connected || !db) {
     await connectToDB();
-    consoleMessage("Connected to MongoDB", "mongoDB");
+    //consoleMessage("Connected to MongoDB", "mongoDB");
   } //connect
   const logToggleJSON = await loggingToggleModel.findOne({ guildId });
   if (logToggleJSON == null) {
@@ -216,7 +216,7 @@ const getLogToggle = async (guildId) => {
 const getBannedWordToggle = async (guildID) => {
   if (!connected || !db) {
     await connectToDB();
-    consoleMessage("Connected to DB", "mongoDB");
+    //consoleMessage("Connected to DB", "mongoDB");
   } //connect
 
   const BWToggleJSON = await BWToggleModel.findOne({ guildID });
@@ -230,7 +230,7 @@ const getBannedWordToggle = async (guildID) => {
 const getWelcomeToggle = async (guildId) => {
   if (!connected || !db) {
     await connectToDB();
-    consoleMessage("Connected to DB", "mongoDB");
+    //consoleMessage("Connected to DB", "mongoDB");
   } //connect
 
   const welcomeToggle = await welcomeToggleModel.findOne({ guildId });
@@ -308,4 +308,4 @@ export default {
   getWelcomeToggle,
 };
 
-consoleMessage("mongodb.js run", "botInit");
+//consoleMessage("mongodb.js run", "botInit");

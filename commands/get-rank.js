@@ -15,4 +15,4 @@ export default {
     await interaction.reply("Your rank is: " + rank);
   },
 };
-consoleMessage("get-rank.js run", "botInit");
+//consoleMessage("get-rank.js run", "botInit");

@@ -34,4 +34,4 @@ export default {
   },
 };
 
-consoleMessage("events/MessageDelete.js run", "botInit");
+//consoleMessage("events/MessageDelete.js run", "botInit");

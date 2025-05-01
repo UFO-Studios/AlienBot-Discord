@@ -97,4 +97,4 @@ export default {
   },
 };
 
-consoleMessage("event/interactionCreate.js run", "botInit")
+//consoleMessage("event/interactionCreate.js run", "botInit")

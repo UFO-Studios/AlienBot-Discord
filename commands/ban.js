@@ -96,4 +96,4 @@ export default {
   },
 };
 
-consoleMessage("ban.js run", "botInit");
+//consoleMessage("ban.js run", "botInit");

@@ -57,4 +57,4 @@ export default {
   },
 };
 
-consoleMessage("resumeButton.js run", "botInit");
+//consoleMessage("resumeButton.js run", "botInit");

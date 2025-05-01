@@ -27,7 +27,7 @@ const port = 3333;
 
 app.get("/", (req, res) => {
   res.send("Bot is online!");
-  consoleMessage("status page visited", "index.express");
+  //consoleMessage("status page visited", "index.express");
 });
 
 app.listen(port, () => {

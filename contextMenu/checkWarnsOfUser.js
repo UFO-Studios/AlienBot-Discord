@@ -26,4 +26,4 @@ export default {
   },
 };
 
-consoleMessage("checkWarnsOfUser.js run", "botInit");
+//consoleMessage("checkWarnsOfUser.js run", "botInit");

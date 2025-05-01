@@ -35,4 +35,4 @@ export default {
   },
 };
 
-consoleMessage("events/channelCreate.js run", "botInit")
+//consoleMessage("events/channelCreate.js run", "botInit")

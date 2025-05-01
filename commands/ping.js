@@ -28,8 +28,8 @@ export default {
         text: "/ping • AlienBot",
         iconURL: "https://thealiendoctor.com/img/alienbot/face-64x64.png",
       });
-    consoleMessage("Bots ping is " + client.ws.ping, "ping");
+    //consoleMessage("Bots ping is " + client.ws.ping, "ping");
     return await interaction.reply({ embeds: [embed] });
   },
 };
-consoleMessage("ping.js run", "botInit");
+//consoleMessage("ping.js run", "botInit");
