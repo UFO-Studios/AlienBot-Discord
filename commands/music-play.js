@@ -4,7 +4,7 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 // const { useMainPlayer } = require("discord-player");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   data: new SlashCommandBuilder()

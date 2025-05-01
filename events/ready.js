@@ -1,6 +1,6 @@
 const { Client, ActivityType } = require("discord.js");
 const Config = require("../config.json");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   name: "ready",

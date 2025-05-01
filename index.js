@@ -1,5 +1,8 @@
-const { deleteOld, registerCommands } = require("./deploy-commands.js");
-const { consoleError, consoleMessage } = require("./log.js")
+const { deleteOld } = require("./deploy-commands.js");
+import commandsModule from "./deploy-commands.js"; 
+const { registerCommands } = commandsModule; 
+import consoleModule from './log.js'
+const { consoleMessage, consoleError } = consoleModule;
 const fs = require("node:fs");
 const path = require("node:path");
 const {

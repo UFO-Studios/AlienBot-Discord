@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 let getEmojis = require("get-emojis-from-string");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   data: new SlashCommandBuilder()

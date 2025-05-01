@@ -4,7 +4,7 @@ const {
   Channel,
   ChannelType,
 } = require("discord.js");
-const mongo = require("../database/mongodb");const { consoleMessage } = require("../log");
+const mongo = require("../database/mongodb");import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   name: "channelDelete",

@@ -6,7 +6,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const translate = require("@vitalets/google-translate-api");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   data: new ContextMenuCommandBuilder()

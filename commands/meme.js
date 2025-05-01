@@ -8,7 +8,7 @@ const {
   ButtonStyle,
 } = require("discord.js");
 const fetch = require("node-fetch");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 // const { getMeme } = require("memes-api");
 
 export default {

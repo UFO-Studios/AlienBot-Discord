@@ -1,4 +1,4 @@
-﻿const { consoleMessage } = require("../log");
+﻿import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 const mongo = require("../database/mongodb");
 const { ChannelType, Message, Client } = require("discord.js");
 

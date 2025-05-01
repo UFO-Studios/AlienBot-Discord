@@ -4,7 +4,7 @@ const {
   WebhookClient,
   EmbedBuilder,
 } = require("discord.js");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   name: "ufoApply",

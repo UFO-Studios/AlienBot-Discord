@@ -6,7 +6,7 @@ const {
   SlashCommandBuilder,
 } = require("discord.js");
 const prettyMilliseconds = require("pretty-ms");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 const durations = [
   { name: "60 seconds", value: 60 * 1000 },

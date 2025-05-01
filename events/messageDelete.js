@@ -1,5 +1,5 @@
 const { Message, EmbedBuilder, WebhookClient } = require("discord.js");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   name: "messageDelete",

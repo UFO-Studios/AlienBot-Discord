@@ -5,7 +5,7 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 const { default: fetch } = require("node-fetch");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   data: new SlashCommandBuilder()

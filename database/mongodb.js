@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("../config.json");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 const schemas = require("./schema");
 let connected;
 let db;

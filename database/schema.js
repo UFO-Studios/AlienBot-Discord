@@ -22,7 +22,7 @@ const loggingToggleSchema = new mongoose.Schema({
   toggle: Boolean,
 });
 
- BWToggleSchema = new mongoose.Schema({
+const BWToggleSchema = new mongoose.Schema({
   guildID: Number,
   toggle: Boolean,
 });

@@ -7,7 +7,7 @@ const {
 } = require("discord.js");
 //const Canvas = require("@napi-rs/canvas");
 //const mongo = require("../database/mongodb");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   name: "guildMemberRemove",

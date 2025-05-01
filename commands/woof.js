@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { consoleMessage } = require("../log");
+import consoleModule from "../log"; const { consoleMessage } = consoleModule;
 
 export default {
   data: new SlashCommandBuilder()
