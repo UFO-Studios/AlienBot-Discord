@@ -1,4 +1,6 @@
-const { deleteOld } = require("./deploy-commands.js");
+console.log("STARTING...")
+import { exit } from "node:process";
+// const deleteOld  = require("./deploy-commands.js");
 import commandsModule from "./deploy-commands.js"; 
 const { registerCommands } = commandsModule; 
 import consoleModule from './log.js'
@@ -20,6 +22,26 @@ const {
 const Config = require("./config.json");
 const { DiscordTogether } = require("discord-together");
 const express = require("express");
+const { Routes, REST } = require("discord.js");
+
+const rest = new REST({ version: "9" }).setToken(Config.TOKEN);
+
+const deleteOld = () => {
+  rest
+    .put(Routes.applicationCommands(Config.CLIENT_ID), { body: [] })
+    .then(() => {
+      console.log("Successfully deleted all application commands.");
+    })
+    .catch(console.error);
+
+    rest.put(Routes.applicationGuildCommands(Config.APP_ID, Config.GUILD_ID), {
+      body: [],
+    })
+    .catch(console.error);
+    console.log("Deleted")
+};
+deleteOld();
+exit()
 
 //express server for uptime robot
 const app = express();

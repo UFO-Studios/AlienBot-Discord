@@ -75,6 +75,8 @@ const deleteOld = () => {
     .catch(console.error);
 };
 
+deleteOld();
+
 export default {
   registerCommands,
   deleteOld,
