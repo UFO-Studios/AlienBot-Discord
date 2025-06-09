@@ -9,7 +9,7 @@ namespace AlienBot.Commands
 
         public static async Task Reply(InteractionContext ctx, bool isPrivate, string message)
         {
-            await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent(message).AsEphemeral(isPrivate));
+            await ctx.CreateResponseAsync(message);
         }
         [SlashCommand("ban", "Ban a user")]
         public static async Task BanCommand(InteractionContext ctx, [Option("user", "The user to ban")] DiscordUser user)

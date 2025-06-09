@@ -8,7 +8,7 @@
             "name": "C#: AlienBot-Discord Debug",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/AlienBot-Discord.csproj"
+            "projectPath": "${workspaceFolder}/AlienBot.csproj"
         }
 
     ]

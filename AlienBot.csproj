@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02230" />
-    <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02230" />
-    <PackageReference Include="DSharpPlus.SlashCommands" Version="4.4.9" />
+
+    <PackageReference Include="DSharpPlus" Version="4.5.1" />
+
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="8.0.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
